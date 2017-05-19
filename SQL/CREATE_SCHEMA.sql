@@ -1,79 +1,102 @@
-CREATE TABLE Benutzer(
-	BenutzerID int NOT NULL AUTO_INCREMENT,
-    Login varchar(255) NOT NULL UNIQUE,
-    Passwort varchar(255) NOT NULL,
-    Vorname varchar(255),
-    Nachname varchar(255),
-    IBAN int,
-    CONSTRAINT PK_Benutzer PRIMARY KEY(BenutzerID)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-CREATE TABLE Mitarbeiter(
-	MitarbeiterID int NOT NULL,
-    ManagerID int,
-    Stelle varchar(255) NOT NULL,
-    Gehalt int,
-    CONSTRAINT FK_Manager_TABLE_MITARBEITER FOREIGN KEY(ManagerID) REFERENCES Mitarbeiter(MitarbeiterID),
-    CONSTRAINT FK_Mitarbeiter_TABLE_MITARBEITER FOREIGN KEY(MitarbeiterID) REFERENCES Benutzer(BenutzerID),
-    CONSTRAINT PK_Mitarbeiter_TABLE_MITARBEITER PRIMARY KEY(MitarbeiterID)
-);
 
-CREATE TABLE Kunde(
-	KundenID int NOT NULL,
-    Stadt varchar(255) NOT NULL,
-    Straße varchar(255) NOT NULL,
-    PLZ int NOT NULL,
-    Telefonnr varchar(60),
-    CONSTRAINT FK_Mitarbeiter_TABLE_KUNDE FOREIGN KEY(KundenID) REFERENCES Benutzer(BenutzerID),
-    CONSTRAINT PK_Mitarbeiter_TABLE_KUNDE PRIMARY KEY(KundenID)
-);
+use imse;
 
-CREATE TABLE Wunschliste(
-	WListeID int NOT NULL AUTO_INCREMENT, 
-	KundenID int NOT NULL,
-	WListeName varchar(255) NOT NULL,
-    CONSTRAINT FK_Wunschliste_WEAK_ENTITY FOREIGN KEY(KundenID) REFERENCES Kunde(KundenID) ON DELETE CASCADE,
-    CONSTRAINT PK_Wunschliste PRIMARY KEY(WListeID, KundenID)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+CREATE TABLE `Adress` (
+  `adressId` int(11) NOT NULL AUTO_INCREMENT,
+  `streetName` varchar(45) NOT NULL,
+  `streetNumber` varchar(45) NOT NULL,
+  `additionalInfo` varchar(45) DEFAULT NULL,
+  `city` varchar(45) NOT NULL,
+  `postCode` varchar(45) NOT NULL,
+  `country` varchar(45) NOT NULL,
+  PRIMARY KEY (`adressId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE Produkt(
-	ProduktID int NOT NULL AUTO_INCREMENT,
-    Menge int,
-    ProduktName varchar(255) NOT NULL,
-    Beschreibung TEXT,
-    Kategorie varchar(255),
-    Kaufpreis FLOAT(7,2),
-    Verkaufspreis FLOAT(7,2),
-    CONSTRAINT PK_Produkt PRIMARY KEY(ProduktID)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+CREATE TABLE `Customer` (
+  `emailAdress` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `firstName` varchar(45) NOT NULL,
+  `lastName` varchar(45) NOT NULL,
+  `phoneNumber` varchar(45) DEFAULT NULL,
+  `creditCardInfo` varchar(100) DEFAULT NULL,
+  `shippingAdressId` int(11) DEFAULT NULL,
+  `billingAdressId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`emailAdress`),
+  KEY `FK-ShippingAdressId` (`shippingAdressId`),
+  KEY `FK-BillingAdressId` (`billingAdressId`),
+  CONSTRAINT `FK-BillingAdressId` FOREIGN KEY (`billingAdressId`) REFERENCES `Adress` (`adressId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK-ShippingAdressId` FOREIGN KEY (`shippingAdressId`) REFERENCES `Adress` (`adressId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE Hersteller(
-	HerstellerID int NOT NULL AUTO_INCREMENT,
-    HerstellerName varchar(255),
-    Branche varchar(255),
-    CONSTRAINT PK_Hersteller PRIMARY KEY(HerstellerID)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-CREATE TABLE kauft(
-	KundenID int NOT NULL,
-    ProduktID int NOT NULL,
-	CONSTRAINT FK_kauft_KundenID FOREIGN KEY(KundenID) REFERENCES Kunde(KundenID),
-    CONSTRAINT FK_kauft_ProduktID FOREIGN KEY(ProduktID) REFERENCES Produkt(ProduktID),
-    CONSTRAINT PK_kauft PRIMARY KEY(KundenID, ProduktID)    
-);
+CREATE TABLE `Admin` (
+  `emailAdress` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `firstName` varchar(45) NOT NULL,
+  `lastName` varchar(45) NOT NULL,
+  `verified` varchar(45) NOT NULL,
+  `managerEmailAdress` varchar(45) NOT NULL,
+  PRIMARY KEY (`emailAdress`),
+  KEY `FK_ManagerEmailAdress_idx` (`managerEmailAdress`),
+  CONSTRAINT `FK_ManagerEmailAdress` FOREIGN KEY (`managerEmailAdress`) REFERENCES `Admin` (`emailAdress`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE beinhaltet(
-	WListeID int NOT NULL,
-    KundenID int NOT NULL,
-    ProduktID int NOT NULL,
-    CONSTRAINT FK_beinhaltet_WListeID FOREIGN KEY(WListeID) REFERENCES Wunschliste(WListeID),
-    CONSTRAINT FK_beinhaltet_KundenID FOREIGN KEY(KundenID) REFERENCES Wunschliste(KundenID),
-    CONSTRAINT FK_beinhaltet_ProduktID FOREIGN KEY(ProduktID) REFERENCES Produkt(ProduktID),
-    CONSTRAINT PK_beinhaltet PRIMARY KEY(WListeID, KundenID)    
-);
+
+CREATE TABLE `Product` (
+  `productId` int(11) NOT NULL AUTO_INCREMENT,
+  `productName` varchar(45) NOT NULL,
+  `price` decimal(7,2) NOT NULL,
+  `description` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`productId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
+CREATE TABLE `Image` (
+  `imageId` int(11) NOT NULL AUTO_INCREMENT,
+  `productId` int(11) NOT NULL,
+  `image` blob,
+  PRIMARY KEY (`imageId`,`productId`),
+  KEY `FK_ProductId_idx` (`productId`),
+  CONSTRAINT `FK_ProductId` FOREIGN KEY (`productId`) REFERENCES `Product` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+CREATE TABLE `Category` (
+  `categoryId` int(11) NOT NULL AUTO_INCREMENT,
+  `categoryName` varchar(45) NOT NULL,
+  PRIMARY KEY (`categoryId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `ProductBelongsCategory` (
+  `productId` int(11) NOT NULL,
+  `categoryId` int(11) NOT NULL,
+  PRIMARY KEY (`productId`,`categoryId`),
+  KEY `FK_CategoryId_idx` (`categoryId`),
+  CONSTRAINT `FK_CategoryId` FOREIGN KEY (`categoryId`) REFERENCES `Category` (`categoryId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_ProductBelongs` FOREIGN KEY (`productId`) REFERENCES `Product` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `CustomerOrder` (
+  `OrderId` int(11) NOT NULL AUTO_INCREMENT,
+  `dateCreated` varchar(10) NOT NULL,
+  `dateShipped` varchar(10) DEFAULT NULL,
+  `productId` int(11) NOT NULL,
+  PRIMARY KEY (`OrderId`),
+  KEY `FK_ProductIdOrder_idx` (`productId`),
+  CONSTRAINT `FK_ProductIdOrder` FOREIGN KEY (`productId`) REFERENCES `Product` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `OrderDetail` (
+  `orderId` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `subTotal` decimal(7,2) NOT NULL,
+  PRIMARY KEY (`orderId`,`quantity`,`subTotal`),
+  CONSTRAINT `FK_OrderId` FOREIGN KEY (`orderId`) REFERENCES `CustomerOrder` (`OrderId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
