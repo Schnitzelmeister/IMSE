@@ -5,20 +5,21 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class DataGenerator {
 
 	public static void main(String args[]) {
-		System.out.print(generateRandomCreditCards(1000));
+		System.out.println(generateRandomData(entityTyp.description,2));
 	}
 
-	public static ArrayList<Integer> generateRandomInteger(Integer quantityOfRandomNumbers, Integer randomFromNumber,
-			Integer randomUpToNumber) {
+	public static ArrayList<Integer> generateRandomInteger(Integer quantityOfRandomNumbers, Integer randomMinNumber,
+			Integer randomMaxNumber) {
 		ArrayList<Integer> randomNumbers = new ArrayList<Integer>();
 
 		for (int i = 0; i < quantityOfRandomNumbers; ++i) {
-			randomNumbers.add(ThreadLocalRandom.current().nextInt(randomFromNumber, randomUpToNumber));
+			randomNumbers.add(ThreadLocalRandom.current().nextInt(randomMinNumber, randomMaxNumber));
 		}
 
 		return randomNumbers;
@@ -64,6 +65,35 @@ public class DataGenerator {
 		
 		return randomCreditCards;
 	}
+	
+	public static ArrayList<String> generateRandomDates(Integer quantityOfRandomDates){
+		ArrayList<String> randomDates = new ArrayList<String>();
+		ArrayList<Integer> randomNumbersPostfix = generateRandomInteger(quantityOfRandomDates, 100000, 999999);
+		ArrayList<Integer> randomNumbersPrefix = generateRandomInteger(quantityOfRandomDates, 00000, 
+				Integer.parseInt(Long.toString(System.currentTimeMillis()).substring(2, 7)));
+		
+		String fixedTimePeriod = String.valueOf(Long.toString(System.currentTimeMillis()).substring(0, 2));
+		
+		for(int i=0;i<quantityOfRandomDates;++i){
+			randomDates.add(fixedTimePeriod+randomNumbersPrefix.get(i)+randomNumbersPostfix.get(i));
+		}
+		
+		return randomDates;
+	}
+	
+	public static ArrayList<Float> generateRandomFloats(Integer quantityOfRandomFloats, Integer randomMinNumber, 
+			Integer randomMaxNumber) {
+		ArrayList<Float> randomFloatNumber = new ArrayList<Float>();
+		Random random = new Random();
+		
+		for(int i=0;i<quantityOfRandomFloats;++i){
+			randomFloatNumber.add(Float.valueOf((float) ((Math.round((randomMinNumber+random.nextFloat()*
+					(randomMaxNumber-randomMinNumber))*100))/100.00)));
+		}
+		
+		return randomFloatNumber;
+		
+	}
 
 	
 	public static ArrayList<String> getSurNames() {
@@ -77,22 +107,30 @@ public class DataGenerator {
 	}
 
 	public static ArrayList<String> getProductNames() {
-		String entityNames = "check out";
-		return new ArrayList<String>(Arrays.asList(entityNames.split(" ")));
+		String productNames = "check out";
+		return new ArrayList<String>(Arrays.asList(productNames.split(" ")));
 	}
 	
 	public static ArrayList<String> getProductCategories() {
-		String entityNames = "Zeitschriften Uhren Technik Wissenschaft Spielzeug Software Schuhe Handtaschen Schmuck Beauty Musikinstrumente Musik Lebensmittel Getränke Küche Haushalt Taschen Rucksäcke Koffer Klassik Kamera Foto Haustier Handmade Geschenkgutscheine Garten Games Fashion Elektronik Foto Elektro-Großgeräte DVD Blu-Ray Drogerie Körperpflege Computer Bürobedarf Bücher Beleuchtung Bekleidung Beauty Baumarkt Baby Auto Motorrad Apps Spiele";
-		return new ArrayList<String>(Arrays.asList(entityNames.split(" ")));
+		String categories = "Zeitschriften Uhren Technik Wissenschaft Spielzeug Software Schuhe Handtaschen Schmuck Beauty Musikinstrumente Musik Lebensmittel Getränke Küche Haushalt Taschen Rucksäcke Koffer Klassik Kamera Foto Haustier Handmade Geschenkgutscheine Garten Games Fashion Elektronik Foto Elektro-Großgeräte DVD Blu-Ray Drogerie Körperpflege Computer Bürobedarf Bücher Beleuchtung Bekleidung Beauty Baumarkt Baby Auto Motorrad Apps Spiele";
+		return new ArrayList<String>(Arrays.asList(categories.split(" ")));
 	}
 	
 	public static ArrayList<String> getCities(){
-    	String a = "Allentsteig Altheim Althofen Amstetten Ansfelden Attnang-Puchheim Bad-Aussee Bad-Hall Bad-Ischl Bad-Leonfelden Bad-Radkersburg Bad-St.Leonhard-im-Lavanttal Bad-Voeslau Baden Baernbach Berndorf Bischofshofen Bleiburg Bludenz Braunau-am-Inn Bregenz Bruck-an-der-Leitha Bruck-an-der-Mur Deutsch-Wagram Deutschlandsberg Dornbirn Drosendorf-Zissersdorf Duernstein Ebenfurth Ebreichsdorf Eferding Eggenburg Eisenerz Eisenstadt Enns Fehring Feldbach Feldkirch Feldkirchen-in-Kaernten Ferlach Fischamend Frauenkirchen Freistadt Friedberg Friesach Frohnleiten Fuerstenfeld Gallneukirchen Gaenserndorf Geras Gerasdorf-bei-Wien Gfoehl Gleisdorf Gloggnitz Gmuend Gmuend-in-Kaernten Gmunden Graz Grein Grieskirchen Groß Gerungs Groß-Enzersdorf Groß-Siegharts Guessing Haag Hainburg-an-der-Donau Hainfeld Hall-in-Tirol Hallein Hardegg Hartberg Heidenreichstein Hermagor-Pressegger-See Herzogenburg Hohenems Hollabrunn Horn Imst Innsbruck Jennersdorf Judenburg Kapfenberg Kindberg Kirchdorf-an-der-Krems Kirchschlag-in-der-Buckligen-Welt Kitzbuehel Klagenfurt-am-Woerthersee Klosterneuburg Knittelfeld Koeflach Korneuburg Krems-an-der-Donau Kufstein Laa-an-der-Thaya Laakirchen Landeck Langenlois Leibnitz Leoben Leonding Lienz Liezen Lilienfeld Linz Litschau Maissau Mank Mannersdorf-am-Leithagebirge Marchegg Marchtrenk Mariazell Mattersburg Mattighofen Mautern-an-der-Donau Melk Mistelbach Mittersill Moedling Murau Mureck Muerzzuschlag Neufeld-an-der-Leitha Neulengbach Neumarkt-am-Wallersee Neunkirchen Neusiedl-am-See Oberndorf-bei-Salzburg Oberpullendorf Oberwart Oberwoelz Perg Peuerbach Pinkafeld Poechlarn Poysdorf Pregarten Pressbaum Pulkau Purbach-am-Neusiedler-See Purkersdorf Raabs-an-der-Thaya Radenthein Radstadt Rattenberg Retz Ried-im-Innkreis Rohrbach-Berg Rottenmann Rust Saalfelden-am-Steinernen-Meer Salzburg Sankt-Andrae Sankt-Veit-an-der-Glan Schaerding Scheibbs Schladming Schrattenthal Schrems Schwanenstadt Schwaz Schwechat Seekirchen-am-Wallersee Spielberg Spittal-an-der-Drau St.Johann-im-Pongau St.Pölten St.Valentin Stadtschlaining Steyr Steyregg Stockerau Straßburg Ternitz Traiskirchen Traismauer Traun Trieben Trofaiach Tulln-an-der-Donau Villach Vils Voecklabruck Voitsberg Voelkermarkt Waidhofen-an-der-Thaya Waidhofen-an-der-Ybbs Weitra Weiz Wels Wien Wiener-Neustadt Wieselburg Wilhelmsburg Wolfsberg Wolkersdorf-im-Weinviertel Woergl Ybbs-an-der-Donau Zell-am-See Zeltweg Zistersdorf Zwettl-Niederoesterreich";
-    	return new ArrayList<String>(Arrays.asList(a.split(" ")));
+    	String cities = "Allentsteig Altheim Althofen Amstetten Ansfelden Attnang-Puchheim Bad-Aussee Bad-Hall Bad-Ischl Bad-Leonfelden Bad-Radkersburg Bad-St.Leonhard-im-Lavanttal Bad-Voeslau Baden Baernbach Berndorf Bischofshofen Bleiburg Bludenz Braunau-am-Inn Bregenz Bruck-an-der-Leitha Bruck-an-der-Mur Deutsch-Wagram Deutschlandsberg Dornbirn Drosendorf-Zissersdorf Duernstein Ebenfurth Ebreichsdorf Eferding Eggenburg Eisenerz Eisenstadt Enns Fehring Feldbach Feldkirch Feldkirchen-in-Kaernten Ferlach Fischamend Frauenkirchen Freistadt Friedberg Friesach Frohnleiten Fuerstenfeld Gallneukirchen Gaenserndorf Geras Gerasdorf-bei-Wien Gfoehl Gleisdorf Gloggnitz Gmuend Gmuend-in-Kaernten Gmunden Graz Grein Grieskirchen Groß Gerungs Groß-Enzersdorf Groß-Siegharts Guessing Haag Hainburg-an-der-Donau Hainfeld Hall-in-Tirol Hallein Hardegg Hartberg Heidenreichstein Hermagor-Pressegger-See Herzogenburg Hohenems Hollabrunn Horn Imst Innsbruck Jennersdorf Judenburg Kapfenberg Kindberg Kirchdorf-an-der-Krems Kirchschlag-in-der-Buckligen-Welt Kitzbuehel Klagenfurt-am-Woerthersee Klosterneuburg Knittelfeld Koeflach Korneuburg Krems-an-der-Donau Kufstein Laa-an-der-Thaya Laakirchen Landeck Langenlois Leibnitz Leoben Leonding Lienz Liezen Lilienfeld Linz Litschau Maissau Mank Mannersdorf-am-Leithagebirge Marchegg Marchtrenk Mariazell Mattersburg Mattighofen Mautern-an-der-Donau Melk Mistelbach Mittersill Moedling Murau Mureck Muerzzuschlag Neufeld-an-der-Leitha Neulengbach Neumarkt-am-Wallersee Neunkirchen Neusiedl-am-See Oberndorf-bei-Salzburg Oberpullendorf Oberwart Oberwoelz Perg Peuerbach Pinkafeld Poechlarn Poysdorf Pregarten Pressbaum Pulkau Purbach-am-Neusiedler-See Purkersdorf Raabs-an-der-Thaya Radenthein Radstadt Rattenberg Retz Ried-im-Innkreis Rohrbach-Berg Rottenmann Rust Saalfelden-am-Steinernen-Meer Salzburg Sankt-Andrae Sankt-Veit-an-der-Glan Schaerding Scheibbs Schladming Schrattenthal Schrems Schwanenstadt Schwaz Schwechat Seekirchen-am-Wallersee Spielberg Spittal-an-der-Drau St.Johann-im-Pongau St.Pölten St.Valentin Stadtschlaining Steyr Steyregg Stockerau Straßburg Ternitz Traiskirchen Traismauer Traun Trieben Trofaiach Tulln-an-der-Donau Villach Vils Voecklabruck Voitsberg Voelkermarkt Waidhofen-an-der-Thaya Waidhofen-an-der-Ybbs Weitra Weiz Wels Wien Wiener-Neustadt Wieselburg Wilhelmsburg Wolfsberg Wolkersdorf-im-Weinviertel Woergl Ybbs-an-der-Donau Zell-am-See Zeltweg Zistersdorf Zwettl-Niederoesterreich";
+    	return new ArrayList<String>(Arrays.asList(cities.split(" ")));
+	}
+	
+	public static ArrayList<String> getDescription() {
+		String description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+		ArrayList<String> descriptionList = new ArrayList<String>();
+		
+		descriptionList.add(description);
+		return descriptionList;
 	}
 	
 	public static ArrayList<String> generateRandomStreetNames(Integer quantityOfRandomStreetNames){
-		ArrayList<String> streets = getNames();
+		ArrayList<String> streets = generateRandomData(entityTyp.Names, quantityOfRandomStreetNames);
 		ArrayList<String> streetList = new ArrayList<String>();
 		ArrayList<Integer> randomNumbers = generateRandomInteger(quantityOfRandomStreetNames, 1, 150);
 		for(int i=0;i<streets.size();++i){
@@ -103,6 +141,22 @@ public class DataGenerator {
 			}
 		}
 		return streetList;
+	}
+	
+	public static ArrayList<String> getFullAddress(Integer quantityOfRandomAddresses){
+		ArrayList<Integer> addressId = generateRandomInteger(quantityOfRandomAddresses, 50000000, 99999999);
+		ArrayList<String> streetList = generateRandomStreetNames(quantityOfRandomAddresses);
+		ArrayList<String> cityList = generateRandomData(entityTyp.cities, quantityOfRandomAddresses);
+		ArrayList<Integer> postalCodeList = generateRandomInteger(quantityOfRandomAddresses, 1010, 9990);
+		ArrayList<String> randomAddresses = new ArrayList<String>();
+		
+		for(int i=0;i<quantityOfRandomAddresses;++i){
+			randomAddresses.add(addressId.get(i)+" "+streetList.get(i)+" "+postalCodeList.get(i)+" "+
+					cityList.get(i));
+		}
+		
+		return randomAddresses;
+		
 	}
 	
 	public static ArrayList<String> getFullNames() {
@@ -126,7 +180,6 @@ public class DataGenerator {
 
 		return fullNamesList;
 	}
-	
 	
 	
 	public static ArrayList<String> generateRandomMobileNumbers(Integer quantityOfRandomMobileNumbers) {
@@ -215,8 +268,16 @@ public class DataGenerator {
 			entityList = getProductCategories();
 		}
 		
+		if (typ.equals(entityTyp.productCategories)) {
+			entityList = getProductCategories();
+		}
+		
 		if (typ.equals(entityTyp.cities)) {
 			entityList = getCities();
+		}
+		
+		if (typ.equals(entityTyp.description)) {
+			entityList = getDescription();
 		}
 
 		entityListsize = entityList.size();
@@ -239,7 +300,7 @@ public class DataGenerator {
 	}
 
 	public enum entityTyp {
-		productNames, surNames, Names, fullNames, productCategories, cities
+		productNames, surNames, Names, fullNames, productCategories, cities, description
 	}
 
 }
