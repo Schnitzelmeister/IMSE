@@ -1,5 +1,7 @@
 package at.ac.ac.univie.imse.SS2017.team1.database;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class DataGenerator {
 
 	public static void main(String args[]) {
-		System.out.print(generateRandomStreetNames(1009));
+		System.out.print(generateRandomCreditCards(1000));
 	}
 
 	public static ArrayList<Integer> generateRandomInteger(Integer quantityOfRandomNumbers, Integer randomFromNumber,
@@ -20,6 +22,47 @@ public class DataGenerator {
 		}
 
 		return randomNumbers;
+	}
+	
+	public static ArrayList<String> generateRandomStrings(Integer quantityOfRandomStrings, Integer numberOfUsedBits){
+		ArrayList<String> randomStrings = new ArrayList<String>();
+		SecureRandom random = new SecureRandom();
+		
+		for(int i=0;i<quantityOfRandomStrings;++i){
+			// numberOfUsedBits recommended -> 64 
+			randomStrings.add(new BigInteger(numberOfUsedBits, random).toString(32));		
+		}
+		return randomStrings;
+	}
+	
+	public static ArrayList<Boolean> generateRandomBooleans(Integer quantityOfRandomBoolean, Boolean isAlwaystrue){
+		ArrayList<Boolean> randomBooleans = new ArrayList<Boolean>();
+		Double compareNumber = 0.5;
+		
+		if(isAlwaystrue!=null && isAlwaystrue==true){
+			compareNumber = 1.0;
+		}
+		if(isAlwaystrue!=null && isAlwaystrue==false){
+			compareNumber = 0.0;
+		}
+		
+		for(int i=0;i<quantityOfRandomBoolean;++i){
+			randomBooleans.add(Math.random()<compareNumber);
+		}
+		
+		return randomBooleans;
+	}
+	
+	public static ArrayList<String> generateRandomCreditCards(Integer quantityOfRandomCreditCards){
+		ArrayList<String> randomCreditCards = new ArrayList<String>();
+		ArrayList<Integer> randomNumbers = generateRandomInteger(quantityOfRandomCreditCards*4, 1000, 9999);
+		
+		for(int i=0;i<quantityOfRandomCreditCards*4;i+=4){
+			randomCreditCards.add(randomNumbers.get(i)+"-"+randomNumbers.get(i+1)+"-"+randomNumbers.get(i+2)+
+					"-"+randomNumbers.get(i+3));
+		}
+		
+		return randomCreditCards;
 	}
 
 	
