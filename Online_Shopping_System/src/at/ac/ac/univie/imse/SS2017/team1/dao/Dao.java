@@ -1,4 +1,4 @@
-package at.ac.ac.univie.imse.SS2017.team1.Dao;
+package at.ac.ac.univie.imse.SS2017.team1.dao;
 
 import java.util.List;
 
