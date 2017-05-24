@@ -4,7 +4,7 @@ import at.ac.ac.univie.imse.SS2017.team1.dao.Dao;
 import at.ac.ac.univie.imse.SS2017.team1.model.Product;
 
 public class DatabaseJunit{
-
+	
 	public void test() {
 		Dao dao = new Dao();
 		Product product = new Product();
