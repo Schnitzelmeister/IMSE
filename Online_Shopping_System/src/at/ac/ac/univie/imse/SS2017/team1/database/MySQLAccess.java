@@ -16,7 +16,7 @@ public class MySQLAccess {
           //// statement = connect.createStatement();
 
             		
-           Connection connect=DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "root", "tarik1983");
+           Connection connect=DriverManager.getConnection("jdbc:mysql://localhost:3306/imse", "root", "tarik1983");
                 			
            Statement statement=connect.createStatement();
                     

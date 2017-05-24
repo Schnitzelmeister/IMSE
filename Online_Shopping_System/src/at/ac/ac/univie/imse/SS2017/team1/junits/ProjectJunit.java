@@ -12,7 +12,7 @@ public class ProjectJunit {
 		Dao dao = new Dao();
 		Product product = new Product();
 		product.setDescription("Alles klar");
-		product.setProductId(1233);
+		//product.setProductId(1233);
 		product.setProductName("Rechner");
 		product.setPrice(23.45F);
 		dao.save(product);
