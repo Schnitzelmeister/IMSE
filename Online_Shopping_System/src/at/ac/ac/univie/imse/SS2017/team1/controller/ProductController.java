@@ -1,8 +1,8 @@
-package at.ac.ac.univie.imse.SS2017.team1.Controller;
+package at.ac.ac.univie.imse.SS2017.team1.controller;
 
 import java.util.List;
 
-import at.ac.ac.univie.imse.SS2017.team1.Model.Product;
+import at.ac.ac.univie.imse.SS2017.team1.model.Product;
 
 
 public class ProductController {

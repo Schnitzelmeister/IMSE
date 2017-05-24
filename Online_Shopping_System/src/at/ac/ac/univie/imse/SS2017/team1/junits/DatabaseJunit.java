@@ -1,15 +1,10 @@
-package at.ac.ac.univie.imse.SS2017.team1.Junits;
+package at.ac.ac.univie.imse.SS2017.team1.junits;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-
-import at.ac.ac.univie.imse.SS2017.team1.Dao.Dao;
-import at.ac.ac.univie.imse.SS2017.team1.Model.Product;
+import at.ac.ac.univie.imse.SS2017.team1.dao.Dao;
+import at.ac.ac.univie.imse.SS2017.team1.model.Product;
 
 public class DatabaseJunit{
 
-	@Test
 	public void test() {
 		Dao dao = new Dao();
 		Product product = new Product();
