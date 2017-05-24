@@ -1,7 +1,5 @@
 package at.ac.ac.univie.imse.SS2017.team1.junits;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 import at.ac.ac.univie.imse.SS2017.team1.dao.Dao;

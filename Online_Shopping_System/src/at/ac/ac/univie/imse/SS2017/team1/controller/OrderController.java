@@ -1,6 +1,9 @@
 package at.ac.ac.univie.imse.SS2017.team1.controller;
 
+import java.util.List;
+
 import at.ac.ac.univie.imse.SS2017.team1.dao.Dao;
+import at.ac.ac.univie.imse.SS2017.team1.model.CustomerOrder;
 
 public class OrderController {
 	
@@ -15,15 +18,17 @@ public class OrderController {
 	}
 	
 	public Integer getOrderPrice(Integer orderId){
+		return orderId;
 
 	}
 	
-	public Order getOrder(Integer orderId){
-		dao.getobjects(Order.class);
+	public CustomerOrder getOrder(Integer orderId){
+		dao.getobjects(CustomerOrder.class);
+		return null;
 	}
 	
-	public List<Order> getAllOrder(){
-		return dao.getobjects(Order.class);
+	public List<CustomerOrder> getAllOrder(){
+		return dao.getobjects(CustomerOrder.class);
 	}
 	
 }
