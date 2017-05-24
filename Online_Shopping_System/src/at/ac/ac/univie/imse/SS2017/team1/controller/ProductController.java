@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import at.ac.ac.univie.imse.SS2017.team1.dao.Dao;
+import at.ac.ac.univie.imse.SS2017.team1.model.Image;
 import at.ac.ac.univie.imse.SS2017.team1.model.Product;
 
 
@@ -50,8 +51,12 @@ public class ProductController {
 		dao.save(product);
 	}
 	
-	public void addProductImage(String image){
-		
+	public void addProductImage(String imageString, Integer productId){
+		Image image = new Image();
+		image.setImageId(generateImageId());
+		image.setImageString(imageString);
+		image.setProductId(productId);
+		dao.save(image);
 		
 	}
 	
@@ -59,8 +64,8 @@ public class ProductController {
 		dao.delete(productId);
 	}
 	
-	public void deleteImage(String image){
-		
+	public void deleteImage(String imageId){
+		dao.delete(imageId);
 	}
 	
 	public void updateProductName(Integer productId, String productName){
@@ -79,6 +84,10 @@ public class ProductController {
 	}
 	
 	private Integer generateId(){
+		return 0;
+	}
+	
+	private Integer generateImageId(){
 		return 0;
 	}
 	
