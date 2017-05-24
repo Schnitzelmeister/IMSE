@@ -10,7 +10,7 @@ public class Adress {
 	private String streetNumber;
 	private String additionaolInfo;
 	private String city;
-	private Integer postCode;
+	private String postCode;
 	private String country;
 	
 	public Integer getAdressId() {
@@ -53,11 +53,11 @@ public class Adress {
 		this.city = city;
 	}
 	
-	public Integer getPostCode() {
+	public String getPostCode() {
 		return postCode;
 	}
 	
-	public void setPostCode(Integer postCode) {
+	public void setPostCode(String postCode) {
 		this.postCode = postCode;
 	}
 	
