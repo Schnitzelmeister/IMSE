@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form method="post" action="register">
+<form method="post" action="../register">
         <label>Email: <input type="text" name="email" /></label></br>
         <label>Vorname: <input type="text" name="vorname" /></label></br>
         <label>Nachname: <input type="text" name="nachname" /></label></br>

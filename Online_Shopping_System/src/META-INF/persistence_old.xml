@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
 	<persistence-unit name="Online_Shopping_System">
-	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+ 	<provider>org.hibernate.ejb.HibernatePersistence</provider>  
+<!--<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		
 		<properties>
@@ -11,8 +12,8 @@
 			<property name="javax.persistence.jdbc.url" 
 					  value="jdbc:oracle:thin:@oracle-lab.cs.univie.ac.at:1521:lab"/>
 			
-			<property name="javax.persistence.jdbc.user" value="..."/>
-			<property name="javax.persistence.jdbc.password" value="..."/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="born2kil"/>
 			
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
             <property name="hibernate.show_sql" value="true" />

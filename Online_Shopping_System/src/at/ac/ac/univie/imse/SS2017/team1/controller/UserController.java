@@ -4,39 +4,42 @@ import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import at.ac.ac.univie.imse.SS2017.team1.dao.DatabaseAccess;
+import at.ac.ac.univie.imse.SS2017.team1.dao.Dao;
+import at.ac.ac.univie.imse.SS2017.team1.dao.DaoInterface;
+import at.ac.ac.univie.imse.SS2017.team1.model.Customer;
 
 public class UserController {
-	DatabaseAccess dao;
+	DaoInterface dao;
 
 	public UserController() {
-		dao = new DatabaseAccess();
+		dao = new Dao();
 	}
 
 	public void verifyLogin(String emailAdress, String password) {
 
 	}
 
-	public void registerCustomer(String customerFirstName, String customerLastName, String customerEmail,
-			String password, String phoneNumber) {
-
+	public void registerCustomer(Customer customer) {
+		try {
+			dao.save(customer);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Die Datenspeicherung war nicht erfolgreich");
+		}
 	}
 
 	public void verifyUserInput(String firstname, String surname, String email, String password, String telephonenr) {
 		boolean emailTaken;
-		
-		try {
-			emailTaken = dao.isEmailInUse(email);
-		} catch (SQLException e) {
-			throw new IllegalArgumentException("Ein Datenbankfehler ist aufgetreten");
-		}
 
-		if (emailTaken) {
-			throw new IllegalArgumentException("Der Benutzername ist schon vergeben");
-		}
-
+		/*
+		 * try { emailTaken = dao.isEmailInUse(email); } catch (SQLException e)
+		 * { throw new IllegalArgumentException(
+		 * "Ein Datenbankfehler ist aufgetreten"); }
+		 * 
+		 * if (emailTaken) { throw new IllegalArgumentException(
+		 * "Der Benutzername ist schon vergeben"); }
+		 */
 		if (!validEmail(email)) {
-			throw new IllegalArgumentException("Die angegebene Email Adresse ist keine gltige Email");
+			throw new IllegalArgumentException("Die angegebene Email Adresse ist keine gültige Email");
 		}
 
 		if (firstname.equals("") || surname.equals("") || telephonenr.equals(""))

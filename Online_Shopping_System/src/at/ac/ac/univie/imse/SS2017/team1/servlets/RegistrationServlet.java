@@ -8,13 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import at.ac.ac.univie.imse.SS2017.team1.controller.UserController;
+import at.ac.ac.univie.imse.SS2017.team1.dao.DaoInterface;
 import at.ac.ac.univie.imse.SS2017.team1.model.Customer;
 
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/customer/newaccount.jsp")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/register")
+public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	UserController controls;
@@ -22,7 +23,7 @@ public class LoginServlet extends HttpServlet {
 	/**
 	 * Default constructor.
 	 */
-	public LoginServlet() {
+	public RegistrationServlet() {
 		controls = new UserController();
 	}
 
@@ -34,15 +35,16 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			String firstname = request.getParameter("");
-			String surname = request.getParameter("");
+			String lastname = request.getParameter("");
 			String email = request.getParameter("");
 			String password = request.getParameter("");
 			String telephonenr = request.getParameter("");
-			String fullName = firstname + " " + surname;
 
-			controls.verifyUserInput(firstname, surname, email, password, telephonenr);
+			//controls.verifyUserInput(firstname, lastname, email, password, telephonenr);
 
-			Customer newCustomer = new Customer(email, password, true, fullName, "", "", telephonenr, "");
+			Customer newCustomer = new Customer(email, password, true, firstname, lastname, "", "", telephonenr, "");
+			controls.registerCustomer(newCustomer);
+			
 		} catch (IllegalArgumentException e) {
 			request.setAttribute("errorMessage", e.getMessage());
 		} catch (Exception e) {
