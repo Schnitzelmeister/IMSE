@@ -49,7 +49,7 @@ public class Dao implements DaoInterface {
 	}
 
 	@Override
-	public <T> T getobject(Class<T> cls, String Id) {
+	public <T> T getobject(Class<T> cls, Integer Id) {
 		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
 		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
 		try {
