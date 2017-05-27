@@ -8,35 +8,25 @@
 </head>
 <body>
 
-<form method="post" action="../register">
+<form method="POST" action="../register">
         <label>Email: <input type="text" name="email" /></label></br>
         <label>Vorname: <input type="text" name="vorname" /></label></br>
         <label>Nachname: <input type="text" name="nachname" /></label></br>
         <label>TelefonNr: <input type="text" name="telefonnummer" /></label></br>
         <label>Passwort: <input type="password" name="passwort" /></label></br>
-        <input type="hidden" name="usertype" value="private" />
-        <input type="hidden" name="formtype" value="publicform" />
+        
         <br/>
         <label><input type="submit" value="Konto erstellen" /></label></br>
 </form>
 
- 		<%
-        if(!(request.getAttribute("errorMessage")==null)) {
-        %>
-        <strong>${errorMessage}</strong>
-        </div>
-        <%        	
-        }
-        %>
+<c:if test="${not empty errorMessage}">
+   <c:out value="${errorMessage}"/>
+</c:if>
+ 		
         
-        <%
-        if(!(request.getAttribute("infoMessage")==null)) {
-        %>
-        <strong>${infoMessage}</strong>
-        </div>
-        <%        	
-        }
-        %>
+       
+       ${infoMessage}
+      
 
 </body>
 </html>
