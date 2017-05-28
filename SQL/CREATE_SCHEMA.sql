@@ -109,14 +109,16 @@ CREATE TABLE `CustomerOrder` (
 
 
 CREATE TABLE `OrderDetail` (
-  `orderId` int(11) NOT NULL AUTO_INCREMENT,
-  `orderDetailId` int(11) NOT NULL,
+  `orderDetailId` int(11) NOT NULL AUTO_INCREMENT,
+  `orderId` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `subTotal` decimal(7,2) NOT NULL,
   `productId` int(11) NOT NULL,
-  PRIMARY KEY (`orderId`,`orderDetailId`),
+  PRIMARY KEY (`orderDetailId`,`orderId`),
   KEY `FK_Product_idx` (`productId`),
+  KEY `FK_OrderId` (`orderId`),
   CONSTRAINT `FK_OrderId` FOREIGN KEY (`orderId`) REFERENCES `CustomerOrder` (`orderId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_Product` FOREIGN KEY (`productId`) REFERENCES `Product` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
