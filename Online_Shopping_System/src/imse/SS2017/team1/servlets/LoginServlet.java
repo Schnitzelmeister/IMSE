@@ -52,7 +52,7 @@ public class LoginServlet extends HttpServlet {
 	     session.setAttribute("usertype", "customer");
 	     session.setAttribute("email", currentUser.getEmailAddress());
 	    	
-	     response.sendRedirect("/Online_Shopping_System/index.jsp");
+	     response.sendRedirect("/Online_Shopping_System/index.jsp?infoMessage=Die Anmeldung war erfolgreich");
 	     return;
 	}
 

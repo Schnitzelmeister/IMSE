@@ -10,7 +10,7 @@
 <body>
 
 <form method="POST" action="../editinfo">
-        <label>Email: <input type="text" name="email" value="${email}" /></label></br>
+        <label>Email: <input type="text" name="email" value="${email}" readonly/></label></br>
         <label>Vorname: <input type="text" name="vorname" value="${vorname}" /></label></br>
         <label>Nachname: <input type="text" name="nachname" value="${nachname}" /></label></br>
         <label>TelefonNr: <input type="text" name="telefonnummer" value="${telefonnummer}"/></label></br>
