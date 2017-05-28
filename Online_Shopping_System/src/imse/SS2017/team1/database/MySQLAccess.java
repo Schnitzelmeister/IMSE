@@ -10,11 +10,6 @@ public class MySQLAccess {
         try {
         	
            //Class.forName("oracle.jdbc.driver.OracleDriver");
-         //   z.b. MATRIKELNUMMER -> "a1424234" , PASSWORT -> "Superhansi"
-         // connect = DriverManager
-             //       .getConnection("jdbc:oracle:thin:@oracle-lab.cs.univie.ac.at:1521:lab","-MATRIKELNUMMER-","-PASSWORT-");
-          //// statement = connect.createStatement();
-
             		
            Connection connect=DriverManager.getConnection("jdbc:mysql://localhost:3306/imse", "root", "tarik1983");
                 			

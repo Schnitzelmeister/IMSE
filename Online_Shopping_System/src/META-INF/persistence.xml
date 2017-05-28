@@ -12,6 +12,7 @@
 		<class>imse.SS2017.team1.model.Customer</class>
 		<class>imse.SS2017.team1.model.OrderDetail</class>
 		<class>imse.SS2017.team1.model.Admin</class>
+		<class>imse.SS2017.team1.model.ProductBelongsCategory</class>
 		
 		
 		<properties>
