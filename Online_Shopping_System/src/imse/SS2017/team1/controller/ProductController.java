@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import imse.SS2017.team1.dao.Dao;
+import imse.SS2017.team1.model.Category;
 import imse.SS2017.team1.model.Image;
 import imse.SS2017.team1.model.Product;
 
@@ -38,22 +39,20 @@ public class ProductController {
 		return sameProductPrice;
 	}
 
-	public List<Product> GetAllProduct(){
+	public List<Product> GetAllProducts(){
 		return dao.getobjects(Product.class);
 	}
 	
-	public void createProduct(String productName, Float price, String description){
+	public void createProduct(String productName, Float price, String description, Integer quantity){
 		Product product = new Product();
 		product.setDescription(description);
 		product.setPrice(price);
-		product.setProductId(generateId());
 		product.setProductName(productName);
 		dao.save(product);
 	}
 	
 	public void addProductImage(String imageString, Integer productId){
 		Image image = new Image();
-		image.setImageId(generateImageId());
 		image.setImageString(imageString);
 		image.setProductId(productId);
 		dao.save(image);
@@ -61,34 +60,29 @@ public class ProductController {
 	}
 	
 	public void deleteProductById(Integer productId){
-		dao.delete(productId);
+		dao.delete(dao.getobject(Category.class, productId));
 	}
 	
 	public void deleteImage(String imageId){
 		dao.delete(imageId);
 	}
 	
-	public void updateProductName(Integer productId, String productName){
+	public void updateProduct(Integer productId, String productName, Float price, 
+			String description, Integer quantity) {
 		Product product = dao.getobject(Product.class, productId);
-		product.setProductName(productName);
-	}
-	
-	public void updateProductPrice(Integer productId, Float price){
-		Product product = dao.getobject(Product.class, productId);
-		product.setPrice(price);
-	}
-	
-	public void updateProductDescription(Integer productId, String description){
-		Product product = dao.getobject(Product.class, productId);
-		product.setDescription(description);
-	}
-	
-	private Integer generateId(){
-		return 0;
-	}
-	
-	private Integer generateImageId(){
-		return 0;
+		if(!product.getDescription().equals(description)){
+			product.setDescription(description);
+		}
+		if(!product.getPrice().equals(price)){
+			product.setPrice(price);
+		}
+		if(!product.getProductName().equals(productName)){
+			product.setProductName(productName);
+		}
+		if(product.getQuantity()!=quantity){
+			product.setQuantity(quantity);
+		}
+		dao.save(product);	
 	}
 	
 }

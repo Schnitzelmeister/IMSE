@@ -11,7 +11,6 @@ public class CategoryController {
 
 	public void createCategory(String categoryName){
 		Category category = new Category();
-		category.setCategoryId(generateId());
 		category.setCategoryName(categoryName);
 		dao.save(category);
 	}
@@ -38,7 +37,4 @@ public class CategoryController {
 		return dao.getobjects(Category.class);
 	}
 	
-	private Integer generateId(){
-		return 0;
-	}
 }

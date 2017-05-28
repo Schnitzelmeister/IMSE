@@ -10,14 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import imse.SS2017.team1.controller.CategoryController;
+import imse.SS2017.team1.controller.ProductController;
 import imse.SS2017.team1.model.Category;
 
-@WebServlet("/DeleteProductCategory")
-public class DeleteProductCategory extends HttpServlet {
+@WebServlet("/CreateNewProduct")
+public class CreateNewProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		
 		CategoryController categoryController = new CategoryController();
 		ArrayList<Category> categories = (ArrayList<Category>) categoryController.getAllCategories();
 		request.setAttribute("categories", categories);
@@ -25,11 +27,16 @@ public class DeleteProductCategory extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		ProductController productController = new ProductController();
 		
-		CategoryController categoryController = new CategoryController();
+		String productName = request.getParameter("productName");
+		Float price = Float.valueOf(request.getParameter("productPrice"));
+		String description = request.getParameter("description");
+		Integer quantity = Integer.valueOf(request.getParameter("productQuantity"));
 		
-		Integer categoryId = categoryController.getCategoryByName(request.getParameter("deletedCategoryName")).getCategoryId();
-		categoryController.deleteCategory(categoryId);
+		productController.createProduct(productName, price, description, quantity);
+		
 	}
 
 }
