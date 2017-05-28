@@ -1,4 +1,4 @@
-package imse.SS2017.team1.model;
+package at.ac.ac.univie.imse.SS2017.team1.model;
 
 import javax.persistence.*;
 
@@ -8,25 +8,23 @@ public class Customer extends User{
 	
 	private String firstName;
 	private String lastName;
-	@Transient private String shippingAdress;
-	@Transient private String billingAdress;
+	private Adress shippingAddress;
+	private Adress billingAddress;
 	private String phoneNumber;
-	private String creditCardInfo;
+	private CreditCard creditCard;
 
 	public Customer(){
 		
 	}
 	
 	public Customer(String emailAddress, String password, boolean loginStatus, String firstName, String lastName,
-			String shippingAddress, String billingAddress, String phoneNumber, String creditCardInfo) {
+			String phoneNumber) {
 		
 		super(emailAddress, password, loginStatus);
 		this.firstName=firstName;
 		this.lastName=lastName;
-		this.shippingAdress = shippingAddress;
-		this.billingAdress = billingAddress;
 		this.phoneNumber = phoneNumber;
-		this.creditCardInfo = creditCardInfo;
+	
 	}
 
 	public String getFirstName() {
@@ -47,20 +45,20 @@ public class Customer extends User{
 		this.lastName = lastName;
 	}
 	
-	public String getShippingAddress() {
-		return shippingAdress;
+	public Adress getShippingAddress() {
+		return shippingAddress;
 	}
 
-	public void setShippingAddress(String shippingAddress) {
-		this.shippingAdress = shippingAddress;
+	public void setShippingAddress(Adress shippingAddress) {
+		this.shippingAddress = shippingAddress;
 	}
 
-	public String getBillingAddress() {
-		return billingAdress;
+	public Adress getBillingAddress() {
+		return billingAddress;
 	}
 
-	public void setBillingAddress(String billingAddress) {
-		this.billingAdress = billingAddress;
+	public void setBillingAddress(Adress billingAddress) {
+		this.billingAddress = billingAddress;
 	}
 
 	public String getPhoneNumber() {
@@ -71,11 +69,11 @@ public class Customer extends User{
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getCreditCardInfo() {
-		return creditCardInfo;
+	public CreditCard getCreditCardInfo() {
+		return creditCard;
 	}
 
-	public void setCreditCardInfo(String creditCardInfo) {
-		this.creditCardInfo = creditCardInfo;
+	public void setCreditCardInfo(CreditCard creditCard) {
+		this.creditCard = creditCard;
 	}
 }
