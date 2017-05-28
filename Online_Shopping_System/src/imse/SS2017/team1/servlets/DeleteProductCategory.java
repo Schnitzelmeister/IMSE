@@ -12,24 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 import imse.SS2017.team1.controller.CategoryController;
 import imse.SS2017.team1.model.Category;
 
-@WebServlet(name="CreateNewProductCategory")
-public class CreateNewProductCategory extends HttpServlet {
+@WebServlet("/DeleteProductCategory")
+public class DeleteProductCategory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	
 		CategoryController categoryController = new CategoryController();
 		ArrayList<Category> categories = (ArrayList<Category>) categoryController.getAllCategories();
+		
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String categoryName = request.getParameter("categoryName");
-		
 		CategoryController categoryController = new CategoryController();
-		categoryController.createCategory(categoryName);
 		
-		
+		Integer categoryId = categoryController.getCategoryByName(request.getParameter("deletedCategoryName")).getCategoryId();
+		categoryController.deleteCategory(categoryId);
 	}
 
 }

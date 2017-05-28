@@ -16,8 +16,8 @@ public class CategoryController {
 		dao.save(category);
 	}
 	
-	public void deleteCategory(String categoryId){
-		dao.delete(categoryId);
+	public void deleteCategory(Integer categoryId){
+		dao.delete(dao.getobject(Category.class, categoryId));
 	}
 	
 	public Category getCategoryByName(String categoryName){

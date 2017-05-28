@@ -11,6 +11,7 @@ import imse.SS2017.team1.model.CustomerOrder;
 import imse.SS2017.team1.model.Image;
 import imse.SS2017.team1.model.OrderDetail;
 import imse.SS2017.team1.model.Product;
+import imse.SS2017.team1.model.User;
 
 import java.util.Random;
 
