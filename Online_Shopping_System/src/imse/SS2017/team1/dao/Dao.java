@@ -82,6 +82,17 @@ public class Dao implements DaoInterface {
 		else
 			return true;
 	}
+	
+	@Override
+	public <T> T getUser(Class<T> cls, String email) {
+		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
+		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
+		try {
+			return (T) entitymanager.find(cls, email);
+		} finally {
+			entitymanager.close();
+		}
+	}
 }
 
 

@@ -14,4 +14,5 @@ public interface DaoInterface {
 	
 	public <T> boolean isEmailTaken(Class<T> cls, String email);
 	
+	public <T> T getUser(Class<T> cls, String email);
 }

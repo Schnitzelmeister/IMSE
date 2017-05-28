@@ -50,7 +50,7 @@ public class RegistrationServlet extends HttpServlet {
 			Customer newCustomer = new Customer(email, password, true, firstname, lastname, "", "", telephonenr, "");
 			System.out.println("Customer instantiiert");
 			controls.registerCustomer(newCustomer);
-			
+			response.sendRedirect("/Online_Shopping_System/customer/customerlogin.jsp?infoMessage=Das Konto wurde erfolgreich erstellt, melden Sie sich bitte an");
 		} catch (IllegalArgumentException e) {
 			System.out.println("IllegalArgumentException: "+e.getMessage());
 			request.setAttribute("errorMessage", e.getMessage());

@@ -9,4 +9,12 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <servlet-name>LoadCustomerInfoServlet</servlet-name>
+    <servlet-class>imse.SS2017.team1.servlets.LoadCustomerInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoadCustomerInfoServlet</servlet-name>
+    <url-pattern>/Online_Shopping_System/WebContent/loaddata/</url-pattern>
+  </servlet-mapping>
 </web-app>

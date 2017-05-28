@@ -19,14 +19,24 @@
         <label><input type="submit" value="Konto erstellen" /></label></br>
 </form>
 
-<c:if test="${not empty errorMessage}">
-   <c:out value="${errorMessage}"/>
-</c:if>
- 		
-        
-       
-       ${infoMessage}
-      
+<% 
+if(request.getParameter("errorMessage")!=null){
+	request.setAttribute("errorMessage", request.getParameter("errorMessage"));
+%>
+${errorMessage}    
+<% 
+}       
+%>
+
+<% 
+if(request.getParameter("infoMessage")!=null){
+	request.setAttribute("infoMessage", request.getParameter("infoMessage"));
+%>
+${infoMessage}    
+<% 
+}       
+%>
+
 
 </body>
 </html>

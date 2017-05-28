@@ -4,14 +4,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Hauptseite</title>
+<title>Kundenkonto anlegen</title>
 </head>
 <body>
 
 
-<a href="/Online_Shopping_System/customer/customerlogin.jsp">Customer login</a></br>
-<a href="/Online_Shopping_System/customer/newaccount.jsp">New customer account</a></br>
-<a href="/Online_Shopping_System/logout">Logout</a></br>
+
+<form method="POST" action="../login">
+        <label>Email: <input type="text" name="email" /></label></br>
+        <label>Passwort: <input type="password" name="passwort" /></label></br>
+        <br/>
+        <label><input type="submit" value="Anmelden" /></label></br>
+</form>
+
 
 <% 
 if(request.getParameter("errorMessage")!=null){
@@ -30,7 +35,6 @@ ${infoMessage}
 <% 
 }       
 %>
-
 
 </body>
 </html>
