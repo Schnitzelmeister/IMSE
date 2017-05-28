@@ -9,7 +9,7 @@ import javax.persistence.Table;
 public class CreditCard {
 	
 	@Id
-	private Integer cardNumber;
+	private String cardNumber;
 	private String firstName;
 	private String lastName;
 	private String type; //MasterCard, Visa 
@@ -19,13 +19,13 @@ public class CreditCard {
 	/**
 	 * @return the cardNumber
 	 */
-	public Integer getCardNumber() {
+	public String getCardNumber() {
 		return cardNumber;
 	}
 	/**
 	 * @param cardNumber the cardNumber to set
 	 */
-	public void setCardNumber(Integer cardNumber) {
+	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
 	/**

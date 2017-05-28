@@ -69,7 +69,7 @@ public class DatabaseJunit{
 		customer.setPhoneNumber("0676234234");
 		customer.setShippingAddress(1);
 		customer.setBillingAddress(1);
-		// E-Mail-Adresse bei mehrmaligem Test ändern
+		// E-Mail-Adresse muss bei mehrmaligem Testen geändert werden
 		customer.setEmailAddress("Hansi@hotmail.com");
 		customer.setCreditCardInfo(null);
 		dao.save(customer);
@@ -82,6 +82,7 @@ public class DatabaseJunit{
 		Admin admin = new Admin();
 		admin.setFirstName("Georg");
 		admin.setLastName("Jandel");
+		// E-Mail-Adresse muss bei mehrmaligem Testen geändert werden
 		admin.setEmailAddress("Hansi@hotmail.com");
 		admin.setPassword("super");
 		admin.setVerified("true");
@@ -101,5 +102,20 @@ public class DatabaseJunit{
 		customerOrder.setOrdered(true);
 		dao.save(customerOrder);
 	}
+	
+	@Test
+	public void testCustomerCreditCard(){
+		Dao dao = new Dao();
+		CreditCard creditcard = new CreditCard();
+		creditcard.setCardNumber("1241-1234-1234-1234");
+		creditcard.setCvv("123");
+		creditcard.setExpiryMonth(2);
+		creditcard.setExpiryYear(2019);
+		creditcard.setFirstName("Gerhard");
+		creditcard.setLastName("Oberdorfler");
+		creditcard.setType("MasterCard");
+		dao.save(creditcard);
+	}
+
 
 }
