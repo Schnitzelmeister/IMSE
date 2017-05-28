@@ -97,6 +97,7 @@ CREATE TABLE `CustomerOrder` (
   `dateCreated` varchar(10) NOT NULL,
   `dateShipped` varchar(10) DEFAULT NULL,
   `CustomerEmail` varchar(45) NOT NULL,
+  `ordered` tinyint(4) NOT NULL,
   PRIMARY KEY (`orderId`),
   KEY `FK_CustomerEmail_idx` (`CustomerEmail`),
   CONSTRAINT `FK_CustomerEmail` FOREIGN KEY (`CustomerEmail`) REFERENCES `Customer` (`emailAdress`) ON DELETE CASCADE ON UPDATE CASCADE
