@@ -9,16 +9,16 @@ import javax.persistence.Table;
 public class OrderDetail {
 
 	@Id
-	private CustomerOrder orderId;
+	private Integer orderId;
 	private Integer orderDetailId;
 	private Integer quantity;
 	private Float subTotal;
-	private Product product;
+	private Integer productId;
 
 	/**
 	 * @return the orderId
 	 */
-	public CustomerOrder getOrderId() {
+	public Integer getOrderId() {
 		return orderId;
 	}
 
@@ -26,7 +26,7 @@ public class OrderDetail {
 	 * @param orderId
 	 *            the orderId to set
 	 */
-	public void setOrderId(CustomerOrder orderId) {
+	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
 
@@ -74,22 +74,16 @@ public class OrderDetail {
 		this.orderDetailId = orderDetailId;
 	}
 
-	/**
-	 * @return the product
-	 */
-	public Product getProduct() {
-		return product;
-	}
-
-	/**
-	 * @param product the product to set
-	 */
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
 	public Float calculatePrice(Integer quantity, Float unitCost) {
 		return unitCost * quantity;
 
+	}
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
 	}
 }

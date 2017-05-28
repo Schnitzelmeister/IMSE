@@ -1,6 +1,7 @@
 package imse.SS2017.team1.junits;
 
 import imse.SS2017.team1.dao.Dao;
+import imse.SS2017.team1.database.DataGenerator;
 import imse.SS2017.team1.model.Address;
 import imse.SS2017.team1.model.Admin;
 import imse.SS2017.team1.model.Category;
@@ -8,14 +9,14 @@ import imse.SS2017.team1.model.CreditCard;
 import imse.SS2017.team1.model.Customer;
 import imse.SS2017.team1.model.CustomerOrder;
 import imse.SS2017.team1.model.Image;
+import imse.SS2017.team1.model.OrderDetail;
 import imse.SS2017.team1.model.Product;
+
+import java.util.Random;
 
 import org.junit.Test;
 
 public class DatabaseJunit{
-	
-	Address address;
-	CreditCard creditcard;
 	
 	@Test
 	public void testProduct() {
@@ -31,6 +32,7 @@ public class DatabaseJunit{
 	@Test
 	public void testAddress() {
 		Dao dao = new Dao();
+		Address address = new Address();
 		address = new Address();
 		address.setCity("Salzburg");
 		address.setCountry("Austria");
@@ -62,6 +64,7 @@ public class DatabaseJunit{
 	@Test
 	public void testCustomer() {
 		Dao dao = new Dao();
+		Random random = new Random();
 		Customer customer = new Customer();
 		customer.setFirstName("Fritz");
 		customer.setLastName("Heinzl");
@@ -69,8 +72,7 @@ public class DatabaseJunit{
 		customer.setPhoneNumber("0676234234");
 		customer.setShippingAddress(1);
 		customer.setBillingAddress(1);
-		// E-Mail-Adresse muss bei mehrmaligem Testen geändert werden
-		customer.setEmailAddress("Hansi@hotmail.com");
+		customer.setEmailAddress(DataGenerator.generateRandomEmailAccounts(DataGenerator.generateRandomData(DataGenerator.entityTyp.fullNames, 100)).get(random.nextInt(99)));
 		customer.setCreditCardInfo(null);
 		dao.save(customer);
 		
@@ -79,11 +81,11 @@ public class DatabaseJunit{
 	@Test
 	public void testAdmin(){
 		Dao dao = new Dao();
+		Random random = new Random();
 		Admin admin = new Admin();
 		admin.setFirstName("Georg");
 		admin.setLastName("Jandel");
-		// E-Mail-Adresse muss bei mehrmaligem Testen geändert werden
-		admin.setEmailAddress("Hansi@hotmail.com");
+		admin.setEmailAddress(DataGenerator.generateRandomEmailAccounts(DataGenerator.generateRandomData(DataGenerator.entityTyp.fullNames, 100)).get(random.nextInt(99)));
 		admin.setPassword("super");
 		admin.setVerified("true");
 		admin.setManagerEmailAddress("Hansi@hotmail.com");
@@ -107,7 +109,7 @@ public class DatabaseJunit{
 	public void testCustomerCreditCard(){
 		Dao dao = new Dao();
 		CreditCard creditcard = new CreditCard();
-		creditcard.setCardNumber("1241-1234-1234-1234");
+		creditcard.setCardNumber(DataGenerator.generateRandomCreditCards(100).get(0));
 		creditcard.setCvv("123");
 		creditcard.setExpiryMonth(2);
 		creditcard.setExpiryYear(2019);
@@ -117,5 +119,17 @@ public class DatabaseJunit{
 		dao.save(creditcard);
 	}
 
+	@Test
+	public void testOrderDetail(){
+		Dao dao = new Dao();
+		OrderDetail orderDetail = new OrderDetail();
+		orderDetail.setProductId(1);
+		orderDetail.setQuantity(12);
+		orderDetail.setSubTotal(2.45F);
+		orderDetail.setOrderId(1);
+		// Wird noch im Create-Table ausgebessert 
+		orderDetail.setOrderDetailId(12);
+		dao.save(orderDetail);
+	}
 
 }

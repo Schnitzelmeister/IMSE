@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="C:/Users/Raf/Desktop/ImseProject/JakubsVersion/IMSE/Online_Shopping_System/libraries/eclipselink-2.5.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Raf/Desktop/ImseProject/JakubsVersion/IMSE/Online_Shopping_System/libraries/javax.persistence-2.1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Raf/Desktop/ImseProject/JakubsVersion/IMSE/Online_Shopping_System/libraries/mysql-connector-java-5.1.42-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Raf/Desktop/ImseProject/JakubsVersion/IMSE/Online_Shopping_System/libraries/commons-codec-1.7.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
