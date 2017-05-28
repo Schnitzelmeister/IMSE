@@ -27,7 +27,6 @@ public class DeleteProductCategory extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		CategoryController categoryController = new CategoryController();
-		
 		Integer categoryId = categoryController.getCategoryByName(request.getParameter("deletedCategoryName")).getCategoryId();
 		categoryController.deleteCategory(categoryId);
 	}
