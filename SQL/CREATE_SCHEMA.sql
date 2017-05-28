@@ -13,19 +13,33 @@ CREATE TABLE `Adress` (
   PRIMARY KEY (`adressId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `CreditCard` (
+  `cardNumber` varchar(20) NOT NULL,
+  `firstName` varchar(45) NOT NULL,
+  `lastName` varchar(45) NOT NULL,
+  `type` varchar(45) NOT NULL,
+  `cvv` varchar(45) NOT NULL,
+  `expiryMonth` int(11) NOT NULL,
+  `expiryYear` int(11) NOT NULL,
+  PRIMARY KEY (`cardNumber`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 CREATE TABLE `Customer` (
   `emailAdress` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `firstName` varchar(45) NOT NULL,
   `lastName` varchar(45) NOT NULL,
   `phoneNumber` varchar(45) DEFAULT NULL,
-  `creditCardInfo` varchar(100) DEFAULT NULL,
+  `creditCardNumber` varchar(20) DEFAULT NULL,
   `shippingAdressId` int(11) DEFAULT NULL,
   `billingAdressId` int(11) DEFAULT NULL,
   PRIMARY KEY (`emailAdress`),
   KEY `FK-ShippingAdressId` (`shippingAdressId`),
   KEY `FK-BillingAdressId` (`billingAdressId`),
+  KEY `FK-CreditCard_idx` (`creditCardNumber`),
   CONSTRAINT `FK-BillingAdressId` FOREIGN KEY (`billingAdressId`) REFERENCES `Adress` (`adressId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK-CreditCard` FOREIGN KEY (`creditCardNumber`) REFERENCES `CreditCard` (`cardNumber`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK-ShippingAdressId` FOREIGN KEY (`shippingAdressId`) REFERENCES `Adress` (`adressId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -52,7 +66,6 @@ CREATE TABLE `Product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-
 CREATE TABLE `Image` (
   `imageId` int(11) NOT NULL AUTO_INCREMENT,
   `productId` int(11) NOT NULL,
@@ -69,7 +82,6 @@ CREATE TABLE `Category` (
   PRIMARY KEY (`categoryId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
 CREATE TABLE `ProductBelongsCategory` (
   `productId` int(11) NOT NULL,
   `categoryId` int(11) NOT NULL,
@@ -81,22 +93,25 @@ CREATE TABLE `ProductBelongsCategory` (
 
 
 CREATE TABLE `CustomerOrder` (
-  `OrderId` int(11) NOT NULL AUTO_INCREMENT,
+  `orderId` int(11) NOT NULL AUTO_INCREMENT,
   `dateCreated` varchar(10) NOT NULL,
   `dateShipped` varchar(10) DEFAULT NULL,
-  `productId` int(11) NOT NULL,
-  PRIMARY KEY (`OrderId`),
-  KEY `FK_ProductIdOrder_idx` (`productId`),
-  CONSTRAINT `FK_ProductIdOrder` FOREIGN KEY (`productId`) REFERENCES `Product` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE
+  `CustomerEmail` varchar(45) NOT NULL,
+  PRIMARY KEY (`orderId`),
+  KEY `FK_CustomerEmail_idx` (`CustomerEmail`),
+  CONSTRAINT `FK_CustomerEmail` FOREIGN KEY (`CustomerEmail`) REFERENCES `Customer` (`emailAdress`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `OrderDetail` (
   `orderId` int(11) NOT NULL,
+  `orderDetailId` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `subTotal` decimal(7,2) NOT NULL,
-  PRIMARY KEY (`orderId`,`quantity`,`subTotal`),
-  CONSTRAINT `FK_OrderId` FOREIGN KEY (`orderId`) REFERENCES `CustomerOrder` (`OrderId`) ON DELETE CASCADE ON UPDATE CASCADE
+  `productId` int(11) NOT NULL,
+  PRIMARY KEY (`orderId`,`orderDetailId`),
+  KEY `FK_Product_idx` (`productId`),
+  CONSTRAINT `FK_OrderId` FOREIGN KEY (`orderId`) REFERENCES `CustomerOrder` (`orderId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_Product` FOREIGN KEY (`productId`) REFERENCES `Product` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
