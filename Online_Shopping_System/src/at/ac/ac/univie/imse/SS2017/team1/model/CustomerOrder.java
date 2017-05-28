@@ -60,10 +60,25 @@ public class CustomerOrder {
 	public void setDateShipped(String dateShipped) {
 		this.dateShipped = dateShipped;
 	}
+
+	/**
+	 * @return the ordered
+	 */
+	public Boolean getOrdered() {
+		return ordered;
+	}
+	/**
+	 * @param ordered the ordered to set
+	 */
+	public void setOrdered(Boolean ordered) {
+		this.ordered = ordered;
+	}
+	ArrayList<OrderDetail> orderdetails=new ArrayList<OrderDetail>();
+
 	private Integer orderId;
 	private String customerEmail;
 	private String dateCreated;
 	private String dateShipped;
-	ArrayList<OrderDetail> orderdetails=new ArrayList<OrderDetail>();
-
+	private Boolean ordered;
+	
 }
