@@ -64,8 +64,10 @@ CREATE TABLE `Product` (
   `productName` varchar(45) NOT NULL,
   `price` decimal(7,2) NOT NULL,
   `description` varchar(45) DEFAULT NULL,
+  `quantity` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`productId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 
 CREATE TABLE `Image` (
@@ -107,7 +109,7 @@ CREATE TABLE `CustomerOrder` (
 
 
 CREATE TABLE `OrderDetail` (
-  `orderId` int(11) NOT NULL,
+  `orderId` int(11) NOT NULL AUTO_INCREMENT,
   `orderDetailId` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `subTotal` decimal(7,2) NOT NULL,
