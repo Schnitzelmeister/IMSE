@@ -1,13 +1,12 @@
 package imse.SS2017.team1.model;
 
-import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "customerorder")
+@Table(name = "CustomerOrder")
 public class CustomerOrder {
 	
 	
@@ -75,7 +74,6 @@ public class CustomerOrder {
 	public void setOrdered(Boolean ordered) {
 		this.ordered = ordered;
 	}
-	ArrayList<OrderDetail> orderdetails=new ArrayList<OrderDetail>();
 
 	@Id
 	private Integer orderId;

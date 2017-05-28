@@ -1,6 +1,5 @@
 package imse.SS2017.team1.model;
 
-import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

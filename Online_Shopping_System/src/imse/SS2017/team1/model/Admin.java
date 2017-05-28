@@ -3,36 +3,40 @@ package imse.SS2017.team1.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "admin")
+@Table(name = "Admin")
 public class Admin extends User {
 	
-	private String adminName;
-	private boolean isVerified;
+	//muss noch im Create Table auf Boolean geändert werden
+	private String verified;
+	private String managerEmailAddress;
 
 	public Admin(){
 		
 	}
 	
-	public Admin(String emailAddress, String password, boolean loginStatus, String adminName, boolean isVerified) {
-		super(emailAddress, password, loginStatus);
-		this.adminName = adminName;
-		this.isVerified = isVerified;
+	public Admin(String emailAddress, String password, String firstName, String lastName, boolean loginStatus, String adminName, String isVerified) {
+		super(emailAddress, password, firstName, lastName, loginStatus);
+		this.verified = isVerified;
 	}
 
-	public String getAdminName() {
-		return adminName;
+	public String isVerified() {
+		return verified;
 	}
 
-	public void setAdminName(String adminName) {
-		this.adminName = adminName;
+	public void setVerified(String isVerified) {
+		this.verified = isVerified;
 	}
 
-	public boolean isVerified() {
-		return isVerified;
+	public String getManagerEmailAddress() {
+		return managerEmailAddress;
 	}
 
-	public void setVerified(boolean isVerified) {
-		this.isVerified = isVerified;
+	public void setManagerEmailAddress(String managerEmailAddress) {
+		this.managerEmailAddress = managerEmailAddress;
+	}
+
+	public String getVerified() {
+		return verified;
 	}
 
 }

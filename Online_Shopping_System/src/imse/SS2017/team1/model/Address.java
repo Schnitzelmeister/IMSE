@@ -5,11 +5,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "adress")
+@Table(name = "Address")
 public class Address {
 
 	@Id
-	private Integer adressId;
+	private Integer addressId;
 	private String streetName;
 	private String streetNumber;
 	private String additionalInfo;
@@ -18,11 +18,11 @@ public class Address {
 	private String country;
 	
 	public Integer getAdressId() {
-		return adressId;
+		return addressId;
 	}
 	
 	public void setAdressId(Integer adressId) {
-		this.adressId = adressId;
+		this.addressId = adressId;
 	}
 	
 	public String getStreetName() {

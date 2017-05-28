@@ -3,62 +3,40 @@ package imse.SS2017.team1.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "customer")
+@Table(name = "Customer")
 public class Customer extends User{
 	
-	private String firstName;
-	private String lastName;
-	private Address shippingAddress;
-	private Address billingAddress;
+	private Integer shippingAddressId;
+	private Integer billingAddressId;
 	private String phoneNumber;
-	private CreditCard creditCard;
+	private String creditCardNumber;
 
 	public Customer(){
 		
 	}
 	
-	public Customer(String emailAddress, String password, boolean loginStatus, String firstName, String lastName,
-			String phoneNumber) {
-		
-		super(emailAddress, password, loginStatus);
-		this.firstName=firstName;
-		this.lastName=lastName;
+	public Customer(String emailAddress, String password, String firstName, String lastName, boolean loginStatus,
+			String phoneNumber ) {		
+		super(emailAddress, password, firstName, lastName, loginStatus);
 		this.phoneNumber = phoneNumber;
 	
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
 	
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public Integer getShippingAddress() {
+		return shippingAddressId;
 	}
 
-	public String getLastName() {
-		return this.lastName;
-	}
-	
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	
-	public Address getShippingAddress() {
-		return shippingAddress;
+	public void setShippingAddress(Integer shippingAddress) {
+		this.shippingAddressId = shippingAddress;
 	}
 
-	public void setShippingAddress(Address shippingAddress) {
-		this.shippingAddress = shippingAddress;
+	public Integer getBillingAddress() {
+		return billingAddressId;
 	}
 
-	public Address getBillingAddress() {
-		return billingAddress;
-	}
-
-	public void setBillingAddress(Address billingAddress) {
-		this.billingAddress = billingAddress;
+	public void setBillingAddress(Integer billingAddress) {
+		this.billingAddressId = billingAddress;
 	}
 
 	public String getPhoneNumber() {
@@ -69,11 +47,11 @@ public class Customer extends User{
 		this.phoneNumber = phoneNumber;
 	}
 
-	public CreditCard getCreditCardInfo() {
-		return creditCard;
+	public String getCreditCardInfo() {
+		return creditCardNumber;
 	}
 
-	public void setCreditCardInfo(CreditCard creditCard) {
-		this.creditCard = creditCard;
+	public void setCreditCardInfo(String creditCard) {
+		this.creditCardNumber = creditCard;
 	}
 }

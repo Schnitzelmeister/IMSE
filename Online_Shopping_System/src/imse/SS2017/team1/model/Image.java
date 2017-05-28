@@ -11,7 +11,7 @@ public class Image {
 	@Id
 	private Integer imageId;
 	private Integer productId;
-	private String imageString;
+	private String image;
 	
 	public Integer getImageId() {
 		return imageId;
@@ -30,10 +30,10 @@ public class Image {
 	}
 	
 	public String getImageString() {
-		return imageString;
+		return image;
 	}
 	
-	public void setImageString(String imageString) {
-		this.imageString = imageString;
+	public void setImageString(String image) {
+		this.image = image;
 	}
 }

@@ -1,5 +1,4 @@
 package imse.SS2017.team1.database;
-/*package at.ac.ac.univie.imse.SS2017.team1.database;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,4 +25,3 @@ public class PictureUtility {
 	}
 	
 }
-*/
