@@ -18,6 +18,8 @@ import org.junit.Test;
 
 public class DatabaseJunit{
 	
+	String emailAddress;
+	
 	@Test
 	public void testProduct() {
 		Dao dao = new Dao();
@@ -25,6 +27,7 @@ public class DatabaseJunit{
 		product.setDescription("Alles klar");
 		product.setProductName("Rechner");
 		product.setPrice(23.45F);
+		product.setQuantity(2);
 		dao.save(product);
 		
 	}
@@ -54,6 +57,14 @@ public class DatabaseJunit{
 	@Test
 	public void testImage() {
 		Dao dao = new Dao();
+		
+		Product product = new Product();
+		product.setDescription("Alles klar");
+		product.setProductName("Rechner");
+		product.setPrice(23.45F);
+		product.setQuantity(2);
+		dao.save(product);
+		
 		Image image = new Image();
 		image.setImageString("asdfgasdgasgas");
 		image.setProductId(1);
@@ -74,8 +85,7 @@ public class DatabaseJunit{
 		customer.setBillingAddress(1);
 		customer.setEmailAddress(DataGenerator.generateRandomEmailAccounts(DataGenerator.generateRandomData(DataGenerator.entityTyp.fullNames, 100)).get(random.nextInt(99)));
 		customer.setCreditCardInfo(null);
-		dao.save(customer);
-		
+		dao.save(customer);	
 	}
 	
 	@Test
@@ -88,7 +98,7 @@ public class DatabaseJunit{
 		admin.setEmailAddress(DataGenerator.generateRandomEmailAccounts(DataGenerator.generateRandomData(DataGenerator.entityTyp.fullNames, 100)).get(random.nextInt(99)));
 		admin.setPassword("super");
 		admin.setVerified("true");
-		admin.setManagerEmailAddress("Hansi@hotmail.com");
+		admin.setManagerEmailAddress(admin.getEmailAddress());
 		dao.save(admin);
 	}
 	
@@ -97,8 +107,21 @@ public class DatabaseJunit{
 	@Test
 	public void testCustomerOrder(){
 		Dao dao = new Dao();
+		
+		Random random = new Random();
+		Customer customer = new Customer();
+		customer.setFirstName("Fritz");
+		customer.setLastName("Heinzl");
+		customer.setPassword("sowieso");
+		customer.setPhoneNumber("0676234234");
+		customer.setShippingAddress(1);
+		customer.setBillingAddress(1);
+		customer.setEmailAddress(DataGenerator.generateRandomEmailAccounts(DataGenerator.generateRandomData(DataGenerator.entityTyp.fullNames, 100)).get(random.nextInt(99)));
+		customer.setCreditCardInfo(null);
+		dao.save(customer);	
+		
 		CustomerOrder customerOrder = new CustomerOrder();
-		customerOrder.setCustomerEmail("Hansi@hotmail.com");
+		customerOrder.setCustomerEmail(customer.getEmailAddress());
 		customerOrder.setDateCreated("223452345");
 		customerOrder.setDateShipped("2342342342");
 		customerOrder.setOrdered(true);
@@ -122,13 +145,31 @@ public class DatabaseJunit{
 	@Test
 	public void testOrderDetail(){
 		Dao dao = new Dao();
+		
+		Random random = new Random();
+		Customer customer = new Customer();
+		customer.setFirstName("Fritz");
+		customer.setLastName("Heinzl");
+		customer.setPassword("sowieso");
+		customer.setPhoneNumber("0676234234");
+		customer.setShippingAddress(1);
+		customer.setBillingAddress(1);
+		customer.setEmailAddress(DataGenerator.generateRandomEmailAccounts(DataGenerator.generateRandomData(DataGenerator.entityTyp.fullNames, 100)).get(random.nextInt(99)));
+		customer.setCreditCardInfo(null);
+		dao.save(customer);	
+		
+		CustomerOrder customerOrder = new CustomerOrder();
+		customerOrder.setCustomerEmail(customer.getEmailAddress());
+		customerOrder.setDateCreated("223452345");
+		customerOrder.setDateShipped("2342342342");
+		customerOrder.setOrdered(true);
+		dao.save(customerOrder);
+		
 		OrderDetail orderDetail = new OrderDetail();
 		orderDetail.setProductId(1);
 		orderDetail.setQuantity(12);
 		orderDetail.setSubTotal(2.45F);
-		orderDetail.setOrderId(1);
-		// Wird noch im Create-Table ausgebessert 
-		orderDetail.setOrderDetailId(12);
+		orderDetail.setOrderId(dao.getobjects(CustomerOrder.class).get(0).getOrderId());
 		dao.save(orderDetail);
 	}
 

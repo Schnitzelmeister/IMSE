@@ -14,7 +14,7 @@ public class Product {
 	private String productName;
 	private Float price;
 	private String description;
-	//ArrayList<Image> image=new ArrayList<Image>();
+	private Integer quantity;
 	
 	public Integer getProductId() {
 		return productId;
@@ -46,6 +46,14 @@ public class Product {
 	
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 	
 }

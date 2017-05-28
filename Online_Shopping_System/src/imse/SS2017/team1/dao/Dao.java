@@ -58,7 +58,7 @@ public class Dao implements DaoInterface {
 		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
 		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
 		try {
-			return (T) entitymanager.find(cls, Id);
+			return (T) entitymanager.find(cls, String.valueOf(Id));
 		} finally {
 			entitymanager.close();
 		}
