@@ -18,4 +18,4 @@ drop table Customer;
 
 drop table CreditCard;
 
-drop table Adress;
+drop table Address;
