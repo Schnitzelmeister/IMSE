@@ -58,6 +58,17 @@ public class Dao implements DaoInterface {
 		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
 		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
 		try {
+			return (T) entitymanager.find(cls, String.valueOf(Id));
+		} finally {
+			entitymanager.close();
+		}
+	}
+	
+	@Override
+	public <T> T getobject(Class<T> cls, String Id) {
+		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
+		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
+		try {
 			return (T) entitymanager.find(cls, Id);
 		} finally {
 			entitymanager.close();
@@ -81,6 +92,17 @@ public class Dao implements DaoInterface {
 			return false;
 		else
 			return true;
+	}
+	
+	@Override
+	public <T> T getUser(Class<T> cls, String email) {
+		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
+		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
+		try {
+			return (T) entitymanager.find(cls, email);
+		} finally {
+			entitymanager.close();
+		}
 	}
 }
 

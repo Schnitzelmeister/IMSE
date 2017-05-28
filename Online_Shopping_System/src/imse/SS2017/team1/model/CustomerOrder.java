@@ -1,18 +1,16 @@
 package imse.SS2017.team1.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity(name = "customerorder")
+@Entity
+@Table(name = "CustomerOrder")
 public class CustomerOrder {
 	
-	@Id
-	private Integer orderId;
-	private String customerEmail;
-	private String customerFirstName;
-	private String customerLastName;
-	private String dateCreated;
-	private String dateShipped;
+	
+	
 	
 	/**
 	 * @return the orderId
@@ -38,30 +36,7 @@ public class CustomerOrder {
 	public void setCustomerEmail(String customerEmail) {
 		this.customerEmail = customerEmail;
 	}
-	/**
-	 * @return the customerFirstName
-	 */
-	public String getCustomerFirstName() {
-		return customerFirstName;
-	}
-	/**
-	 * @param customerFirstName the customerFirstName to set
-	 */
-	public void setCustomerFirstName(String customerFirstName) {
-		this.customerFirstName = customerFirstName;
-	}
-	/**
-	 * @return the customerLastName
-	 */
-	public String getCustomerLastName() {
-		return customerLastName;
-	}
-	/**
-	 * @param customerLastName the customerLastName to set
-	 */
-	public void setCustomerLastName(String customerLastName) {
-		this.customerLastName = customerLastName;
-	}
+
 	/**
 	 * @return the dateCreated
 	 */
@@ -86,4 +61,25 @@ public class CustomerOrder {
 	public void setDateShipped(String dateShipped) {
 		this.dateShipped = dateShipped;
 	}
+
+	/**
+	 * @return the ordered
+	 */
+	public Boolean getOrdered() {
+		return ordered;
+	}
+	/**
+	 * @param ordered the ordered to set
+	 */
+	public void setOrdered(Boolean ordered) {
+		this.ordered = ordered;
+	}
+
+	@Id
+	private Integer orderId;
+	private String customerEmail;
+	private String dateCreated;
+	private String dateShipped;
+	private Boolean ordered;
+	
 }

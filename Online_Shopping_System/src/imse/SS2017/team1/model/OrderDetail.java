@@ -2,79 +2,88 @@ package imse.SS2017.team1.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity(name = "orderdetail")
+@Entity
+@Table(name = "orderdetail")
 public class OrderDetail {
-	
+
 	@Id
-	private CustomerOrder orderId;
+	private Integer orderId;
+	private Integer orderDetailId;
 	private Integer quantity;
-	private Float unitCost;
 	private Float subTotal;
-	private static Integer orderCounter=0;
+	private Integer productId;
+
 	/**
 	 * @return the orderId
 	 */
-	public CustomerOrder getOrderId() {
+	public Integer getOrderId() {
 		return orderId;
 	}
+
 	/**
-	 * @param orderId the orderId to set
+	 * @param orderId
+	 *            the orderId to set
 	 */
-	public void setOrderId(CustomerOrder orderId) {
+	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
+
 	/**
 	 * @return the quantity
 	 */
 	public Integer getQuantity() {
 		return quantity;
 	}
+
 	/**
-	 * @param quantity the quantity to set
+	 * @param quantity
+	 *            the quantity to set
 	 */
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-	/**
-	 * @return the unitCost
-	 */
-	public Float getUnitCost() {
-		return unitCost;
-	}
-	/**
-	 * @param unitCost the unitCost to set
-	 */
-	public void setUnitCost(Float unitCost) {
-		this.unitCost = unitCost;
-	}
+
 	/**
 	 * @return the subTotal
 	 */
 	public Float getSubTotal() {
 		return subTotal;
 	}
+
 	/**
-	 * @param subTotal the subTotal to set
+	 * @param subTotal
+	 *            the subTotal to set
 	 */
 	public void setSubTotal(Float subTotal) {
 		this.subTotal = subTotal;
 	}
+
 	/**
-	 * @return the orderCounter
+	 * @return the orderDetailId
 	 */
-	public static Integer getOrderCounter() {
-		return orderCounter;
+	public Integer getOrderDetailId() {
+		return orderDetailId;
 	}
+
 	/**
-	 * @param orderCounter the orderCounter to set
+	 * @param orderDetailId the orderDetailId to set
 	 */
-	public static void setOrderCounter(Integer orderCounter) {
-		OrderDetail.orderCounter = orderCounter;
+	public void setOrderDetailId(Integer orderDetailId) {
+		this.orderDetailId = orderDetailId;
 	}
-	
-	public Float calculatePrice(Integer quantity, Float unitCost ){
-		return unitCost*quantity;
-		
+
+	public Float calculatePrice(Integer quantity, Float unitCost) {
+		return unitCost * quantity;
+
+	}
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
 	}
 }

@@ -1,11 +1,12 @@
 package imse.SS2017.team1.controller;
 
-import java.sql.SQLException;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.dao.DaoInterface;
+import imse.SS2017.team1.model.Admin;
 import imse.SS2017.team1.model.Customer;
 
 public class UserController {
@@ -56,4 +57,30 @@ public class UserController {
 
 		return mat.matches();
 	}
+	
+	public List<Customer> searchAllCustomer() {
+		return dao.getobjects(Customer.class);
+	}
+	
+	public Customer searchCustomer(String email){
+		return dao.getobject(Customer.class, email);
+	}
+	
+	public void deleteAccount(String email){
+		dao.delete(dao.getobject(Customer.class, email));
+	}
+	
+	public List<Admin> searchAllAdmins(){
+		return dao.getobjects(Admin.class);
+	}
+	
+	public void deleteAdminAccount(String email){
+		dao.delete(dao.getobject(Admin.class, email));
+	}
+	
+	public void verifyAdmin(String email){
+		Admin admin = dao.getobject(Admin.class, email);
+		admin.setVerified("true");
+	}
+	
 }

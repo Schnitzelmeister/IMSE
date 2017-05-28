@@ -2,25 +2,27 @@ package imse.SS2017.team1.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Adress {
+@Table(name = "Address")
+public class Address {
 
 	@Id
-	private Integer adressId;
+	private Integer addressId;
 	private String streetName;
 	private String streetNumber;
-	private String additionaolInfo;
+	private String additionalInfo;
 	private String city;
 	private String postCode;
 	private String country;
 	
 	public Integer getAdressId() {
-		return adressId;
+		return addressId;
 	}
 	
 	public void setAdressId(Integer adressId) {
-		this.adressId = adressId;
+		this.addressId = adressId;
 	}
 	
 	public String getStreetName() {
@@ -39,12 +41,12 @@ public class Adress {
 		this.streetNumber = streetNumber;
 	}
 	
-	public String getAdditionaolInfo() {
-		return additionaolInfo;
+	public String getAdditionalInfo() {
+		return additionalInfo;
 	}
 	
-	public void setAdditionaolInfo(String additionaolInfo) {
-		this.additionaolInfo = additionaolInfo;
+	public void setAdditionaolInfo(String additionalInfo) {
+		this.additionalInfo = additionalInfo;
 	}
 	
 	public String getCity() {

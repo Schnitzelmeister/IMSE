@@ -12,9 +12,10 @@ drop table Image;
 
 drop table Product;
 
-
 drop table Admin;
 
 drop table Customer;
 
-drop table Adress;
+drop table CreditCard;
+
+drop table Address;

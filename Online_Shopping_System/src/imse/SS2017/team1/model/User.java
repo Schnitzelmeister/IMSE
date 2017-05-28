@@ -8,28 +8,33 @@ import javax.persistence.*;
 public abstract class User {
 	
 	@Id
-	private String emailAdress;
+	private String emailAddress;
 	
 	private String password;
 	//private boolean loginStatus;
+	
+	private String firstName;
+	private String lastName;
 
 	public User(){
 		
 	}
 	
-	public User(String emailAddress, String password, boolean loginStatus) {
-		this.emailAdress = emailAddress;
+	public User(String emailAddress, String password, String firstName, String lastName, boolean loginStatus) {
+		this.emailAddress = emailAddress;
 		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		//this.loginStatus = loginStatus;
 	}
 
 	
 	public String getEmailAddress() {
-		return emailAdress;
+		return emailAddress;
 	}
 
 	public void setEmailAddress(String emailAddress) {
-		this.emailAdress = emailAddress;
+		this.emailAddress = emailAddress;
 	}
 
 	public String getPassword() {
@@ -48,4 +53,20 @@ public abstract class User {
 		this.loginStatus = loginStatus;
 	}
 */
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 }

@@ -11,13 +11,12 @@ public class CategoryController {
 
 	public void createCategory(String categoryName){
 		Category category = new Category();
-		category.setCategoryId(generateId());
 		category.setCategoryName(categoryName);
 		dao.save(category);
 	}
 	
-	public void deleteCategory(String categoryId){
-		dao.delete(categoryId);
+	public void deleteCategory(Integer categoryId){
+		dao.delete(dao.getobject(Category.class, categoryId));
 	}
 	
 	public Category getCategoryByName(String categoryName){
@@ -38,7 +37,4 @@ public class CategoryController {
 		return dao.getobjects(Category.class);
 	}
 	
-	private Integer generateId(){
-		return 0;
-	}
 }

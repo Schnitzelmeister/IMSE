@@ -2,14 +2,16 @@ package imse.SS2017.team1.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Image")
 public class Image {
 
 	@Id
 	private Integer imageId;
 	private Integer productId;
-	private String imageString;
+	private String image;
 	
 	public Integer getImageId() {
 		return imageId;
@@ -28,10 +30,10 @@ public class Image {
 	}
 	
 	public String getImageString() {
-		return imageString;
+		return image;
 	}
 	
-	public void setImageString(String imageString) {
-		this.imageString = imageString;
+	public void setImageString(String image) {
+		this.image = image;
 	}
 }

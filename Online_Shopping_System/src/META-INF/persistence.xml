@@ -2,7 +2,18 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
 	<persistence-unit name="Online_Shopping_System">
 	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<class>imse.SS2017.team1.model.Product</class>
+		<class>imse.SS2017.team1.model.Address</class>
+		<class>imse.SS2017.team1.model.Category</class>
+		<class>imse.SS2017.team1.model.Image</class>
+		<class>imse.SS2017.team1.model.CustomerOrder</class>
+		<class>imse.SS2017.team1.model.CreditCard</class>
+		<class>imse.SS2017.team1.model.Customer</class>
+		<class>imse.SS2017.team1.model.OrderDetail</class>
+		<class>imse.SS2017.team1.model.Admin</class>
+		<class>imse.SS2017.team1.model.ProductBelongsCategory</class>
+		
 		
 		<properties>
 			
