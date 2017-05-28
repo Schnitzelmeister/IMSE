@@ -1,11 +1,13 @@
-package at.ac.ac.univie.imse.SS2017.team1.model;
+package imse.SS2017.team1.model;
 
 import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-
+@Entity
+@Table(name = "customerorder")
 public class CustomerOrder {
 	
 	
@@ -75,6 +77,7 @@ public class CustomerOrder {
 	}
 	ArrayList<OrderDetail> orderdetails=new ArrayList<OrderDetail>();
 
+	@Id
 	private Integer orderId;
 	private String customerEmail;
 	private String dateCreated;

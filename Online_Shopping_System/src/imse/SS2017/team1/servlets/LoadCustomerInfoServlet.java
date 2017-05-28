@@ -35,13 +35,13 @@ public class LoadCustomerInfoServlet extends HttpServlet {
 		String firstName=user.getFirstName();
 		String lastName=user.getLastName();
 		String phoneNumber=user.getPhoneNumber();
-		String creditCardInfo=user.getCreditCardInfo();
+		//String creditCardInfo=user.getCreditCardInfo();
 		
 		request.setAttribute("email", emailAdress);
 		request.setAttribute("vorname", firstName);
 		request.setAttribute("nachname", lastName);
 		request.setAttribute("telefonnummer", phoneNumber);
-		request.setAttribute("kreditkartennummer", creditCardInfo);   
+		//request.setAttribute("kreditkartennummer", creditCardInfo);   
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

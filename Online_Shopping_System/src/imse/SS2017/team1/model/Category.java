@@ -2,8 +2,10 @@ package imse.SS2017.team1.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity(name = "category")
+@Entity
+@Table(name = "category")
 public class Category {
 
 	@Id

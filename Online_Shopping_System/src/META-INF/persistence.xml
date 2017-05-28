@@ -2,12 +2,17 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
 	<persistence-unit name="Online_Shopping_System">
 	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<class>imse.SS2017.team1.model.Product</class>
+		<class>imse.SS2017.team1.model.Address</class>
+		<class>imse.SS2017.team1.model.Category</class>
+		<class>imse.SS2017.team1.model.Image</class>
+		
 		
 		<properties>
 			
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/onlineshop" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/imse" />
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="born2kil" />
 

@@ -1,11 +1,13 @@
-package at.ac.ac.univie.imse.SS2017.team1.model;
+package imse.SS2017.team1.model;
 
 import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "product")
 public class Product {
 
 	@Id
@@ -13,7 +15,7 @@ public class Product {
 	private String productName;
 	private Float price;
 	private String description;
-	ArrayList<Image> image=new ArrayList<Image>();
+	//ArrayList<Image> image=new ArrayList<Image>();
 	
 	public Integer getProductId() {
 		return productId;

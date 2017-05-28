@@ -1,9 +1,14 @@
-package at.ac.ac.univie.imse.SS2017.team1.model;
+package imse.SS2017.team1.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "creditcard")
 public class CreditCard {
+	
+	@Id
 	private Integer cardNumber;
 	private String firstName;
 	private String lastName;

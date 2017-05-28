@@ -47,9 +47,9 @@ public class RegistrationServlet extends HttpServlet {
 			System.out.println("Daten in string");
 			controls.verifyUserInput(firstname, lastname, email, password, telephonenr);
 
-			Customer newCustomer = new Customer(email, password, true, firstname, lastname, "", "", telephonenr, "");
+			//Customer newCustomer = new Customer(email, password, true, firstname, lastname, "", "", telephonenr, "");
 			System.out.println("Customer instantiiert");
-			controls.registerCustomer(newCustomer);
+			//controls.registerCustomer(newCustomer);
 			response.sendRedirect("/Online_Shopping_System/customer/customerlogin.jsp?infoMessage=Das Konto wurde erfolgreich erstellt, melden Sie sich bitte an");
 		} catch (IllegalArgumentException e) {
 			System.out.println("IllegalArgumentException: "+e.getMessage());

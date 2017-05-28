@@ -1,4 +1,4 @@
-package at.ac.ac.univie.imse.SS2017.team1.model;
+package imse.SS2017.team1.model;
 
 import javax.persistence.*;
 
@@ -8,8 +8,8 @@ public class Customer extends User{
 	
 	private String firstName;
 	private String lastName;
-	private Adress shippingAddress;
-	private Adress billingAddress;
+	private Address shippingAddress;
+	private Address billingAddress;
 	private String phoneNumber;
 	private CreditCard creditCard;
 
@@ -45,19 +45,19 @@ public class Customer extends User{
 		this.lastName = lastName;
 	}
 	
-	public Adress getShippingAddress() {
+	public Address getShippingAddress() {
 		return shippingAddress;
 	}
 
-	public void setShippingAddress(Adress shippingAddress) {
+	public void setShippingAddress(Address shippingAddress) {
 		this.shippingAddress = shippingAddress;
 	}
 
-	public Adress getBillingAddress() {
+	public Address getBillingAddress() {
 		return billingAddress;
 	}
 
-	public void setBillingAddress(Adress billingAddress) {
+	public void setBillingAddress(Address billingAddress) {
 		this.billingAddress = billingAddress;
 	}
 
