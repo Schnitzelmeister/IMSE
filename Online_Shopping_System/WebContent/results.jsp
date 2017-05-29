@@ -59,7 +59,7 @@ else
 
 <p>&nbsp;</p>
 
-<p>Sort by:<select name="sort">
+<p>Sort by:<select onchange="var s=document.getElementById('sort');location.href='results?search=<%= java.net.URLEncoder.encode(results.getSearchText(), "UTF-8") %>&cat=<%= results.getCategoryId() %>&sort='+s.options[s.selectedIndex].value;" id="sort">
 <option value="0"<% if (results.getSortMode() == 0) { out.write(" selected"); } %>>Price DESC</option>
 <option value="1"<% if (results.getSortMode() == 1) { out.write(" selected"); } %>>Price ASC</option>
 <option value="2"<% if (results.getSortMode() == 2) { out.write(" selected"); } %>>Product Name</option>
