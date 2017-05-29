@@ -19,7 +19,10 @@ public class DataGenerator {
 		ArrayList<Integer> randomNumbers = new ArrayList<Integer>();
 
 		for (int i = 0; i < quantityOfRandomNumbers; ++i) {
-			randomNumbers.add(ThreadLocalRandom.current().nextInt(randomMinNumber, randomMaxNumber));
+			Integer randomNumber = ThreadLocalRandom.current().nextInt(randomMinNumber, randomMaxNumber);
+			if(randomNumber>randomMinNumber){
+				randomNumbers.add(randomNumber);
+			}
 		}
 
 		return randomNumbers;
@@ -107,7 +110,7 @@ public class DataGenerator {
 	}
 
 	public static ArrayList<String> getProductNames() {
-		String productNames = "check out";
+		String productNames = "Lederpflege-Set Stuhl Stuhlkissen Pflanze Kinderstuhl Sessel Gardinenpaar Gardinenpaar-Meterware Regal Mischbatterie Aufsatz Schreibtisch Schubladenelement Schubladen Rollen Schubladenelement Rahmen Netzdrahtkörbe Wandschiene Böden Box Korb Stange Dreierhaken Wäschehalter Teppich Langflor Teppich Tagesdeck Kissenbezug Batterie-alkalisch Rührschüssel Deckel Tasche Kaffeemühle Pflanze Drehstuhl Hocker Bettwäscheset Einsatzspüle Becken Pavillon Kleiderschrank Plaid Fußbodenschutz Kochgeschirr5-tlg. Topf Schiebegardine Stuhlkissen Spülbürste Anschlusskabel Transformator Fernbedienung Verbindungskabel Arbeitsleuchte Leseleuchte Kinderhochstuhl Kinderstuhl Tablett Drahtkorb Trockengestell Hackblock Schneidebrett";
 		return new ArrayList<String>(Arrays.asList(productNames.split(" ")));
 	}
 	
@@ -122,7 +125,7 @@ public class DataGenerator {
 	}
 	
 	public static ArrayList<String> getDescription() {
-		String description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+		String description = "Lorem ipsum dolor sit amet";//, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 		ArrayList<String> descriptionList = new ArrayList<String>();
 		
 		descriptionList.add(description);
@@ -132,12 +135,12 @@ public class DataGenerator {
 	public static ArrayList<String> generateRandomStreetNames(Integer quantityOfRandomStreetNames){
 		ArrayList<String> streets = generateRandomData(entityTyp.Names, quantityOfRandomStreetNames);
 		ArrayList<String> streetList = new ArrayList<String>();
-		ArrayList<Integer> randomNumbers = generateRandomInteger(quantityOfRandomStreetNames, 1, 150);
+		//ArrayList<Integer> randomNumbers = generateRandomInteger(quantityOfRandomStreetNames, 1, 150);
 		for(int i=0;i<streets.size();++i){
 			if(i%10!=0){
-				streetList.add(streets.get(i)+"strasse "+randomNumbers.get(i));
+				streetList.add(streets.get(i)+"strasse "/*+randomNumbers.get(i)*/);
 			} else {
-				streetList.add(streets.get(i)+"gasse "+randomNumbers.get(i));
+				streetList.add(streets.get(i)+"gasse "/*+randomNumbers.get(i)*/);
 			}
 		}
 		return streetList;
@@ -159,14 +162,20 @@ public class DataGenerator {
 		
 	}
 	
-	public static ArrayList<String> getFullNames() {
-		ArrayList<String> surnamesList = new ArrayList<String>();
-		ArrayList<String> namesList = new ArrayList<String>();
+	public static ArrayList<String> getFullNames(ArrayList<String> surnamesList, ArrayList<String> namesList) {
+		
 		ArrayList<String> fullNamesList = new ArrayList<String>();
 		Integer smallerIndex = 0;
 
-		surnamesList = getSurNames();
-		namesList = getNames();
+		if(surnamesList==null || surnamesList.isEmpty()){
+			surnamesList = new ArrayList<String>();
+			surnamesList = getSurNames();
+		}
+		
+		if(namesList==null || namesList.isEmpty()){
+			namesList = new ArrayList<String>();
+			namesList = getNames();
+		}
 
 		if (surnamesList.size() > namesList.size()) {
 			smallerIndex = namesList.size();
@@ -261,7 +270,7 @@ public class DataGenerator {
 		}
 
 		if (typ.equals(entityTyp.fullNames)) {
-			entityList = getFullNames();
+			entityList = getFullNames(null, null);
 		}
 		
 		if (typ.equals(entityTyp.productCategories)) {

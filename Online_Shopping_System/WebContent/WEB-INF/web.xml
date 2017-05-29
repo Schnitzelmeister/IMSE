@@ -17,4 +17,17 @@
     <servlet-name>LoadCustomerInfoServlet</servlet-name>
     <url-pattern>/Online_Shopping_System/WebContent/loaddata/</url-pattern>
   </servlet-mapping>
+  
+  
+  
+  <servlet>
+    <description>Add to chart and get the number of items - jQuery Ajax</description>
+    <display-name>Add2Cart</display-name>
+    <servlet-name>Add2Cart</servlet-name>
+    <servlet-class>imse.SS2017.team1.servlets.Add2Cart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Add2Cart</servlet-name>
+    <url-pattern>/add2chart</url-pattern>
+  </servlet-mapping>
 </web-app>

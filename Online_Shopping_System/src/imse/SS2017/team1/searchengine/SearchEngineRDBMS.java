@@ -69,6 +69,7 @@ public class SearchEngineRDBMS implements SearchEngine {
 				+ "GROUP BY prod2cat.categoryId;";
 		
 		Query qstat = em.createNativeQuery(sql);
+		@SuppressWarnings("unchecked")
 		List<Object[]> dataRaws = qstat.getResultList();
 		Map<Integer, Integer> foundCategoriesStat = new TreeMap<Integer, Integer>();
 
@@ -89,13 +90,16 @@ public class SearchEngineRDBMS implements SearchEngine {
 		switch (sortMode) {
 			case SORT_BY_PRICE_DESC: sql = sql + "ORDER BY prod.price DESC "; break;
 			case SORT_BY_PRICE_ASC: sql = sql + "ORDER BY prod.price ASC "; break;
-			case SORT_BY_NAME: sql = sql + "ORDER BY prod.name ASC "; break;
+			case SORT_BY_NAME: sql = sql + "ORDER BY prod.productName ASC "; break;
 			default: throw new IllegalArgumentException("Sort Mode not implemented");
 		}
 		
 		sql = sql + "LIMIT " + pageSize + " OFFSET " + pageNumber * pageSize + ";";
 
+		//System.out.println(sql);
+		
 		Query qprod = em.createNativeQuery(sql);
+		@SuppressWarnings("unchecked")
 		List<Object[]> prodRaws = qprod.getResultList();
 		List<FoundProduct> foundProducts = new ArrayList<FoundProduct>();
 

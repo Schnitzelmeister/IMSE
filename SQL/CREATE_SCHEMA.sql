@@ -49,7 +49,7 @@ CREATE TABLE `Admin` (
   `password` varchar(45) NOT NULL,
   `firstName` varchar(45) NOT NULL,
   `lastName` varchar(45) NOT NULL,
-  `verified` varchar(45) NOT NULL,
+  `verified` tinyint(4) NOT NULL,
   `managerEmailAddress` varchar(45) NOT NULL,
   PRIMARY KEY (`emailAddress`),
   KEY `FK_ManagerEmailAddress_idx` (`managerEmailAddress`),
@@ -57,25 +57,28 @@ CREATE TABLE `Admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
+
 CREATE TABLE `Product` (
   `productId` int(11) NOT NULL AUTO_INCREMENT,
   `productName` varchar(45) NOT NULL,
   `price` decimal(7,2) NOT NULL,
-  `description` varchar(45) DEFAULT NULL,
+  `description` longtext,
   `quantity` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`productId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
+
 CREATE TABLE `Image` (
   `imageId` int(11) NOT NULL AUTO_INCREMENT,
   `productId` int(11) NOT NULL,
-  `image` varchar(1000) NOT NULL,
+  `image` longtext NOT NULL,
   PRIMARY KEY (`imageId`,`productId`),
   KEY `FK_ProductId_idx` (`productId`),
   CONSTRAINT `FK_ProductId` FOREIGN KEY (`productId`) REFERENCES `Product` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 
 CREATE TABLE `Category` (
