@@ -69,6 +69,7 @@ public class SearchEngineRDBMS implements SearchEngine {
 				+ "GROUP BY prod2cat.categoryId;";
 		
 		Query qstat = em.createNativeQuery(sql);
+		@SuppressWarnings("unchecked")
 		List<Object[]> dataRaws = qstat.getResultList();
 		Map<Integer, Integer> foundCategoriesStat = new TreeMap<Integer, Integer>();
 
@@ -96,6 +97,7 @@ public class SearchEngineRDBMS implements SearchEngine {
 		sql = sql + "LIMIT " + pageSize + " OFFSET " + pageNumber * pageSize + ";";
 
 		Query qprod = em.createNativeQuery(sql);
+		@SuppressWarnings("unchecked")
 		List<Object[]> prodRaws = qprod.getResultList();
 		List<FoundProduct> foundProducts = new ArrayList<FoundProduct>();
 
