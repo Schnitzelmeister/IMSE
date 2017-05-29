@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import imse.SS2017.team1.controller.FoundResult;
-import imse.SS2017.team1.controller.SearchEngine;
-import imse.SS2017.team1.controller.SearchEngineRDBMS;
+import imse.SS2017.team1.searchengine.FoundResult;
+import imse.SS2017.team1.searchengine.SearchEngine;
+import imse.SS2017.team1.searchengine.SearchEngineRDBMS;
 
 @WebServlet("/results")
 public class ProductSearch extends HttpServlet {

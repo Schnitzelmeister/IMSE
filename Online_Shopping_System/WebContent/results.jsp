@@ -19,7 +19,7 @@
 <form method="get" action="results">
         <table>
             <tr><td>Search your Product</td>
-            <td><select name="cat" id="cat"><option value="0"<% if (results.getCategoryId() == 0) { out.write(" selected"); } %>>In all Categories</option>
+            <td><select name="cat" id="cat"><option value="0"<% if (results.getCategoryId() == 0) out.write(" selected"); %>>In all Categories</option>
 
 <%
 for ( Map.Entry<Integer, String> me : results.getCategories().entrySet() ) {
