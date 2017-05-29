@@ -8,5 +8,8 @@
 	<classpathentry kind="lib" path="libraries/eclipselink-2.5.0.jar"/>
 	<classpathentry kind="lib" path="libraries/javax.persistence-2.1.1.jar"/>
 	<classpathentry kind="lib" path="libraries/mysql-connector-java-5.1.42-bin.jar"/>
+	<classpathentry kind="lib" path="libraries/commons-codec-1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Raf/Desktop/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Raf/Desktop/javax.servlet-3.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
