@@ -19,9 +19,9 @@ public interface DaoInterface {
 
 	public <T> List<T> getobjects(Class<T> cls);
 	
-	public <T> boolean isEmailTaken(Class<T> cls, String email);
+	//public <T> boolean isEmailTaken(Class<T> cls, String email);
 	
-	public <T> T getUser(Class<T> cls, String email);
+	//public <T> T getUser(Class<T> cls, String email);
 	
 	public <T> void updateEntity(Object entity);
 }

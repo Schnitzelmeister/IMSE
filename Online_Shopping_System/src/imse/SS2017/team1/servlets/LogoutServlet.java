@@ -14,19 +14,21 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	
-    public LogoutServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public LogoutServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		if(session != null) session.invalidate();
+		if (session != null)
+			session.invalidate();
 		response.sendRedirect("/Online_Shopping_System/index.jsp");
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

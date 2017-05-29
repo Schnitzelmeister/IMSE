@@ -27,8 +27,8 @@ public class UpdateBillingAddressServlet extends HttpServlet {
 		try {
 			String email = (String) request.getSession().getAttribute("email");
 			DaoInterface dao = new Dao();
-			Customer user = dao.getUser(Customer.class, email);
-			Integer billingAddress = user.getBillingAddress();
+			Customer user = dao.getobject(Customer.class, email);
+			Integer billingAddressId = user.getBillingAddress();
 			
 			String stadt = request.getParameter("stadtr");
 			String strassenname = request.getParameter("strassennamer");
@@ -37,15 +37,14 @@ public class UpdateBillingAddressServlet extends HttpServlet {
 			String plz = request.getParameter("plzr");
 			String infos = request.getParameter("infor");
 			
-			if(billingAddress == null){
+			if(billingAddressId == null){
 				Address newAdresse = new Address(null, strassenname, hausnummer, infos, stadt, plz, land);
 				Integer addressId=dao.saveAddress(newAdresse);
-				System.out.println("addressId: "+addressId);
 				user.setBillingAddress(addressId);
 				dao.updateEntity(user);
 				response.sendRedirect("/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Rechnungsdaten wurden gespeichert");
 			}else{
-				Address currentAddress = dao.getobject(Address.class, billingAddress);
+				Address currentAddress = dao.getobject(Address.class, billingAddressId);
 				currentAddress.setAdditionaolInfo(infos);
 				currentAddress.setCity(stadt);
 				currentAddress.setCountry(land);
@@ -53,10 +52,10 @@ public class UpdateBillingAddressServlet extends HttpServlet {
 				currentAddress.setStreetName(strassenname);
 				currentAddress.setStreetNumber(hausnummer);
 				dao.updateEntity(currentAddress);
-				response.sendRedirect("/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Rechnungsdaten wurden aktualisiert");
+				response.sendRedirect(
+						"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Rechnungsdaten wurden aktualisiert");
 			} 
 		} catch (IllegalArgumentException e) {
-			System.out.println("IllegalArgumentException: " + e.getMessage());
 			response.sendRedirect(
 					"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?errorMessage=" + e.getMessage());
 		} catch (Exception e) { //DB Exception werden abgefangen

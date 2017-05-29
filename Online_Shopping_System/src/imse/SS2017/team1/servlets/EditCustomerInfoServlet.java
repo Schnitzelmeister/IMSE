@@ -23,11 +23,9 @@ public class EditCustomerInfoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			System.out.println("EditInfo Servlet wurde aufgerufen");
 			String email = (String) request.getSession().getAttribute("email");
 			DaoInterface dao = new Dao();
-			Customer user = dao.getUser(Customer.class, email);
-			System.out.println("CustomerObject: "+user.getEmailAddress());
+			Customer user = dao.getobject(Customer.class, email);
 			
 			String vorname = request.getParameter("vorname");
 			String nachname = request.getParameter("nachname");
@@ -47,15 +45,12 @@ public class EditCustomerInfoServlet extends HttpServlet {
 					user.setPassword(passwort);
 			}
 			
-			System.out.println("Die merge Funktion des DAO wurde aufgerufen");
 			dao.updateEntity(user);
 			response.sendRedirect("/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kontodaten wurden gespeichert");
 		} catch (IllegalArgumentException e) {
-			System.out.println("IllegalArgumentException: " + e.getMessage());
 			response.sendRedirect(
 					"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?errorMessage=" + e.getMessage());
 		} catch (Exception e) { //DB Exception werden abgefangen
-			System.out.println("Exceptiontype: " + e.getClass() + " Message: " + e.getMessage());
 			response.sendRedirect(
 					"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?errorMessage=" + e.getMessage());
 		}

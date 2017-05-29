@@ -27,7 +27,7 @@ public class UpdateShippingAddressServlet extends HttpServlet {
 		try {
 			String email = (String) request.getSession().getAttribute("email");
 			DaoInterface dao = new Dao();
-			Customer user = dao.getUser(Customer.class, email);
+			Customer user = dao.getobject(Customer.class, email);
 			Integer shippingAddress = user.getShippingAddress();
 			
 			String stadt = request.getParameter("stadts");
@@ -40,7 +40,6 @@ public class UpdateShippingAddressServlet extends HttpServlet {
 			if(shippingAddress == null){
 				Address newAdresse = new Address(null, strassenname, hausnummer, infos, stadt, plz, land);
 				Integer addressId=dao.saveAddress(newAdresse);
-				System.out.println("addressId: "+addressId);
 				user.setShippingAddress(addressId);
 				dao.updateEntity(user);
 				response.sendRedirect("/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Zustellungsdaten wurden gespeichert");
@@ -56,7 +55,6 @@ public class UpdateShippingAddressServlet extends HttpServlet {
 				response.sendRedirect("/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Zustellungsdaten wurden aktualisiert");
 			} 
 		} catch (IllegalArgumentException e) {
-			System.out.println("IllegalArgumentException: " + e.getMessage());
 			response.sendRedirect(
 					"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?errorMessage=" + e.getMessage());
 		} catch (Exception e) { //DB Exception werden abgefangen

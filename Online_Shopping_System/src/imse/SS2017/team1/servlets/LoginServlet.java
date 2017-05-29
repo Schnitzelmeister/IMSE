@@ -13,21 +13,14 @@ import imse.SS2017.team1.dao.DaoInterface;
 import imse.SS2017.team1.model.Customer;
 import imse.SS2017.team1.model.User;
 
-/**
- * Servlet implementation class LoginServlet
- */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public LoginServlet() {
         super();
     }
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 String email = request.getParameter("email");
 		 String password = request.getParameter("passwort");
@@ -36,15 +29,14 @@ public class LoginServlet extends HttpServlet {
 		 DaoInterface dao = new Dao();
 		
 		 try{
-			 currentUser = dao.getUser(Customer.class, email);
+			 currentUser = dao.getobject(Customer.class, email);
 			 if(currentUser == null) throw new IllegalArgumentException("Die Anmeldedaten sind nicht korrekt");
 			 if(!currentUser.getPassword().equals(password)) throw new IllegalArgumentException("Das Passwort ist nicht korrekt");
 		 } catch(IllegalArgumentException e){
-			 System.out.println("IllegalArgumentException: "+e.getMessage());
 			 response.sendRedirect("/Online_Shopping_System/customer/customerlogin.jsp?errorMessage="+e.getMessage());
 			 return;
 		 } catch(Exception e){
-			 System.out.println("Exception: "+e.getClass()+" Message: "+e.getMessage());
+			System.out.println("Exception: "+e.getClass()+" Message: "+e.getMessage());
 			 return;
 		 }
 		 

@@ -13,7 +13,11 @@
 <form method="POST" action="${pageContext.request.contextPath}/jakub">
         <table>
             <tr>
-                <td><a href="${pageContext.request.contextPath}/customer/newaccount.jsp">Register New User</a></td>
+                <td><a href="${pageContext.request.contextPath}/customer/newaccount.jsp">Neues Kundenkonto erstellen</a></td>
+                
+                <td><a href="${pageContext.request.contextPath}/customer/private/editcustomerinfo.jsp">Kontodaten verwalten</a></td>
+                
+                
                 <td>Login:</td><td><input name="login" type="text" /></td>
                 <td>Password:</td><td><input name="psw" type="password" /></td>
                 <td><input type="submit" value="Login" /></td>
@@ -23,21 +27,21 @@
         <table>
             <tr>
                 <td><a id="warenkorb" href="${pageContext.request.contextPath}/tarik">Warenkorb (2 items)</a></td>
-                <td><a href="${pageContext.request.contextPath}/jakub">Logout</a></td>
+                <td><a href="${pageContext.request.contextPath}/logout">Logout</a></td>
             </tr>
         </table>
 
 <p>&nbsp;</p>
-
+<!-- 
 <form method="get" action="${pageContext.request.contextPath}/results">
         <table>
             <tr><td>Search your Product</td>
             <td><select name="cat" id="cat"><option value="0">In all Categories</option>
 
 <%
-CategoryController cc = new CategoryController();
-for (Category c : cc.getAllCategories() )
-	out.write("<option value=\"" + c.getCategoryId() + "\">" + c.getCategoryName() + "</option>");
+//CategoryController cc = new CategoryController();
+//for (Category c : cc.getAllCategories() )
+	//out.write("<option value=\"" + c.getCategoryId() + "\">" + c.getCategoryName() + "</option>");
 %>
 
             </select></td>
@@ -46,13 +50,23 @@ for (Category c : cc.getAllCategories() )
         </table>
 </form>
 
-<c:if test="${not empty errorMessage}">
-   <c:out value="${errorMessage}"/>
-</c:if>
- 		
-        
-       
-       ${infoMessage}
+<% 
+if(request.getParameter("errorMessage")!=null){
+	request.setAttribute("errorMessage", request.getParameter("errorMessage"));
+%>
+${errorMessage}    
+<% 
+}       
+%>
+ -->
+<% 
+if(request.getParameter("infoMessage")!=null){
+	request.setAttribute("infoMessage", request.getParameter("infoMessage"));
+%>
+${infoMessage}    
+<% 
+}       
+%>
       
 
 </body>

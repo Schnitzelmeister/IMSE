@@ -35,10 +35,7 @@ public class RegistrationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			System.out.println("Das Servlet wurde gestartet");
-
 			UserController controls = new UserController();
-			System.out.println("Usercontroller wurde instantiiert");
 
 			String firstname = request.getParameter("vorname");
 			String lastname = request.getParameter("nachname");
@@ -46,20 +43,16 @@ public class RegistrationServlet extends HttpServlet {
 			String password = request.getParameter("passwort");
 			String telephonenr = request.getParameter("telefonnummer");
 
-	
-			System.out.println("Daten in string");
 			controls.verifyUserInput(firstname, lastname, email, password, telephonenr);
 
-		
 			Customer newCustomer = new Customer(email, password, firstname, lastname, true, null, null, telephonenr);
-			System.out.println("Customer instantiiert");
 			controls.registerCustomer(newCustomer);
-			response.sendRedirect("/Online_Shopping_System/customer/customerlogin.jsp?infoMessage=Das Konto wurde erfolgreich erstellt, melden Sie sich bitte an");
+			response.sendRedirect(
+					"/Online_Shopping_System/customer/customerlogin.jsp?infoMessage=Das Konto wurde erfolgreich erstellt, melden Sie sich bitte an");
 		} catch (IllegalArgumentException e) {
-			System.out.println("IllegalArgumentException: "+e.getMessage());
 			request.setAttribute("errorMessage", e.getMessage());
-			response.sendRedirect("/Online_Shopping_System/customer/newaccount.jsp?errorMessage="+e.getMessage());
-		} 
+			response.sendRedirect("/Online_Shopping_System/customer/newaccount.jsp?errorMessage=" + e.getMessage());
+		}
 
 	}
 
