@@ -110,7 +110,7 @@ public class DataGenerator {
 	}
 
 	public static ArrayList<String> getProductNames() {
-		String productNames = "check out";
+		String productNames = "Lederpflege-Set Stuhl Stuhlkissen Pflanze Kinderstuhl Sessel Gardinenpaar Gardinenpaar-Meterware Regal Mischbatterie Aufsatz Schreibtisch Schubladenelement Schubladen Rollen Schubladenelement Rahmen Netzdrahtkörbe Wandschiene Böden Box Korb Stange Dreierhaken Wäschehalter Teppich Langflor Teppich Tagesdeck Kissenbezug Batterie-alkalisch Rührschüssel Deckel Tasche Kaffeemühle Pflanze Drehstuhl Hocker Bettwäscheset Einsatzspüle Becken Pavillon Kleiderschrank Plaid Fußbodenschutz Kochgeschirr5-tlg. Topf Schiebegardine Stuhlkissen Spülbürste Anschlusskabel Transformator Fernbedienung Verbindungskabel Arbeitsleuchte Leseleuchte Kinderhochstuhl Kinderstuhl Tablett Drahtkorb Trockengestell Hackblock Schneidebrett";
 		return new ArrayList<String>(Arrays.asList(productNames.split(" ")));
 	}
 	
@@ -125,7 +125,7 @@ public class DataGenerator {
 	}
 	
 	public static ArrayList<String> getDescription() {
-		String description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+		String description = "Lorem ipsum dolor sit amet";//, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 		ArrayList<String> descriptionList = new ArrayList<String>();
 		
 		descriptionList.add(description);

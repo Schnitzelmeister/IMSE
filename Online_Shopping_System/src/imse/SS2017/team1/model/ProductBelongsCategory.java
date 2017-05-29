@@ -24,4 +24,20 @@ public class ProductBelongsCategory {
 	@PrimaryKeyJoinColumn(name="categoryId", referencedColumnName="categoryId")
 	private Category category;
 
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+
 }

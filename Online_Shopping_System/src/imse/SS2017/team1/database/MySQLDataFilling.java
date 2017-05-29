@@ -10,6 +10,7 @@ import imse.SS2017.team1.model.Category;
 import imse.SS2017.team1.model.CreditCard;
 import imse.SS2017.team1.model.Customer;
 import imse.SS2017.team1.model.Product;
+import imse.SS2017.team1.model.ProductBelongsCategory;
 
 public class MySQLDataFilling {
 	
@@ -48,6 +49,26 @@ public class MySQLDataFilling {
 		}
 		
 		System.out.println("Produkte werden gerneriert!");
+		Product product = new Product();
+		ArrayList<String> productNames = DataGenerator.generateRandomData(entityTyp.productNames, 200);
+		ArrayList<String> description = DataGenerator.generateRandomData(entityTyp.description, 200);
+		ArrayList<Integer> productQuantity = DataGenerator.generateRandomInteger(200, 1, 10);
+		ArrayList<Float> productPrice = DataGenerator.generateRandomFloats(200, 10, 150);
+		for(int i=0;i<200;++i){
+			try{
+				product.setDescription(description.get(i));
+				product.setPrice(productPrice.get(i));
+				product.setProductName(productNames.get(i));
+				product.setQuantity(productQuantity.get(i));
+			} catch (Exception e){
+				System.out.println("Fehler bei Variablensetzung!");
+			}
+			try {
+				dao.save(product);				
+			} catch(Exception e) {
+				System.out.println("Ein Duplikat wurde gefunden!");
+			}
+		}	
 
 		System.out.println("Addressen werden generiert!");
 		Address customerAddress = new Address();
@@ -151,7 +172,23 @@ public class MySQLDataFilling {
 			}
 		}
 		
-		
+		System.out.println("Produktdaten werden mit Kategorien verbunden!");
+		ProductBelongsCategory productBelongsCategory = new ProductBelongsCategory();
+		Integer j=0;
+		for(int i=1;i<20;i++){
+			++j;
+			productBelongsCategory.setCategoryId(i);
+			while(j%10!=0){
+				productBelongsCategory.setProductId(j);
+				try{
+					dao.save(productBelongsCategory);
+				} catch(Exception e){
+					System.out.println("Ein Duplikat wurde gefunden!");
+				}
+				++j;
+			}
+		}
+
 		
 		
 	}
