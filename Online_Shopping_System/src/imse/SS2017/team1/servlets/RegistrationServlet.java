@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import imse.SS2017.team1.controller.UserController;
+import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.dao.DaoInterface;
+import imse.SS2017.team1.model.Address;
 import imse.SS2017.team1.model.Customer;
 
 /**
@@ -44,9 +46,11 @@ public class RegistrationServlet extends HttpServlet {
 			String password = request.getParameter("passwort");
 			String telephonenr = request.getParameter("telefonnummer");
 
+	
 			System.out.println("Daten in string");
 			controls.verifyUserInput(firstname, lastname, email, password, telephonenr);
 
+		
 			Customer newCustomer = new Customer(email, password, firstname, lastname, true, null, null, telephonenr);
 			System.out.println("Customer instantiiert");
 			controls.registerCustomer(newCustomer);

@@ -4,26 +4,27 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Customer")
-public class Customer extends User{
+public class Customer extends User {
 	
 	private Integer shippingAddressId;
 	private Integer billingAddressId;
 	private String phoneNumber;
+
 	private String creditCardNumber;
 
-	public Customer(){
-		
-	}
-	
-	public Customer(String emailAddress, String password, String firstName, String lastName, boolean loginStatus, Integer shippingAddressId, Integer billingAddressId,
-			String phoneNumber ) {		
-		super(emailAddress, password, firstName, lastName, loginStatus);
-		this.phoneNumber = phoneNumber;
-		this.shippingAddressId=shippingAddressId;
-		this.billingAddressId=billingAddressId;
+	public Customer() {
+
 	}
 
-	
+	public Customer(String emailAddress, String password, String firstName, String lastName, boolean loginStatus,
+			Integer shippingAddressId, Integer billingAddressId, String phoneNumber) {
+		super(emailAddress, password, firstName, lastName, loginStatus);
+		this.phoneNumber = phoneNumber;
+		this.shippingAddressId = shippingAddressId;
+		this.billingAddressId = billingAddressId;
+		this.creditCardNumber = null;
+	}
+
 	public Integer getShippingAddress() {
 		return shippingAddressId;
 	}

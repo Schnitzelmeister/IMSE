@@ -12,6 +12,8 @@
 <a href="/Online_Shopping_System/customer/customerlogin.jsp">Customer login</a></br>
 <a href="/Online_Shopping_System/customer/newaccount.jsp">New customer account</a></br>
 <a href="/Online_Shopping_System/logout">Logout</a></br>
+<a href="/Online_Shopping_System/customer/private/editcustomerinfo.jsp">Edit customer info</a></br>
+
 
 <% 
 if(request.getParameter("errorMessage")!=null){

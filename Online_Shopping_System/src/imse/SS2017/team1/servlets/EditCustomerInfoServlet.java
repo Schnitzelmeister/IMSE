@@ -11,10 +11,8 @@ import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.dao.DaoInterface;
 import imse.SS2017.team1.model.Customer;
 
-/**
- * Servlet implementation class EditCustomerInfoServlet
- */
-@WebServlet("/Online_Shopping_System/customer/editinfo")
+
+@WebServlet("/editinfo")
 public class EditCustomerInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -25,10 +23,12 @@ public class EditCustomerInfoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
+			System.out.println("EditInfo Servlet wurde aufgerufen");
 			String email = (String) request.getSession().getAttribute("email");
 			DaoInterface dao = new Dao();
 			Customer user = dao.getUser(Customer.class, email);
-
+			System.out.println("CustomerObject: "+user.getEmailAddress());
+			
 			String vorname = request.getParameter("vorname");
 			String nachname = request.getParameter("nachname");
 			String telefonr = request.getParameter("telefonnummer");
@@ -47,6 +47,9 @@ public class EditCustomerInfoServlet extends HttpServlet {
 					user.setPassword(passwort);
 			}
 			
+			System.out.println("Die merge Funktion des DAO wurde aufgerufen");
+			dao.updateEntity(user);
+			response.sendRedirect("/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kontodaten wurden gespeichert");
 		} catch (IllegalArgumentException e) {
 			System.out.println("IllegalArgumentException: " + e.getMessage());
 			response.sendRedirect(
@@ -56,11 +59,9 @@ public class EditCustomerInfoServlet extends HttpServlet {
 			response.sendRedirect(
 					"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?errorMessage=" + e.getMessage());
 		}
-
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	}
-
 }

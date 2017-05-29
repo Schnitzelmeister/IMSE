@@ -16,6 +16,23 @@ public class CreditCard {
 	private String cvv;
 	private Integer expiryMonth;
 	private Integer expiryYear;
+	
+	public CreditCard(){
+		
+	}
+	
+	public CreditCard(String cardNumber, String firstName, String lastName, String type, String cvv,
+			Integer expiryMonth, Integer expiryYear) {
+		this.cardNumber = cardNumber;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.type = type;
+		this.cvv = cvv;
+		this.expiryMonth = expiryMonth;
+		this.expiryYear = expiryYear;
+	}
+	
+	
 	/**
 	 * @return the cardNumber
 	 */

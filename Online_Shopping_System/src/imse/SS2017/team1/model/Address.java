@@ -1,6 +1,8 @@
 package imse.SS2017.team1.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -9,6 +11,7 @@ import javax.persistence.Table;
 public class Address {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer addressId;
 	private String streetName;
 	private String streetNumber;
@@ -17,6 +20,21 @@ public class Address {
 	private String postCode;
 	private String country;
 	
+	public Address(){
+		
+	}
+	
+	public Address(Integer addressId, String streetName, String streetNumber, String additionalInfo, String city,
+			String postCode, String country) {
+		this.addressId = addressId;
+		this.streetName = streetName;
+		this.streetNumber = streetNumber;
+		this.additionalInfo = additionalInfo;
+		this.city = city;
+		this.postCode = postCode;
+		this.country = country;
+	}
+
 	public Integer getAdressId() {
 		return addressId;
 	}

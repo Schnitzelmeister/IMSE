@@ -1,3 +1,4 @@
+
 package imse.SS2017.team1.filter;
 
 import java.io.IOException;
@@ -49,3 +50,4 @@ public class AuthenticationFilterCustomer implements Filter{
 	}
 
 }
+

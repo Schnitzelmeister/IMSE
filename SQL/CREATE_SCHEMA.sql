@@ -1,5 +1,3 @@
-
-
 use imse;
 
 CREATE TABLE `Address` (
@@ -120,5 +118,3 @@ CREATE TABLE `OrderDetail` (
   CONSTRAINT `FK_OrderId` FOREIGN KEY (`orderId`) REFERENCES `CustomerOrder` (`orderId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_Product` FOREIGN KEY (`productId`) REFERENCES `Product` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-

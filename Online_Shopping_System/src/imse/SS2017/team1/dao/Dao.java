@@ -7,6 +7,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import imse.SS2017.team1.model.Address;
+import imse.SS2017.team1.model.User;
+
 public class Dao implements DaoInterface {
 	EntityManagerFactory entitymanagerfactory;
 
@@ -34,6 +37,26 @@ public class Dao implements DaoInterface {
 		}
 	}
 
+	public <T> Integer saveAddress(Address entity) {
+		entitymanagerfactory=Persistence.createEntityManagerFactory("Online_Shopping_System");
+		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
+		EntityTransaction tx = entitymanager.getTransaction();
+		try {
+			tx.begin();
+			entitymanager.persist(entity);
+			tx.commit();
+			System.out.println("Die entity id ist: "+entity.getAdressId());
+			return entity.getAdressId();			
+		} catch (RuntimeException ex) {
+			if (tx != null && tx.isActive())
+				tx.rollback();
+			throw ex;
+		} finally {
+			entitymanager.close();
+			entitymanagerfactory.close();
+		}
+	}
+	
 	@Override
 	public <T> void delete(T entity) {
 		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
@@ -58,7 +81,7 @@ public class Dao implements DaoInterface {
 		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
 		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
 		try {
-			return (T) entitymanager.find(cls, String.valueOf(Id));
+			return (T) entitymanager.find(cls, Id);
 		} finally {
 			entitymanager.close();
 		}
@@ -89,6 +112,20 @@ public class Dao implements DaoInterface {
 		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
 		try {
 			return (T) entitymanager.find(cls, email);
+		} finally {
+			entitymanager.close();
+		}
+	}
+	
+	@Override
+	public <T> void updateEntity(Object entity) {
+		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
+		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
+		EntityTransaction tx = entitymanager.getTransaction();
+		try {
+			tx.begin();
+			entitymanager.merge(entity);
+			tx.commit();
 		} finally {
 			entitymanager.close();
 		}
