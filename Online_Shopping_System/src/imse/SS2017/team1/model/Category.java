@@ -1,7 +1,10 @@
 package imse.SS2017.team1.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,4 +30,7 @@ public class Category {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
+	
+	@OneToMany(mappedBy="category")
+	private List<ProductBelongsCategory> products;
 }

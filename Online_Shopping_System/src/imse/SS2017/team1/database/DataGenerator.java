@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class DataGenerator {
 
 	public static void main(String args[]) {
-		System.out.println(generateRandomData(entityTyp.description,2));
+		System.out.println(generateRandomData(entityTyp.productCategories,2));
 	}
 
 	public static ArrayList<Integer> generateRandomInteger(Integer quantityOfRandomNumbers, Integer randomMinNumber,

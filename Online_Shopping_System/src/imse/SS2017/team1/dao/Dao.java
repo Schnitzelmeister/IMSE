@@ -86,6 +86,17 @@ public class Dao implements DaoInterface {
 			entitymanager.close();
 		}
 	}
+	
+	@Override
+	public <T> T getobject(Class<T> cls, String Id) {
+		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
+		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
+		try {
+			return (T) entitymanager.find(cls, Id);
+		} finally {
+			entitymanager.close();
+		}
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
