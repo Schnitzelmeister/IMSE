@@ -13,12 +13,12 @@
 <title>Welcome!!!</title>
 </head>
 <body>
-<form method="POST" action="${pageContext.request.contextPath}/jakub">
+<form method="POST" action="login">
         <table>
             <tr>
                 <td><a href="${pageContext.request.contextPath}/customer/newaccount.jsp">Register New User</a></td>
-                <td>Login:</td><td><input name="login" type="text" /></td>
-                <td>Password:</td><td><input name="psw" type="password" /></td>
+                <td>Email-Adresse:</td><td><input name="email" type="text" /></td>
+                <td>Password:</td><td><input name="passwort" type="password" /></td>
                 <td><input type="submit" value="Login" /></td>
             </tr>
         </table>

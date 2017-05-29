@@ -1,6 +1,10 @@
 package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,9 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import imse.SS2017.team1.controller.ProductController;
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.dao.DaoInterface;
 import imse.SS2017.team1.model.Customer;
+import imse.SS2017.team1.model.Product;
 import imse.SS2017.team1.model.User;
 
 /**
@@ -29,7 +35,9 @@ public class LoginServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 String email = request.getParameter("email");
+		 
+		response.setContentType("text/jsp");
+		String email = request.getParameter("email");
 		 String password = request.getParameter("passwort");
 		 
 		 Customer currentUser;
@@ -37,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 		
 		 try{
 			 currentUser = dao.getUser(Customer.class, email);
-			 if(currentUser == null) throw new IllegalArgumentException("Die Anmeldedaten sind nicht korrekt");
+			 if(currentUser == null) throw new IllegalArgumentException("Email Adresse existiert nicht");
 			 if(!currentUser.getPassword().equals(password)) throw new IllegalArgumentException("Das Passwort ist nicht korrekt");
 		 } catch(IllegalArgumentException e){
 			 System.out.println("IllegalArgumentException: "+e.getMessage());
@@ -51,8 +59,18 @@ public class LoginServlet extends HttpServlet {
 		 HttpSession session = request.getSession();
 	     session.setAttribute("usertype", "customer");
 	     session.setAttribute("email", currentUser.getEmailAddress());
-	    	
-	     response.sendRedirect("/Online_Shopping_System/index.jsp?infoMessage=Die Anmeldung war erfolgreich");
+	     session.setAttribute("customerName",currentUser.getFirstName()+" "+ currentUser.getLastName());
+	    
+	     ProductController productController=new ProductController();
+	     List<Product> products=productController.GetAllProducts();
+	     
+	    session.setAttribute("products", products);
+	     
+	     //request.setAttribute("products", products);
+	     //RequestDispatcher dispatcher=request.getRequestDispatcher("allProducts.jsp");
+	     
+	    // dispatcher.forward(request, response);
+	    response.sendRedirect("allProducts.jsp");
 	     return;
 	}
 
