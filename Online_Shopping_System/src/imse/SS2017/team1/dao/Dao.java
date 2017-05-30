@@ -12,14 +12,12 @@ import imse.SS2017.team1.model.Address;
 public class Dao implements DaoInterface {
 	EntityManagerFactory entitymanagerfactory;
 
-	public Dao(){
-		System.out.println("DAO constructor wurde aufgerufen");
+	public Dao() {
 	}
-	
+
 	@Override
 	public <T> void save(T entity) {
-		System.out.println("Dao save methode wurde gestartet");
-		entitymanagerfactory=Persistence.createEntityManagerFactory("Online_Shopping_System");
+		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
 		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
 		EntityTransaction tx = entitymanager.getTransaction();
 		try {
@@ -37,15 +35,14 @@ public class Dao implements DaoInterface {
 	}
 
 	public <T> Integer saveAddress(Address entity) {
-		entitymanagerfactory=Persistence.createEntityManagerFactory("Online_Shopping_System");
+		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
 		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
 		EntityTransaction tx = entitymanager.getTransaction();
 		try {
 			tx.begin();
 			entitymanager.persist(entity);
 			tx.commit();
-			System.out.println("Die entity id ist: "+entity.getAdressId());
-			return entity.getAdressId();			
+			return entity.getAdressId();
 		} catch (RuntimeException ex) {
 			if (tx != null && tx.isActive())
 				tx.rollback();
@@ -55,7 +52,7 @@ public class Dao implements DaoInterface {
 			entitymanagerfactory.close();
 		}
 	}
-	
+
 	@Override
 	public <T> void delete(T entity) {
 		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
@@ -85,7 +82,7 @@ public class Dao implements DaoInterface {
 			entitymanager.close();
 		}
 	}
-	
+
 	@Override
 	public <T> T getobject(Class<T> cls, String Id) {
 		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
@@ -106,28 +103,6 @@ public class Dao implements DaoInterface {
 	}
 
 	@Override
-	public <T> boolean isEmailTaken(Class<T> cls, String email) {
-		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
-		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
-		
-		if(null == entitymanager.find(cls, email))
-			return false;
-		else
-			return true;
-	}
-	
-	@Override
-	public <T> T getUser(Class<T> cls, String email) {
-		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
-		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
-		try {
-			return (T) entitymanager.find(cls, email);
-		} finally {
-			entitymanager.close();
-		}
-	}
-	
-	@Override
 	public <T> void updateEntity(Object entity) {
 		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
 		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
@@ -141,10 +116,3 @@ public class Dao implements DaoInterface {
 		}
 	}
 }
-
-
-
-
-
-
-

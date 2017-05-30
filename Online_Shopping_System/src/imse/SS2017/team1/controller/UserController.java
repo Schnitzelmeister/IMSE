@@ -8,6 +8,7 @@ import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.dao.DaoInterface;
 import imse.SS2017.team1.model.Admin;
 import imse.SS2017.team1.model.Customer;
+import imse.SS2017.team1.model.User;
 
 public class UserController {
 	DaoInterface dao;
@@ -42,7 +43,7 @@ public class UserController {
 		if (password.length() < 8) 
 			throw new IllegalArgumentException("Das Passwort muss mindestens 8 Stellen haben");
 		
-		boolean emailTaken = dao.isEmailTaken(Customer.class, email);
+		boolean emailTaken = isCustomerEmailTaken(email);
 
 		if(emailTaken)
 			throw new IllegalArgumentException("Die Email Adresse ist schon in Benutzung");
@@ -56,6 +57,15 @@ public class UserController {
 		Matcher mat = pattern.matcher(email);
 
 		return mat.matches();
+	}
+	
+	private boolean isCustomerEmailTaken(String email){
+		User user=dao.getobject(Customer.class, email);
+		
+		if(user == null)
+			return false;
+		else
+			return true;
 	}
 	
 	public List<Customer> searchAllCustomer() {

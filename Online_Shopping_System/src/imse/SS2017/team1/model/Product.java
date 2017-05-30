@@ -59,6 +59,6 @@ public class Product {
 		this.quantity = quantity;
 	}
 	
-	@OneToMany(mappedBy="product")
-	private List<ProductBelongsCategory> categories;
+	//@OneToMany(mappedBy="product")
+	//private List<ProductBelongsCategory> categories;
 }

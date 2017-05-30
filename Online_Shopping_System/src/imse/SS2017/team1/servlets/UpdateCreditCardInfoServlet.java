@@ -9,15 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.eclipse.persistence.exceptions.DatabaseException;
-
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
-
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.dao.DaoInterface;
 import imse.SS2017.team1.model.CreditCard;
 import imse.SS2017.team1.model.Customer;
-
 
 @WebServlet("/updatecreditcard")
 public class UpdateCreditCardInfoServlet extends HttpServlet {
@@ -32,7 +27,7 @@ public class UpdateCreditCardInfoServlet extends HttpServlet {
 		try {
 			DaoInterface dao = new Dao();
 			String email = (String) request.getSession().getAttribute("email");
-			Customer customer = dao.getUser(Customer.class, email);
+			Customer customer = dao.getobject(Customer.class, email);
 			String creditCardNumber = customer.getCreditCardInfo();
 
 			String cardNumber = request.getParameter("kreditkartennr");
@@ -51,13 +46,12 @@ public class UpdateCreditCardInfoServlet extends HttpServlet {
 				dao.updateEntity(customer);
 				response.sendRedirect(
 						"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kreditkartendaten wurden gespeichert");
-			}else{
-				//Poor method naming, intended purpose was different although also suitable for retrieving other objects than User
-				CreditCard currentCard = dao.getUser(CreditCard.class, creditCardNumber);
-				CreditCard currentCardforDeletion = dao.getUser(CreditCard.class, creditCardNumber);
-				System.out.println("Kreditkarte mit nummer: "+currentCard.getCardNumber());
-				if(dao.getUser(CreditCard.class, cardNumber) != null) throw new IllegalArgumentException("Die Kreditkarte mit dieser Nummer wird schon benutzt");
-				
+			} else {
+				CreditCard currentCard = dao.getobject(CreditCard.class, creditCardNumber);
+				CreditCard currentCardforDeletion = dao.getobject(CreditCard.class, creditCardNumber);
+				if (dao.getobject(CreditCard.class, cardNumber) != null)
+					throw new IllegalArgumentException("Die Kreditkarte mit dieser Nummer wird schon benutzt");
+
 				customer.setCreditCardInfo(cardNumber);
 				currentCard.setCardNumber(cardNumber);
 				currentCard.setCvv(cvv);
@@ -67,15 +61,13 @@ public class UpdateCreditCardInfoServlet extends HttpServlet {
 				currentCard.setLastName(lastNameOncard);
 				currentCard.setType(type);
 				dao.updateEntity(currentCard);
-				System.out.println("Karte wird upgedated");
 				dao.delete(currentCardforDeletion);
 				dao.updateEntity(customer);
 				response.sendRedirect(
 						"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kreditkartendaten wurden aktualisiert");
 			}
-			
+
 		} catch (IllegalArgumentException e) {
-			System.out.println("IllegalArgumentException: " + e.getMessage());
 			response.sendRedirect(
 					"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?errorMessage=" + e.getMessage());
 		} catch (Exception e) {
