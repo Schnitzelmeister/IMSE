@@ -32,8 +32,8 @@ public class DeleteProduct extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		ProductController productController = new ProductController();
-		String productId = request.getParameter("deletedProductId");
-		productController.deleteProductById(Integer.valueOf(productId));
+		Integer productId = Integer.valueOf(request.getParameter("deletedProductId").replaceAll("\\D+", ""));
+		productController.deleteProductById(productId);
 		
 		doGet(request,response);
 		

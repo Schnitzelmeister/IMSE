@@ -20,15 +20,22 @@ public class DeleteProductCategory extends HttpServlet {
 	
 		CategoryController categoryController = new CategoryController();
 		List<Category> categories = categoryController.getAllCategories();
+		Integer productCatCount = categories.size();
+		productCatCount--;
+		
 		request.setAttribute("categories", categories);
+		request.setAttribute("productCatCount", productCatCount);
+		request.getRequestDispatcher("/deleteProductCategory.jsp").forward(request,response);
 		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		CategoryController categoryController = new CategoryController();
-		Integer categoryId = categoryController.getCategoryByName(request.getParameter("deletedCategoryName")).getCategoryId();
+		Integer categoryId = Integer.valueOf(request.getParameter("deletedCategoryId").replaceAll("\\D+", ""));
 		categoryController.deleteCategory(categoryId);
+		
+		doGet(request,response);
 	}
 
 }

@@ -24,17 +24,25 @@ public class DeleteAdmin extends HttpServlet {
 		List<Admin> admins = userController.searchAllAdmins();
 		List<String> emails = new ArrayList<String>();
 		List<String> names = new ArrayList<String>();
-		Integer anzahl = admins.size();
+		List<String> surNames = new ArrayList<String>();
+		Integer countMainAdmins=0;
 		for(Admin a:admins){
-			emails.add(a.getEmailAddress());
-			names.add(a.getLastName());
+			if(!a.getEmailAddress().equals(a.getManagerEmailAddress())){
+				emails.add(a.getEmailAddress());
+				names.add(a.getLastName());
+				surNames.add(a.getFirstName());
+			} else {
+				++countMainAdmins;
+			}
 		}
+		Integer anzahl1 = admins.size()-countMainAdmins;
 		
-		anzahl--;
+		anzahl1--;
 		
+		request.setAttribute("surNames", surNames);
 		request.setAttribute("emails", emails);
 		request.setAttribute("names", names);
-		request.setAttribute("anzahl", anzahl);
+		request.setAttribute("anzahl1", anzahl1);
 		request.getRequestDispatcher("/deleteAdmin.jsp").forward(request,response);
 		
 	}
@@ -42,7 +50,7 @@ public class DeleteAdmin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		UserController userController = new UserController();
-		String email = request.getParameter("deletedAdminEmail");
+		String email = request.getParameter("deletedAdminEmail").replaceAll("Lösche Admin: ", "");
 		userController.deleteAdminAccount(email);
 		
 		doGet(request,response);

@@ -97,7 +97,7 @@ public class DatabaseJunit{
 		admin.setLastName("Jandel");
 		admin.setEmailAddress(DataGenerator.generateRandomEmailAccounts(DataGenerator.generateRandomData(DataGenerator.entityTyp.fullNames, 100)).get(random.nextInt(99)));
 		admin.setPassword("super");
-		admin.setVerified("true");
+		admin.setVerified(true);
 		admin.setManagerEmailAddress(admin.getEmailAddress());
 		dao.save(admin);
 	}

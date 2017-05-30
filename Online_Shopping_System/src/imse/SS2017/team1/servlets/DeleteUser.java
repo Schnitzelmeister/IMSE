@@ -24,16 +24,19 @@ public class DeleteUser extends HttpServlet {
 		List<Customer> customers = userController.searchAllCustomer();
 		List<String> emails = new ArrayList<String>();
 		List<String> names = new ArrayList<String>();
+		List<String> surNames = new ArrayList<String>();
 		Integer anzahl = customers.size();
 		for(Customer c:customers){
 			emails.add(c.getEmailAddress());
 			names.add(c.getLastName());
+			surNames.add(c.getFirstName());
 		}
 		
 		anzahl--;
 		
 		request.setAttribute("emails1", emails);
 		request.setAttribute("names1", names);
+		request.setAttribute("surNames1", surNames);
 		request.setAttribute("anzahl1", anzahl);
 		request.getRequestDispatcher("/deleteUser.jsp").forward(request,response);
 		
@@ -42,9 +45,8 @@ public class DeleteUser extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("ok");
 		UserController userController = new UserController();
-		String email = request.getParameter("deletedCustomerEmail");
+		String email = request.getParameter("deletedCustomerEmail").replaceAll("Lösche Kunden: ", "");
 		userController.deleteAccount(email);
 		
 		doGet(request,response);

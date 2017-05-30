@@ -89,12 +89,11 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 					<c:forEach var="i" begin="0" end="${anzahl1}" step="1">
 						<li>
 							<div>
-								<input type="submit" value="X" class="w3-button w3-white w3-xlarge w3-right"/>
-								<input type="hidden" name="deletedCustomerEmail"
-									value="${emails1.get(i)}"/>
-							</div> <span class="w3-large">Kundenname:
-								${names1.get(i)}</span><br> <span>Kunden-Email-Adresse:
-								${emails1.get(i)}</span>
+								<input type="submit" value="Lösche Kunden: ${emails1.get(i)}"
+									name="deletedCustomerEmail"
+									class="w3-button w3-red w3-small w3-right" />
+							</div> <span class="w3-large">Nachname: ${names1.get(i)}</span><br>
+							<span>Vorname: ${surNames1.get(i)}</span>
 						</li>
 					</c:forEach>
 				</ul>

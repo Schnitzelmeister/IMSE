@@ -86,15 +86,14 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 		<!-- list header -->
 		<div class="w3-display-container w3-container">
 			<ul class="w3-ul w3-card-4">
-					<c:forEach var="i" begin="0" end="${anzahl}" step="1">
+					<c:forEach var="i" begin="0" end="${anzahl1}" step="1">
 						<li>
 							<div>
-								<input type="submit" value="X" class="w3-button w3-white w3-xlarge w3-right"/>
-								<input type="hidden" name="deletedAdminEmail"
-									value="${emails.get(i)}"/>
-							</div> <span class="w3-large">Adminnamen:
-								${names.get(i)}</span><br> <span>Admin-Email-Adresse:
-								${emails.get(i)}</span>
+								<input type="submit" value="Lösche Admin: ${emails.get(i)}"
+									name="deletedAdminEmail"
+									class="w3-button w3-red w3-small w3-right" />
+							</div> <span class="w3-large">Nachname: ${names.get(i)}</span><br>
+							<span>Vorname: ${surNames.get(i)}</span>
 						</li>
 					</c:forEach>
 				</ul>

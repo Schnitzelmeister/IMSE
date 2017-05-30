@@ -90,7 +90,7 @@ public class UserController {
 	
 	public void verifyAdmin(String email){
 		Admin admin = dao.getobject(Admin.class, email);
-		admin.setVerified("true");
+		admin.isVerified();
 	}
 	
 }
