@@ -2,6 +2,7 @@ package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,18 +21,33 @@ public class DeleteUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		UserController userController = new UserController();
-		ArrayList<Customer> customers = (ArrayList<Customer>) userController.searchAllCustomer();
-		request.setAttribute("customers", customers);
+		List<Customer> customers = userController.searchAllCustomer();
+		List<String> emails = new ArrayList<String>();
+		List<String> names = new ArrayList<String>();
+		Integer anzahl = customers.size();
+		for(Customer c:customers){
+			emails.add(c.getEmailAddress());
+			names.add(c.getLastName());
+		}
+		
+		anzahl--;
+		
+		request.setAttribute("emails1", emails);
+		request.setAttribute("names1", names);
+		request.setAttribute("anzahl1", anzahl);
+		request.getRequestDispatcher("/deleteUser.jsp").forward(request,response);
 		
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		System.out.println("ok");
 		UserController userController = new UserController();
 		String email = request.getParameter("deletedCustomerEmail");
 		userController.deleteAccount(email);
 		
+		doGet(request,response);
 	}
 
 }

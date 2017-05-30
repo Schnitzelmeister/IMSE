@@ -1,7 +1,7 @@
 package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +20,7 @@ public class VerifyAdmins extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		UserController userController = new UserController();
-		ArrayList<Admin> admins = (ArrayList<Admin>) userController.searchAllAdmins();
+		List<Admin> admins = userController.searchAllAdmins();
 		request.setAttribute("admins", admins);
 		
 	}

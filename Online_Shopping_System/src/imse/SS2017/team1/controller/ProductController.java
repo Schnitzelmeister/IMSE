@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import imse.SS2017.team1.dao.Dao;
-import imse.SS2017.team1.model.Category;
 import imse.SS2017.team1.model.Image;
 import imse.SS2017.team1.model.Product;
 
@@ -60,7 +59,7 @@ public class ProductController {
 	}
 	
 	public void deleteProductById(Integer productId){
-		dao.delete(dao.getobject(Category.class, productId));
+		dao.delete(dao.getobject(Product.class, productId));
 	}
 	
 	public void deleteImage(String imageId){

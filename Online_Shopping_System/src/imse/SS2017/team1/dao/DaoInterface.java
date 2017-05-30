@@ -3,7 +3,6 @@ package imse.SS2017.team1.dao;
 import java.util.List;
 
 import imse.SS2017.team1.model.Address;
-import imse.SS2017.team1.model.User;
 
 public interface DaoInterface {
 	

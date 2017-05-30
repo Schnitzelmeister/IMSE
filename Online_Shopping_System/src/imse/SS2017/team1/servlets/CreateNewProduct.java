@@ -1,7 +1,7 @@
 package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +21,7 @@ public class CreateNewProduct extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		CategoryController categoryController = new CategoryController();
-		ArrayList<Category> categories = (ArrayList<Category>) categoryController.getAllCategories();
+		List<Category> categories = categoryController.getAllCategories();
 		request.setAttribute("categories", categories);
 		
 	}

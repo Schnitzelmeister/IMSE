@@ -1,7 +1,7 @@
 package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,17 +19,23 @@ public class DeleteProduct extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ProductController productController = new ProductController();
-		ArrayList<Product> products = (ArrayList<Product>) productController.GetAllProducts();
+		List<Product> products = productController.GetAllProducts();
+		Integer anzahl = products.size();
+		anzahl--;
+		
 		request.setAttribute("products", products);
+		request.setAttribute("anzahl", anzahl);
+		request.getRequestDispatcher("/deleteProduct.jsp").forward(request,response);
 		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		ProductController productController = new ProductController();
-		
 		String productId = request.getParameter("deletedProductId");
 		productController.deleteProductById(Integer.valueOf(productId));
+		
+		doGet(request,response);
 		
 	}
 

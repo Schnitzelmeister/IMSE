@@ -2,6 +2,7 @@ package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +21,21 @@ public class DeleteAdmin extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		UserController userController = new UserController();
-		ArrayList<Admin> admins = (ArrayList<Admin>) userController.searchAllAdmins();
-		request.setAttribute("admins", admins);
+		List<Admin> admins = userController.searchAllAdmins();
+		List<String> emails = new ArrayList<String>();
+		List<String> names = new ArrayList<String>();
+		Integer anzahl = admins.size();
+		for(Admin a:admins){
+			emails.add(a.getEmailAddress());
+			names.add(a.getLastName());
+		}
+		
+		anzahl--;
+		
+		request.setAttribute("emails", emails);
+		request.setAttribute("names", names);
+		request.setAttribute("anzahl", anzahl);
+		request.getRequestDispatcher("/deleteAdmin.jsp").forward(request,response);
 		
 	}
 
@@ -30,6 +44,8 @@ public class DeleteAdmin extends HttpServlet {
 		UserController userController = new UserController();
 		String email = request.getParameter("deletedAdminEmail");
 		userController.deleteAdminAccount(email);
+		
+		doGet(request,response);
 		
 	}
 
