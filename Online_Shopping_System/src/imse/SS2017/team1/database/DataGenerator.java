@@ -62,8 +62,13 @@ public class DataGenerator {
 		ArrayList<Integer> randomNumbers = generateRandomInteger(quantityOfRandomCreditCards*4, 1000, 9999);
 		
 		for(int i=0;i<quantityOfRandomCreditCards*4;i+=4){
+			try{
 			randomCreditCards.add(randomNumbers.get(i)+"-"+randomNumbers.get(i+1)+"-"+randomNumbers.get(i+2)+
-					"-"+randomNumbers.get(i+3));
+					"-"+randomNumbers.get(i+3));				
+			} catch (Exception e){
+				System.out.println("Fehler in der Kreditkartengenerierung");
+			}
+
 		}
 		
 		return randomCreditCards;

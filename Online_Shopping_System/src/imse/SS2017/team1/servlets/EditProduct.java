@@ -1,7 +1,7 @@
 package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,8 +23,8 @@ public class EditProduct extends HttpServlet {
 		CategoryController categoryController = new CategoryController();
 		ProductController productController = new ProductController();
 		
-		ArrayList<Category> categories = (ArrayList<Category>) categoryController.getAllCategories();
-		ArrayList<Product> products = (ArrayList<Product>) productController.GetAllProducts();
+		List<Category> categories = categoryController.getAllCategories();
+		List<Product> products = productController.GetAllProducts();
 		
 		request.setAttribute("categories", categories);
 		request.setAttribute("products", products);

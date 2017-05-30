@@ -1,7 +1,7 @@
 package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,16 +19,23 @@ public class DeleteProductCategory extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		CategoryController categoryController = new CategoryController();
-		ArrayList<Category> categories = (ArrayList<Category>) categoryController.getAllCategories();
+		List<Category> categories = categoryController.getAllCategories();
+		Integer productCatCount = categories.size();
+		productCatCount--;
+		
 		request.setAttribute("categories", categories);
+		request.setAttribute("productCatCount", productCatCount);
+		request.getRequestDispatcher("/deleteProductCategory.jsp").forward(request,response);
 		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		CategoryController categoryController = new CategoryController();
-		Integer categoryId = categoryController.getCategoryByName(request.getParameter("deletedCategoryName")).getCategoryId();
+		Integer categoryId = Integer.valueOf(request.getParameter("deletedCategoryId").replaceAll("\\D+", ""));
 		categoryController.deleteCategory(categoryId);
+		
+		doGet(request,response);
 	}
 
 }

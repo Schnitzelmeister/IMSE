@@ -2,6 +2,7 @@ package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,16 +21,39 @@ public class DeleteAdmin extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		UserController userController = new UserController();
-		ArrayList<Admin> admins = (ArrayList<Admin>) userController.searchAllAdmins();
-		request.setAttribute("admins", admins);
+		List<Admin> admins = userController.searchAllAdmins();
+		List<String> emails = new ArrayList<String>();
+		List<String> names = new ArrayList<String>();
+		List<String> surNames = new ArrayList<String>();
+		Integer countMainAdmins=0;
+		for(Admin a:admins){
+			if(!a.getEmailAddress().equals(a.getManagerEmailAddress())){
+				emails.add(a.getEmailAddress());
+				names.add(a.getLastName());
+				surNames.add(a.getFirstName());
+			} else {
+				++countMainAdmins;
+			}
+		}
+		Integer anzahl1 = admins.size()-countMainAdmins;
+		
+		anzahl1--;
+		
+		request.setAttribute("surNames", surNames);
+		request.setAttribute("emails", emails);
+		request.setAttribute("names", names);
+		request.setAttribute("anzahl1", anzahl1);
+		request.getRequestDispatcher("/deleteAdmin.jsp").forward(request,response);
 		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		UserController userController = new UserController();
-		String email = request.getParameter("deletedAdminEmail");
+		String email = request.getParameter("deletedAdminEmail").replaceAll("Lösche Admin: ", "");
 		userController.deleteAdminAccount(email);
+		
+		doGet(request,response);
 		
 	}
 

@@ -1,7 +1,5 @@
 package imse.SS2017.team1.junits;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 import java.util.List;
 

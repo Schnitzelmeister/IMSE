@@ -1,7 +1,7 @@
 package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +21,12 @@ public class CreateNewProduct extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		CategoryController categoryController = new CategoryController();
-		ArrayList<Category> categories = (ArrayList<Category>) categoryController.getAllCategories();
-		request.setAttribute("categories", categories);
+		List<Category> categories = categoryController.getAllCategories();
+		Integer anzahl3 = categories.size();
+		anzahl3--;
+		request.setAttribute("categories2", categories);
+		request.setAttribute("anzahl3", anzahl3);
+		request.getRequestDispatcher("/createProduct.jsp").forward(request,response);
 		
 	}
 
@@ -32,10 +36,13 @@ public class CreateNewProduct extends HttpServlet {
 		
 		String productName = request.getParameter("productName");
 		Float price = Float.valueOf(request.getParameter("productPrice"));
-		String description = request.getParameter("description");
+		String description = request.getParameter("productDescription");
 		Integer quantity = Integer.valueOf(request.getParameter("productQuantity"));
+		System.out.println(productName + price + description + quantity);
 		
 		productController.createProduct(productName, price, description, quantity);
+		
+		doGet(request,response);
 		
 	}
 
