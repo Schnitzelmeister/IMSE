@@ -16,7 +16,7 @@
 <body>
 
 <p>&nbsp;</p>
-<div id="chart"></div>
+<div id="cart"></div>
 
 <%
 	FoundResult results = (FoundResult)request.getAttribute("results");
@@ -78,7 +78,7 @@ for (FoundProduct prod : results.getFoundProducts()) { %>
 <td><%= ++pos%>.</td>
 <%
 	if (prod.getImages().length == 1) {
-		out.write("<td><img src=\"data:image/jpeg;base64," + prod.getImages()[0] + "\" /></td>");
+		out.write("<td><img src=\"data:image/jpeg;base64," + prod.getImages()[0] + "\" height=\"200\" width=\"200\"/></td>");
 	}
 	else if (prod.getImages().length > 1) {
 		out.write("<script type=\"text/javascript\">imgs"+ prod.getId() + "=new Array(");
@@ -90,7 +90,7 @@ for (FoundProduct prod : results.getFoundProducts()) { %>
 		out.write(");</script>");
 		%>
 <td><table>
-<tr align="center"><td colspan="2"><img id="ctlimg<%= prod.getId() %>" /></td></tr>
+<tr align="center"><td colspan="2"><img id="ctlimg<%= prod.getId() %>" height="200" width="200" /></td></tr>
 <tr>
 	<input type="hidden" id="start<%= prod.getId() %>" onclick="javascript:chgImg(<%= prod.getId() %>,imgs<%= prod.getId() %>,0);" />
 	<td align="right"><a href="javascript:void(0)" onclick="javascript:chgImg(<%= prod.getId() %>,imgs<%= prod.getId() %>,-1);">&lt;</a></td>

@@ -44,7 +44,7 @@ $(document).ready(function() {
     	//meaning we are expecting PlainText data in response from the server
     	$.ajax({
     		type: "POST",
-    		url: "add2chart",
+    		url: "add2cart",
     		data: dataString,
     		dataType: "text",
     		
@@ -52,18 +52,18 @@ $(document).ready(function() {
     		//if received a response from the server
     		success: function( data, textStatus, jqXHR) {
     			if(textStatus == 'success'){
-    				$("#chart").html("<a href=\"tarik\"><b>Your Chart has items: " + jqXHR.responseText + "</b></a>");
+    				$("#cart").html("<a href=\"tarik\"><b>Your Cart has items: " + jqXHR.responseText + "</b></a>");
     				}
     			//display error message
     			else {
-    				$("#chart").html("<b>Invalid!</b>");
+    				$("#cart").html("<b>Invalid!</b>");
     				}
     			},
     			
 			//If there was no resonse from the server
 			error: function(jqXHR, textStatus, errorThrown){
     			//alert('error jqXHR='+jqXHR + ' ' + textStatus);
-				$("#chart").html('error: ' + jqXHR.responseText);
+				$("#cart").html('error: ' + jqXHR.responseText);
 				},
 				
 			//capture the request before it was sent to server
