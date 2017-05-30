@@ -47,6 +47,7 @@ public class ProductController {
 		product.setDescription(description);
 		product.setPrice(price);
 		product.setProductName(productName);
+		product.setQuantity(quantity);
 		dao.save(product);
 	}
 	

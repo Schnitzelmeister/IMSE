@@ -22,7 +22,11 @@ public class CreateNewProduct extends HttpServlet {
 		
 		CategoryController categoryController = new CategoryController();
 		List<Category> categories = categoryController.getAllCategories();
-		request.setAttribute("categories", categories);
+		Integer anzahl3 = categories.size();
+		anzahl3--;
+		request.setAttribute("categories2", categories);
+		request.setAttribute("anzahl3", anzahl3);
+		request.getRequestDispatcher("/createProduct.jsp").forward(request,response);
 		
 	}
 
@@ -32,10 +36,13 @@ public class CreateNewProduct extends HttpServlet {
 		
 		String productName = request.getParameter("productName");
 		Float price = Float.valueOf(request.getParameter("productPrice"));
-		String description = request.getParameter("description");
+		String description = request.getParameter("productDescription");
 		Integer quantity = Integer.valueOf(request.getParameter("productQuantity"));
+		System.out.println(productName + price + description + quantity);
 		
 		productController.createProduct(productName, price, description, quantity);
+		
+		doGet(request,response);
 		
 	}
 

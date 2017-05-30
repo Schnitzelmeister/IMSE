@@ -91,7 +91,7 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 							<div>
 								<input type="submit" value="Verifiziere Admin: ${emails2.get(i)}"
 									name="verifiedAdminEmail"
-									class="w3-button w3-red w3-small w3-right" />
+									class="w3-button w3-green w3-small w3-right" />
 							</div> <span class="w3-large">Nachname: ${names2.get(i)}</span><br>
 							<span>Vorname: ${surNames2.get(i)}</span>
 						</li>

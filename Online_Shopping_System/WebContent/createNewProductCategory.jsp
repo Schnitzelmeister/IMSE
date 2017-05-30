@@ -119,7 +119,7 @@ tr:nth-child(even) {
 					<tr>
 						<th><input type="text" name="productCategoryName" value="Kategoriename"
 							style="width: 100%"></th>
-						<th><input type="submit" value="Hinzufuegen" style="width: 100%"></th>
+						<th><input type="submit" value="Hinzufuegen" style="width: 100%; background-color: green; color: white" ></th>
 					</tr>
 				</table>
 				<ul class="w3-ul w3-card-4">
