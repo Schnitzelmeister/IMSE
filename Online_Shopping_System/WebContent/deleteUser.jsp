@@ -40,7 +40,7 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 		
 		<a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align w3-text-grey" id="myBtn"> Edit Categories <i class="fa fa-caret-down"></i> </a>
 		<div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-			 	<a href="createProductCategory" class="w3-bar-item w3-button">Add</a> 
+			 	<a href="createNewProductCategory" class="w3-bar-item w3-button">Add</a> 
 				<a href="deleteProductCategory" class="w3-bar-item w3-button">Delete</a> 
 		</div>
 		
