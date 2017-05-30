@@ -90,7 +90,9 @@ public class UserController {
 	
 	public void verifyAdmin(String email){
 		Admin admin = dao.getobject(Admin.class, email);
-		admin.isVerified();
+		System.out.println(admin.getEmailAddress());
+		admin.setVerified(true);
+		dao.updateEntity(admin);
 	}
 	
 }
