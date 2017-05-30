@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js" type="text/javascript"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="app.js"></script>
@@ -75,7 +76,31 @@ int pos = results.getPageNumber() * results.getPageSize();
 for (FoundProduct prod : results.getFoundProducts()) { %>
 <tr>
 <td><%= ++pos%>.</td>
-<td><img src="https://images-eu.ssl-images-amazon.com/images/I/31q6ZxsV5lL._AC_US218_.jpg" style="box-sizing: border-box; max-width: 100%; border: 0px; vertical-align: top;" width="218" /></td>
+<%
+	if (prod.getImages().length == 1) {
+		out.write("<td><img src=\"data:image/jpeg;base64," + prod.getImages()[0] + "\" /></td>");
+	}
+	else if (prod.getImages().length > 1) {
+		out.write("<script type=\"text/javascript\">imgs"+ prod.getId() + "=new Array(");
+		for (int i = 0; i < prod.getImages().length; ++i) {
+			out.write("\"data:image/jpeg;base64," + prod.getImages()[i] + "\"");
+			if (i != prod.getImages().length-1)
+				out.write(",");
+		}
+		out.write(");</script>");
+		%>
+<td><table>
+<tr align="center"><td colspan="2"><img id="ctlimg<%= prod.getId() %>" /></td></tr>
+<tr>
+	<input type="hidden" id="start<%= prod.getId() %>" onclick="javascript:chgImg(<%= prod.getId() %>,imgs<%= prod.getId() %>,0);" />
+	<td align="right"><a href="javascript:void(0)" onclick="javascript:chgImg(<%= prod.getId() %>,imgs<%= prod.getId() %>,-1);">&lt;</a></td>
+ 	<td align="left"><a href="javascript:void(0)" onclick="javascript:chgImg(<%= prod.getId() %>,imgs<%= prod.getId() %>,1);">&gt;</a></td>
+</tr>
+</table></td>
+<%
+	}
+%>
+
 <td style="width:100%">
 	<table style="width:100%">
 		<tr><td><b><%= prod.getName() %></b></td></tr>
@@ -89,7 +114,7 @@ for (FoundProduct prod : results.getFoundProducts()) { %>
                  			<option value="4">4</option>
                  			<option value="5">5</option>
                  		</select></form></td>
-						<td><a href="javascript:void(0)" onclick="add2cart(<%= prod.getId() %>,<%= prod.getAvailableQuantity() %>)" style="white-space: nowrap">Add To Bin</a></td></tr></table>
+						<td><a href="javascript:void(0)" onclick="javascript:add2cart(<%= prod.getId() %>,<%= prod.getAvailableQuantity() %>)" style="white-space: nowrap">Add To Bin</a></td></tr></table>
                   </td>
 			</tr></table>
 		</td></tr>

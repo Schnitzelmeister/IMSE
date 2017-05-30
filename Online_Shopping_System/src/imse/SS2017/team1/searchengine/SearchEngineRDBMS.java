@@ -7,11 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
+import org.eclipse.persistence.jpa.JpaEntityManager;
 
 import imse.SS2017.team1.controller.CategoryController;
 import imse.SS2017.team1.model.Category;
@@ -73,12 +77,19 @@ public class SearchEngineRDBMS implements SearchEngine {
 		List<Object[]> dataRaws = qstat.getResultList();
 		Map<Integer, Integer> foundCategoriesStat = new TreeMap<Integer, Integer>();
 
+		
 		for (Object[] data : dataRaws) {
 			foundCategoriesStat.put((int)data[0], java.lang.Math.toIntExact((long)data[1]));
 		}
 		
-		sql = "SELECT prod.productId, prod.productName, prod.price, prod.description, prod.quantity "
-				+ ",GROUP_CONCAT(prod2cat.categoryId SEPARATOR ',') cats "
+		org.eclipse.persistence.sessions.Session session = ((JpaEntityManager)em.getDelegate()).getActiveSession();
+		session.executeNonSelectingSQL("SET group_concat_max_len = 1000000;");
+		
+		sql = "SELECT prod.productId, prod.productName, prod.price, prod.description, prod.quantity, prod.cats, "
+				//+ "GROUP_CONCAT(CONCAT('\"',REPLACE(img.image,'\"','\"\"'),'\"') SEPARATOR ' ') imgs "
+				+ "GROUP_CONCAT(img.image SEPARATOR '\"') imgs "
+				+ "FROM (SELECT prod.productId, prod.productName, prod.price, prod.description, prod.quantity, "
+				+ "GROUP_CONCAT(prod2cat.categoryId SEPARATOR ',') cats "
 				+ "FROM imse.product prod "
 				+ "INNER JOIN imse.ProductBelongsCategory prod2cat "
 				+ "	on prod2cat.productId = prod.productId "
@@ -94,17 +105,25 @@ public class SearchEngineRDBMS implements SearchEngine {
 			default: throw new IllegalArgumentException("Sort Mode not implemented");
 		}
 		
-		sql = sql + "LIMIT " + pageSize + " OFFSET " + pageNumber * pageSize + ";";
+		sql = sql + "LIMIT " + pageSize + " OFFSET " + pageNumber * pageSize + ") prod "
+				+ "LEFT OUTER JOIN imse.image img "
+				+ "	on img.productId = prod.productId;";
 
-		//System.out.println(sql);
+		System.out.println("sql="+sql);
 		
 		Query qprod = em.createNativeQuery(sql);
 		@SuppressWarnings("unchecked")
 		List<Object[]> prodRaws = qprod.getResultList();
 		List<FoundProduct> foundProducts = new ArrayList<FoundProduct>();
 
+		//System.out.println("prodRaws/len="+prodRaws.size());
 		for (Object[] data : prodRaws) {
-			foundProducts.add(new FoundProduct( (int)data[0], (String)data[1], ((BigDecimal)data[2]).doubleValue(), (String)data[3], (int)data[4], (String)data[5]) );
+			//i think error in em.createNativeQuery
+			if (data[0] == null) break; 
+			//System.out.println("(String)data[6].len="+((String)data[6]).length());
+			//System.out.println("(int)data[0]="+(int)data[0]);
+			//System.out.println("(String)data[6]="+(String)data[6]);
+			foundProducts.add(new FoundProduct( (int)data[0], (String)data[1], ((BigDecimal)data[2]).doubleValue(), (String)data[3], (int)data[4], (String)data[5], /*imgs.toArray(new String[imgs.size()])*/ ((String)data[6]).split("\"")) );
 		}
 		return new FoundResult(categories, foundProducts, foundCategoriesStat, searchText, categoryId, sortMode, pageNumber, pageSize);
 	}

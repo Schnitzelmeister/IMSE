@@ -1,6 +1,27 @@
 
-$(document).ready(function() { add2cart(0,0); })
+$(document).ready(function() { 	
+		add2cart(0,0);
+		
+		var all = document.getElementsByTagName("input");
+		for (var i=0, max=all.length; i < max; i++) {
+			if (all[i].id.substring(0, 5) == 'start') {
+				all[i].click();
+			}
+		}
+	})
 
+	function chgImg(prodid, ar, direction){
+		elid = 'ctlimg1';
+		el = document.getElementById(elid);
+		ImgNum = el.value;
+		if (ImgNum == null)
+			ImgNum = 0;
+		ImgNum = ImgNum + direction;
+		if (ImgNum >= ar.length) { ImgNum = 0; }
+		if (ImgNum < 0) { ImgNum = ar.length - 1; }
+		el.value = ImgNum;
+		el.src = ar[ImgNum];
+	}
     //Stops the submit request
 //    $("#myAjaxRequestForm").submit(function(e){
 //           e.preventDefault();
