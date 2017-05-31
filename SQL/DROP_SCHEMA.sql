@@ -19,3 +19,8 @@ drop table Customer;
 drop table CreditCard;
 
 drop table Address;
+
+
+/*drop database imse;
+create database imse;
+*/

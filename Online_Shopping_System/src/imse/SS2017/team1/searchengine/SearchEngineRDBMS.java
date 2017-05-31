@@ -22,8 +22,8 @@ import imse.SS2017.team1.model.Category;
 
 
 public class SearchEngineRDBMS implements SearchEngine {
-	public final static int SORT_BY_PRICE_DESC = 0;
-	public final static int SORT_BY_PRICE_ASC = 1;
+	public final static int SORT_BY_PRICE_ASC = 0;
+	public final static int SORT_BY_PRICE_DESC = 1;
 	public final static int SORT_BY_NAME = 2;
 	
 	private final static int pageSize = 10;
@@ -107,9 +107,16 @@ public class SearchEngineRDBMS implements SearchEngine {
 		
 		sql = sql + "LIMIT " + pageSize + " OFFSET " + pageNumber * pageSize + ") prod "
 				+ "LEFT OUTER JOIN imse.image img "
-				+ "	on img.productId = prod.productId;";
+				+ "	on img.productId = prod.productId "
+				+ "GROUP BY prod.productId, prod.productName, prod.price, prod.description, prod.quantity, prod.cats ";
 
-		System.out.println("sql="+sql);
+		switch (sortMode) {
+			case SORT_BY_PRICE_DESC: sql = sql + "ORDER BY prod.price DESC;"; break;
+			case SORT_BY_PRICE_ASC: sql = sql + "ORDER BY prod.price ASC;"; break;
+			case SORT_BY_NAME: sql = sql + "ORDER BY prod.productName ASC;"; break;
+			default: throw new IllegalArgumentException("Sort Mode not implemented");
+		}
+		//System.out.println("sql="+sql);
 		
 		Query qprod = em.createNativeQuery(sql);
 		@SuppressWarnings("unchecked")
@@ -120,10 +127,14 @@ public class SearchEngineRDBMS implements SearchEngine {
 		for (Object[] data : prodRaws) {
 			//i think error in em.createNativeQuery
 			if (data[0] == null) break; 
+			//System.out.println("(String)data[6]="+(String)data[6]);
 			//System.out.println("(String)data[6].len="+((String)data[6]).length());
 			//System.out.println("(int)data[0]="+(int)data[0]);
 			//System.out.println("(String)data[6]="+(String)data[6]);
-			foundProducts.add(new FoundProduct( (int)data[0], (String)data[1], ((BigDecimal)data[2]).doubleValue(), (String)data[3], (int)data[4], (String)data[5], /*imgs.toArray(new String[imgs.size()])*/ ((String)data[6]).split("\"")) );
+			String pics = (String)data[6];
+			if (pics == null)
+				pics = "";
+			foundProducts.add(new FoundProduct( (int)data[0], (String)data[1], ((BigDecimal)data[2]).doubleValue(), (String)data[3], (int)data[4], (String)data[5], /*imgs.toArray(new String[imgs.size()])*/ pics.split("\"")) );
 		}
 		return new FoundResult(categories, foundProducts, foundCategoriesStat, searchText, categoryId, sortMode, pageNumber, pageSize);
 	}

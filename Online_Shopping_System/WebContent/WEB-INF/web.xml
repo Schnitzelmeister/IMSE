@@ -2,14 +2,14 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" metadata-complete="false" version="3.1">
   <display-name>Online_Shopping_System</display-name>
   <welcome-file-list>
-   <welcome-file>index.html</welcome-file>
+    <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-<servlet>
+  <servlet>
     <servlet-name>LoadCustomerInfoServlet</servlet-name>
     <servlet-class>imse.SS2017.team1.servlets.LoadCustomerInfoServlet</servlet-class>
   </servlet>
@@ -17,97 +17,78 @@
     <servlet-name>LoadCustomerInfoServlet</servlet-name>
     <url-pattern>/Online_Shopping_System/WebContent/loaddata/</url-pattern>
   </servlet-mapping>
-
-<servlet>  
-  <servlet-name>adminIndex</servlet-name>  
-  <servlet-class>imse.SS2017.team1.servlets.AdminIndex</servlet-class>  
-</servlet>
-
-<servlet-mapping>
-  <servlet-name>adminIndex</servlet-name>
-  <url-pattern>/adminIndex</url-pattern>
-</servlet-mapping>
-
-<servlet>  
-  <servlet-name>createNewProduct</servlet-name>  
-  <servlet-class>imse.SS2017.team1.servlets.CreateNewProduct</servlet-class>  
-</servlet>
-
-<servlet-mapping>
-  <servlet-name>createNewProduct</servlet-name>
-  <url-pattern>/createProduct</url-pattern>
-</servlet-mapping>
-
-<servlet>  
-  <servlet-name>deleteProduct</servlet-name>  
-  <servlet-class>imse.SS2017.team1.servlets.DeleteProduct</servlet-class>  
-</servlet>
-
-<servlet-mapping>
-  <servlet-name>deleteProduct</servlet-name>
-  <url-pattern>/deleteProduct</url-pattern>
-</servlet-mapping>
-
-<servlet>  
-  <servlet-name>editProduct</servlet-name>  
-  <servlet-class>imse.SS2017.team1.servlets.EditProduct</servlet-class>  
-</servlet>
-
-<servlet-mapping>
-  <servlet-name>editProduct</servlet-name>
-  <url-pattern>/updateProduct</url-pattern>
-</servlet-mapping>
-
-<servlet>  
-  <servlet-name>deleteUser</servlet-name>  
-  <servlet-class>imse.SS2017.team1.servlets.DeleteUser</servlet-class>  
-</servlet>
-
-<servlet-mapping>
-  <servlet-name>deleteUser</servlet-name>
-  <url-pattern>/deleteUser</url-pattern>
-</servlet-mapping>
-
-<servlet>  
-  <servlet-name>createNewProductCategory</servlet-name>  
-  <servlet-class>imse.SS2017.team1.servlets.CreateNewProductCategory</servlet-class>  
-</servlet>
-
-<servlet-mapping>
-  <servlet-name>createNewProductCategory</servlet-name>
-  <url-pattern>/createNewProductCategory</url-pattern>
-</servlet-mapping>
-
-<servlet>  
-  <servlet-name>deleteProductCategory</servlet-name>  
-  <servlet-class>imse.SS2017.team1.servlets.DeleteProductCategory</servlet-class>  
-</servlet>
-
-<servlet-mapping>
-  <servlet-name>deleteProductCategory</servlet-name>
-  <url-pattern>/deleteProductCategory</url-pattern>
-</servlet-mapping>
-
-<servlet>  
-  <servlet-name>deleteAdmin</servlet-name>  
-  <servlet-class>imse.SS2017.team1.servlets.DeleteAdmin</servlet-class>  
-</servlet>
-
-<servlet-mapping>
-  <servlet-name>deleteAdmin</servlet-name>
-  <url-pattern>/deleteAdmin</url-pattern>
-</servlet-mapping>
-
-<servlet>  
-  <servlet-name>verifyAdmin</servlet-name>  
-  <servlet-class>imse.SS2017.team1.servlets.VerifyAdmins</servlet-class>  
-</servlet>
-
-<servlet-mapping>
-  <servlet-name>verifyAdmin</servlet-name>
-  <url-pattern>/verifyAdmin</url-pattern>
-</servlet-mapping>
-
+  <servlet>
+    <servlet-name>adminIndex</servlet-name>
+    <servlet-class>imse.SS2017.team1.servlets.AdminIndex</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>adminIndex</servlet-name>
+    <url-pattern>/adminIndex</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>createNewProduct</servlet-name>
+    <servlet-class>imse.SS2017.team1.servlets.CreateNewProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>createNewProduct</servlet-name>
+    <url-pattern>/createProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>deleteProduct</servlet-name>
+    <servlet-class>imse.SS2017.team1.servlets.DeleteProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteProduct</servlet-name>
+    <url-pattern>/deleteProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>editProduct</servlet-name>
+    <servlet-class>imse.SS2017.team1.servlets.EditProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>editProduct</servlet-name>
+    <url-pattern>/updateProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>deleteUser</servlet-name>
+    <servlet-class>imse.SS2017.team1.servlets.DeleteUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteUser</servlet-name>
+    <url-pattern>/deleteUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>createNewProductCategory</servlet-name>
+    <servlet-class>imse.SS2017.team1.servlets.CreateNewProductCategory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>createNewProductCategory</servlet-name>
+    <url-pattern>/createNewProductCategory</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>deleteProductCategory</servlet-name>
+    <servlet-class>imse.SS2017.team1.servlets.DeleteProductCategory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteProductCategory</servlet-name>
+    <url-pattern>/deleteProductCategory</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>deleteAdmin</servlet-name>
+    <servlet-class>imse.SS2017.team1.servlets.DeleteAdmin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteAdmin</servlet-name>
+    <url-pattern>/deleteAdmin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>verifyAdmin</servlet-name>
+    <servlet-class>imse.SS2017.team1.servlets.VerifyAdmins</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>verifyAdmin</servlet-name>
+    <url-pattern>/verifyAdmin</url-pattern>
+  </servlet-mapping>
   <servlet>
     <description>Add to cart and get the number of items - jQuery Ajax</description>
     <display-name>Add2Cart</display-name>
@@ -118,14 +99,4 @@
     <servlet-name>Add2Cart</servlet-name>
     <url-pattern>/add2cart</url-pattern>
   </servlet-mapping>
-  
-<security-constraint> 
-<web-resource-collection> 
-<web-resource-name>Protected Context</web-resource-name> 
-<url-pattern>/*</url-pattern>
-</web-resource-collection> 
-<user-data-constraint> 
-<transport-guarantee>CONFIDENTIAL</transport-guarantee> 
-</user-data-constraint> 
-</security-constraint>
 </web-app>

@@ -12,8 +12,8 @@
 <jsp:include page="header.jsp" />
 <%Product product=(Product)session.getAttribute("product"); %>
 Sie wollen das Product <%=(String)product.getProductName() %> kaufen
-<br><h1>Bitte geben Sie Ihre Kreditkartendaten ein</h1>
-	<form method="post" action="NewCreditCard">
+<br><h1>Bitte geben Sie Ihre Adressdaten ein</h1>
+	<form method="post" action="CheckAddress">
 	<pre>
 	<br>	Kreditkartennummer:<input type="text" name="cardNumber"/>
 		<br>Vorname: <input type="text" name="vorname"/> 

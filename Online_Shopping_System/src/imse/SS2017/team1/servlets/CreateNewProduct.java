@@ -20,6 +20,13 @@ public class CreateNewProduct extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String adminTyp = null;
+		if(request.getSession().getAttribute("adminType")!=null){
+			adminTyp = request.getSession().getAttribute("adminType").toString();
+		}
+		request.setAttribute("IsAdminTyp", adminTyp!=null);
+		request.setAttribute("IsAdminChief", adminTyp.equals("chiefadmin"));
+		
 		CategoryController categoryController = new CategoryController();
 		List<Category> categories = categoryController.getAllCategories();
 		Integer anzahl3 = categories.size();
@@ -33,6 +40,13 @@ public class CreateNewProduct extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		ProductController productController = new ProductController();
+		
+		String adminTyp = null;
+		if(request.getSession().getAttribute("adminType")!=null){
+			adminTyp = request.getSession().getAttribute("adminType").toString();
+		}
+		request.setAttribute("IsAdminTyp", adminTyp!=null);
+		request.setAttribute("IsAdminChief", adminTyp.equals("chiefadmin"));
 		
 		String productName = request.getParameter("productName");
 		Float price = Float.valueOf(request.getParameter("productPrice"));

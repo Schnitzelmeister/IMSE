@@ -20,6 +20,13 @@ public class DeleteAdmin extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		String adminTyp = null;
+		if(request.getSession().getAttribute("adminType")!=null){
+			adminTyp = request.getSession().getAttribute("adminType").toString();
+		}
+		request.setAttribute("IsAdminTyp", adminTyp!=null);
+		request.setAttribute("IsAdminChief", adminTyp.equals("chiefadmin"));
+		
 		UserController userController = new UserController();
 		List<Admin> admins = userController.searchAllAdmins();
 		List<String> emails = new ArrayList<String>();
@@ -49,6 +56,13 @@ public class DeleteAdmin extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		String adminTyp = null;
+		if(request.getSession().getAttribute("adminType")!=null){
+			adminTyp = request.getSession().getAttribute("adminType").toString();
+		}
+		request.setAttribute("IsAdminTyp", adminTyp!=null);
+		request.setAttribute("IsAdminChief", adminTyp.equals("chiefadmin"));
+		
 		UserController userController = new UserController();
 		String email = request.getParameter("deletedAdminEmail").replaceAll("Lösche Admin: ", "");
 		userController.deleteAdminAccount(email);

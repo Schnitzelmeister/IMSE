@@ -53,44 +53,53 @@ tr:nth-child(even) {
 		</h3>
 	</div>
 
-	<div class="w3-padding-64 w3-large w3-text-grey"
-		style="font-weight: bold">
+	<c:choose>
+		<c:when test="${IsAdminTyp==true}">
 
-		<a onclick="myAccFunc()" href="javascript:void(0)"
-			class="w3-button w3-block w3-white w3-left-align w3-text-grey"
-			id="myBtn"> Edit Categories <i class="fa fa-caret-down"></i>
-		</a>
-		<div id="demoAcc"
-			class="w3-bar-block w3-hide w3-padding-large w3-medium">
-			<a href="createNewProductCategory" class="w3-bar-item w3-button">Add</a>
-			<a href="deleteProductCategory" class="w3-bar-item w3-button">Delete</a>
-		</div>
+			<div class="w3-padding-64 w3-large w3-text-grey"
+				style="font-weight: bold">
 
-		<a onclick="myAccFunc1()" href="javascript:void(0)"
-			class="w3-button w3-block w3-white w3-left-align w3-text-grey"
-			id="myBtn1"> Edit Products <i class="fa fa-caret-down"></i>
-		</a>
-		<div id="demoAcc1"
-			class="w3-bar-block w3-hide w3-padding-large w3-medium">
-			<a href="createProduct" class="w3-bar-item w3-button">Add</a> <a
-				href="deleteProduct" class="w3-bar-item w3-button">Delete</a> <a
-				href="updateProduct" class="w3-bar-item w3-button">Update</a>
-		</div>
+				<a onclick="myAccFunc()" href="javascript:void(0)"
+					class="w3-button w3-block w3-white w3-left-align w3-text-grey"
+					id="myBtn"> Edit Categories <i class="fa fa-caret-down"></i>
+				</a>
+				<div id="demoAcc"
+					class="w3-bar-block w3-hide w3-padding-large w3-medium">
+					<a href="createNewProductCategory" class="w3-bar-item w3-button">Add</a>
+					<a href="deleteProductCategory" class="w3-bar-item w3-button">Delete</a>
+				</div>
 
-		<a onclick="myAccFunc2()" href="javascript:void(0)"
-			class="w3-button w3-block w3-white w3-left-align w3-text-grey"
-			id="myBtn2"> Edit Admin <i class="fa fa-caret-down"></i>
-		</a>
-		<div id="demoAcc2"
-			class="w3-bar-block w3-hide w3-padding-large w3-medium">
-			<a href="deleteAdmin" class="w3-bar-item w3-button">Delete</a> <a
-				href="verifyAdmin" class="w3-bar-item w3-button">Verify</a>
-		</div>
+				<a onclick="myAccFunc1()" href="javascript:void(0)"
+					class="w3-button w3-block w3-white w3-left-align w3-text-grey"
+					id="myBtn1"> Edit Products <i class="fa fa-caret-down"></i>
+				</a>
+				<div id="demoAcc1"
+					class="w3-bar-block w3-hide w3-padding-large w3-medium">
+					<a href="createProduct" class="w3-bar-item w3-button">Add</a> <a
+						href="deleteProduct" class="w3-bar-item w3-button">Delete</a> <a
+						href="updateProduct" class="w3-bar-item w3-button">Update</a>
+				</div>
 
-		<a href="deleteUser" class="w3-bar-item w3-button">Edit User</a>
+				<a onclick="myAccFunc2()" href="javascript:void(0)"
+					class="w3-button w3-block w3-white w3-left-align w3-text-grey"
+					id="myBtn2"> Edit Admin <i class="fa fa-caret-down"></i>
+				</a>
 
-	</div>
-	</nav>
+				<c:choose>
+					<c:when test="${IsAdminChief==true}">
+
+						<div id="demoAcc2"
+							class="w3-bar-block w3-hide w3-padding-large w3-medium">
+							<a href="deleteAdmin" class="w3-bar-item w3-button">Delete</a> <a
+								href="verifyAdmin" class="w3-bar-item w3-button">Verify</a>
+						</div>
+
+					</c:when>
+				</c:choose>
+
+				<a href="deleteUser" class="w3-bar-item w3-button">Edit User</a>
+
+			</div></nav>
 
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 250px">
@@ -123,6 +132,15 @@ tr:nth-child(even) {
 
 		<!-- End page content -->
 	</div>
+
+	</c:when>
+	<c:otherwise>
+		<div>
+			<p>Sie besitzen keine Zugriffsrechte!</p>
+		</div>
+	</c:otherwise>
+	</c:choose>
+
 	<script>
 		// Accordion 
 		function myAccFunc() {

@@ -58,15 +58,14 @@ public class ProductSearch extends HttpServlet {
 				pageNumber = 0;
 			}
 
+			//System.out.println("pageNumber="+pageNumber);
 			FoundResult results = engine.getResults(searchText, categoryId, sortMode, pageNumber);
 			
 			request.setAttribute("results", results);
 		    request.getRequestDispatcher("/results.jsp").forward(request, response);
 			
 		} catch (IllegalArgumentException e) {
-			System.out.println("IllegalArgumentException: "+e.getMessage());
-			request.setAttribute("errorMessage", e.getMessage());
-			response.sendRedirect("/Online_Shopping_System/customer/newaccount.jsp?errorMessage="+e.getMessage());
+			e.printStackTrace();
 		} 
 
 	}
