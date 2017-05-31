@@ -11,7 +11,7 @@
 <th>
 <form method="get" action="${pageContext.request.contextPath}/results">
        
-            <select  name="cat" id="cat"><%CategoryController cc = new CategoryController();
+            <select name="cat" id="cat"><%CategoryController cc = new CategoryController();
             for (Category c : cc.getAllCategories() ) {%><option value=<%=c.getCategoryId()%>><%=c.getCategoryName() %></option>
             <%} %>
             </select>
@@ -21,7 +21,7 @@
 </th>
 <th>
 <form class="form-inline" action="results">
-   <input type="search" class="form-control" size="50" placeholder="Produktname" autocomplete="on">
+   <input name="search" type="search" class="form-control" size="50" placeholder="Produktname" autocomplete="on">
     <button type="button" class="btn btn-danger">Suchen</button>
   </form>
   </th>

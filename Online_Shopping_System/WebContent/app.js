@@ -11,7 +11,7 @@ $(document).ready(function() {
 	})
 
 	function chgImg(prodid, ar, direction){
-		elid = 'ctlimg1';
+		elid = 'ctlimg'+prodid;
 		el = document.getElementById(elid);
 		ImgNum = el.value;
 		if (ImgNum == null)
@@ -52,7 +52,7 @@ $(document).ready(function() {
     		//if received a response from the server
     		success: function( data, textStatus, jqXHR) {
     			if(textStatus == 'success'){
-    				$("#cart").html("<a href=\"tarik\"><b>Your Cart has items: " + jqXHR.responseText + "</b></a>");
+    				$("#cart").html("<a href=\"products.jsp\"><b>Your Cart has items: " + jqXHR.responseText + "</b></a>");
     				}
     			//display error message
     			else {

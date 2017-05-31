@@ -48,7 +48,7 @@ for ( Map.Entry<Integer, String> me : results.getCategories().entrySet() ) {
 if ( results.getFoundCategoriesStat().size() == 0 ) {
 	out.write("No results");
 }
-else
+else if ( results.getCategoryId() == 0 )
 {
 	out.write("Found in Categories: ");
 	for ( Map.Entry<Integer, Integer> me : results.getFoundCategoriesStat().entrySet() ) {
@@ -61,8 +61,8 @@ else
 <p>&nbsp;</p>
 
 <p>Sort by:<select onchange="var s=document.getElementById('sort');location.href='results?search=<%= java.net.URLEncoder.encode(results.getSearchText(), "UTF-8") %>&cat=<%= results.getCategoryId() %>&sort='+s.options[s.selectedIndex].value;" id="sort">
-<option value="0"<% if (results.getSortMode() == 0) { out.write(" selected"); } %>>Price DESC</option>
-<option value="1"<% if (results.getSortMode() == 1) { out.write(" selected"); } %>>Price ASC</option>
+<option value="0"<% if (results.getSortMode() == 0) { out.write(" selected"); } %>>Price ASC</option>
+<option value="1"<% if (results.getSortMode() == 1) { out.write(" selected"); } %>>Price DESC</option>
 <option value="2"<% if (results.getSortMode() == 2) { out.write(" selected"); } %>>Product Name</option>
 </select>
 </p>
@@ -136,11 +136,12 @@ for ( int catId : prod.getCategoryIds() ) {
 
 <p>
 <%
-if ((pos + 1) == (results.getPageNumber() + 1) * results.getPageSize()) {
+//System.out.println("pos="+pos);
+if (pos == (results.getPageNumber() + 1) * results.getPageSize()) {
 	for ( int i = 0; i < results.getPageNumber(); ++i ) {
-		out.write("<a href=\"results?search=" + java.net.URLEncoder.encode(results.getSearchText(), "UTF-8") + "&cat="+ results.getCategoryId() +"&pnum=" + i + "\">" + i + "</a>  ");
+		out.write("<a href=\"results?search=" + java.net.URLEncoder.encode(results.getSearchText(), "UTF-8") + "&cat="+ results.getCategoryId() +"&pnum=" + i + "&sort=" + results.getSortMode() + "\">" + (i+1) + "</a>  ");
 	}
-	out.write("<a href=\"results?search=" + java.net.URLEncoder.encode(results.getSearchText(), "UTF-8") + "&cat="+ results.getCategoryId() +"&pnum=" + results.getPageNumber() + "\">next >></a>  ");
+	out.write("<a href=\"results?search=" + java.net.URLEncoder.encode(results.getSearchText(), "UTF-8") + "&cat="+ results.getCategoryId() +"&pnum=" + (results.getPageNumber() + 1) + "&sort=" + results.getSortMode() + "\">next >></a>  ");
 }
 %>
 </p>

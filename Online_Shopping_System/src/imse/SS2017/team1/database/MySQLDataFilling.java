@@ -1,6 +1,11 @@
 package imse.SS2017.team1.database;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
+
+import com.sun.xml.bind.v2.schemagen.xmlschema.List;
 
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.database.DataGenerator.entityTyp;
@@ -9,6 +14,7 @@ import imse.SS2017.team1.model.Admin;
 import imse.SS2017.team1.model.Category;
 import imse.SS2017.team1.model.CreditCard;
 import imse.SS2017.team1.model.Customer;
+import imse.SS2017.team1.model.Image;
 import imse.SS2017.team1.model.Product;
 import imse.SS2017.team1.model.ProductBelongsCategory;
 
@@ -50,25 +56,59 @@ public class MySQLDataFilling {
 		
 		System.out.println("Produkte werden gerneriert!");
 		Product product = new Product();
+		ProductBelongsCategory productBelongsCategory = new ProductBelongsCategory();
+		Image image = new Image();
+		
+		
 		ArrayList<String> productNames = DataGenerator.generateRandomData(entityTyp.productNames, 200);
 		ArrayList<String> description = DataGenerator.generateRandomData(entityTyp.description, 200);
 		ArrayList<Integer> productQuantity = DataGenerator.generateRandomInteger(200, 1, 10);
 		ArrayList<Float> productPrice = DataGenerator.generateRandomFloats(200, 10, 150);
-		for(int i=0;i<200;++i){
+		
+		
+		String pictureFolder = "E:/Photos/airat/pictures";
+		File folder = new File(pictureFolder);
+		File[] listOfFiles = folder.listFiles();
+		ArrayList<String> files = new ArrayList<String>();
+		    for (int i = 0; i < listOfFiles.length; i++) {
+		      if (listOfFiles[i].isFile()) {
+		    	  files.add(listOfFiles[i].getName());
+		      }
+		    }
+		    
+		for(int i=1;i<200;++i){
 			try{
 				product.setDescription(description.get(i));
 				product.setPrice(productPrice.get(i));
 				product.setProductName(productNames.get(i));
 				product.setQuantity(productQuantity.get(i));
+				
 			} catch (Exception e){
 				System.out.println("Fehler bei Variablensetzung!");
 			}
 			try {
 				dao.save(product);				
+				
+				int num = ThreadLocalRandom.current().nextInt(1, 5);
+				for (int q = 0; q < num; ++q) {
+					productBelongsCategory.setCategoryId(ThreadLocalRandom.current().nextInt(1, 19));
+					productBelongsCategory.setProductId(i);
+					dao.save(productBelongsCategory);
+				}
+				
+				for (int q = 0; q < num; ++q) {
+					String filename = pictureFolder + "/" + files.get(ThreadLocalRandom.current().nextInt(0, files.size()));
+					System.out.println(Paths.get(filename).toUri().toURL().toString());
+					image.setImageString(PictureUtility.convertPicToString(Paths.get(filename).toUri().toURL().toString()));
+					image.setProductId(i);
+					dao.save(image);
+				}
+
 			} catch(Exception e) {
-				System.out.println("Ein Duplikat wurde gefunden!");
+				System.out.println(e.getMessage());
 			}
 		}	
+		
 
 		System.out.println("Addressen werden generiert!");
 		Address customerAddress = new Address();
@@ -172,8 +212,8 @@ public class MySQLDataFilling {
 			}
 		}
 		
-		System.out.println("Produktdaten werden mit Kategorien verbunden!");
-		ProductBelongsCategory productBelongsCategory = new ProductBelongsCategory();
+		
+/*
 		Integer j=0;
 		for(int i=1;i<20;i++){
 			++j;
@@ -187,7 +227,7 @@ public class MySQLDataFilling {
 				}
 				++j;
 			}
-		}
+		}*/
 
 		
 		
