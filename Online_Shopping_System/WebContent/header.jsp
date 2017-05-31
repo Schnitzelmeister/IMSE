@@ -1,3 +1,5 @@
+<%@page import="imse.SS2017.team1.model.Category"%>
+<%@page import="imse.SS2017.team1.controller.CategoryController"%>
 <div class="jumbotron">
   <div class="container text-center">
     <h1>The Best Online Store </h1>      
@@ -5,10 +7,25 @@
   </div>
 </div>
 
-<center><form class="form-inline">Produkt suchen
+<table>
+<th>
+<form method="get" action="${pageContext.request.contextPath}/results">
+       
+            <select  name="cat" id="cat"><%CategoryController cc = new CategoryController();
+            for (Category c : cc.getAllCategories() ) {%><option value=<%=c.getCategoryId()%>><%=c.getCategoryName() %></option>
+            <%} %>
+            </select>
+
+
+</form>
+</th>
+<th>
+<form class="form-inline" action="results">
    <input type="search" class="form-control" size="50" placeholder="Produktname" autocomplete="on">
     <button type="button" class="btn btn-danger">Suchen</button>
-  </form></center>
+  </form>
+  </th>
+  </table>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
    

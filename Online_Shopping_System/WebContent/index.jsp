@@ -1,35 +1,22 @@
 <!DOCTYPE html>
+<%@page import="imse.SS2017.team1.model.Category"%>
+<%@page import="imse.SS2017.team1.controller.CategoryController"%>
 <html lang="en">
 
 <head>
 <jsp:include page="defaultsIncludes.jsp" />
 
-<style>
-form {
-	text-align: center;
-}
-</style>
+
 </head>
 
 <body>
 	<jsp:include page="header.jsp" />
 
-<<<<<<< HEAD
 
-=======
 <p>&nbsp;</p>
 
-<form method="get" action="${pageContext.request.contextPath}/results">
-        <table>
-            <tr><td>Search your Product</td>
-            <td><select name="cat" id="cat"><option value="0">In all Categories</option>
 
-<%
-CategoryController cc = new CategoryController();
-for (Category c : cc.getAllCategories() )
-	out.write("<option value=\"" + c.getCategoryId() + "\">" + c.getCategoryName() + "</option>");
-%>
->>>>>>> fef6e9d381e83e623a091a103ceb70c249bb5ef3
+
 
 	<form class="login-form" method="post" action="login">
 		<input type="text" name="email" placeholder="e-mail adresse" /> <input
@@ -42,8 +29,7 @@ for (Category c : cc.getAllCategories() )
 		</p>
 	</form>
 
-<<<<<<< HEAD
-=======
+
 <% 
 if(request.getParameter("errorMessage")!=null){
 	request.setAttribute("errorMessage", request.getParameter("errorMessage"));
@@ -62,7 +48,7 @@ ${infoMessage}
 }       
 %>
       
->>>>>>> fef6e9d381e83e623a091a103ceb70c249bb5ef3
+
 
 </body>
 </html>

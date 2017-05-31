@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<jsp:include page="defaultsIncludes.jsp" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -36,7 +37,7 @@
 <title>Kundenkonto anlegen</title>
 </head>
 <body>
-
+<jsp:include page="header.jsp"/>
 	<div class="container">
 		<div class="row main">
 			<div class="main-login main-center">
