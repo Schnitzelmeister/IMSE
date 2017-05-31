@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -46,13 +46,13 @@ tr:nth-child(even) {
 	<!-- Sidebar/menu -->
 	<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top"
 		style="z-index:3;width:250px" id="mySidebar">
+
 	<div class="w3-container w3-display-container w3-padding-16">
-		<i onclick="w3_close()"
-			class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
 		<h3 class="w3-wide">
 			<b>Adminmode</b>
 		</h3>
 	</div>
+
 	<div class="w3-padding-64 w3-large w3-text-grey"
 		style="font-weight: bold">
 
@@ -86,40 +86,30 @@ tr:nth-child(even) {
 			<a href="deleteAdmin" class="w3-bar-item w3-button">Delete</a> <a
 				href="verifyAdmin" class="w3-bar-item w3-button">Verify</a>
 		</div>
+
 		<a href="deleteUser" class="w3-bar-item w3-button">Edit User</a>
+
 	</div>
 	</nav>
-
-	<!-- Top menu on small screens -->
-	<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-	<div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
-	<a href="javascript:void(0)"
-		class="w3-bar-item w3-button w3-padding-24 w3-right"
-		onclick="w3_open()"><i class="fa fa-bars"></i></a> </header>
-
-	<!-- Overlay effect when opening sidebar on small screens -->
-	<div class="w3-overlay w3-hide-large" onclick="w3_close()"
-		style="cursor: pointer" title="close side menu" id="myOverlay"></div>
 
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 250px">
 
-		<!-- Push down content on small screens -->
-		<div class="w3-hide-large" style="margin-top: 83px"></div>
-
 		<!-- Top header -->
 		<header class="w3-container w3-xlarge">
 		<p class="w3-left">Online_Shopping_System</p>
-		</p>
 		</header>
-		<form name="addProductCat" action="CreateNewProductCategory" method="POST">
+
+		<form name="addProductCat" action="CreateNewProductCategory"
+			method="POST">
 			<!-- list header -->
 			<div class="w3-display-container w3-container">
 				<table>
 					<tr>
-						<th><input type="text" name="productCategoryName" value="Kategoriename"
-							style="width: 100%"></th>
-						<th><input type="submit" value="Hinzufuegen" style="width: 100%; background-color: green; color: white" ></th>
+						<th><input type="text" name="productCategoryName"
+							value="Kategoriename" style="width: 100%"></th>
+						<th><input type="submit" value="Hinzufuegen"
+							style="width: 100%; background-color: green; color: white"></th>
 					</tr>
 				</table>
 				<ul class="w3-ul w3-card-4">
@@ -163,18 +153,6 @@ tr:nth-child(even) {
 			}
 		}
 
-		// Script to open and close sidebar
-		function w3_open() {
-			document.getElementById("mySidebar").style.display = "block";
-			document.getElementById("myOverlay").style.display = "block";
-		}
-
-		function w3_close() {
-			document.getElementById("mySidebar").style.display = "none";
-			document.getElementById("myOverlay").style.display = "none";
-		}
 	</script>
-
-
 </body>
 </html>
