@@ -6,8 +6,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import imse.SS2017.team1.controller.ProductController;
+import imse.SS2017.team1.controller.UserController;
+import imse.SS2017.team1.model.Customer;
 import imse.SS2017.team1.model.Product;
 
 /**
@@ -22,8 +25,40 @@ public class BuyProduct extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		Integer productId=Integer.parseInt(request.getParameter("auswahl"));
+		
+		Integer productId=Integer.parseInt(request.getParameter("product"));
 		Product auswahl=(Product) new ProductController().getProductById(productId);
+		try {
+			request.getSession().setAttribute("product", auswahl);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		HttpSession session=request.getSession();
+		String email=(String)session.getAttribute("email");
+		Customer customer=new UserController().searchCustomer(email);
+		
+		try {
+			if((customer.getCreditCardInfo()==null)){
+				
+				request.getRequestDispatcher("newCreditCard.jsp").forward(request, response);
+				
+			}
+			
+			else{
+				request.setAttribute("CreditCard", customer.getCreditCardInfo());
+				request.getRequestDispatcher("updateCreditCard.jsp").forward(request, response);
+			}
+			
+			
+				
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(email);
 		System.out.println("Produktpreis: "+auswahl.getPrice());
 		System.out.println("Das Produkt heisst"+auswahl.getProductName()+"...");
 		

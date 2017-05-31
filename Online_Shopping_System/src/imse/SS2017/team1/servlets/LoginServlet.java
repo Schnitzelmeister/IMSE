@@ -1,6 +1,7 @@
 package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import imse.SS2017.team1.controller.ProductController;
+import imse.SS2017.team1.controller.UserController;
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.dao.DaoInterface;
 import imse.SS2017.team1.model.Customer;
@@ -36,15 +38,17 @@ public class LoginServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 
-		response.setContentType("text/jsp");
+		response.setContentType("text/html");
 		String email = request.getParameter("email");
 		 String password = request.getParameter("passwort");
 		 
-		 Customer currentUser;
-		 DaoInterface dao = new Dao();
+		 UserController usercontroller=new UserController();
+
+		 Customer currentUser=usercontroller.searchCustomer(email);
+
 		
 		 try{
-			 currentUser = dao.getUser(Customer.class, email);
+			
 			 if(currentUser == null) throw new IllegalArgumentException("Email Adresse existiert nicht");
 			 if(!currentUser.getPassword().equals(password)) throw new IllegalArgumentException("Das Passwort ist nicht korrekt");
 		 } catch(IllegalArgumentException e){
@@ -58,9 +62,10 @@ public class LoginServlet extends HttpServlet {
 		 
 		 HttpSession session = request.getSession();
 	     session.setAttribute("usertype", "customer");
-	     session.setAttribute("email", currentUser.getEmailAddress());
-	     session.setAttribute("customerName",currentUser.getFirstName()+" "+ currentUser.getLastName());
-	    
+	   //  session.setAttribute("email", currentUser.getEmailAddress());
+	     //session.setAttribute("customerName",currentUser.getFirstName()+" "+ currentUser.getLastName());
+	    session.setAttribute("customer", currentUser);
+	     
 	     ProductController productController=new ProductController();
 	     List<Product> products=productController.GetAllProducts();
 	     

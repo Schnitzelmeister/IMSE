@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.dao.DaoInterface;
 import imse.SS2017.team1.model.Admin;
+import imse.SS2017.team1.model.CreditCard;
 import imse.SS2017.team1.model.Customer;
 import imse.SS2017.team1.model.User;
 
@@ -38,7 +39,7 @@ public class UserController {
 			throw new IllegalArgumentException("Kein Feld darf leer bleiben");
 		
 		if (!validEmail(email)) 
-			throw new IllegalArgumentException("Die angegebene Email Adresse ist keine gültige Email");
+			throw new IllegalArgumentException("Die angegebene Email Adresse ist keine gï¿½ltige Email");
 		
 		if (password.length() < 8) 
 			throw new IllegalArgumentException("Das Passwort muss mindestens 8 Stellen haben");
@@ -91,6 +92,12 @@ public class UserController {
 	public void verifyAdmin(String email){
 		Admin admin = dao.getobject(Admin.class, email);
 		admin.setVerified("true");
+	}
+	
+	public void saveCreditCard(CreditCard creditcard,Customer customer){
+		dao.save(creditcard);
+		customer.setCreditCardInfo(creditcard.getCardNumber());
+		dao.updateEntity(customer);
 	}
 	
 }
