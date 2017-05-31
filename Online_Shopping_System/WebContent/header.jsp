@@ -11,7 +11,7 @@
 <table>
 <th>
        
-            <select name="cat" id="cat"><%CategoryController cc = new CategoryController();
+            <select name="cat" id="cat"><option value="0" selected>In all Categories</option><%CategoryController cc = new CategoryController();
             for (Category c : cc.getAllCategories() ) {%><option value=<%=c.getCategoryId()%>><%=c.getCategoryName() %></option>
             <%} %>
             </select>
