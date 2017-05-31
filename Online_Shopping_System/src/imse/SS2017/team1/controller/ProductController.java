@@ -27,6 +27,16 @@ public class ProductController {
 		return sameProducts;
 	}
 	
+	public Product getProductByParams(String productName, Float price, String description, Integer quantity){
+		List<Product> productList = dao.getobjects(Product.class);
+		for(Product p:productList){
+			if(p.getDescription().equals(description) && p.getPrice().equals(price) && p.getProductName().equals(productName) && p.getQuantity().equals(quantity)){
+				return p;
+			}
+		}
+		return null;
+	}
+	
 	public List<Product> getProductByPrice(Float price){
 		List<Product> productList = dao.getobjects(Product.class);
 		List<Product> sameProductPrice = new ArrayList<Product>();

@@ -134,28 +134,28 @@ tr:nth-child(even) {
 					</tr>
 					<tr>
 						<th><label for="picture">1.Bild</label> <input type="file"
-							id="picture1"> <input type="text" hidden name="image1"
-							id="pictureValue1"></th>
+							id="picture6"> <input type="text" hidden name="image6"
+							id="pictureValue6"></th>
 					</tr>
 					<tr>
 						<th><label for="picture">2.Bild</label> <input type="file"
-							id="picture2"> <input type="text" hidden name="image2"
-							id="pictureValue2"></th>
+							id="picture7"> <input type="text" hidden name="image7"
+							id="pictureValue7"></th>
 					</tr>
 					<tr>
 						<th><label for="picture">3.Bild</label> <input type="file"
-							id="picture3"> <input type="text" hidden name="image3"
-							id="pictureValue3"></th>
+							id="picture8"> <input type="text" hidden name="image8"
+							id="pictureValue8"></th>
 					</tr>
 					<tr>
 						<th><label for="picture">4.Bild</label> <input type="file"
-							id="picture4"> <input type="text" hidden name="image4"
-							id="pictureValue4"></th>
+							id="picture9"> <input type="text" hidden name="image9"
+							id="pictureValue9"></th>
 					</tr>
 					<tr>
 						<th><label for="picture">5.Bild</label> <input type="file"
-							id="picture5"> <input type="text" hidden name="image5"
-							id="pictureValue5"></th>
+							id="picture10"> <input type="text" hidden name="image10"
+							id="pictureValue10"></th>
 					</tr>
 					<tr>
 						<th><TEXTAREA ROWS=10 COLS=110% name="productDescription">Beschreibung....</TEXTAREA></th>

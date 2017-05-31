@@ -76,6 +76,28 @@ public class EditProduct extends HttpServlet {
 		Integer productId = Integer.valueOf(request.getParameter("productId").replaceAll("\\D+", ""));
 		
 		productController.updateProduct(productId, productName, price, description, quantity);
+	
+		String image1 = request.getParameter("image1");
+		String image2 = request.getParameter("image2");
+		String image3 = request.getParameter("image3");
+		String image4 = request.getParameter("image4");
+		String image5 = request.getParameter("image5");
+		
+		if(image1!=null && !image1.equals("")){
+			productController.addProductImage(image1, productId);
+		}
+		if(image2!=null && !image2.equals("")){
+			productController.addProductImage(image2, productId);
+		}
+		if(image3!=null && !image3.equals("")){
+			productController.addProductImage(image3, productId);
+		}
+		if(image4!=null && !image4.equals("")){
+			productController.addProductImage(image4, productId);
+		}
+		if(image5!=null && !image5.equals("")){
+			productController.addProductImage(image5, productId);
+		}	
 		
 		doGet(request,response);
 		

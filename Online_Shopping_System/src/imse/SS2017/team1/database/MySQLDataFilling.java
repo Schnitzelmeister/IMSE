@@ -5,8 +5,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import com.sun.xml.bind.v2.schemagen.xmlschema.List;
-
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.database.DataGenerator.entityTyp;
 import imse.SS2017.team1.model.Address;
@@ -212,8 +210,6 @@ public class MySQLDataFilling {
 			}
 		}
 		
-		
-/*
 		Integer j=0;
 		for(int i=1;i<20;i++){
 			++j;
@@ -227,7 +223,7 @@ public class MySQLDataFilling {
 				}
 				++j;
 			}
-		}*/
+		}
 
 		
 		
