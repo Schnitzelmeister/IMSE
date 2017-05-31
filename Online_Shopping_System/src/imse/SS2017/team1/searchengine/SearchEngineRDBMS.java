@@ -22,8 +22,8 @@ import imse.SS2017.team1.model.Category;
 
 
 public class SearchEngineRDBMS implements SearchEngine {
-	public final static int SORT_BY_PRICE_DESC = 0;
-	public final static int SORT_BY_PRICE_ASC = 1;
+	public final static int SORT_BY_PRICE_ASC = 0;
+	public final static int SORT_BY_PRICE_DESC = 1;
 	public final static int SORT_BY_NAME = 2;
 	
 	private final static int pageSize = 10;
@@ -108,8 +108,14 @@ public class SearchEngineRDBMS implements SearchEngine {
 		sql = sql + "LIMIT " + pageSize + " OFFSET " + pageNumber * pageSize + ") prod "
 				+ "LEFT OUTER JOIN imse.image img "
 				+ "	on img.productId = prod.productId "
-				+ "GROUP BY prod.productId, prod.productName, prod.price, prod.description, prod.quantity, prod.cats;";
+				+ "GROUP BY prod.productId, prod.productName, prod.price, prod.description, prod.quantity, prod.cats ";
 
+		switch (sortMode) {
+			case SORT_BY_PRICE_DESC: sql = sql + "ORDER BY prod.price DESC;"; break;
+			case SORT_BY_PRICE_ASC: sql = sql + "ORDER BY prod.price ASC;"; break;
+			case SORT_BY_NAME: sql = sql + "ORDER BY prod.productName ASC;"; break;
+			default: throw new IllegalArgumentException("Sort Mode not implemented");
+		}
 		//System.out.println("sql="+sql);
 		
 		Query qprod = em.createNativeQuery(sql);
