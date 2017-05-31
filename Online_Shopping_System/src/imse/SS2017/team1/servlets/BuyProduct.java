@@ -26,7 +26,7 @@ public class BuyProduct extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		
-		Integer productId=Integer.parseInt(request.getParameter("product"));
+		Integer productId=Integer.parseInt("0" + request.getParameter("product"));
 		Product auswahl=(Product) new ProductController().getProductById(productId);
 		try {
 			request.getSession().setAttribute("product", auswahl);
@@ -43,7 +43,7 @@ public class BuyProduct extends HttpServlet {
 		
 		
 		try {
-			if((customer.getCreditCardInfo()==null)){
+			if((customer==null || customer.getCreditCardInfo()==null)){
 				
 				request.getRequestDispatcher("newCreditCard.jsp").forward(request, response);
 				
