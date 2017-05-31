@@ -6,18 +6,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<jsp:include page="defaultsIncludes.jsp" />
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js" type="text/javascript"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="app.js"></script>
 <title>Results</title>
 </head>
 <body>
 
-
-<p>&nbsp;</p>
-<div id="cart"></div>
+<jsp:include page="header.jsp" /> 
 
 <%
 	FoundResult results = (FoundResult)request.getAttribute("results");

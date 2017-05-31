@@ -7,9 +7,9 @@
   </div>
 </div>
 
+<form method="get" action="${pageContext.request.contextPath}/results">
 <table>
 <th>
-<form method="get" action="${pageContext.request.contextPath}/results">
        
             <select name="cat" id="cat"><%CategoryController cc = new CategoryController();
             for (Category c : cc.getAllCategories() ) {%><option value=<%=c.getCategoryId()%>><%=c.getCategoryName() %></option>
@@ -17,15 +17,17 @@
             </select>
 
 
-</form>
 </th>
 <th>
-<form class="form-inline" action="results">
    <input name="search" class="form-control" size="50" placeholder="Produktname" autocomplete="on">
-    <button type="button" class="btn btn-danger">Suchen</button>
-  </form>
+ 
+  </th>
+  <th>
+    <input type="submit" value="Suchen">
+ 
   </th>
   </table>
+ </form>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
    
@@ -36,7 +38,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a class="active" href="index.jsp"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+        <li id="cart"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
       </ul>
     </div>
   </div>

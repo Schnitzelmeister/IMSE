@@ -52,7 +52,7 @@ $(document).ready(function() {
     		//if received a response from the server
     		success: function( data, textStatus, jqXHR) {
     			if(textStatus == 'success'){
-    				$("#cart").html("<a href=\"products.jsp\"><b>Your Cart has items: " + jqXHR.responseText + "</b></a>");
+    				$("#cart").html("<a href=\"products.jsp\"><span class=\"glyphicon glyphicon-shopping-cart\"></span> Cart (Items: " + jqXHR.responseText + ")</a>");
     				}
     			//display error message
     			else {
