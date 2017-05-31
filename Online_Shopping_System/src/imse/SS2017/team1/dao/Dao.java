@@ -8,7 +8,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import imse.SS2017.team1.model.Address;
-import imse.SS2017.team1.model.User;
 
 public class Dao implements DaoInterface {
 	EntityManagerFactory entitymanagerfactory;

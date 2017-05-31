@@ -28,7 +28,7 @@ public class MySQLDataFilling {
 		admin.setLastName("admin");
 		admin.setManagerEmailAddress("admin@hotmail.com");
 		admin.setPassword("admin");
-		admin.setVerified("true");
+		admin.setVerified(true);
 		dao.save(admin);
 		
 		Category category = new Category();
@@ -133,7 +133,7 @@ public class MySQLDataFilling {
 				admin.setFirstName(adminSurNames.get(i));
 				admin.setLastName(adminLastNames.get(i));
 				admin.setPassword(passwords.get(i));
-				admin.setVerified("false");
+				admin.setVerified(false);
 				admin.setManagerEmailAddress("admin@hotmail.com");
 			} catch (Exception e){
 				System.out.println("Fehler bei Variablensetzung!");

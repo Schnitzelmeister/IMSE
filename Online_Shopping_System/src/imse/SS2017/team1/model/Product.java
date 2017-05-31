@@ -1,6 +1,7 @@
 package imse.SS2017.team1.model;
 
 
+
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -60,5 +61,5 @@ public class Product {
 	}
 	
 	//@OneToMany(mappedBy="product")
-	//private List<ProductBelongsCategory> categories;
+		//private List<ProductBelongsCategory> categories;
 }

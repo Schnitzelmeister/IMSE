@@ -1,7 +1,5 @@
 package imse.SS2017.team1.junits;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -27,16 +25,16 @@ public class ConvertImageJunit {
 		dao.save(product);
 		
 		//url muss eigens bestimmt werden z.B. "C:/Users/Raf/Desktop/Salzburg.jpeg"
-		String url = "";
+		String url = "C:/Users/uniw/Desktop/avatar.png";
 		image.setImageString(PictureUtility.convertPicToString(url));
 		image.setProductId(1);
 		dao.save(image);
 		
 		List<Image> imageList = dao.getobjects(Image.class);
 		for(Image i:imageList){
-			if(i.getProductId()==1){
+			//if(i.getProductId()==1){
 				System.out.print(PictureUtility.convertStringToPic(i.getImageString()));
-			}
+			//}
 		}
 	}
 

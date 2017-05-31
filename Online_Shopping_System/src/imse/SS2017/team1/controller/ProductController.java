@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import imse.SS2017.team1.dao.Dao;
-import imse.SS2017.team1.model.Category;
 import imse.SS2017.team1.model.Image;
 import imse.SS2017.team1.model.Product;
 
@@ -48,6 +47,7 @@ public class ProductController {
 		product.setDescription(description);
 		product.setPrice(price);
 		product.setProductName(productName);
+		product.setQuantity(quantity);
 		dao.save(product);
 	}
 	
@@ -60,7 +60,7 @@ public class ProductController {
 	}
 	
 	public void deleteProductById(Integer productId){
-		dao.delete(dao.getobject(Category.class, productId));
+		dao.delete(dao.getobject(Product.class, productId));
 	}
 	
 	public void deleteImage(String imageId){
@@ -70,19 +70,19 @@ public class ProductController {
 	public void updateProduct(Integer productId, String productName, Float price, 
 			String description, Integer quantity) {
 		Product product = dao.getobject(Product.class, productId);
-		if(!product.getDescription().equals(description)){
+		if(description!=null && !product.getDescription().equals(description)){
 			product.setDescription(description);
 		}
-		if(!product.getPrice().equals(price)){
+		if(!product.getPrice().equals(price) && price!=null){
 			product.setPrice(price);
 		}
-		if(!product.getProductName().equals(productName)){
+		if(productName!=null && !product.getProductName().equals(productName)){
 			product.setProductName(productName);
 		}
-		if(product.getQuantity()!=quantity){
+		if(product.getQuantity()!=quantity && quantity!=null){
 			product.setQuantity(quantity);
 		}
-		dao.save(product);	
+		dao.updateEntity(product);	
 	}
 	
 }
