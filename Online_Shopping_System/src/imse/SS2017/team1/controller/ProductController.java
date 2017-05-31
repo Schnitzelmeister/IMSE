@@ -70,19 +70,19 @@ public class ProductController {
 	public void updateProduct(Integer productId, String productName, Float price, 
 			String description, Integer quantity) {
 		Product product = dao.getobject(Product.class, productId);
-		if(!product.getDescription().equals(description)){
+		if(description!=null && !product.getDescription().equals(description)){
 			product.setDescription(description);
 		}
-		if(!product.getPrice().equals(price)){
+		if(!product.getPrice().equals(price) && price!=null){
 			product.setPrice(price);
 		}
-		if(!product.getProductName().equals(productName)){
+		if(productName!=null && !product.getProductName().equals(productName)){
 			product.setProductName(productName);
 		}
-		if(product.getQuantity()!=quantity){
+		if(product.getQuantity()!=quantity && quantity!=null){
 			product.setQuantity(quantity);
 		}
-		dao.save(product);	
+		dao.updateEntity(product);	
 	}
 	
 }
