@@ -40,7 +40,7 @@ public class AuthenticationFilterCustomer implements Filter{
         if (loggedIn && usertype=="customer") {
             chain.doFilter(request, response);
         } else {
-            ((HttpServletResponse) response).sendRedirect("/Online_Shopping_System/customer/customerlogin.jsp");
+            ((HttpServletResponse) response).sendRedirect("/Online_Shopping_System/index.jsp");
         }		
 	}
 
