@@ -32,16 +32,16 @@
         </table>
 
 <p>&nbsp;</p>
-<!-- 
+
 <form method="get" action="${pageContext.request.contextPath}/results">
         <table>
             <tr><td>Search your Product</td>
             <td><select name="cat" id="cat"><option value="0">In all Categories</option>
 
 <%
-//CategoryController cc = new CategoryController();
-//for (Category c : cc.getAllCategories() )
-	//out.write("<option value=\"" + c.getCategoryId() + "\">" + c.getCategoryName() + "</option>");
+CategoryController cc = new CategoryController();
+for (Category c : cc.getAllCategories() )
+	out.write("<option value=\"" + c.getCategoryId() + "\">" + c.getCategoryName() + "</option>");
 %>
 
             </select></td>
@@ -58,7 +58,7 @@ ${errorMessage}
 <% 
 }       
 %>
- -->
+
 <% 
 if(request.getParameter("infoMessage")!=null){
 	request.setAttribute("infoMessage", request.getParameter("infoMessage"));

@@ -1,6 +1,27 @@
 
-$(document).ready(function() { add2cart(0,0); })
+$(document).ready(function() { 	
+		add2cart(0,0);
+		
+		var all = document.getElementsByTagName("input");
+		for (var i=0, max=all.length; i < max; i++) {
+			if (all[i].id.substring(0, 5) == 'start') {
+				all[i].click();
+			}
+		}
+	})
 
+	function chgImg(prodid, ar, direction){
+		elid = 'ctlimg1';
+		el = document.getElementById(elid);
+		ImgNum = el.value;
+		if (ImgNum == null)
+			ImgNum = 0;
+		ImgNum = ImgNum + direction;
+		if (ImgNum >= ar.length) { ImgNum = 0; }
+		if (ImgNum < 0) { ImgNum = ar.length - 1; }
+		el.value = ImgNum;
+		el.src = ar[ImgNum];
+	}
     //Stops the submit request
 //    $("#myAjaxRequestForm").submit(function(e){
 //           e.preventDefault();
@@ -23,7 +44,7 @@ $(document).ready(function() { add2cart(0,0); })
     	//meaning we are expecting PlainText data in response from the server
     	$.ajax({
     		type: "POST",
-    		url: "add2chart",
+    		url: "add2cart",
     		data: dataString,
     		dataType: "text",
     		
@@ -31,18 +52,18 @@ $(document).ready(function() { add2cart(0,0); })
     		//if received a response from the server
     		success: function( data, textStatus, jqXHR) {
     			if(textStatus == 'success'){
-    				$("#chart").html("<a href=\"tarik\"><b>Your Chart has items: " + jqXHR.responseText + "</b></a>");
+    				$("#cart").html("<a href=\"tarik\"><b>Your Cart has items: " + jqXHR.responseText + "</b></a>");
     				}
     			//display error message
     			else {
-    				$("#chart").html("<b>Invalid!</b>");
+    				$("#cart").html("<b>Invalid!</b>");
     				}
     			},
     			
 			//If there was no resonse from the server
 			error: function(jqXHR, textStatus, errorThrown){
     			//alert('error jqXHR='+jqXHR + ' ' + textStatus);
-				$("#chart").html('error: ' + jqXHR.responseText);
+				$("#cart").html('error: ' + jqXHR.responseText);
 				},
 				
 			//capture the request before it was sent to server

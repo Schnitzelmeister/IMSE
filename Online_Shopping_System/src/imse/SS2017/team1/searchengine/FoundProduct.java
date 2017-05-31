@@ -2,13 +2,14 @@ package imse.SS2017.team1.searchengine;
 
 public class FoundProduct {
 	
-	FoundProduct(int id, String name, double price, String description, int availableQuantity, String categories) {
+	FoundProduct(int id, String name, double price, String description, int availableQuantity, String categories, String[] images) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.description = description;
 		this.availableQuantity = availableQuantity;
 		this.categories = categories;
+		this.images = images;
 	}
 	
 	private int id;
@@ -49,5 +50,10 @@ public class FoundProduct {
 		    intArray[i] = Integer.parseInt(strArray[i]);
 		}
 		return intArray;
+	}
+
+	private String[] images;
+	public String[] getImages() {
+		return images;
 	}
 }
