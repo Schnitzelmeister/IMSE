@@ -85,6 +85,10 @@ public class UserController {
 		return dao.getobjects(Admin.class);
 	}
 	
+	public Admin searchAdmin(String email){
+		return dao.getobject(Admin.class, email);
+	}
+	
 	public void deleteAdminAccount(String email){
 		dao.delete(dao.getobject(Admin.class, email));
 	}

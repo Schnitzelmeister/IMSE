@@ -17,6 +17,7 @@ import imse.SS2017.team1.controller.ProductController;
 import imse.SS2017.team1.controller.UserController;
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.dao.DaoInterface;
+import imse.SS2017.team1.model.Admin;
 import imse.SS2017.team1.model.Customer;
 import imse.SS2017.team1.model.Product;
 import imse.SS2017.team1.model.User;
@@ -45,11 +46,35 @@ public class LoginServlet extends HttpServlet {
 		 UserController usercontroller=new UserController();
 
 		 Customer currentUser=usercontroller.searchCustomer(email);
+		 Admin admin = null;
+		 
+		 if(currentUser==null){
+			 admin=usercontroller.searchAdmin(email);
+			 try{	
+				 if(admin==null) throw new IllegalArgumentException("Email Adresse existiert nicht");
+				 if(!admin.getPassword().equals(password)) throw new IllegalArgumentException("Das Passwort ist nicht korrekt");
+			 } catch(IllegalArgumentException e){
+				 System.out.println("IllegalArgumentException: "+e.getMessage());
+				 response.sendRedirect("/Online_Shopping_System/customer/customerlogin.jsp?errorMessage="+e.getMessage());
+				 return;
+			 } catch(Exception e){
+				 System.out.println("Exception: "+e.getClass()+" Message: "+e.getMessage());
+				 return;
+			 }
+			 
+			 if(admin!=null){
+				 HttpSession session = request.getSession();
+			     if(admin.getManagerEmailAddress().equals(admin.getEmailAddress())){
+			    	 session.setAttribute("adminType", "chiefadmin");
+			     } else {
+			    	 session.setAttribute("adminType", "admin");			    	 
+			     }
+			    response.sendRedirect("adminIndex.jsp");
+			     return;
+			 }
+		 }
 
-		
-		 try{
-			
-			 if(currentUser == null) throw new IllegalArgumentException("Email Adresse existiert nicht");
+		 try{	
 			 if(!currentUser.getPassword().equals(password)) throw new IllegalArgumentException("Das Passwort ist nicht korrekt");
 		 } catch(IllegalArgumentException e){
 			 System.out.println("IllegalArgumentException: "+e.getMessage());
@@ -60,23 +85,26 @@ public class LoginServlet extends HttpServlet {
 			 return;
 		 }
 		 
-		 HttpSession session = request.getSession();
-	     session.setAttribute("usertype", "customer");
-	     session.setAttribute("email", currentUser.getEmailAddress());
-	     //session.setAttribute("customerName",currentUser.getFirstName()+" "+ currentUser.getLastName());
-	    session.setAttribute("customer", currentUser);
-	     
-	     ProductController productController=new ProductController();
-	     List<Product> products=productController.GetAllProducts();
-	     
-	    session.setAttribute("products", products);
-	     
-	     //request.setAttribute("products", products);
-	     //RequestDispatcher dispatcher=request.getRequestDispatcher("allProducts.jsp");
-	     
-	    // dispatcher.forward(request, response);
-	    response.sendRedirect("products.jsp");
-	     return;
+		 if(currentUser!=null){
+			 HttpSession session = request.getSession();
+		     session.setAttribute("usertype", "customer");
+		   //  session.setAttribute("email", currentUser.getEmailAddress());
+		     //session.setAttribute("customerName",currentUser.getFirstName()+" "+ currentUser.getLastName());
+		    session.setAttribute("customer", currentUser);
+		     
+		     ProductController productController=new ProductController();
+		     List<Product> products=productController.GetAllProducts();
+		     
+		    session.setAttribute("products", products);
+		     
+		     //request.setAttribute("products", products);
+		     //RequestDispatcher dispatcher=request.getRequestDispatcher("allProducts.jsp");
+		     
+		    // dispatcher.forward(request, response);
+		    response.sendRedirect("products.jsp");
+		     return;
+		 }
+
 	}
 
 }
