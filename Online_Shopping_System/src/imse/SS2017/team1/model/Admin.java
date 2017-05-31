@@ -7,23 +7,23 @@ import javax.persistence.*;
 public class Admin extends User {
 	
 	//muss noch im Create Table auf Boolean geändert werden
-	private String verified;
+	private Boolean verified;
 	private String managerEmailAddress;
 
 	public Admin(){
 		
 	}
 	
-	public Admin(String emailAddress, String password, String firstName, String lastName, boolean loginStatus, String adminName, String isVerified) {
+	public Admin(String emailAddress, String password, String firstName, String lastName, boolean loginStatus, String adminName, Boolean isVerified) {
 		super(emailAddress, password, firstName, lastName, loginStatus);
 		this.verified = isVerified;
 	}
 
-	public String isVerified() {
+	public Boolean isVerified() {
 		return verified;
 	}
 
-	public void setVerified(String isVerified) {
+	public void setVerified(Boolean isVerified) {
 		this.verified = isVerified;
 	}
 
@@ -35,8 +35,5 @@ public class Admin extends User {
 		this.managerEmailAddress = managerEmailAddress;
 	}
 
-	public String getVerified() {
-		return verified;
-	}
 
 }

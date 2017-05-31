@@ -11,7 +11,6 @@ import imse.SS2017.team1.model.CustomerOrder;
 import imse.SS2017.team1.model.Image;
 import imse.SS2017.team1.model.OrderDetail;
 import imse.SS2017.team1.model.Product;
-import imse.SS2017.team1.model.User;
 
 import java.util.Random;
 
@@ -98,7 +97,7 @@ public class DatabaseJunit{
 		admin.setLastName("Jandel");
 		admin.setEmailAddress(DataGenerator.generateRandomEmailAccounts(DataGenerator.generateRandomData(DataGenerator.entityTyp.fullNames, 100)).get(random.nextInt(99)));
 		admin.setPassword("super");
-		admin.setVerified("true");
+		admin.setVerified(true);
 		admin.setManagerEmailAddress(admin.getEmailAddress());
 		dao.save(admin);
 	}

@@ -91,7 +91,9 @@ public class UserController {
 	
 	public void verifyAdmin(String email){
 		Admin admin = dao.getobject(Admin.class, email);
-		admin.setVerified("true");
+		System.out.println(admin.getEmailAddress());
+		admin.setVerified(true);
+		dao.updateEntity(admin);
 	}
 	
 	public void saveCreditCard(CreditCard creditcard,Customer customer){
