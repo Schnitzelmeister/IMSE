@@ -28,82 +28,92 @@ import imse.SS2017.team1.model.User;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginServlet() {
-        super();
-    }
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public LoginServlet() {
+		super();
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		response.setContentType("text/html");
 		String email = request.getParameter("email");
-		 String password = request.getParameter("passwort");
-		 
-		 UserController usercontroller=new UserController();
+		String password = request.getParameter("passwort");
 
-		 Customer currentUser=usercontroller.searchCustomer(email);
-		 Admin admin = null;
-		 
-		 if(currentUser==null){
-			 admin=usercontroller.searchAdmin(email);
-			 try{	
-				 if(admin==null) throw new IllegalArgumentException("Email Adresse existiert nicht");
-				 if(!admin.getPassword().equals(password)) throw new IllegalArgumentException("Das Passwort ist nicht korrekt");
-			 } catch(IllegalArgumentException e){
-				 System.out.println("IllegalArgumentException: "+e.getMessage());
-				 response.sendRedirect("/Online_Shopping_System/customer/customerlogin.jsp?errorMessage="+e.getMessage());
-				 return;
-			 } catch(Exception e){
-				 System.out.println("Exception: "+e.getClass()+" Message: "+e.getMessage());
-				 return;
-			 }
-			 
-			 if(admin!=null){
-				 HttpSession session = request.getSession();
-			     if(admin.getManagerEmailAddress().equals(admin.getEmailAddress())){
-			    	 session.setAttribute("adminType", "chiefadmin");
-			     } else {
-			    	 session.setAttribute("adminType", "admin");			    	 
-			     }
-			    response.sendRedirect("adminIndex.jsp");
-			     return;
-			 }
-		 }
+		UserController usercontroller = new UserController();
 
-		 try{	
-			 if(!currentUser.getPassword().equals(password)) throw new IllegalArgumentException("Das Passwort ist nicht korrekt");
-		 } catch(IllegalArgumentException e){
-			 System.out.println("IllegalArgumentException: "+e.getMessage());
-			 response.sendRedirect("/Online_Shopping_System/customer/customerlogin.jsp?errorMessage="+e.getMessage());
-			 return;
-		 } catch(Exception e){
-			 System.out.println("Exception: "+e.getClass()+" Message: "+e.getMessage());
-			 return;
-		 }
-		 
-		 if(currentUser!=null){
-			 HttpSession session = request.getSession();
-		     session.setAttribute("usertype", "customer");
-		   //  session.setAttribute("email", currentUser.getEmailAddress());
-		     //session.setAttribute("customerName",currentUser.getFirstName()+" "+ currentUser.getLastName());
-		    session.setAttribute("customer", currentUser);
-		     
-		     ProductController productController=new ProductController();
-		     List<Product> products=productController.GetAllProducts();
-		     
-		    session.setAttribute("products", products);
-		     
-		     //request.setAttribute("products", products);
-		     //RequestDispatcher dispatcher=request.getRequestDispatcher("allProducts.jsp");
-		     
-		    // dispatcher.forward(request, response);
-		    response.sendRedirect("products.jsp");
-		     return;
-		 }
+		Customer currentUser = usercontroller.searchCustomer(email);
+		Admin admin = null;
+
+		if (currentUser == null) {
+			admin = usercontroller.searchAdmin(email);
+			try {
+				if (admin == null)
+					throw new IllegalArgumentException("Email Adresse existiert nicht");
+				if (!admin.getPassword().equals(password))
+					throw new IllegalArgumentException("Das Passwort ist nicht korrekt");
+			} catch (IllegalArgumentException e) {
+				System.out.println("IllegalArgumentException: " + e.getMessage());
+				response.sendRedirect(
+						"/Online_Shopping_System/customer/customerlogin.jsp?errorMessage=" + e.getMessage());
+				return;
+			} catch (Exception e) {
+				System.out.println("Exception: " + e.getClass() + " Message: " + e.getMessage());
+				return;
+			}
+
+			if (admin != null) {
+				HttpSession session = request.getSession();
+				if (admin.getManagerEmailAddress().equals(admin.getEmailAddress())) {
+					session.setAttribute("adminType", "chiefadmin");
+				} else {
+					if (admin.isVerified()) {
+						session.setAttribute("adminType", "admin");
+					}
+				}
+				RequestDispatcher rd = request.getRequestDispatcher("adminIndex");
+				rd.forward(request, response);
+			}
+		}
+		if (admin == null) {
+			try {
+				if (!currentUser.getPassword().equals(password))
+					throw new IllegalArgumentException("Das Passwort ist nicht korrekt");
+			} catch (IllegalArgumentException e) {
+				System.out.println("IllegalArgumentException: " + e.getMessage());
+				response.sendRedirect(
+						"/Online_Shopping_System/customer/customerlogin.jsp?errorMessage=" + e.getMessage());
+				return;
+			} catch (Exception e) {
+				System.out.println("Exception: " + e.getClass() + " Message: " + e.getMessage());
+				return;
+			}
+
+			if (currentUser != null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("usertype", "customer");
+				// session.setAttribute("email", currentUser.getEmailAddress());
+				// session.setAttribute("customerName",currentUser.getFirstName()+"
+				// "+ currentUser.getLastName());
+				session.setAttribute("customer", currentUser);
+
+				ProductController productController = new ProductController();
+				List<Product> products = productController.GetAllProducts();
+
+				session.setAttribute("products", products);
+
+				// request.setAttribute("products", products);
+				// RequestDispatcher
+				// dispatcher=request.getRequestDispatcher("allProducts.jsp");
+
+				// dispatcher.forward(request, response);
+				response.sendRedirect("products.jsp");
+				return;
+			}
+		}
 
 	}
 

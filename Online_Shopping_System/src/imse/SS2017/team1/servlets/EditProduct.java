@@ -20,6 +20,13 @@ public class EditProduct extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String adminTyp = null;
+		if(request.getSession().getAttribute("adminType")!=null){
+			adminTyp = request.getSession().getAttribute("adminType").toString();
+		}
+		request.setAttribute("IsAdminTyp", adminTyp!=null);
+		request.setAttribute("IsAdminChief", adminTyp.equals("chiefadmin"));
+		
 		CategoryController categoryController = new CategoryController();
 		ProductController productController = new ProductController();
 		
@@ -41,6 +48,13 @@ public class EditProduct extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String adminTyp = null;
+		if(request.getSession().getAttribute("adminType")!=null){
+			adminTyp = request.getSession().getAttribute("adminType").toString();
+		}
+		request.setAttribute("IsAdminTyp", adminTyp!=null);
+		request.setAttribute("IsAdminChief", adminTyp.equals("chiefadmin"));
+		
 		ProductController productController = new ProductController();
 		Integer quantity = null;
 		Float price = null;

@@ -13,11 +13,24 @@ public class AdminIndex extends HttpServlet {
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String adminTyp = null;
+		if(request.getSession().getAttribute("adminType")!=null){
+			adminTyp = request.getSession().getAttribute("adminType").toString();
+		}
+		request.setAttribute("IsAdminTyp", adminTyp!=null);
+		request.setAttribute("IsAdminChief", adminTyp.equals("chiefadmin"));
 		request.getRequestDispatcher("adminIndex.jsp").forward(request, response);
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String adminTyp = null;
+		if(request.getSession().getAttribute("adminType")!=null){
+			adminTyp = request.getSession().getAttribute("adminType").toString();
+		}
+		request.setAttribute("IsAdminTyp", adminTyp!=null);
+		request.setAttribute("IsAdminChief", adminTyp.equals("chiefadmin"));
+		request.getRequestDispatcher("adminIndex.jsp").forward(request, response);
 	}
 
 }

@@ -18,6 +18,13 @@ public class DeleteProduct extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String adminTyp = null;
+		if(request.getSession().getAttribute("adminType")!=null){
+			adminTyp = request.getSession().getAttribute("adminType").toString();
+		}
+		request.setAttribute("IsAdminTyp", adminTyp!=null);
+		request.setAttribute("IsAdminChief", adminTyp.equals("chiefadmin"));
+		
 		ProductController productController = new ProductController();
 		List<Product> products = productController.GetAllProducts();
 		Integer anzahl = products.size();
@@ -31,6 +38,13 @@ public class DeleteProduct extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String adminTyp = null;
+		if(request.getSession().getAttribute("adminType")!=null){
+			adminTyp = request.getSession().getAttribute("adminType").toString();
+		}
+		request.setAttribute("IsAdminTyp", adminTyp!=null);
+		request.setAttribute("IsAdminChief", adminTyp.equals("chiefadmin"));
+		
 		ProductController productController = new ProductController();
 		Integer productId = Integer.valueOf(request.getParameter("deletedProductId").replaceAll("\\D+", ""));
 		productController.deleteProductById(productId);

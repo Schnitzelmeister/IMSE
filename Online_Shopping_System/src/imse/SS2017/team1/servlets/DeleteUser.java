@@ -20,6 +20,13 @@ public class DeleteUser extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String adminTyp = null;
+		if(request.getSession().getAttribute("adminType")!=null){
+			adminTyp = request.getSession().getAttribute("adminType").toString();
+		}
+		request.setAttribute("IsAdminTyp", adminTyp!=null);
+		request.setAttribute("IsAdminChief", adminTyp.equals("chiefadmin"));
+		
 		UserController userController = new UserController();
 		List<Customer> customers = userController.searchAllCustomer();
 		List<String> emails = new ArrayList<String>();
@@ -44,6 +51,13 @@ public class DeleteUser extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String adminTyp = null;
+		if(request.getSession().getAttribute("adminType")!=null){
+			adminTyp = request.getSession().getAttribute("adminType").toString();
+		}
+		request.setAttribute("IsAdminTyp", adminTyp!=null);
+		request.setAttribute("IsAdminChief", adminTyp.equals("chiefadmin"));
 		
 		UserController userController = new UserController();
 		String email = request.getParameter("deletedCustomerEmail").replaceAll("Lösche Kunden: ", "");
