@@ -19,6 +19,7 @@ public class Address {
 	private String city;
 	private String postCode;
 	private String country;
+	private static int idcounter=0;
 	
 	public Address(){
 		
@@ -33,7 +34,21 @@ public class Address {
 		this.city = city;
 		this.postCode = postCode;
 		this.country = country;
+		idcounter++;
 	}
+	
+	public Address(String streetName, String streetNumber, String additionalInfo, String city,
+			String postCode, String country) {
+		this.addressId =idcounter++;
+		this.streetName = streetName;
+		this.streetNumber = streetNumber;
+		this.additionalInfo = additionalInfo;
+		this.city = city;
+		this.postCode = postCode;
+		this.country = country;
+	}
+
+
 
 	public Integer getAdressId() {
 		return addressId;

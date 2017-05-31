@@ -12,18 +12,16 @@
 <jsp:include page="header.jsp" />
 <%Product product=(Product)session.getAttribute("product"); %>
 Sie wollen das Product <%=(String)product.getProductName() %> kaufen
-<br><h1>Bitte geben Sie Ihre Kreditkartendaten ein</h1>
+<br><h1>Bitte geben Sie Ihre LieferAdresse ein</h1>
 	<form method="post" action="CheckAddress">
 	<pre>
-	<br>	Kreditkartennummer:<input type="text" name="cardNumber"/>
-		<br>Vorname: <input type="text" name="vorname"/> 
-		<br>Nachname:<input type="text"	name="nachname"/> 
-		<br>Kartentyp:<select name="type"><option
-				value="mastercard">MasterCard</option>
-			<option value="visacard"/>VisaCard</option></select> 
-			<br>CVV:<input type="text" name="cvv"/> 
-			<br>Ablaufmonat:<input type="text" name="monat"/>
-		<br>Ablaufjahr<input type="text" name="jahr"/>
+	<br>	Strassenname:<input type="text" name="strassenname"/>
+		<br>Strassennummer: <input type="text" name="strassennummer"/> 
+		<br>Zusatzadresse:<input type="text"	name="zusatzadresse"/> 
+		
+			<br>PLZ:<input type="text" name="plz"/> 
+			<br>Stadt:<input type="text" name="stadt"/>
+		<br>Land:<input type="text" name="land"/>
 		<br><input type="submit" value="bestätigen"/>
 		</pre>
 	</form>

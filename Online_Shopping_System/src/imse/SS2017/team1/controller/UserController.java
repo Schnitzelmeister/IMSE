@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.dao.DaoInterface;
+import imse.SS2017.team1.model.Address;
 import imse.SS2017.team1.model.Admin;
 import imse.SS2017.team1.model.CreditCard;
 import imse.SS2017.team1.model.Customer;
@@ -103,6 +104,19 @@ public class UserController {
 	public void saveCreditCard(CreditCard creditcard,Customer customer){
 		dao.save(creditcard);
 		customer.setCreditCardInfo(creditcard.getCardNumber());
+		dao.updateEntity(customer);
+	}
+	
+	public void saveAddress(Address adress,Customer customer){
+	
+		List<Address> adressen=new Dao().getobjects(Address.class);
+		int max=0;
+		for(int i=0; i<adressen.size();i++){
+			if(adressen.get(i).getAdressId()>max)max=adressen.get(i).getAdressId();
+		}
+		adress.setAdressId(max+1);
+		dao.save(adress);
+		customer.setShippingAddress(adress.getAdressId());
 		dao.updateEntity(customer);
 	}
 	
