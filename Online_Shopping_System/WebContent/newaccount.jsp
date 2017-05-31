@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<jsp:include page="defaultsIncludes.jsp" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -14,7 +15,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/Online_Shopping_System/customer/style.css">
 
 <!-- Website Font style -->
 <link rel="stylesheet"
@@ -37,11 +38,26 @@
 </head>
 <body>
 
+ <nav class="navbar navbar-default" role="navigation">
+    	  <div class="container">
+		
+		    <div class="collapse navbar-collapse" id="navbar-brand-centered">
+		      <ul class="nav navbar-nav">
+		        <li><a href="/Online_Shopping_System/index.jsp">< Zurück zur Hauptseite</a></li>
+		        
+                  </ul>
+                </li>
+		      </ul>
+		      
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+
 	<div class="container">
 		<div class="row main">
 			<div class="main-login main-center">
 				<h5>Erstellen eines privaten Kundenkontos</h5>
-				<form method="POST" action="../register">
+				<form method="POST" action="register">
 
 
 					<div class="form-group">
@@ -115,7 +131,9 @@
 					if (request.getParameter("errorMessage") != null) {
 						request.setAttribute("errorMessage", request.getParameter("errorMessage"));
 				%>
-				${errorMessage}
+				<div class="alert alert-warning">
+					<strong>${errorMessage}</strong>
+				</div>
 				<%
 					}
 				%>
@@ -124,7 +142,11 @@
 					if (request.getParameter("infoMessage") != null) {
 						request.setAttribute("infoMessage", request.getParameter("infoMessage"));
 				%>
-				${infoMessage}
+
+				<div class="alert alert-info">
+					<strong>${infoMessage}</strong>
+				</div>
+
 				<%
 					}
 				%>

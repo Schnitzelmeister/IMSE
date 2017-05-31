@@ -42,7 +42,7 @@ public class UpdateShippingAddressServlet extends HttpServlet {
 				Integer addressId=dao.saveAddress(newAdresse);
 				user.setShippingAddress(addressId);
 				dao.updateEntity(user);
-				response.sendRedirect("/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Zustellungsdaten wurden gespeichert");
+				response.sendRedirect("/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kontodaten wurden aktualisiert");
 			}else{
 				Address currentAddress = dao.getobject(Address.class, shippingAddress);
 				currentAddress.setAdditionaolInfo(infos);
@@ -52,7 +52,7 @@ public class UpdateShippingAddressServlet extends HttpServlet {
 				currentAddress.setStreetName(strassenname);
 				currentAddress.setStreetNumber(hausnummer);
 				dao.updateEntity(currentAddress);
-				response.sendRedirect("/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Zustellungsdaten wurden aktualisiert");
+				response.sendRedirect("/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kontodaten wurden aktualisiert");
 			} 
 		} catch (IllegalArgumentException e) {
 			response.sendRedirect(

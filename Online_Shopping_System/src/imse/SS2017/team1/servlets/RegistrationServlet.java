@@ -48,10 +48,10 @@ public class RegistrationServlet extends HttpServlet {
 			Customer newCustomer = new Customer(email, password, firstname, lastname, true, null, null, telephonenr);
 			controls.registerCustomer(newCustomer);
 			response.sendRedirect(
-					"/Online_Shopping_System/customer/customerlogin.jsp?infoMessage=Das Konto wurde erfolgreich erstellt, melden Sie sich bitte an");
+					"/Online_Shopping_System/index.jsp?infoMessage=Das Konto wurde erfolgreich erstellt, melden Sie sich bitte an");
 		} catch (IllegalArgumentException e) {
 			request.setAttribute("errorMessage", e.getMessage());
-			response.sendRedirect("/Online_Shopping_System/customer/newaccount.jsp?errorMessage=" + e.getMessage());
+			response.sendRedirect("/Online_Shopping_System/newaccount.jsp?errorMessage=" + e.getMessage());
 		}
 
 	}

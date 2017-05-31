@@ -45,7 +45,7 @@ public class UpdateCreditCardInfoServlet extends HttpServlet {
 				customer.setCreditCardInfo(cardNumber);
 				dao.updateEntity(customer);
 				response.sendRedirect(
-						"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kreditkartendaten wurden gespeichert");
+						"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kontodaten wurden aktualisiert");
 			} else {
 				CreditCard currentCard = dao.getobject(CreditCard.class, creditCardNumber);
 				CreditCard currentCardforDeletion = dao.getobject(CreditCard.class, creditCardNumber);
@@ -64,7 +64,7 @@ public class UpdateCreditCardInfoServlet extends HttpServlet {
 				dao.delete(currentCardforDeletion);
 				dao.updateEntity(customer);
 				response.sendRedirect(
-						"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kreditkartendaten wurden aktualisiert");
+						"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kontodaten wurden aktualisiert");
 			}
 
 		} catch (IllegalArgumentException e) {
