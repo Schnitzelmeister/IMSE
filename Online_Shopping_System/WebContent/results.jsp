@@ -14,7 +14,7 @@
 <title>Results</title>
 </head>
 <body>
-
+<jsp:include page="header.jsp" /> 
 <p>&nbsp;</p>
 <div id="cart"></div>
 

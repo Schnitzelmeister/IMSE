@@ -39,8 +39,8 @@ public class LoginServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 
-		response.setContentType("text/html");
-		String email = request.getParameter("email");
+		 response.setContentType("text/html");
+		 String email = request.getParameter("email");
 		 String password = request.getParameter("passwort");
 		 
 		 UserController usercontroller=new UserController();
@@ -88,20 +88,20 @@ public class LoginServlet extends HttpServlet {
 		 if(currentUser!=null){
 			 HttpSession session = request.getSession();
 		     session.setAttribute("usertype", "customer");
-		   //  session.setAttribute("email", currentUser.getEmailAddress());
+		     session.setAttribute("email", currentUser.getEmailAddress());
 		     //session.setAttribute("customerName",currentUser.getFirstName()+" "+ currentUser.getLastName());
-		    session.setAttribute("customer", currentUser);
+		     session.setAttribute("customer", currentUser);
 		     
 		     ProductController productController=new ProductController();
 		     List<Product> products=productController.GetAllProducts();
 		     
-		    session.setAttribute("products", products);
+		     session.setAttribute("products", products);
 		     
 		     //request.setAttribute("products", products);
 		     //RequestDispatcher dispatcher=request.getRequestDispatcher("allProducts.jsp");
 		     
 		    // dispatcher.forward(request, response);
-		    response.sendRedirect("products.jsp");
+		     response.sendRedirect("products.jsp");
 		     return;
 		 }
 
