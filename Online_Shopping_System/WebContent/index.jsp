@@ -4,13 +4,13 @@
 <html lang="en">
 
 <head>
-<jsp:include page="defaultsIncludes.jsp" />
+<!-- <jsp:include page="defaultsIncludes.jsp" />  -->
 
 
 </head>
 
 <body>
-	<jsp:include page="header.jsp" />
+<!-- 	<jsp:include page="header.jsp" /> -->
 
 
 <p>&nbsp;</p>
