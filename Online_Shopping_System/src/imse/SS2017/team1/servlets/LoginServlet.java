@@ -75,7 +75,7 @@ public class LoginServlet extends HttpServlet {
 	     //RequestDispatcher dispatcher=request.getRequestDispatcher("allProducts.jsp");
 	     
 	    // dispatcher.forward(request, response);
-	    response.sendRedirect("allProducts.jsp");
+	    response.sendRedirect("products.jsp");
 	     return;
 	}
 

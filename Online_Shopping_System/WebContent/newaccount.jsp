@@ -42,7 +42,7 @@
 		<div class="row main">
 			<div class="main-login main-center">
 				<h5>Erstellen eines privaten Kundenkontos</h5>
-				<form method="POST" action="../register">
+				<form method="POST" action="register">
 
 
 					<div class="form-group">

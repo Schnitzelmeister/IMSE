@@ -10,15 +10,17 @@
 </head>
 
 <body>
+
+
 	<jsp:include page="header.jsp" />
 
 
-<p>&nbsp;</p>
 
 
 
 
 	<form class="login-form" method="post" action="login">
+			
 		<input type="text" name="email" placeholder="e-mail adresse" /> <input
 			type="password" name="passwort" placeholder="password" /> <input type="submit"
 			value="Login" />

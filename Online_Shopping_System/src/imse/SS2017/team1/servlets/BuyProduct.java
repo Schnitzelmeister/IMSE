@@ -36,8 +36,8 @@ public class BuyProduct extends HttpServlet {
 		
 		
 		HttpSession session=request.getSession();
-		String email=(String)session.getAttribute("email");
-		Customer customer=new UserController().searchCustomer(email);
+		Customer customer=(Customer)session.getAttribute("customer");
+		
 		
 		try {
 			if((customer.getCreditCardInfo()==null)){
@@ -58,7 +58,7 @@ public class BuyProduct extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		System.out.println(email);
+		
 		System.out.println("Produktpreis: "+auswahl.getPrice());
 		System.out.println("Das Produkt heisst"+auswahl.getProductName()+"...");
 		

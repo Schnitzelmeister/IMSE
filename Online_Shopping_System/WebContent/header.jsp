@@ -3,7 +3,7 @@
 <div class="jumbotron">
   <div class="container text-center">
     <h1>The Best Online Store </h1>      
-    <p>Mission, Vission & Values</p>
+    <p>Hier findet man alles!</p>
   </div>
 </div>
 
@@ -31,9 +31,7 @@
    
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="products.jsp">Produkte</a></li>
-        <li><a href="#">Deals</a></li>
-        <li><a href="#">Stores</a></li>
+        <li><a class="active" href="products.jsp">Produkte</a></li>
         <li><a href="contacts.jsp">Kontakt</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -43,3 +41,4 @@
     </div>
   </div>
 </nav>
+<h1>${infomessage} </h1>
