@@ -42,7 +42,7 @@ public class UpdateBillingAddressServlet extends HttpServlet {
 				Integer addressId=dao.saveAddress(newAdresse);
 				user.setBillingAddress(addressId);
 				dao.updateEntity(user);
-				response.sendRedirect("/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Rechnungsdaten wurden gespeichert");
+				response.sendRedirect("/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kontodaten wurden aktualisiert");
 			}else{
 				Address currentAddress = dao.getobject(Address.class, billingAddressId);
 				currentAddress.setAdditionaolInfo(infos);
@@ -53,7 +53,7 @@ public class UpdateBillingAddressServlet extends HttpServlet {
 				currentAddress.setStreetNumber(hausnummer);
 				dao.updateEntity(currentAddress);
 				response.sendRedirect(
-						"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Rechnungsdaten wurden aktualisiert");
+						"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kontodaten wurden aktualisiert");
 			} 
 		} catch (IllegalArgumentException e) {
 			response.sendRedirect(

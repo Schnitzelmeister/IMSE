@@ -115,7 +115,9 @@
 					if (request.getParameter("errorMessage") != null) {
 						request.setAttribute("errorMessage", request.getParameter("errorMessage"));
 				%>
-				${errorMessage}
+				<div class="alert alert-warning">
+					<strong>${errorMessage}</strong>
+				</div>
 				<%
 					}
 				%>
@@ -124,7 +126,11 @@
 					if (request.getParameter("infoMessage") != null) {
 						request.setAttribute("infoMessage", request.getParameter("infoMessage"));
 				%>
-				${infoMessage}
+
+				<div class="alert alert-info">
+					<strong>${infoMessage}</strong>
+				</div>
+
 				<%
 					}
 				%>
