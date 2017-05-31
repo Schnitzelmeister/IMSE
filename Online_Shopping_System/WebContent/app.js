@@ -11,7 +11,7 @@ $(document).ready(function() {
 	})
 
 	function chgImg(prodid, ar, direction){
-		elid = 'ctlimg1';
+		elid = 'ctlimg'+prodid;
 		el = document.getElementById(elid);
 		ImgNum = el.value;
 		if (ImgNum == null)

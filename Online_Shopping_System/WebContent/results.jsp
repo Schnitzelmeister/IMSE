@@ -136,11 +136,12 @@ for ( int catId : prod.getCategoryIds() ) {
 
 <p>
 <%
-if ((pos + 1) == (results.getPageNumber() + 1) * results.getPageSize()) {
+System.out.println("pos="+pos);
+if (pos == (results.getPageNumber() + 1) * results.getPageSize()) {
 	for ( int i = 0; i < results.getPageNumber(); ++i ) {
-		out.write("<a href=\"results?search=" + java.net.URLEncoder.encode(results.getSearchText(), "UTF-8") + "&cat="+ results.getCategoryId() +"&pnum=" + i + "\">" + i + "</a>  ");
+		out.write("<a href=\"results?search=" + java.net.URLEncoder.encode(results.getSearchText(), "UTF-8") + "&cat="+ results.getCategoryId() +"&pnum=" + i + "\">" + (i+1) + "</a>  ");
 	}
-	out.write("<a href=\"results?search=" + java.net.URLEncoder.encode(results.getSearchText(), "UTF-8") + "&cat="+ results.getCategoryId() +"&pnum=" + results.getPageNumber() + "\">next >></a>  ");
+	out.write("<a href=\"results?search=" + java.net.URLEncoder.encode(results.getSearchText(), "UTF-8") + "&cat="+ results.getCategoryId() +"&pnum=" + (results.getPageNumber() + 1) + "\">next >></a>  ");
 }
 %>
 </p>

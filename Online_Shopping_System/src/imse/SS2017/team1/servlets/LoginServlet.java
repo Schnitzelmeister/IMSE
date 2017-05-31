@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 		 DaoInterface dao = new Dao();
 		
 		 try{
-			 currentUser = dao.getUser(Customer.class, email);
+			 currentUser = dao.getobject(Customer.class, email);
 			 if(currentUser == null) throw new IllegalArgumentException("Email Adresse existiert nicht");
 			 if(!currentUser.getPassword().equals(password)) throw new IllegalArgumentException("Das Passwort ist nicht korrekt");
 		 } catch(IllegalArgumentException e){

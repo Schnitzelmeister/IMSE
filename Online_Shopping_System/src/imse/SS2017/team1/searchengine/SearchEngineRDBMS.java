@@ -107,9 +107,10 @@ public class SearchEngineRDBMS implements SearchEngine {
 		
 		sql = sql + "LIMIT " + pageSize + " OFFSET " + pageNumber * pageSize + ") prod "
 				+ "LEFT OUTER JOIN imse.image img "
-				+ "	on img.productId = prod.productId;";
+				+ "	on img.productId = prod.productId "
+				+ "GROUP BY prod.productId, prod.productName, prod.price, prod.description, prod.quantity, prod.cats;";
 
-		System.out.println("sql="+sql);
+		//System.out.println("sql="+sql);
 		
 		Query qprod = em.createNativeQuery(sql);
 		@SuppressWarnings("unchecked")
@@ -120,10 +121,14 @@ public class SearchEngineRDBMS implements SearchEngine {
 		for (Object[] data : prodRaws) {
 			//i think error in em.createNativeQuery
 			if (data[0] == null) break; 
+			//System.out.println("(String)data[6]="+(String)data[6]);
 			//System.out.println("(String)data[6].len="+((String)data[6]).length());
 			//System.out.println("(int)data[0]="+(int)data[0]);
 			//System.out.println("(String)data[6]="+(String)data[6]);
-			foundProducts.add(new FoundProduct( (int)data[0], (String)data[1], ((BigDecimal)data[2]).doubleValue(), (String)data[3], (int)data[4], (String)data[5], /*imgs.toArray(new String[imgs.size()])*/ ((String)data[6]).split("\"")) );
+			String pics = (String)data[6];
+			if (pics == null)
+				pics = "";
+			foundProducts.add(new FoundProduct( (int)data[0], (String)data[1], ((BigDecimal)data[2]).doubleValue(), (String)data[3], (int)data[4], (String)data[5], /*imgs.toArray(new String[imgs.size()])*/ pics.split("\"")) );
 		}
 		return new FoundResult(categories, foundProducts, foundCategoriesStat, searchText, categoryId, sortMode, pageNumber, pageSize);
 	}
