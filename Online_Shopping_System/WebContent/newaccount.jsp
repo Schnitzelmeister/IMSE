@@ -15,7 +15,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/Online_Shopping_System/customer/style.css">
 
 <!-- Website Font style -->
 <link rel="stylesheet"
@@ -37,7 +37,22 @@
 <title>Kundenkonto anlegen</title>
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+
+ <nav class="navbar navbar-default" role="navigation">
+    	  <div class="container">
+		
+		    <div class="collapse navbar-collapse" id="navbar-brand-centered">
+		      <ul class="nav navbar-nav">
+		        <li><a href="/Online_Shopping_System/index.jsp">< Zurück zur Hauptseite</a></li>
+		        
+                  </ul>
+                </li>
+		      </ul>
+		      
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+
 	<div class="container">
 		<div class="row main">
 			<div class="main-login main-center">
