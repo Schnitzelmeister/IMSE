@@ -88,7 +88,7 @@ public class LoginServlet extends HttpServlet {
 		 if(currentUser!=null){
 			 HttpSession session = request.getSession();
 		     session.setAttribute("usertype", "customer");
-		   //  session.setAttribute("email", currentUser.getEmailAddress());
+		     session.setAttribute("email", currentUser.getEmailAddress());
 		     //session.setAttribute("customerName",currentUser.getFirstName()+" "+ currentUser.getLastName());
 		    session.setAttribute("customer", currentUser);
 		     
