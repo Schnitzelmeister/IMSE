@@ -33,7 +33,10 @@ public class BuyProduct extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		if(request.getSession().getAttribute("customer")==null){
+			response.sendRedirect("index.jsp?errorMessage='Bitte loggen Sie sich ein oder registrierene Sie sich'");
+			
+		}
 		
 		HttpSession session=request.getSession();
 		Customer customer=(Customer)session.getAttribute("customer");
