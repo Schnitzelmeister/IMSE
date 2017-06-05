@@ -31,4 +31,7 @@ public class OrderController {
 		return dao.getobjects(CustomerOrder.class);
 	}
 	
+	public void close() {
+		dao.close();
+	}
 }

@@ -37,4 +37,8 @@ public class CategoryController {
 		return dao.getobjects(Category.class);
 	}
 	
+	public void close() {
+		dao.close();
+	}
+
 }

@@ -1,4 +1,9 @@
 <%@page import="imse.SS2017.team1.model.Category"%>
+<%@page import="javax.persistence.Persistence"%>
+<%@page import="javax.persistence.EntityManager"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="javax.persistence.EntityManagerFactory"%>
 <%@page import="imse.SS2017.team1.controller.CategoryController"%>
 <div class="jumbotron">
   <div class="container text-center">
@@ -13,8 +18,8 @@
        
             <select name="cat" id="cat"><option value="0" selected>In all Categories</option><%CategoryController cc = new CategoryController();
             for (Category c : cc.getAllCategories() ) {%><option value=<%=c.getCategoryId()%>><%=c.getCategoryName() %></option>
-            <%} %>
-            </select>
+            <%}
+            cc.close();%></select>
 
 
 </th>

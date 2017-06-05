@@ -95,4 +95,7 @@ public class ProductController {
 		dao.updateEntity(product);	
 	}
 	
+	public void close() {
+		dao.close();
+	}
 }
