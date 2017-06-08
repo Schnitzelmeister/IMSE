@@ -1,10 +1,17 @@
 package imse.SS2017.team1.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
+
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.Field;
+import org.eclipse.persistence.nosql.annotations.NoSql;
 
 @Entity
 @Table(name = "Customer")
-public class Customer extends User {
+@NoSql(dataFormat=DataFormatType.MAPPED)
+public class Customer extends User implements Serializable {
 	
 	private Integer shippingAddressId;
 	private Integer billingAddressId;

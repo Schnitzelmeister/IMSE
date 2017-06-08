@@ -2,18 +2,27 @@ package imse.SS2017.team1.model;
 
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.eclipse.persistence.nosql.annotations.Field;
+import org.eclipse.persistence.nosql.annotations.NoSql;
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+
 @Entity
 @Table(name = "product")
-public class Product {
+@NoSql(dataFormat=DataFormatType.MAPPED)
+public class Product implements Serializable{
 
 	@Id
+	@GeneratedValue
+	@Field(name="_id")
 	private Integer productId;
 	private String productName;
 	private Float price;

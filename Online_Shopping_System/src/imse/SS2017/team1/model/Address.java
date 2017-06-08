@@ -1,17 +1,25 @@
 package imse.SS2017.team1.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.Field;
+import org.eclipse.persistence.nosql.annotations.NoSql;
+
 @Entity
 @Table(name = "Address")
-public class Address {
+@NoSql(dataFormat=DataFormatType.MAPPED)
+public class Address implements Serializable{
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue
+	@Field(name="_id")
 	private Integer addressId;
 	private String streetName;
 	private String streetNumber;

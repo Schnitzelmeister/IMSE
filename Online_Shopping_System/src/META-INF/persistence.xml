@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
-	<persistence-unit name="Online_Shopping_System">
-	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	version="2.0">
+
+	<persistence-unit name="Online_Shopping_System"
+		transaction-type="RESOURCE_LOCAL">
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<class>imse.SS2017.team1.model.Product</class>
 		<class>imse.SS2017.team1.model.Address</class>
 		<class>imse.SS2017.team1.model.Category</class>
 		<class>imse.SS2017.team1.model.Image</class>
-		<class>imse.SS2017.team1.model.CustomerOrder</class>
 		<class>imse.SS2017.team1.model.CreditCard</class>
 		<class>imse.SS2017.team1.model.Customer</class>
-		<class>imse.SS2017.team1.model.OrderDetail</class>
 		<class>imse.SS2017.team1.model.Admin</class>
-		<class>imse.SS2017.team1.model.ProductBelongsCategory</class>
-		
-		
-		<properties>
-			
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/imse" />
-            <property name="javax.persistence.jdbc.user" value="root" />
-            <property name="javax.persistence.jdbc.password" value="born2kil" />
+		<class>imse.SS2017.team1.model.OrderDetail</class>
+		<class>imse.SS2017.team1.model.CustomerOrder</class>
 
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
-            <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="create" />
-			
+		<properties>
+			<property name="eclipselink.target-database"
+				value="org.eclipse.persistence.nosql.adapters.mongo.MongoPlatform" />
+			<property name="eclipselink.nosql.connection-spec"
+				value="org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec" />
+			<property name="eclipselink.nosql.property.mongo.port"
+				value="27017" />
+			<property name="eclipselink.nosql.property.mongo.host"
+				value="localhost" />
+			<property name="eclipselink.nosql.property.mongo.db" value="imse" />
+			<property name="eclipselink.logging.level" value="FINEST" />
 		</properties>
+
 	</persistence-unit>
 </persistence>

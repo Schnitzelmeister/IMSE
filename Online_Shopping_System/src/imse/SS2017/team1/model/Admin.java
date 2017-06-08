@@ -1,12 +1,18 @@
 package imse.SS2017.team1.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
+
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.Field;
+import org.eclipse.persistence.nosql.annotations.NoSql;
 
 @Entity
 @Table(name = "Admin")
-public class Admin extends User {
+@NoSql(dataFormat=DataFormatType.MAPPED)
+public class Admin extends User implements Serializable{
 	
-	//muss noch im Create Table auf Boolean geändert werden
 	private Boolean verified;
 	private String managerEmailAddress;
 

@@ -28,6 +28,7 @@ public class DatabaseJunit{
 		product.setProductName("Rechner");
 		product.setPrice(23.45F);
 		product.setQuantity(2);
+		product.setProductId(1);
 		dao.save(product);
 		
 	}
@@ -43,6 +44,7 @@ public class DatabaseJunit{
 		address.setStreetNumber("14");
 		address.setStreetName("Hansigasse");
 		address.setAdditionaolInfo("ok");
+		address.setAdressId(1);
 		dao.save(address);
 	}
 	
@@ -51,6 +53,7 @@ public class DatabaseJunit{
 		Dao dao = new Dao();
 		Category category = new Category();
 		category.setCategoryName("Computer");
+		category.setCategoryId(1);
 		dao.save(category);
 	}
 	
@@ -63,11 +66,13 @@ public class DatabaseJunit{
 		product.setProductName("Rechner");
 		product.setPrice(23.45F);
 		product.setQuantity(2);
+		product.setProductId(1);
 		dao.save(product);
 		
 		Image image = new Image();
 		image.setImageString("asdfgasdgasgas");
 		image.setProductId(1);
+		image.setImageId(1);
 		dao.save(image);
 	}
 	
@@ -125,6 +130,7 @@ public class DatabaseJunit{
 		customerOrder.setDateCreated("223452345");
 		customerOrder.setDateShipped("2342342342");
 		customerOrder.setOrdered(true);
+		customerOrder.setOrderId(1);
 		dao.save(customerOrder);
 	}
 	
@@ -163,13 +169,16 @@ public class DatabaseJunit{
 		customerOrder.setDateCreated("223452345");
 		customerOrder.setDateShipped("2342342342");
 		customerOrder.setOrdered(true);
+		customerOrder.setOrderId(1);
 		dao.save(customerOrder);
 		
 		OrderDetail orderDetail = new OrderDetail();
 		orderDetail.setProductId(1);
 		orderDetail.setQuantity(12);
 		orderDetail.setSubTotal(2.45F);
-		orderDetail.setOrderId(dao.getobjects(CustomerOrder.class).get(0).getOrderId());
+		//TODO
+		//orderDetail.setOrderId(dao.getobjects(CustomerOrder.class).get(0).getOrderId());
+		orderDetail.setOrderId(1);//provisorisch
 		dao.save(orderDetail);
 	}
 

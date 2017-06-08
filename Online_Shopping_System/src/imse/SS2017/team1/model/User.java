@@ -2,12 +2,16 @@ package imse.SS2017.team1.model;
 
 import javax.persistence.*;
 
+import org.eclipse.persistence.nosql.annotations.Field;
+
 
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User {
 	
 	@Id
+	@GeneratedValue
+	@Field(name="_id")
 	private String emailAddress;
 	
 	private String password;
