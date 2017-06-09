@@ -61,20 +61,8 @@ public class ProductController {
 		dao.save(product);
 	}
 	
-	public void addProductImage(String imageString, Integer productId){
-		Image image = new Image();
-		image.setImageString(imageString);
-		image.setProductId(productId);
-		dao.save(image);
-		
-	}
-	
 	public void deleteProductById(Integer productId){
 		dao.delete(dao.getobject(Product.class, productId));
-	}
-	
-	public void deleteImage(String imageId){
-		dao.delete(imageId);
 	}
 	
 	public void updateProduct(Integer productId, String productName, Float price, 
@@ -93,6 +81,32 @@ public class ProductController {
 			product.setQuantity(quantity);
 		}
 		dao.updateEntity(product);	
+	}
+	
+	//TODO Sobald Images hinzugefügt werden können, "2" auf imageId setzen
+	public String getProductpictures(Integer imageId){
+		return dao.getobject(Image.class, 2).getImageString();
+	}
+	
+	public void addProductImage(String imageString, Integer productId){
+		Image image = new Image();
+		image.setImageString(imageString);
+		image.setProductId(productId);
+		dao.save(image);
+	}
+	
+	public void deleteImage(String imageId){
+		dao.delete(imageId);
+	}
+	
+	//TODO
+	public List<Image> getAllProductImages(){
+		return null;
+	}
+	
+	//TODO
+	public List<Image> getAllImagesOfSpecProduct(){
+		return null;
 	}
 	
 }

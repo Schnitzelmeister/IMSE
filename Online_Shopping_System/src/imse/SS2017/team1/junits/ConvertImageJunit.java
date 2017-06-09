@@ -42,23 +42,24 @@ public class ConvertImageJunit {
 		}*/
 		
 		
-		Product product = new Product();
-		product.setDescription("Alles klar");
-		product.setProductName("Rechner");
-		product.setPrice(23.45F);
-		product.setQuantity(2);
-		dao.save(product);
+		//Product product = new Product();
+		//product.setDescription("Alles klar");
+		//product.setProductName("Rechner");
+		//product.setPrice(23.45F);
+		//product.setQuantity(2);
+		//dao.save(product);
 		
-		ProductBelongsCategory productBelongsCategory = new ProductBelongsCategory();
+		//ProductBelongsCategory productBelongsCategory = new ProductBelongsCategory();
 
-		productBelongsCategory.setCategoryId(ThreadLocalRandom.current().nextInt(1, 19));
-		productBelongsCategory.setProductId(1);
-		dao.save(productBelongsCategory);
+		//productBelongsCategory.setCategoryId(ThreadLocalRandom.current().nextInt(1, 19));
+		//productBelongsCategory.setProductId(1);
+		//dao.save(productBelongsCategory);
 		
 		//url muss eigens bestimmt werden z.B. "C:/Users/Raf/Desktop/Salzburg.jpeg"
-		String url = "file:/E:/Photos/airat/pictures/1906423.jpg";
+		String url = "file:/C:/Users/Raf/Desktop/Salzburg.jpeg";
 		image.setImageString(PictureUtility.convertPicToString(url));
-		image.setProductId(1);
+		image.setProductId(2);
+		image.setImageId(2);
 		dao.save(image);
 		
 		List<Image> imageList = dao.getobjects(Image.class);
