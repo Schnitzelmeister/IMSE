@@ -33,7 +33,7 @@ public class DataMigration {
 			e.printStackTrace();
 		}
 		try {
-			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/imse", "root", "tarik1983");
+			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/imse", "root", "born2kil");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -170,7 +170,7 @@ public class DataMigration {
 						admin.setPassword((String) resultset.getObject(i+1));
 						admin.setFirstName((String) resultset.getObject(i+2));
 						admin.setLastName((String) resultset.getObject(i+3));
-						admin.setVerified((Boolean) resultset.getObject(i+4));
+						admin.setVerified(Boolean.valueOf(String.valueOf((resultset.getObject(i+4)))));
 						admin.setManagerEmailAddress((String) resultset.getObject(i+5));
 						
 						dao.save(admin);
@@ -197,7 +197,7 @@ public class DataMigration {
 					for (int i = 1; i <= numColumns; i += 5) {
 						product.setProductId((Integer) resultset.getObject(i));
 						product.setProductName((String) resultset.getObject(i+1));
-						product.setPrice((Float) resultset.getObject(i+2));
+						product.setPrice(Float.valueOf(String.valueOf(resultset.getObject(i+2))));
 						product.setDescription((String) resultset.getObject(i+3));
 						product.setQuantity((Integer) resultset.getObject(i+4));
 					
@@ -331,8 +331,7 @@ public class DataMigration {
 						orderDetail.setOrderDetailId((Integer) resultset.getObject(i));
 						orderDetail.setOrderId((Integer) resultset.getObject(i+1));
 						orderDetail.setQuantity((Integer) resultset.getObject(i+2));
-						orderDetail.setSubTotal(resultset.getFloat(i+3));
-					//	orderDetail.setSubTotal((Float) resultset.getObject(i+3));
+						orderDetail.setSubTotal(Float.valueOf(String.valueOf(resultset.getObject(i+3))));
 						orderDetail.setProductId((Integer) resultset.getObject(i+4));
 						
 						dao.save(orderDetail);
