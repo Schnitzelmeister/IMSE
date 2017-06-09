@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.swing.text.Document;
 
 import imse.SS2017.team1.model.Address;
 
@@ -99,7 +101,7 @@ public class Dao implements DaoInterface {
 	public <T> List<T> getobjects(Class<T> cls) {
 		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
 		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
-		return entitymanager.createQuery("SELECT a FROM " + cls.getName() + " a").getResultList();
+		return entitymanager.createQuery("SELECT a FROM " + cls.getSimpleName() + " a").getResultList();
 	}
 
 	@Override
