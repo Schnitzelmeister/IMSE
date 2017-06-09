@@ -69,31 +69,34 @@ else if ( results.getCategoryId() == 0 )
 
 <p>&nbsp;</p>
 
-<table>
+<table width="100%">
 
 <% 
 int pos = results.getPageNumber() * results.getPageSize();
 for (FoundProduct prod : results.getFoundProducts()) { %>
 <tr>
-<td><%= ++pos%>.</td>
+<td width="0"><%= ++pos%>.</td><td width="0" style="padding: 10px 10px 10px 10px;">
 <%
-	if (prod.getImages().length == 1) {
-		out.write("<td><img src=\"data:image/jpeg;base64," + prod.getImages()[0] + "\" height=\"200\" width=\"200\"/></td>");
-	}
-	else if (prod.getImages().length > 1) {
-		out.write("<script type=\"text/javascript\">imgs"+ prod.getId() + "=new Array(");
-		for (int i = 0; i < prod.getImages().length; ++i) {
-			out.write("\"data:image/jpeg;base64," + prod.getImages()[i] + "\"");
-			if (i != prod.getImages().length-1)
-				out.write(",");
-		}
-		out.write(");</script>");
-		%>
-<td><table>
+	if (prod.getImages().length == 0) {
+			out.write("</td>");
+		} else if (prod.getImages().length == 1) {
+			out.write("<img src=\"data:image/jpeg;base64," + prod.getImages()[0]
+					+ "\" height=\"200\" width=\"200\"/></td>");
+
+		} else if (prod.getImages().length > 1) {
+			out.write("<script type=\"text/javascript\">imgs" + prod.getId() + "=new Array(");
+			for (int i = 0; i < prod.getImages().length; ++i) {
+				out.write("\"data:image/jpeg;base64," + prod.getImages()[i] + "\"");
+				if (i != prod.getImages().length - 1)
+					out.write(",");
+			}
+			out.write(");</script>");
+%>
+<table style="width:0">
 <tr align="center"><td colspan="2"><img id="ctlimg<%= prod.getId() %>" height="200" width="200" /></td></tr>
 <tr>
-	<input type="hidden" id="start<%= prod.getId() %>" onclick="javascript:chgImg(<%= prod.getId() %>,imgs<%= prod.getId() %>,0);" />
-	<td align="right"><a href="javascript:void(0)" onclick="javascript:chgImg(<%= prod.getId() %>,imgs<%= prod.getId() %>,-1);">&lt;</a></td>
+	<td align="right"><input type="hidden" id="start<%= prod.getId() %>" onclick="javascript:chgImg(<%= prod.getId() %>,imgs<%= prod.getId() %>,0);" /><a
+href="javascript:void(0)" onclick="javascript:chgImg(<%= prod.getId() %>,imgs<%= prod.getId() %>,-1);">&lt;</a></td>
  	<td align="left"><a href="javascript:void(0)" onclick="javascript:chgImg(<%= prod.getId() %>,imgs<%= prod.getId() %>,1);">&gt;</a></td>
 </tr>
 </table></td>
@@ -101,12 +104,14 @@ for (FoundProduct prod : results.getFoundProducts()) { %>
 	}
 %>
 
-<td style="width:100%">
+<td width="100%" align="left" valign="top" style="padding: 10px 10px 10px 10px;">
 	<table style="width:100%">
 		<tr><td><b><%= prod.getName() %></b></td></tr>
 		<tr><td><table style="width:100%">
 			<tr><td style="width:100%">EUR <%= prod.getPrice() %></td>
-                 <td><table><tr><td>Quantity</td><td><form id="ajax<%= prod.getId() %>"><input type="hidden" name="prod" value="<%= prod.getId() %>">
+			<td style="width:0; align:right"><table style="width:0; align:right"><tr><td>Quantity</td><td><form id="ajax<%= prod.getId() %>"><input type="hidden" 
+			name="prod" value="<%= prod.getId() %>">
+
                  		<select id="qty<%= prod.getId() %>" name="qnty" >
                  			<option selected value="1">1</option>
                  			<option value="2">2</option>
@@ -114,7 +119,7 @@ for (FoundProduct prod : results.getFoundProducts()) { %>
                  			<option value="4">4</option>
                  			<option value="5">5</option>
                  		</select></form></td>
-						<td><a href="javascript:void(0)" onclick="javascript:add2cart(<%= prod.getId() %>,<%= prod.getAvailableQuantity() %>)" style="white-space: nowrap">Add To Bin</a></td></tr></table>
+						<td><a href="javascript:void(0)" onclick="javascript:add2cart(<%= prod.getId() %>,<%= prod.getAvailableQuantity() %>)" style="white-space: nowrap">Add To Bin</a>
                   </td>
 			</tr></table>
 		</td></tr>

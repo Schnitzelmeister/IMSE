@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import imse.SS2017.team1.searchengine.FoundResult;
 import imse.SS2017.team1.searchengine.SearchEngine;
+import imse.SS2017.team1.searchengine.SearchEngineMongoDB;
 import imse.SS2017.team1.searchengine.SearchEngineRDBMS;
 
 @WebServlet("/results")
@@ -31,8 +32,9 @@ public class ProductSearch extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			SearchEngine engine = new SearchEngineRDBMS();
-
+			//SearchEngine engine = new SearchEngineRDBMS();
+			SearchEngine engine = new SearchEngineMongoDB();
+			
 			String searchText = request.getParameter("search");
 			int categoryId;
 			try {

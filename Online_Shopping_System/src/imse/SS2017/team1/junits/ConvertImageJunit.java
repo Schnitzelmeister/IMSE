@@ -63,11 +63,11 @@ public class ConvertImageJunit {
 		dao.save(image);
 		
 		List<Image> imageList = dao.getobjects(Image.class);
-		for(Image i:imageList){
+		//for(Image i:imageList){
 			//if(i.getProductId()==1){
-				System.out.print(PictureUtility.convertStringToPic(i.getImageString()));
+				//System.out.print(PictureUtility.convertStringToPic(i.getImageString()));
 			//}
-		}
+		//}
 	}
 
 }

@@ -3,12 +3,15 @@ package imse.SS2017.team1.model;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.eclipse.persistence.nosql.annotations.Field;
@@ -20,6 +23,10 @@ import org.eclipse.persistence.nosql.annotations.DataFormatType;
 @NoSql(dataFormat=DataFormatType.MAPPED)
 public class Product implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	@Field(name="_id")
@@ -69,6 +76,20 @@ public class Product implements Serializable{
 		this.quantity = quantity;
 	}
 	
-	//@OneToMany(mappedBy="product")
-		//private List<ProductBelongsCategory> categories;
+	    //Only for MongoDB, in RDMS we use ProductBelongsCategory class
+		@ManyToMany(fetch=FetchType.LAZY)
+		private List<Category> categories = new ArrayList<Category>();
+		
+		public List<Category> getCategories() {
+			return categories;
+		}
+
+		//Only for MongoDB
+		@ElementCollection
+		private List<Image> images = new ArrayList<Image>();
+		
+		public List<Image> getImages() {
+			return images;
+		}
+
 }

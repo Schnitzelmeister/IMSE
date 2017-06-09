@@ -109,4 +109,8 @@ public class ProductController {
 		return null;
 	}
 	
+	public void close() {
+		dao.close();
+	}
+	
 }

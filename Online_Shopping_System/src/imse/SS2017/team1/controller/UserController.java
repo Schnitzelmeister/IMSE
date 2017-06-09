@@ -120,4 +120,8 @@ public class UserController {
 		dao.updateEntity(customer);
 	}
 	
+	public void close() {
+		dao.close();
+	}
+	
 }

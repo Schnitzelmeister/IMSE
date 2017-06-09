@@ -18,6 +18,11 @@ import org.eclipse.persistence.nosql.annotations.DataFormatType;
 @NoSql(dataFormat=DataFormatType.MAPPED)
 public class ProductBelongsCategory implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	@Field(name="_id")

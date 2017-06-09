@@ -23,4 +23,6 @@ public interface DaoInterface {
 	//public <T> T getUser(Class<T> cls, String email);
 	
 	public <T> void updateEntity(Object entity);
+	
+	public void close();
 }

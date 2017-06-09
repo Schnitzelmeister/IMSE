@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import org.eclipse.persistence.nosql.annotations.DataFormatType;
-import org.eclipse.persistence.nosql.annotations.Field;
 import org.eclipse.persistence.nosql.annotations.NoSql;
 
 @Entity
@@ -13,6 +12,10 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 @NoSql(dataFormat=DataFormatType.MAPPED)
 public class Customer extends User implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer shippingAddressId;
 	private Integer billingAddressId;
 	private String phoneNumber;

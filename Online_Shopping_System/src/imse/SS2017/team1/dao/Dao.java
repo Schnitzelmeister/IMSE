@@ -6,21 +6,20 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
-import javax.swing.text.Document;
 
 import imse.SS2017.team1.model.Address;
 
 public class Dao implements DaoInterface {
 	EntityManagerFactory entitymanagerfactory;
+	EntityManager entitymanager;
 
 	public Dao() {
+		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
+		entitymanager = entitymanagerfactory.createEntityManager();
 	}
 
 	@Override
 	public <T> void save(T entity) {
-		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
-		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
 		EntityTransaction tx = entitymanager.getTransaction();
 		try {
 			tx.begin();
@@ -31,14 +30,10 @@ public class Dao implements DaoInterface {
 				tx.rollback();
 			throw ex;
 		} finally {
-			entitymanager.close();
-			entitymanagerfactory.close();
 		}
 	}
 
 	public <T> Integer saveAddress(Address entity) {
-		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
-		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
 		EntityTransaction tx = entitymanager.getTransaction();
 		try {
 			tx.begin();
@@ -50,15 +45,11 @@ public class Dao implements DaoInterface {
 				tx.rollback();
 			throw ex;
 		} finally {
-			entitymanager.close();
-			entitymanagerfactory.close();
 		}
 	}
 
 	@Override
 	public <T> void delete(T entity) {
-		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
-		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
 		EntityTransaction tx = entitymanager.getTransaction();
 		try {
 			tx.begin();
@@ -69,52 +60,45 @@ public class Dao implements DaoInterface {
 				tx.rollback();
 			throw ex;
 		} finally {
-			entitymanager.close();
-			entitymanagerfactory.close();
 		}
 	}
 
 	@Override
 	public <T> T getobject(Class<T> cls, Integer Id) {
-		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
-		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
 		try {
 			return (T) entitymanager.find(cls, Id);
 		} finally {
-			entitymanager.close();
 		}
 	}
 
 	@Override
 	public <T> T getobject(Class<T> cls, String Id) {
-		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
-		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
 		try {
 			return (T) entitymanager.find(cls, Id);
 		} finally {
-			entitymanager.close();
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> List<T> getobjects(Class<T> cls) {
-		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
-		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
 		return entitymanager.createQuery("SELECT a FROM " + cls.getSimpleName() + " a").getResultList();
 	}
 
 	@Override
 	public <T> void updateEntity(Object entity) {
-		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
-		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
 		EntityTransaction tx = entitymanager.getTransaction();
 		try {
 			tx.begin();
 			entitymanager.merge(entity);
 			tx.commit();
 		} finally {
-			entitymanager.close();
 		}
 	}
+	
+	public void close(){
+		entitymanager.close();
+		entitymanagerfactory.close();
+	}
+	
 }

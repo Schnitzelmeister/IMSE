@@ -21,6 +21,10 @@ public class CustomerOrder implements Serializable{
 	
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * @return the orderId
 	 */
 	public Integer getOrderId() {
