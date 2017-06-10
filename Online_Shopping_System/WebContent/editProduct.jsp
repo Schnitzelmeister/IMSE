@@ -15,6 +15,7 @@
 	href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <style>
 .w3-sidebar a {
 	font-family: "Roboto", sans-serif
@@ -141,8 +142,8 @@ tr:nth-child(even) {
 					</tr>
 					<tr>
 						<th><label for="picture">1.Bild</label> <input type="file"
-							id="picture1"> <input type="text" hidden name="image1"
-							id="pictureValue1"></th>
+							id="picture"> <input type="text" hidden name="image"
+							id="pictureValue"></th>
 					</tr>
 					<tr>
 						<th><label for="picture">2.Bild</label> <input type="file"
@@ -215,6 +216,113 @@ tr:nth-child(even) {
 				x.className = x.className.replace(" w3-show", "");
 			}
 		}
+		
+
+		$(document)
+				.ready(
+						function() {
+
+							document.querySelector("#picture").onchange = function() {
+								var image = document.querySelector("#picture").files[0];
+								var fileReader = new FileReader();
+
+								fileReader
+										.addEventListener(
+												"load",
+												function() {
+													document
+															.querySelector("#pictureValue").value = fileReader.result;
+													$('#picturePreview').attr(
+															'src',
+															fileReader.result);
+												});
+
+								fileReader.readAsDataURL(image);
+
+							};
+
+							document.querySelector("#picture2").onchange = function() {
+								var image2 = document
+										.querySelector("#picture2").files[0];
+								var fileReader2 = new FileReader();
+
+								fileReader2
+										.addEventListener(
+												"load",
+												function() {
+													document
+															.querySelector("#pictureValue2").value = fileReader2.result;
+													$('#picturePreview2').attr(
+															'src2',
+															fileReader2.result);
+												});
+
+								fileReader2.readAsDataURL(image2);
+
+							};
+
+							document.querySelector("#picture3").onchange = function() {
+								var image3 = document
+										.querySelector("#picture3").files[0];
+								var fileReader3 = new FileReader();
+
+								fileReader3
+										.addEventListener(
+												"load",
+												function() {
+													document
+															.querySelector("#pictureValue3").value = fileReader3.result;
+													$('#picturePreview3').attr(
+															'src3',
+															fileReader3.result);
+												});
+
+								fileReader3.readAsDataURL(image3);
+
+							};
+
+							document.querySelector("#picture4").onchange = function() {
+								var image4 = document
+										.querySelector("#picture4").files[0];
+								var fileReader4 = new FileReader();
+
+								fileReader4
+										.addEventListener(
+												"load",
+												function() {
+													document
+															.querySelector("#pictureValue4").value = fileReader4.result;
+													$('#picturePreview4').attr(
+															'src4',
+															fileReader4.result);
+												});
+
+								fileReader4.readAsDataURL(image4);
+
+							};
+
+							document.querySelector("#picture5").onchange = function() {
+								var image5 = document
+										.querySelector("#picture5").files[0];
+								var fileReader5 = new FileReader();
+
+								fileReader5
+										.addEventListener(
+												"load",
+												function() {
+													document
+															.querySelector("#pictureValue5").value = fileReader5.result;
+													$('#picturePreview5').attr(
+															'src5',
+															fileReader5.result);
+												});
+
+								fileReader5.readAsDataURL(image5);
+
+							};
+
+						});
+		
 	</script>
 </body>
 </html>

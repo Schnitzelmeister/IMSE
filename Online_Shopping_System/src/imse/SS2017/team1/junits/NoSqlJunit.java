@@ -83,5 +83,20 @@ public class NoSqlJunit {
 		customer.setCreditCard(creditcard);
 		dao.save(customer);	
 	}
+	
+	@Test
+	public void testPicUpdate(){
+		Dao dao = new Dao();
+		Image image = new Image();
+		Product product = dao.getobject(Product.class, 5);
+		
+		image.setImageId(1);
+		image.setImageString("12");
+		image.setProductId(5);
+		product.setImages(image);
+		
+		
+		dao.updateEntity(product);
+	}
 
 }

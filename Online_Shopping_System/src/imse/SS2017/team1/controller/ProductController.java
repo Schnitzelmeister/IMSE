@@ -58,7 +58,7 @@ public class ProductController {
 		for(int i=0;i<5;++i){
 			if(!images.get(i).isEmpty()){
 				image = new Image();
-				image.setImageString(images.get(i));
+				image.setImageString(images.get(i).replaceAll("data:image/jpeg;base64,", ""));
 				image.setImageId(i+1);
 				image.setProductId(0);
 				product.setImages(image);
@@ -77,8 +77,19 @@ public class ProductController {
 	}
 	
 	public void updateProduct(Integer productId, String productName, Float price, 
-			String description, Integer quantity) {
+			String description, Integer quantity, List<String> images) {
 		Product product = dao.getobject(Product.class, productId);
+		Image image = new Image();
+		for(int i=0;i<5;++i){
+			if(!images.get(i).isEmpty()){
+				image = new Image();
+				image.setImageString(images.get(i).replaceAll("data:image/jpeg;base64,", ""));
+				image.setImageId(i+1);
+				image.setProductId(0);
+				product.setImages(image);
+			}
+		}
+		
 		if(description!=null && !product.getDescription().equals(description)){
 			product.setDescription(description);
 		}

@@ -22,7 +22,7 @@
 	List<Product> products=pc.getAllProducts();
 	
 	
-for(int i=0,size=products.size(); i<products.size();i++,size-=3){
+for(int i=0,size=products.size(); i<products.size();i+=3,size-=3){
 	
 %>
 <div class="container"> 

@@ -1,6 +1,7 @@
 package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -74,30 +75,16 @@ public class EditProduct extends HttpServlet {
 			quantity = Integer.valueOf(request.getParameter("productQuantity"));
 		}
 		Integer productId = Integer.valueOf(request.getParameter("productId").replaceAll("\\D+", ""));
-		
-		productController.updateProduct(productId, productName, price, description, quantity);
 	
-		String image1 = request.getParameter("image1");
-		String image2 = request.getParameter("image2");
-		String image3 = request.getParameter("image3");
-		String image4 = request.getParameter("image4");
-		String image5 = request.getParameter("image5");
+		List<String> images = new ArrayList<String>();
 		
-		if(image1!=null && !image1.equals("")){
-			productController.addProductImage(image1, productId);
-		}
-		if(image2!=null && !image2.equals("")){
-			productController.addProductImage(image2, productId);
-		}
-		if(image3!=null && !image3.equals("")){
-			productController.addProductImage(image3, productId);
-		}
-		if(image4!=null && !image4.equals("")){
-			productController.addProductImage(image4, productId);
-		}
-		if(image5!=null && !image5.equals("")){
-			productController.addProductImage(image5, productId);
-		}	
+		images.add(request.getParameter("image"));
+		images.add(request.getParameter("image2"));
+		images.add(request.getParameter("image3"));
+		images.add(request.getParameter("image4"));
+		images.add(request.getParameter("image5"));
+		
+		productController.updateProduct(productId, productName, price, description, quantity, images);
 		
 		doGet(request,response);
 		
