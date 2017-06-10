@@ -20,7 +20,6 @@
  	PictureUtility pic = new PictureUtility();
  
 	List<Product> products=pc.GetAllProducts();
-	String pictures = pc.getProductpictures();
 	
 	
 for(int i=0,size=products.size(); i<products.size();i++,size-=3){
@@ -34,7 +33,7 @@ for(int i=0,size=products.size(); i<products.size();i++,size-=3){
       <div class="panel panel-primary">
         <div class="panel-heading"><%=products.get(i+2).getProductName() %></div>
         <%--Statt "pictures" muss man das entsprechende Bild einfügen --%>
-        <div class="panel-body"><img src="data:image/jpeg;base64,<%=pictures%>" style="width:100%" alt="Image"></div>
+        <div class="panel-body"><img src="data:image/jpeg;base64,<%=pc.getProductpictures(products.get(i+2).getProductId())%>" style="width:100%" alt="Image"></div>
         <div class="panel-footer"><%=products.get(i+2).getDescription() %></div>
         <a href="BuyProduct?product=<%=products.get(i+2).getProductId() %>">Kaufen</a>
       </div>
@@ -44,7 +43,7 @@ for(int i=0,size=products.size(); i<products.size();i++,size-=3){
       <div class="panel panel-primary">
         <div class="panel-heading"><%=products.get(i+1).getProductName() %></div>
         <%--Statt "pictures" muss man das entsprechende Bild einfügen --%>
-        <div class="panel-body"><img src="data:image/jpeg;base64,<%=pictures%>" style="width:100%" alt="Image"></div>
+        <div class="panel-body"><img src="data:image/jpeg;base64,<%=pc.getProductpictures(products.get(i+1).getProductId())%>" style="width:100%" alt="Image"></div>
         <div class="panel-footer"><%=products.get(i+1).getDescription() %></div>
          <a href="BuyProduct?product=<%=products.get(i+1).getProductId() %>">Kaufen</a>
       </div>
@@ -54,7 +53,7 @@ for(int i=0,size=products.size(); i<products.size();i++,size-=3){
       <div class="panel panel-primary">
         <div class="panel-heading"><%=products.get(i).getProductName() %></div>
         <%--Statt "pictures" muss man das entsprechende Bild einfügen --%>
-        <div class="panel-body"><img src="data:image/jpeg;base64,<%=pictures%>" style="width:100%" alt="Image"></div>
+        <div class="panel-body"><img src="data:image/jpeg;base64,<%=pc.getProductpictures(products.get(i).getProductId())%>" style="width:100%" alt="Image"></div>
         <div class="panel-footer"><%=products.get(i).getDescription() %></div>
          <a href="BuyProduct?product=<%=products.get(i).getProductId() %>">Kaufen</a>
       </div>

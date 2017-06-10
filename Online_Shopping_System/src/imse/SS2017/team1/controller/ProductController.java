@@ -83,9 +83,12 @@ public class ProductController {
 		dao.updateEntity(product);	
 	}
 	
-	//TODO Sobald Images hinzugefügt werden können, "2" auf imageId setzen
-	public String getProductpictures(Integer imageId){
-		return dao.getobject(Image.class, 2).getImageString();
+	public String getProductpictures(Integer productId){
+		try{
+			return dao.getobject(Product.class, productId).getImages().get(0).getImageString();	
+		} catch (ArrayIndexOutOfBoundsException e){
+			return null;
+		}
 	}
 	
 	public void addProductImage(String imageString, Integer productId){

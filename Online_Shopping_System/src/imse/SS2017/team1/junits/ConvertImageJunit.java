@@ -57,8 +57,8 @@ public class ConvertImageJunit {
 		//url muss eigens bestimmt werden z.B. "C:/Users/Raf/Desktop/Salzburg.jpeg"
 		String url = "file:/C:/Users/Raf/Desktop/Salzburg.jpeg";
 		image.setImageString(PictureUtility.convertPicToString(url));
-		image.setProductId(2);
-		image.setImageId(2);
+		image.setProductId(1);
+		image.setImageId(1);
 		dao.save(image);
 		
 		List<Image> imageList = dao.getobjects(Image.class);

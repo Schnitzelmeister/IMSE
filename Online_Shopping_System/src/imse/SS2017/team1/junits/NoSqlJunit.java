@@ -1,10 +1,9 @@
 package imse.SS2017.team1.junits;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.model.Category;
+import imse.SS2017.team1.model.Image;
 import imse.SS2017.team1.model.Product;
 
 public class NoSqlJunit {
@@ -44,8 +43,8 @@ public class NoSqlJunit {
 		product.setPrice(23.45F);
 		product.setQuantity(2);
 		
-		//product.getImages().add(new Image("image1straem"));
-		//product.getImages().add(new Image("image2straem"));
+		product.getImages().add(new Image("image1straem"));
+		product.getImages().add(new Image("image2straem"));
 		
 		dao.save(product);
 		}

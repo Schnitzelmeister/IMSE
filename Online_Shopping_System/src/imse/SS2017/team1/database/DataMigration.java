@@ -25,7 +25,6 @@ public class DataMigration {
 	static Statement statement = null;
 	static Statement statement2 = null;
 	static Statement statement3 = null;
-	static Statement statement4 = null;
 	Dao dao = new Dao();
 
 	public DataMigration() {
@@ -46,7 +45,6 @@ public class DataMigration {
 			statement = connect.createStatement();
 			statement2 = connect.createStatement();
 			statement3 = connect.createStatement();
-			statement4 = connect.createStatement();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,10 +59,8 @@ public class DataMigration {
 		//dm.migrateCreditCard();
 		//dm.migrateCustomer();
 		//dm.migrateAdmin();
-		//dm.migrateCategory();
+		dm.migrateCategory();
 		dm.migrateProduct();
-		//dm.migrateImage();
-		//dm.migrateProductBelongsCategory();
 		//dm.migrateCustomerOrder();
 		//dm.migrateOrderDetail();
 		
@@ -193,10 +189,10 @@ public class DataMigration {
 	}
 
 	private void migrateProduct() {
-		List<Product> productList = new ArrayList();
+		
 		Product product = new Product();
-		Category category = new Category();
 		Image image = new Image();
+		
 		try {
 
 			ResultSet resultsetProduct = statement.executeQuery("SELECT * FROM product");
@@ -208,7 +204,9 @@ public class DataMigration {
 					int numColumns = resultsetProduct.getMetaData().getColumnCount();
 					for (int i = 1; i <= numColumns; i += 5) {
 						
-						resultsetProductbelCategory = statement2.executeQuery("SELECT category.categoryId, categoryName FROM productbelongscategory INNER JOIN category ON productbelongscategory.categoryId = category.categoryId WHERE productId="+
+						resultsetProductbelCategory = statement2.executeQuery("SELECT category.categoryId, categoryName "
+								+ "FROM productbelongscategory INNER JOIN category ON productbelongscategory.categoryId = category.categoryId "
+								+ "WHERE productId="+
 								(Integer) resultsetProduct.getObject(i));
 						int numColumnsCategory = resultsetProductbelCategory.getMetaData().getColumnCount();
 						
@@ -225,48 +223,26 @@ public class DataMigration {
 						
 						while (resultsetProductbelCategory.next()) {
 							for(int j = 1; j<= numColumnsCategory; j+= 2){
-								category = new Category();
 								product.setCategories(dao.getobject(Category.class, (Integer) resultsetProductbelCategory.getObject(j)));
 							}
 						}
+						
 						while (resultsetImage.next()) {
 							for(int k = 1; k<= numColumnsImage; k+= 2){
 								image = new Image();
-								product.setImages(dao.getobject(Image.class, (Integer) resultsetImage.getObject(k)));
+								image.setImageId((Integer) resultsetImage.getObject(i));
+								image.setProductId((Integer) resultsetImage.getObject(i+1));
+								image.setImageString((String) resultsetImage.getObject(i+2));
+								product.setImages(image);
 							}					
-						}	
+						}
+						
 						dao.save(product);
 					}
 				}
 			} catch (Exception e) {
 				throw e;
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void migrateImage() {
-		Image image = new Image();
-		try {
-
-			ResultSet resultset = statement.executeQuery("SELECT * FROM image");
-
-			try {
-				while (resultset.next()) {
-					int numColumns = resultset.getMetaData().getColumnCount();
-					for (int i = 1; i <= numColumns; i += 3) {
-						image.setImageId((Integer) resultset.getObject(i));
-						image.setProductId((Integer) resultset.getObject(i+1));
-						image.setImageString((String) resultset.getObject(i+2));
-					
-						dao.save(image);
-					}
-				}
-			} catch (Exception e) {
-				throw e;
-			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -282,6 +258,7 @@ public class DataMigration {
 				while (resultset.next()) {
 					int numColumns = resultset.getMetaData().getColumnCount();
 					for (int i = 1; i <= numColumns; i += 2) {
+						category = new Category();
 						category.setCategoryId((Integer) resultset.getObject(i));
 						category.setCategoryName((String) resultset.getObject(i + 1));
 						dao.save(category);
