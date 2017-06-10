@@ -97,10 +97,10 @@ public class CustomerOrder implements Serializable{
 	}
 	
 	@ElementCollection
-	private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+	private List<OrderDetail> orderDetail = new ArrayList<OrderDetail>();
 	
-	public List<OrderDetail> getImages() {
-		return orderDetails;
+	public OrderDetail getOrderDetails() {
+		return null;
 	}
 	
 }

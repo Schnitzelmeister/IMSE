@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.model.Address;
@@ -56,11 +54,10 @@ public class DataMigration {
 		DataMigration dm=	new DataMigration();
 		
 		//dm.migrateAdress();
-		//dm.migrateCreditCard();
 		//dm.migrateCustomer();
-		//dm.migrateAdmin();
-		dm.migrateCategory();
-		dm.migrateProduct();
+		dm.migrateAdmin();
+		//dm.migrateCategory();
+		//dm.migrateProduct();
 		//dm.migrateCustomerOrder();
 		//dm.migrateOrderDetail();
 		
@@ -78,6 +75,7 @@ public class DataMigration {
 				while (resultset.next()) {
 					int numColumns = resultset.getMetaData().getColumnCount();
 					for (int i = 1; i <= numColumns; i += 7) {
+						address = new Address();
 						address.setAdressId((Integer) resultset.getObject(i));
 						address.setStreetName((String) resultset.getObject(i+1));
 						address.setStreetNumber((String) resultset.getObject(i+2));
@@ -100,45 +98,27 @@ public class DataMigration {
 
 	}
 
-	private void migrateCreditCard() {
-		CreditCard creditCard = new CreditCard();
-		try {
-
-			ResultSet resultset = statement.executeQuery("SELECT * FROM creditCard");
-
-			try {
-				while (resultset.next()) {
-					int numColumns = resultset.getMetaData().getColumnCount();
-					for (int i = 1; i <= numColumns; i += 7) {
-						creditCard.setCardNumber((String) resultset.getObject(i));
-						creditCard.setFirstName((String) resultset.getObject(i+1));
-						creditCard.setLastName((String) resultset.getObject(i+2));
-						creditCard.setType((String) resultset.getObject(i+3));
-						creditCard.setCvv((String) resultset.getObject(i+4));
-						creditCard.setExpiryMonth((Integer) resultset.getObject(i+5));
-						creditCard.setExpiryYear((Integer) resultset.getObject(i+6));
-						dao.save(creditCard);
-					}
-				}
-			} catch (Exception e) {
-				throw e;
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	private void migrateCustomer() {
 		Customer customer = new Customer();
+		CreditCard creditcard = new CreditCard();
+		
 		try {
 
 			ResultSet resultset = statement.executeQuery("SELECT * FROM customer");
+			ResultSet resultsetCreditCards = null;
 
 			try {
+				
 				while (resultset.next()) {
+					
 					int numColumns = resultset.getMetaData().getColumnCount();
 					for (int i = 1; i <= numColumns; i += 8) {
+						
+						resultsetCreditCards = statement2.executeQuery("SELECT * FROM creditcard WHERE cardnumber='" +
+								((String) resultset.getObject(i+5))+"'");
+						int numColumnsCreditCard = resultsetCreditCards.getMetaData().getColumnCount();
+						
+						customer = new Customer();
 						customer.setEmailAddress((String) resultset.getObject(i));
 						customer.setPassword((String) resultset.getObject(i+1));
 						customer.setFirstName((String) resultset.getObject(i+2));
@@ -147,6 +127,21 @@ public class DataMigration {
 						customer.setCreditCardInfo((String) resultset.getObject(i+5));
 						customer.setShippingAddress((Integer) resultset.getObject(i+6));
 						customer.setBillingAddress((Integer) resultset.getObject(i+7));
+						
+						while (resultsetCreditCards.next()) {
+							for (int j = 1; j <= numColumnsCreditCard; j += 7) {
+								creditcard = new CreditCard();
+								creditcard.setCardNumber((String) resultsetCreditCards.getObject(j));
+								creditcard.setFirstName((String) resultsetCreditCards.getObject(j+1));
+								creditcard.setLastName((String) resultsetCreditCards.getObject(j+2));
+								creditcard.setType((String) resultsetCreditCards.getObject(j+3));
+								creditcard.setCvv((String) resultsetCreditCards.getObject(j+4));
+								creditcard.setExpiryMonth((Integer) resultsetCreditCards.getObject(j+5));
+								creditcard.setExpiryYear((Integer) resultsetCreditCards.getObject(j+6));
+							}
+						}
+						customer.setCreditCard(creditcard);
+						
 						dao.save(customer);
 					}
 				}
@@ -169,6 +164,7 @@ public class DataMigration {
 				while (resultset.next()) {
 					int numColumns = resultset.getMetaData().getColumnCount();
 					for (int i = 1; i <= numColumns; i += 6) {
+						admin = new Admin();
 						admin.setEmailAddress((String) resultset.getObject(i));
 						admin.setPassword((String) resultset.getObject(i+1));
 						admin.setFirstName((String) resultset.getObject(i+2));

@@ -11,12 +11,11 @@ import org.eclipse.persistence.nosql.annotations.DataFormatType;
 @Embeddable
 @NoSql(dataFormat=DataFormatType.MAPPED)
 public class OrderDetail implements Serializable{
+	
+	public OrderDetail(){	
+	}
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
 	@Transient
 	private Integer orderId;
 	private Integer orderDetailId;

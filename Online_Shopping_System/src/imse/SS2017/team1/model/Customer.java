@@ -12,14 +12,11 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 @NoSql(dataFormat=DataFormatType.MAPPED)
 public class Customer extends User implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Integer shippingAddressId;
 	private Integer billingAddressId;
 	private String phoneNumber;
-
+	@Transient
 	private String creditCardNumber;
 
 	public Customer() {
@@ -65,5 +62,16 @@ public class Customer extends User implements Serializable {
 
 	public void setCreditCardInfo(String creditCard) {
 		this.creditCardNumber = creditCard;
+	}
+	
+	@Embedded
+	private CreditCard creditcard;
+	
+	public CreditCard getCreditCard() {
+		return creditcard;
+	}
+	
+	public void setCreditCard(CreditCard card){
+		creditcard = card;
 	}
 }

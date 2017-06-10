@@ -19,15 +19,7 @@ public class Image implements Serializable{
 		this.image = image;
 	}
 
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
-	//@Id
-	//@GeneratedValue
-	//@Field(name="_id")
 	private Integer imageId;
 	@Transient
 	private Integer productId;

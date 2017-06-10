@@ -2,37 +2,28 @@ package imse.SS2017.team1.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Embeddable;
+import javax.persistence.Transient;
 
 import org.eclipse.persistence.nosql.annotations.DataFormatType;
-import org.eclipse.persistence.nosql.annotations.Field;
 import org.eclipse.persistence.nosql.annotations.NoSql;
 
-@Entity
-@Table(name = "creditcard")
+@Embeddable
 @NoSql(dataFormat=DataFormatType.MAPPED)
 public class CreditCard implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue
-	@Field(name="_id")
 	private String cardNumber;
+	@Transient
 	private String firstName;
+	@Transient
 	private String lastName;
 	private String type; //MasterCard, Visa 
 	private String cvv;
 	private Integer expiryMonth;
 	private Integer expiryYear;
 	
-	public CreditCard(){
-		
+	public CreditCard(){	
 	}
 	
 	public CreditCard(String cardNumber, String firstName, String lastName, String type, String cvv,
@@ -131,8 +122,5 @@ public class CreditCard implements Serializable{
 	public void setExpiryYear(Integer expiryYear) {
 		this.expiryYear = expiryYear;
 	}
-	
-	
-	
 
 }
