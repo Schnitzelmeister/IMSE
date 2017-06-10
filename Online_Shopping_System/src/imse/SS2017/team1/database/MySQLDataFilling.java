@@ -14,7 +14,6 @@ import imse.SS2017.team1.model.CreditCard;
 import imse.SS2017.team1.model.Customer;
 import imse.SS2017.team1.model.Image;
 import imse.SS2017.team1.model.Product;
-import imse.SS2017.team1.model.ProductBelongsCategory;
 
 public class MySQLDataFilling {
 	
@@ -54,7 +53,6 @@ public class MySQLDataFilling {
 		
 		System.out.println("Produkte werden gerneriert!");
 		Product product = new Product();
-		ProductBelongsCategory productBelongsCategory = new ProductBelongsCategory();
 		Image image = new Image();
 		
 		
@@ -89,9 +87,9 @@ public class MySQLDataFilling {
 				
 				int num = ThreadLocalRandom.current().nextInt(1, 5);
 				for (int q = 0; q < num; ++q) {
-					productBelongsCategory.setCategoryId(ThreadLocalRandom.current().nextInt(1, 19));
-					productBelongsCategory.setProductId(i);
-					dao.save(productBelongsCategory);
+					//productBelongsCategory.setCategoryId(ThreadLocalRandom.current().nextInt(1, 19));
+					//productBelongsCategory.setProductId(i);
+					//dao.save(productBelongsCategory);
 				}
 				
 				for (int q = 0; q < num; ++q) {
@@ -213,11 +211,11 @@ public class MySQLDataFilling {
 		Integer j=0;
 		for(int i=1;i<20;i++){
 			++j;
-			productBelongsCategory.setCategoryId(i);
+			//productBelongsCategory.setCategoryId(i);
 			while(j%10!=0){
-				productBelongsCategory.setProductId(j);
+				//productBelongsCategory.setProductId(j);
 				try{
-					dao.save(productBelongsCategory);
+					//dao.save(productBelongsCategory);
 				} catch(Exception e){
 					System.out.println("Ein Duplikat wurde gefunden!");
 				}

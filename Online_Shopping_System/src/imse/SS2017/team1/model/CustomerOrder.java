@@ -2,7 +2,10 @@ package imse.SS2017.team1.model;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,8 +20,14 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 @NoSql(dataFormat=DataFormatType.MAPPED)
 public class CustomerOrder implements Serializable{
 	
-	
-	
+	@Id
+	@GeneratedValue
+	@Field(name="_id")
+	private Integer orderId;
+	private String customerEmail;
+	private String dateCreated;
+	private String dateShipped;
+	private Boolean ordered;
 	
 	/**
 	 * 
@@ -86,14 +95,12 @@ public class CustomerOrder implements Serializable{
 	public void setOrdered(Boolean ordered) {
 		this.ordered = ordered;
 	}
-
-	@Id
-	@GeneratedValue
-	@Field(name="_id")
-	private Integer orderId;
-	private String customerEmail;
-	private String dateCreated;
-	private String dateShipped;
-	private Boolean ordered;
+	
+	@ElementCollection
+	private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+	
+	public List<OrderDetail> getImages() {
+		return orderDetails;
+	}
 	
 }

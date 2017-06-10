@@ -14,7 +14,6 @@ import imse.SS2017.team1.database.DataGenerator.entityTyp;
 import imse.SS2017.team1.model.Category;
 import imse.SS2017.team1.model.Image;
 import imse.SS2017.team1.model.Product;
-import imse.SS2017.team1.model.ProductBelongsCategory;
 
 public class ConvertImageJunit {
 

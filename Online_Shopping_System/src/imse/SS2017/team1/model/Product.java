@@ -83,6 +83,10 @@ public class Product implements Serializable{
 		public List<Category> getCategories() {
 			return categories;
 		}
+		
+		public void setCategories(Category category) {
+			categories.add(category);
+		}
 
 		//Only for MongoDB
 		@ElementCollection
@@ -90,6 +94,10 @@ public class Product implements Serializable{
 		
 		public List<Image> getImages() {
 			return images;
+		}
+		
+		public void setImages(Image image){
+			images.add(image);
 		}
 
 }

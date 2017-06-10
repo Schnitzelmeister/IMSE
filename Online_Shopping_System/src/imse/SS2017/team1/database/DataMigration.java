@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.model.Address;
@@ -16,12 +18,14 @@ import imse.SS2017.team1.model.CustomerOrder;
 import imse.SS2017.team1.model.Image;
 import imse.SS2017.team1.model.OrderDetail;
 import imse.SS2017.team1.model.Product;
-import imse.SS2017.team1.model.ProductBelongsCategory;
 
 public class DataMigration {
 
 	static Connection connect = null;
 	static Statement statement = null;
+	static Statement statement2 = null;
+	static Statement statement3 = null;
+	static Statement statement4 = null;
 	Dao dao = new Dao();
 
 	public DataMigration() {
@@ -40,6 +44,9 @@ public class DataMigration {
 		}
 		try {
 			statement = connect.createStatement();
+			statement2 = connect.createStatement();
+			statement3 = connect.createStatement();
+			statement4 = connect.createStatement();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,16 +57,16 @@ public class DataMigration {
 	public static void main(String args[]) throws Exception {
 		DataMigration dm=	new DataMigration();
 		
-		dm.migrateAdress();
-		dm.migrateCreditCard();
-		dm.migrateCustomer();
-		dm.migrateAdmin();
+		//dm.migrateAdress();
+		//dm.migrateCreditCard();
+		//dm.migrateCustomer();
+		//dm.migrateAdmin();
+		//dm.migrateCategory();
 		dm.migrateProduct();
-		dm.migrateImage();
-		dm.migrateCategory();
+		//dm.migrateImage();
 		//dm.migrateProductBelongsCategory();
-		dm.migrateCustomerOrder();
-		dm.migrateOrderDetail();
+		//dm.migrateCustomerOrder();
+		//dm.migrateOrderDetail();
 		
 		dm.closeConnection();
 	
@@ -186,28 +193,54 @@ public class DataMigration {
 	}
 
 	private void migrateProduct() {
+		List<Product> productList = new ArrayList();
 		Product product = new Product();
+		Category category = new Category();
+		Image image = new Image();
 		try {
 
-			ResultSet resultset = statement.executeQuery("SELECT * FROM product");
-
+			ResultSet resultsetProduct = statement.executeQuery("SELECT * FROM product");
+			ResultSet resultsetProductbelCategory = null;
+			ResultSet resultsetImage = null;
+			
 			try {
-				while (resultset.next()) {
-					int numColumns = resultset.getMetaData().getColumnCount();
+				while (resultsetProduct.next()) {
+					int numColumns = resultsetProduct.getMetaData().getColumnCount();
 					for (int i = 1; i <= numColumns; i += 5) {
-						product.setProductId((Integer) resultset.getObject(i));
-						product.setProductName((String) resultset.getObject(i+1));
-						product.setPrice(Float.valueOf(String.valueOf(resultset.getObject(i+2))));
-						product.setDescription((String) resultset.getObject(i+3));
-						product.setQuantity((Integer) resultset.getObject(i+4));
-					
+						
+						resultsetProductbelCategory = statement2.executeQuery("SELECT category.categoryId, categoryName FROM productbelongscategory INNER JOIN category ON productbelongscategory.categoryId = category.categoryId WHERE productId="+
+								(Integer) resultsetProduct.getObject(i));
+						int numColumnsCategory = resultsetProductbelCategory.getMetaData().getColumnCount();
+						
+						resultsetImage = statement3.executeQuery("SELECT * FROM image WHERE productId=" +
+								(Integer) resultsetProduct.getObject(i));
+						int numColumnsImage = resultsetImage.getMetaData().getColumnCount();
+						
+						product = new Product();
+						product.setProductId((Integer) resultsetProduct.getObject(i));
+						product.setProductName((String) resultsetProduct.getObject(i+1));
+						product.setPrice(Float.valueOf(String.valueOf(resultsetProduct.getObject(i+2))));
+						product.setDescription((String) resultsetProduct.getObject(i+3));
+						product.setQuantity((Integer) resultsetProduct.getObject(i+4));
+						
+						while (resultsetProductbelCategory.next()) {
+							for(int j = 1; j<= numColumnsCategory; j+= 2){
+								category = new Category();
+								product.setCategories(dao.getobject(Category.class, (Integer) resultsetProductbelCategory.getObject(j)));
+							}
+						}
+						while (resultsetImage.next()) {
+							for(int k = 1; k<= numColumnsImage; k+= 2){
+								image = new Image();
+								product.setImages(dao.getobject(Image.class, (Integer) resultsetImage.getObject(k)));
+							}					
+						}	
 						dao.save(product);
 					}
 				}
 			} catch (Exception e) {
 				throw e;
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -264,30 +297,7 @@ public class DataMigration {
 		
 	}
 
-	private void migrateProductBelongsCategory() {
-		ProductBelongsCategory pbc = new ProductBelongsCategory();
-		try {
-
-			ResultSet resultset = statement.executeQuery("SELECT * FROM productsbelongscategory");
-
-			try {
-				while (resultset.next()) {
-					int numColumns = resultset.getMetaData().getColumnCount();
-					for (int i = 1; i <= numColumns; i += 2) {
-						pbc.setProductId((Integer) resultset.getObject(i));
-						pbc.setCategoryId((Integer) resultset.getObject(i+1));
-					
-						dao.save(pbc);
-					}
-				}
-			} catch (Exception e) {
-				throw e;
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	private void migrateCustomerOrder() {
 		CustomerOrder customerOrder = new CustomerOrder();
