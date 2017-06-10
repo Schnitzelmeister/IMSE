@@ -36,17 +36,17 @@
 				<li><a href="contacts.jsp">Kontakt</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a class="active" href="./customer/private/editcustomerinfo.jsp"><span
-						class="glyphicon glyphicon-user"></span>Your Account</a></li>
-
-
-
 				<li id="cart"><a href="#"><span
 						class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
 				<%
 					HttpSession newsession = request.getSession(false);
 					if (newsession.getAttribute("email") != null) {
 				%>
+
+				<li><a class="active"
+					href="./customer/private/editcustomerinfo.jsp"><span
+						class="glyphicon glyphicon-user"></span>Your Account</a></li>
+
 				<li><a href="./logout">Abmelden</a></li>
 
 				<%
