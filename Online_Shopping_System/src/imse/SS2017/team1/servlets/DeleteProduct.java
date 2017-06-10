@@ -26,7 +26,7 @@ public class DeleteProduct extends HttpServlet {
 		request.setAttribute("IsAdminChief", adminTyp.equals("chiefadmin"));
 		
 		ProductController productController = new ProductController();
-		List<Product> products = productController.GetAllProducts();
+		List<Product> products = productController.getAllProducts();
 		Integer anzahl = products.size();
 		anzahl--;
 		

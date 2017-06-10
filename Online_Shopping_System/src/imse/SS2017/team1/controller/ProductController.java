@@ -48,16 +48,27 @@ public class ProductController {
 		return sameProductPrice;
 	}
 
-	public List<Product> GetAllProducts(){
+	public List<Product> getAllProducts(){
 		return dao.getobjects(Product.class);
 	}
 	
-	public void createProduct(String productName, Float price, String description, Integer quantity){
+	public void createProduct(String productName, Float price, String description, Integer quantity, List<String> images){
 		Product product = new Product();
+		Image image = new Image();
+		for(int i=0;i<5;++i){
+			if(!images.get(i).isEmpty()){
+				image = new Image();
+				image.setImageString(images.get(i));
+				image.setImageId(i+1);
+				image.setProductId(0);
+				product.setImages(image);
+			}
+		}
 		product.setDescription(description);
 		product.setPrice(price);
 		product.setProductName(productName);
 		product.setQuantity(quantity);
+		product.setProductId(generateId());
 		dao.save(product);
 	}
 	
@@ -91,11 +102,12 @@ public class ProductController {
 		}
 	}
 	
-	public void addProductImage(String imageString, Integer productId){
+	public Image addProductImage(String imageString, Integer productId){
 		Image image = new Image();
 		image.setImageString(imageString);
 		image.setProductId(productId);
-		dao.save(image);
+		image.setImageId(0);
+		return image;
 	}
 	
 	public void deleteImage(String imageId){
@@ -114,6 +126,11 @@ public class ProductController {
 	
 	public void close() {
 		dao.close();
+	}
+	
+	public Integer generateId(){
+		List<Product> products = getAllProducts();
+		return products.get(products.size()-1).getProductId()+1;
 	}
 	
 }

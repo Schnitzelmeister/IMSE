@@ -31,7 +31,7 @@ public class EditProduct extends HttpServlet {
 		ProductController productController = new ProductController();
 		
 		List<Category> categories = categoryController.getAllCategories();
-		List<Product> products = productController.GetAllProducts();
+		List<Product> products = productController.getAllProducts();
 		
 		Integer anzahl4 = categories.size();
 		anzahl4--;

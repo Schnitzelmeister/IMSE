@@ -39,7 +39,7 @@ tr:nth-child(even) {
 
 	<%
 		ProductController productController = new ProductController();
-		List<Product> products = productController.GetAllProducts();
+		List<Product> products = productController.getAllProducts();
 	%>
 	<table>
 		<tr>

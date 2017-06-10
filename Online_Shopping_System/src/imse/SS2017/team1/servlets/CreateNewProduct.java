@@ -1,9 +1,11 @@
 package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,7 @@ import imse.SS2017.team1.controller.ProductController;
 import imse.SS2017.team1.model.Category;
 
 @WebServlet("/CreateNewProduct")
+@MultipartConfig(maxFileSize = 16177215) 
 public class CreateNewProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -52,35 +55,15 @@ public class CreateNewProduct extends HttpServlet {
 		Float price = Float.valueOf(request.getParameter("productPrice"));
 		String description = request.getParameter("productDescription");
 		Integer quantity = Integer.valueOf(request.getParameter("productQuantity"));
+		List<String> images = new ArrayList<String>();
 		
-		String image1 = request.getParameter("image6");
-		String image2 = request.getParameter("image7");
-		String image3 = request.getParameter("image8");
-		String image4 = request.getParameter("image9");
-		String image5 = request.getParameter("image10");
+		images.add(request.getParameter("image"));
+		images.add(request.getParameter("image2"));
+		images.add(request.getParameter("image3"));
+		images.add(request.getParameter("image4"));
+		images.add(request.getParameter("image5"));
 		
-		productController.createProduct(productName, price, description, quantity);
-		
-		Integer productId=0;
-		if(productController.getProductByParams(productName, price, description, quantity)!=null){
-			productId = productController.getProductByParams(productName, price, description, quantity).getProductId();
-		}
-		
-		if(image1!=null && !image1.equals("") && productId!=0){
-			productController.addProductImage(image1, productId);
-		}
-		if(image2!=null && !image2.equals("") && productId!=0){
-			productController.addProductImage(image2, productId);
-		}
-		if(image3!=null && !image3.equals("") && productId!=0){
-			productController.addProductImage(image3, productId);
-		}
-		if(image4!=null && !image4.equals("") && productId!=0){
-			productController.addProductImage(image4, productId);
-		}
-		if(image5!=null && !image5.equals("") && productId!=0){
-			productController.addProductImage(image5, productId);
-		}	
+		productController.createProduct(productName, price, description, quantity, images);
 		
 		doGet(request,response);
 		

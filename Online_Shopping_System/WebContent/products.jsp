@@ -19,7 +19,7 @@
 	ProductController pc=new ProductController();
  	PictureUtility pic = new PictureUtility();
  
-	List<Product> products=pc.GetAllProducts();
+	List<Product> products=pc.getAllProducts();
 	
 	
 for(int i=0,size=products.size(); i<products.size();i++,size-=3){
