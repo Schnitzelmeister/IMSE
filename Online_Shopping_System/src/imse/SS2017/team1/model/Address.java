@@ -3,14 +3,8 @@ package imse.SS2017.team1.model;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 import org.eclipse.persistence.nosql.annotations.DataFormatType;
-import org.eclipse.persistence.nosql.annotations.Field;
 import org.eclipse.persistence.nosql.annotations.NoSql;
 
 
@@ -18,19 +12,14 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 @NoSql(dataFormat = DataFormatType.MAPPED)
 public class Address implements Serializable {
 
-/*
-	@EmbeddedId
-	@GeneratedValue
-	@Field(name = "_id")
+	private static final long serialVersionUID = 1L;
 	private String addressId;
-	*/
 	private String streetName;
 	private String streetNumber;
 	private String additionalInfo;
 	private String city;
 	private String postCode;
 	private String country;
-	private static int idcounter = 0;
 
 	public Address() {
 
@@ -38,19 +27,7 @@ public class Address implements Serializable {
 
 	public Address(String addressId, String streetName, String streetNumber, String additionalInfo, String city,
 			String postCode, String country) {
-		//this.addressId = addressId;
-		this.streetName = streetName;
-		this.streetNumber = streetNumber;
-		this.additionalInfo = additionalInfo;
-		this.city = city;
-		this.postCode = postCode;
-		this.country = country;
-		idcounter++;
-	}
-/*
-	public Address(String streetName, String streetNumber, String additionalInfo, String city, String postCode,
-			String country) {
-		this.addressId = idcounter++;
+		this.addressId = addressId;
 		this.streetName = streetName;
 		this.streetNumber = streetNumber;
 		this.additionalInfo = additionalInfo;
@@ -58,8 +35,8 @@ public class Address implements Serializable {
 		this.postCode = postCode;
 		this.country = country;
 	}
-*/
-	/*
+
+
 	public String getAdressId() {
 		return addressId;
 	}
@@ -67,7 +44,7 @@ public class Address implements Serializable {
 	public void setAdressId(String adressId) {
 		this.addressId = adressId;
 	}
-*/
+	
 	public String getStreetName() {
 		return streetName;
 	}

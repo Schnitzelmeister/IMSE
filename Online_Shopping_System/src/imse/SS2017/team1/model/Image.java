@@ -2,18 +2,15 @@ package imse.SS2017.team1.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
+
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
 import javax.persistence.Transient;
 
 import org.eclipse.persistence.nosql.annotations.NoSql;
 import org.eclipse.persistence.nosql.annotations.DataFormatType;
 
-//@Entity
-//@Table(name = "Image")
+
 
 @Embeddable
 @NoSql(dataFormat=DataFormatType.MAPPED)
@@ -27,8 +24,6 @@ public class Image implements Serializable {
 		this.image = image;
 	}
 	
-	/*@Id*/
-	//we save imageId for compatibility with RDBMS
 	private Integer imageId;
 	@Transient
 	private Integer productId;

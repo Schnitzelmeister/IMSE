@@ -10,10 +10,21 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 @NoSql(dataFormat=DataFormatType.MAPPED)
 public class Customer extends User {
 	
-    @Embedded private Address shippingAddress;
-	@Embedded private Address billingAddress;
-	@Embedded private CreditCard creditCard;
-			  private String phoneNumber;
+	private static final long serialVersionUID = 1L;
+	@Embedded 
+	private Address shippingAddress;
+	@Embedded 
+	private Address billingAddress;
+	@Embedded 
+	private CreditCard creditCard;
+	private String phoneNumber;
+	
+	@Transient
+	private String creditCardNumber;
+	@Transient
+	private Integer billingAddressId;
+	@Transient
+	private Integer shippingAddressId;
 
 	public Customer() {
 
@@ -28,20 +39,36 @@ public class Customer extends User {
 		this.creditCard = null;
 	}
 
-	public Address getShippingAddress() {
+	public Address getShippingAdr() {
 		return shippingAddress;
 	}
 
-	public void setShippingAddress(Address shippingAddress) {
+	public void setShippingAdr(Address shippingAddress) {
 		this.shippingAddress = shippingAddress;
 	}
 
-	public Address getBillingAddress() {
+	public Address getBillingAdr() {
 		return billingAddress;
 	}
 
-	public void setBillingAddress(Address billingAddress) {
+	public void setBillingAdr(Address billingAddress) {
 		this.billingAddress = billingAddress;
+	}
+	
+	public Integer getShippingAddress() {
+		return shippingAddressId;
+	}
+
+	public void setShippingAddress(Integer shippingAddress) {
+		this.shippingAddressId = shippingAddress;
+	}
+
+	public Integer getBillingAddress() {
+		return billingAddressId;
+	}
+
+	public void setBillingAddress(Integer billingAddress) {
+		this.billingAddressId = billingAddress;
 	}
 
 	public String getPhoneNumber() {
@@ -51,12 +78,20 @@ public class Customer extends User {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	
+	public String getCreditCardInfo() {
+		return creditCardNumber;
+	}
+
+	public void setCreditCardInfo(String creditCard) {
+		this.creditCardNumber = creditCard;
+	}
 
 	public CreditCard getCreditCard() {
 		return creditCard;
 	}
 
-	public void setCreditCard(CreditCard creditCard) {
-		this.creditCard = creditCard;
+	public void setCreditCard(CreditCard card) {
+		this.creditCard = card;
 	}
 }

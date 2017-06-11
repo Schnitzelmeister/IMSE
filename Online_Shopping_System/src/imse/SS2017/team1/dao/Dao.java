@@ -7,8 +7,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import imse.SS2017.team1.model.Address;
-
 public class Dao implements DaoInterface {
 	EntityManagerFactory entitymanagerfactory;
 	EntityManager entitymanager;
@@ -31,27 +29,7 @@ public class Dao implements DaoInterface {
 			throw ex;
 		}
 	}
-	
-	public void close() {
-		entitymanager.close();
-		entitymanagerfactory.close();
-	}
-/*
-	public <T> Integer saveAddress(Address entity) {
-		EntityTransaction tx = entitymanager.getTransaction();
-		try {
-			tx.begin();
-			entitymanager.persist(entity);
-			tx.commit();
-			return entity.getAdressId();
-		} catch (RuntimeException ex) {
-			if (tx != null && tx.isActive())
-				tx.rollback();
-			throw ex;
-			entitymanagerfactory.close();
-		}
-	}
-*/
+
 	@Override
 	public <T> void delete(T entity) {
 		EntityTransaction tx = entitymanager.getTransaction();

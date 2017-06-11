@@ -14,6 +14,9 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 @NoSql(dataFormat=DataFormatType.MAPPED)
 public abstract class User implements Serializable{
 
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	@Field(name="_id")
@@ -51,15 +54,6 @@ public abstract class User implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-/*
-	public boolean isLoginStatus() {
-		return loginStatus;
-	}
-
-	public void setLoginStatus(boolean loginStatus) {
-		this.loginStatus = loginStatus;
-	}
-*/
 
 	public String getFirstName() {
 		return firstName;

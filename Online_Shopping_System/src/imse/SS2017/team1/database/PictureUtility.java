@@ -41,10 +41,9 @@ public class PictureUtility {
 		return Base64.encodeBase64String(pictureData);
 	}
 	
-	//Wird im Grund genommen nicht benötigt-> siehe products.jsp
-	//public static byte[] convertStringToPic(String pictureString){
-		//return Base64.decodeBase64(pictureString);
-	//}
+	public static byte[] convertStringToPic(String pictureString){
+		return Base64.decodeBase64(pictureString);
+	}
 	
 	public static BufferedImage createResizedCopy(Image originalImage, 
             int scaledWidth, int scaledHeight, 

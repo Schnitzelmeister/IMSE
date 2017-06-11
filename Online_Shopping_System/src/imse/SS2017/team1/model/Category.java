@@ -1,15 +1,13 @@
 package imse.SS2017.team1.model;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQuery;
-import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 
 import org.eclipse.persistence.nosql.annotations.NoSql;
@@ -27,14 +25,6 @@ public class Category implements Serializable {
 	@Id
 	@GeneratedValue
 	@Field(name = "_id")
-	private String id;
-
-	public String getId() {
-		return id;
-	}
-
-	/* @Id */
-	// we save categoryId for compatibility with RDBMS
 	private Integer categoryId;
 	private String categoryName;
 
@@ -54,6 +44,4 @@ public class Category implements Serializable {
 		this.categoryName = categoryName;
 	}
 
-	// @OneToMany(mappedBy="category")
-	// private List<ProductBelongsCategory> products;
 }
