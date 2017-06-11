@@ -3,31 +3,39 @@ package imse.SS2017.team1.model;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Transient;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
 
 import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.Field;
 import org.eclipse.persistence.nosql.annotations.NoSql;
 
 @Embeddable
-@NoSql(dataFormat=DataFormatType.MAPPED)
-public class CreditCard implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
+@NoSql(dataFormat = DataFormatType.MAPPED)
+public class CreditCard implements Serializable {
+/*
+	@EmbeddedId
+	@GeneratedValue
+	@Field(name = "_id")
+	private String id;
+*/
 	private String cardNumber;
-	@Transient
 	private String firstName;
-	@Transient
 	private String lastName;
-	private String type; //MasterCard, Visa 
+	private String type; // MasterCard, Visa
 	private String cvv;
 	private Integer expiryMonth;
 	private Integer expiryYear;
-	
-	public CreditCard(){	
+
+	public CreditCard() {
+
 	}
-	
-	public CreditCard(String cardNumber, String firstName, String lastName, String type, String cvv,
+
+	public CreditCard(String id, String cardNumber, String firstName, String lastName, String type, String cvv,
 			Integer expiryMonth, Integer expiryYear) {
+		//this.id = id;
 		this.cardNumber = cardNumber;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -36,88 +44,115 @@ public class CreditCard implements Serializable{
 		this.expiryMonth = expiryMonth;
 		this.expiryYear = expiryYear;
 	}
+/*
+	public void setId(String id){
+		this.id=id;
+	}
 	
-	
+	public String getId() {
+		return id;
+	}
+	*/
 	/**
 	 * @return the cardNumber
 	 */
 	public String getCardNumber() {
 		return cardNumber;
 	}
+
 	/**
-	 * @param cardNumber the cardNumber to set
+	 * @param cardNumber
+	 *            the cardNumber to set
 	 */
 	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
+
 	/**
 	 * @return the firstName
 	 */
 	public String getFirstName() {
 		return firstName;
 	}
+
 	/**
-	 * @param firstName the firstName to set
+	 * @param firstName
+	 *            the firstName to set
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	/**
 	 * @return the lastName
 	 */
 	public String getLastName() {
 		return lastName;
 	}
+
 	/**
-	 * @param lastName the lastName to set
+	 * @param lastName
+	 *            the lastName to set
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 	/**
 	 * @return the type
 	 */
 	public String getType() {
 		return type;
 	}
+
 	/**
-	 * @param type the type to set
+	 * @param type
+	 *            the type to set
 	 */
 	public void setType(String type) {
 		this.type = type;
 	}
+
 	/**
 	 * @return the cvv
 	 */
 	public String getCvv() {
 		return cvv;
 	}
+
 	/**
-	 * @param cvv the cvv to set
+	 * @param cvv
+	 *            the cvv to set
 	 */
 	public void setCvv(String cvv) {
 		this.cvv = cvv;
 	}
+
 	/**
 	 * @return the expiryMonth
 	 */
 	public Integer getExpiryMonth() {
 		return expiryMonth;
 	}
+
 	/**
-	 * @param expiryMonth the expiryMonth to set
+	 * @param expiryMonth
+	 *            the expiryMonth to set
 	 */
 	public void setExpiryMonth(Integer expiryMonth) {
 		this.expiryMonth = expiryMonth;
 	}
+
 	/**
 	 * @return the expiryYear
 	 */
 	public Integer getExpiryYear() {
 		return expiryYear;
 	}
+
 	/**
-	 * @param expiryYear the expiryYear to set
+	 * @param expiryYear
+	 *            the expiryYear to set
 	 */
 	public void setExpiryYear(Integer expiryYear) {
 		this.expiryYear = expiryYear;

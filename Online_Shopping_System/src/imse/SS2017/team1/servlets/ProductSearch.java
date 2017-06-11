@@ -34,7 +34,7 @@ public class ProductSearch extends HttpServlet {
 		try {
 			//SearchEngine engine = new SearchEngineRDBMS();
 			SearchEngine engine = new SearchEngineMongoDB();
-			
+
 			String searchText = request.getParameter("search");
 			int categoryId;
 			try {

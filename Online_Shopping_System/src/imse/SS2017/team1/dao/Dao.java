@@ -29,10 +29,14 @@ public class Dao implements DaoInterface {
 			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw ex;
-		} finally {
 		}
 	}
-
+	
+	public void close() {
+		entitymanager.close();
+		entitymanagerfactory.close();
+	}
+/*
 	public <T> Integer saveAddress(Address entity) {
 		EntityTransaction tx = entitymanager.getTransaction();
 		try {
@@ -44,10 +48,10 @@ public class Dao implements DaoInterface {
 			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw ex;
-		} finally {
+			entitymanagerfactory.close();
 		}
 	}
-
+*/
 	@Override
 	public <T> void delete(T entity) {
 		EntityTransaction tx = entitymanager.getTransaction();
@@ -59,7 +63,6 @@ public class Dao implements DaoInterface {
 			if (tx != null && tx.isActive())
 				tx.rollback();
 			throw ex;
-		} finally {
 		}
 	}
 
@@ -76,6 +79,7 @@ public class Dao implements DaoInterface {
 		try {
 			return (T) entitymanager.find(cls, Id);
 		} finally {
+			entitymanager.close();
 		}
 	}
 
@@ -88,9 +92,11 @@ public class Dao implements DaoInterface {
 	@Override
 	public <T> void updateEntity(Object entity) {
 		EntityTransaction tx = entitymanager.getTransaction();
+		System.out.println("updateEntity has been called");
 		try {
 			tx.begin();
 			entitymanager.merge(entity);
+			System.out.println("after merge");
 			tx.commit();
 		} finally {
 		}

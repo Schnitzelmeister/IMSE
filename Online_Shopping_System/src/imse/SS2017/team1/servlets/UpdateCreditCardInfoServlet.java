@@ -28,7 +28,7 @@ public class UpdateCreditCardInfoServlet extends HttpServlet {
 			DaoInterface dao = new Dao();
 			String email = (String) request.getSession().getAttribute("email");
 			Customer customer = dao.getobject(Customer.class, email);
-			String creditCardNumber = customer.getCreditCardInfo();
+			CreditCard creditCard = customer.getCreditCard();
 
 			String cardNumber = request.getParameter("kreditkartennr");
 			String cvv = request.getParameter("cvv");
@@ -38,21 +38,15 @@ public class UpdateCreditCardInfoServlet extends HttpServlet {
 			String lastNameOncard = request.getParameter("nachnamekreditkarte");
 			String type = request.getParameter("typ");
 
-			if (creditCardNumber == null) {
-				CreditCard newCard = new CreditCard(cardNumber, firstNameOncard, lastNameOncard, type, cvv, expiryMonth,
-						expiryYear);
-				dao.save(newCard);
-				customer.setCreditCardInfo(cardNumber);
+			if (creditCard == null) {
+				CreditCard newCard = new CreditCard(null, cardNumber, firstNameOncard, lastNameOncard, type, cvv, expiryMonth,expiryYear);
+				customer.setCreditCard(newCard);
 				dao.updateEntity(customer);
 				response.sendRedirect(
 						"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kontodaten wurden aktualisiert");
 			} else {
-				CreditCard currentCard = dao.getobject(CreditCard.class, creditCardNumber);
-				CreditCard currentCardforDeletion = dao.getobject(CreditCard.class, creditCardNumber);
-				if (dao.getobject(CreditCard.class, cardNumber) != null)
-					throw new IllegalArgumentException("Die Kreditkarte mit dieser Nummer wird schon benutzt");
-
-				customer.setCreditCardInfo(cardNumber);
+				CreditCard currentCard = customer.getCreditCard();
+		
 				currentCard.setCardNumber(cardNumber);
 				currentCard.setCvv(cvv);
 				currentCard.setExpiryMonth(expiryMonth);
@@ -60,8 +54,7 @@ public class UpdateCreditCardInfoServlet extends HttpServlet {
 				currentCard.setFirstName(firstNameOncard);
 				currentCard.setLastName(lastNameOncard);
 				currentCard.setType(type);
-				dao.updateEntity(currentCard);
-				dao.delete(currentCardforDeletion);
+				customer.setCreditCard(currentCard);
 				dao.updateEntity(customer);
 				response.sendRedirect(
 						"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kontodaten wurden aktualisiert");

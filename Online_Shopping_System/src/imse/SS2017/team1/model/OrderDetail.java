@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Transient;
-
+	
 import org.eclipse.persistence.nosql.annotations.NoSql;
 import org.eclipse.persistence.nosql.annotations.DataFormatType;
 

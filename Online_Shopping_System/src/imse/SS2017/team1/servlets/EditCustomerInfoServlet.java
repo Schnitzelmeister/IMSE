@@ -31,12 +31,11 @@ public class EditCustomerInfoServlet extends HttpServlet {
 			String nachname = request.getParameter("nachname");
 			String telefonr = request.getParameter("telefonnummer");
 			String passwort = request.getParameter("passwort");
-			String kreditkartennr = request.getParameter("kreditkartennummer");
 
 			user.setFirstName(vorname);
 			user.setLastName(nachname);
 			user.setPhoneNumber(telefonr);
-			user.setCreditCardInfo(kreditkartennr);
+
 
 			if (passwort.length() != 0) { //Wenn der Benutzer das Passwortfeld leer lässt wird nichts am Passwort geändert
 				if (passwort.length() < 8)

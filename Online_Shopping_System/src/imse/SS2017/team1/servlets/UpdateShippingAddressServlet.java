@@ -28,7 +28,7 @@ public class UpdateShippingAddressServlet extends HttpServlet {
 			String email = (String) request.getSession().getAttribute("email");
 			DaoInterface dao = new Dao();
 			Customer user = dao.getobject(Customer.class, email);
-			Integer shippingAddress = user.getShippingAddress();
+			Address shippingAddress = user.getShippingAddress();
 			
 			String stadt = request.getParameter("stadts");
 			String strassenname = request.getParameter("strassennames");
@@ -39,19 +39,19 @@ public class UpdateShippingAddressServlet extends HttpServlet {
 			
 			if(shippingAddress == null){
 				Address newAdresse = new Address(null, strassenname, hausnummer, infos, stadt, plz, land);
-				Integer addressId=dao.saveAddress(newAdresse);
-				user.setShippingAddress(addressId);
+				user.setShippingAddress(newAdresse);
 				dao.updateEntity(user);
 				response.sendRedirect("/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kontodaten wurden aktualisiert");
 			}else{
-				Address currentAddress = dao.getobject(Address.class, shippingAddress);
+				Address currentAddress = user.getShippingAddress();
 				currentAddress.setAdditionaolInfo(infos);
 				currentAddress.setCity(stadt);
 				currentAddress.setCountry(land);
 				currentAddress.setPostCode(plz);
 				currentAddress.setStreetName(strassenname);
 				currentAddress.setStreetNumber(hausnummer);
-				dao.updateEntity(currentAddress);
+				user.setShippingAddress(currentAddress);
+				dao.updateEntity(user);
 				response.sendRedirect("/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kontodaten wurden aktualisiert");
 			} 
 		} catch (IllegalArgumentException e) {

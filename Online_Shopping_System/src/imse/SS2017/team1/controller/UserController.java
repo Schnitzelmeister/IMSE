@@ -102,26 +102,24 @@ public class UserController {
 	}
 	
 	public void saveCreditCard(CreditCard creditcard,Customer customer){
-		dao.save(creditcard);
-		customer.setCreditCardInfo(creditcard.getCardNumber());
+		//dao.save(creditcard);
+		customer.setCreditCard(creditcard);
 		dao.updateEntity(customer);
 	}
 	
 	public void saveAddress(Address adress,Customer customer){
 	
-		List<Address> adressen=new Dao().getobjects(Address.class);
-		int max=0;
+		//List<Address> adressen=new Dao().getobjects(Address.class);
+	/*	int max=0;
 		for(int i=0; i<adressen.size();i++){
 			if(adressen.get(i).getAdressId()>max)max=adressen.get(i).getAdressId();
-		}
-		adress.setAdressId(max+1);
-		dao.save(adress);
-		customer.setShippingAddress(adress.getAdressId());
+		}*/
+		//dao.save(adress);
+		customer.setShippingAddress(adress);
 		dao.updateEntity(customer);
 	}
-	
+
 	public void close() {
 		dao.close();
 	}
-	
 }

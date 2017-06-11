@@ -36,7 +36,7 @@ public class NewCreditCard extends HttpServlet {
 		String cvv=request.getParameter("cvv");
 		Integer monat=Integer.parseInt(request.getParameter("monat"));
 		Integer jahr=Integer.parseInt(request.getParameter("jahr"));
-		CreditCard cc=new CreditCard(kartennummer,vorname,nachname,kartentyp,cvv,monat,jahr);
+		CreditCard cc=new CreditCard(null,kartennummer,vorname,nachname,kartentyp,cvv,monat,jahr);
 		
 		
 		Customer customer=(Customer)request.getSession().getAttribute("customer");

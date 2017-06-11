@@ -23,8 +23,8 @@ public class Admin extends User implements Serializable{
 		
 	}
 	
-	public Admin(String emailAddress, String password, String firstName, String lastName, boolean loginStatus, String adminName, Boolean isVerified) {
-		super(emailAddress, password, firstName, lastName, loginStatus);
+	public Admin(String emailAddress, String password, String firstName, String lastName, String adminName, Boolean isVerified) {
+		super(emailAddress, password, firstName, lastName);
 		this.verified = isVerified;
 	}
 
