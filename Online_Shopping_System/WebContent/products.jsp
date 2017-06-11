@@ -1,9 +1,12 @@
 <!DOCTYPE html>
+<%@page import="java.io.FileOutputStream"%>
+<%@page import="imse.SS2017.team1.database.PictureUtility"%>
+<%@page import="imse.SS2017.team1.dao.Dao"%>
+<%@page import="imse.SS2017.team1.model.Image"%>
 <%@page import="imse.SS2017.team1.controller.ProductController"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="imse.SS2017.team1.model.Product"%>
-<%@page import="imse.SS2017.team1.database.PictureUtility"%>
 <%@page import="java.util.List"%>
+<%@page import="imse.SS2017.team1.model.Product"%>
 <html lang="en">
 <head>
   <jsp:include page="defaultsIncludes.jsp"/>
@@ -17,7 +20,7 @@
 <jsp:include page="header.jsp"/>
  <% 
 	ProductController pc=new ProductController();
- 	PictureUtility pic = new PictureUtility();
+
  
 	List<Product> products=pc.getAllProducts();
 	
@@ -31,31 +34,52 @@ for(int i=0,size=products.size(); i<products.size();i+=3,size-=3){
   <%if(size>=3){ %> 
     <div class="col-sm-4">
       <div class="panel panel-primary">
-        <div class="panel-heading"><%=products.get(i+2).getProductName() %></div>
+		<div class="panel-heading"><%=products.get(i+2).getProductName() %><span style="float:right;"><%=products.get(i+2).getPrice() %> Euro</span></div>
         <%--Statt "pictures" muss man das entsprechende Bild einfügen --%>
         <div class="panel-body"><img src="data:image/jpeg;base64,<%=pc.getProductpictures(products.get(i+2).getProductId())%>" style="width:100%" alt="Image"></div>
         <div class="panel-footer"><%=products.get(i+2).getDescription() %></div>
-        <a href="BuyProduct?product=<%=products.get(i+2).getProductId() %>">Kaufen</a>
+               <% if(session.getAttribute("productId_"+products.get(i+2).getProductId())==null && session.getAttribute("customer")!=null) {%>
+          <div style="text-align: center;">
+			<a  href="/Online_Shopping_System/saveInShoppingCart?productId=productId_<%=products.get(i+2).getProductId() %>">in den Warenkorb einlegen</a></div>
+      <%}else if(session.getAttribute("customer")!=null && session.getAttribute("productId_"+products.get(i+2).getProductId())!=null){%>
+      	<div style="text-align: center;"><a style="color: rgb(0,255,0)" href="#"  >Produkt bereits im Warenkorb</a></div>
+      <%} else{%>
+      <div style="text-align: center;"><a  href="products.jsp">Produkt ansehen</a></div>
+     <%} %>      
       </div>
     </div>
     <%}  if(size>=2){ %>
     <div class="col-sm-4"> 
       <div class="panel panel-primary">
-        <div class="panel-heading"><%=products.get(i+1).getProductName() %></div>
+        <div class="panel-heading"><%=products.get(i+1).getProductName() %><span style="float:right;"><%=products.get(i+1).getPrice() %> Euro</span></div>
         <%--Statt "pictures" muss man das entsprechende Bild einfügen --%>
         <div class="panel-body"><img src="data:image/jpeg;base64,<%=pc.getProductpictures(products.get(i+1).getProductId())%>" style="width:100%" alt="Image"></div>
         <div class="panel-footer"><%=products.get(i+1).getDescription() %></div>
-         <a href="BuyProduct?product=<%=products.get(i+1).getProductId() %>">Kaufen</a>
+				<% if(session.getAttribute("productId_"+products.get(i+1).getProductId())==null && session.getAttribute("customer")!=null) {%>
+			<div style="text-align: center;">
+			  <a  href="/Online_Shopping_System/saveInShoppingCart?productId=productId_<%=products.get(i+1).getProductId() %>">in den Warenkorb einlegen</a></div>
+      <%}else if(session.getAttribute("customer")!=null && session.getAttribute("productId_"+products.get(i+1).getProductId())!=null){%>
+      	<div style="text-align: center;"><a style="color: rgb(0,255,0)" href="#"  >Produkt bereits im Warenkorb</a></div>
+      <%} else{%>
+      <div style="text-align: center;"><a  href="products.jsp">Produkt ansehen</a></div>
+     <%} %>
       </div>
     </div>
     <%} if(size>=1){ %>
     <div class="col-sm-4"> 
       <div class="panel panel-primary">
-        <div class="panel-heading"><%=products.get(i).getProductName() %></div>
+        <div class="panel-heading"><%=products.get(i).getProductName() %><span style="float:right;"><%=products.get(i).getPrice() %> Euro</span></div>
         <%--Statt "pictures" muss man das entsprechende Bild einfügen --%>
         <div class="panel-body"><img src="data:image/jpeg;base64,<%=pc.getProductpictures(products.get(i).getProductId())%>" style="width:100%" alt="Image"></div>
         <div class="panel-footer"><%=products.get(i).getDescription() %></div>
-         <a href="BuyProduct?product=<%=products.get(i).getProductId() %>">Kaufen</a>
+				<% if(session.getAttribute("productId_"+products.get(i).getProductId())==null && session.getAttribute("customer")!=null) {%>
+			<div style="text-align: center;">
+			  <a  href="/Online_Shopping_System/saveInShoppingCart?productId=productId_<%=products.get(i).getProductId() %>">in den Warenkorb einlegen</a></div>
+      <%}else if(session.getAttribute("customer")!=null &&session.getAttribute("productId_"+(Integer)products.get(i).getProductId())!=null){%>
+      	<div style="text-align: center;"><a style="color: rgb(0,255,0)" href="#">Produkt bereits im Warenkorb</a></div>
+      <%} else{%>
+      <div style="text-align: center;"><a  href="products.jsp">Produkt ansehen</a></div>
+     <%} %>
       </div>
     </div>
     <%} %>

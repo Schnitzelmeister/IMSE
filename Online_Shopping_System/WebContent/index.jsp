@@ -13,23 +13,8 @@
 
 
 	<jsp:include page="header.jsp" /> 
+		<h1 style="text-align: center;">
 
-
-
-
-
-
-	<form class="login-form" method="post" action="login">
-			
-		<input type="text" name="email" placeholder="e-mail adresse" /> <input
-			type="password" name="passwort" placeholder="password" /> <input type="submit"
-			value="Login" />
-		<p class="message">
-			Not registered? <a
-				href="newaccount.jsp">Create
-				an account</a>
-		</p>
-	</form>
 
 
 <% 
@@ -49,7 +34,15 @@ ${infoMessage}
 <% 
 }       
 %>
-      
+
+</h1><br>
+	<form class="login-form" method="post" action="login">
+			<input type="text" name="email" placeholder="e-mail adresse" /> 
+			<input type="password" name="passwort" placeholder="password" /> 
+			<input type="submit"value="Login" />
+			<p class="message">	Not registered? <a href="newaccount.jsp">Create	an account</a></p>
+	</form>
+  
 
 
 </body>
