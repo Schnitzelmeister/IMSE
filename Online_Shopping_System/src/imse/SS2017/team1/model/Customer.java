@@ -10,10 +10,8 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 @NoSql(dataFormat=DataFormatType.MAPPED)
 public class Customer extends User {
 	
-	// @Embedded 
-	private Address shippingAddress;
-	// @Embedded
-	private Address billingAddress;
+    @Embedded private Address shippingAddress;
+	@Embedded private Address billingAddress;
 	@Embedded private CreditCard creditCard;
 			  private String phoneNumber;
 
