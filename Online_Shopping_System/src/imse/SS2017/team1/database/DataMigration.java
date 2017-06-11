@@ -54,8 +54,8 @@ public class DataMigration {
 		DataMigration dm=	new DataMigration();
 		
 		//dm.migrateAdress();
-		//dm.migrateCustomer();
-		dm.migrateAdmin();
+		dm.migrateCustomer();
+		//dm.migrateAdmin();
 		//dm.migrateCategory();
 		//dm.migrateProduct();
 		//dm.migrateCustomerOrder();
@@ -101,11 +101,13 @@ public class DataMigration {
 	private void migrateCustomer() {
 		Customer customer = new Customer();
 		CreditCard creditcard = new CreditCard();
+		Address address = new Address();
 		
 		try {
 
 			ResultSet resultset = statement.executeQuery("SELECT * FROM customer");
 			ResultSet resultsetCreditCards = null;
+			ResultSet resultsetDelAddress = null;
 
 			try {
 				
@@ -117,6 +119,10 @@ public class DataMigration {
 						resultsetCreditCards = statement2.executeQuery("SELECT * FROM creditcard WHERE cardnumber='" +
 								((String) resultset.getObject(i+5))+"'");
 						int numColumnsCreditCard = resultsetCreditCards.getMetaData().getColumnCount();
+						
+						resultsetDelAddress = statement3.executeQuery("SELECT * FROM address WHERE addressID="+
+								((Integer) resultset.getObject(i+6)));
+						int numColumnsDelAddress = resultsetDelAddress.getMetaData().getColumnCount();
 						
 						customer = new Customer();
 						customer.setEmailAddress((String) resultset.getObject(i));
@@ -141,6 +147,21 @@ public class DataMigration {
 							}
 						}
 						customer.setCreditCard(creditcard);
+						
+						while (resultsetDelAddress.next()){
+							for(int k = 1; k <= numColumnsDelAddress; k += 7){
+								address = new Address();
+								address.setAdressId(Integer.valueOf(String.valueOf(resultsetDelAddress.getObject(k))));
+								address.setStreetName((String) resultsetDelAddress.getObject(k+1));
+								address.setStreetNumber((String) resultsetDelAddress.getObject(k+2));
+								address.setAdditionaolInfo((String) resultsetDelAddress.getObject(k+3));
+								address.setCity((String) resultsetDelAddress.getObject(k+4));
+								address.setPostCode((String) resultsetDelAddress.getObject(k+5));
+								address.setCountry((String) resultsetDelAddress.getObject(k+6));
+							}
+						}
+						customer.setShippingAdr(address);
+						customer.setBillingAdr(address);
 						
 						dao.save(customer);
 					}

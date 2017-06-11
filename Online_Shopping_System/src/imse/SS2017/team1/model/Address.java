@@ -13,7 +13,7 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 public class Address implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String addressId;
+	private Integer addressId;
 	private String streetName;
 	private String streetNumber;
 	private String additionalInfo;
@@ -25,7 +25,7 @@ public class Address implements Serializable {
 
 	}
 
-	public Address(String addressId, String streetName, String streetNumber, String additionalInfo, String city,
+	public Address(Integer addressId, String streetName, String streetNumber, String additionalInfo, String city,
 			String postCode, String country) {
 		this.addressId = addressId;
 		this.streetName = streetName;
@@ -37,11 +37,11 @@ public class Address implements Serializable {
 	}
 
 
-	public String getAdressId() {
+	public Integer getAdressId() {
 		return addressId;
 	}
 
-	public void setAdressId(String adressId) {
+	public void setAdressId(Integer adressId) {
 		this.addressId = adressId;
 	}
 	
