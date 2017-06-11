@@ -104,7 +104,7 @@ public class LoginServlet extends HttpServlet {
 				ProductController productController = new ProductController();
 				List<Product> products = productController.GetAllProducts();
 
-				session.setAttribute("products", products);
+				//am 09-06 // session.setAttribute("products", products);
 
 				// request.setAttribute("products", products);
 				// RequestDispatcher
