@@ -45,7 +45,7 @@ public class RegistrationServlet extends HttpServlet {
 
 			controls.verifyUserInput(firstname, lastname, email, password, telephonenr);
 
-			Customer newCustomer = new Customer(email, password, firstname, lastname, true, null, null, telephonenr);
+			Customer newCustomer = new Customer(email, password, firstname, lastname, null, null, telephonenr);
 			controls.registerCustomer(newCustomer);
 			response.sendRedirect(
 					"/Online_Shopping_System/index.jsp?infoMessage=Das Konto wurde erfolgreich erstellt, melden Sie sich bitte an");

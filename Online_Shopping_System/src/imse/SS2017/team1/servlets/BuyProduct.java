@@ -43,14 +43,14 @@ public class BuyProduct extends HttpServlet {
 		
 		
 		try {
-			if((customer==null || customer.getCreditCardInfo()==null)){
+			if((customer==null || customer.getCreditCard()==null)){
 				
 				request.getRequestDispatcher("newCreditCard.jsp").forward(request, response);
 				
 			}
 			
 			else{
-				request.setAttribute("CreditCard", customer.getCreditCardInfo());
+				request.setAttribute("CreditCard", customer.getCreditCard());
 				request.getRequestDispatcher("updateCreditCard.jsp").forward(request, response);
 			}
 			

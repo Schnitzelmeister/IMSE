@@ -2,43 +2,48 @@ package imse.SS2017.team1.model;
 
 import javax.persistence.*;
 
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.NoSql;
+
 @Entity
 @Table(name = "Customer")
+@NoSql(dataFormat=DataFormatType.MAPPED)
 public class Customer extends User {
 	
-	private Integer shippingAddressId;
-	private Integer billingAddressId;
-	private String phoneNumber;
-
-	private String creditCardNumber;
+	// @Embedded 
+	private Address shippingAddress;
+	// @Embedded
+	private Address billingAddress;
+	@Embedded private CreditCard creditCard;
+			  private String phoneNumber;
 
 	public Customer() {
 
 	}
 
-	public Customer(String emailAddress, String password, String firstName, String lastName, boolean loginStatus,
-			Integer shippingAddressId, Integer billingAddressId, String phoneNumber) {
-		super(emailAddress, password, firstName, lastName, loginStatus);
+	public Customer(String emailAddress, String password, String firstName, String lastName,
+			Address shippingAddress, Address billingAddress, String phoneNumber) {
+		super(emailAddress, password, firstName, lastName);
 		this.phoneNumber = phoneNumber;
-		this.shippingAddressId = shippingAddressId;
-		this.billingAddressId = billingAddressId;
-		this.creditCardNumber = null;
+		this.shippingAddress = shippingAddress;
+		this.billingAddress = billingAddress;
+		this.creditCard = null;
 	}
 
-	public Integer getShippingAddress() {
-		return shippingAddressId;
+	public Address getShippingAddress() {
+		return shippingAddress;
 	}
 
-	public void setShippingAddress(Integer shippingAddress) {
-		this.shippingAddressId = shippingAddress;
+	public void setShippingAddress(Address shippingAddress) {
+		this.shippingAddress = shippingAddress;
 	}
 
-	public Integer getBillingAddress() {
-		return billingAddressId;
+	public Address getBillingAddress() {
+		return billingAddress;
 	}
 
-	public void setBillingAddress(Integer billingAddress) {
-		this.billingAddressId = billingAddress;
+	public void setBillingAddress(Address billingAddress) {
+		this.billingAddress = billingAddress;
 	}
 
 	public String getPhoneNumber() {
@@ -49,11 +54,11 @@ public class Customer extends User {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getCreditCardInfo() {
-		return creditCardNumber;
+	public CreditCard getCreditCard() {
+		return creditCard;
 	}
 
-	public void setCreditCardInfo(String creditCard) {
-		this.creditCardNumber = creditCard;
+	public void setCreditCard(CreditCard creditCard) {
+		this.creditCard = creditCard;
 	}
 }

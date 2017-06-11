@@ -30,9 +30,9 @@ public class LoadCustomerInfoServlet extends HttpServlet {
 		String firstName = user.getFirstName();
 		String lastName = user.getLastName();
 		String phoneNumber = user.getPhoneNumber();
-		String creditCard = user.getCreditCardInfo();
-		Integer shippingAddressId = user.getShippingAddress();
-		Integer billingAddressId = user.getBillingAddress();
+		CreditCard creditCard = user.getCreditCard();
+		Address shippingAddress = user.getShippingAddress();
+		Address billingAddress = user.getBillingAddress();
 
 		request.setAttribute("email", emailAdress);
 		request.setAttribute("vorname", firstName);
@@ -40,15 +40,13 @@ public class LoadCustomerInfoServlet extends HttpServlet {
 		request.setAttribute("telefonnummer", phoneNumber);
 
 		if (creditCard != null) {
-			CreditCard card = (CreditCard) dao.getobject(CreditCard.class, creditCard);
-
-			Integer expiryMonth = card.getExpiryMonth();
-			Integer expiryYear = card.getExpiryYear();
-			String cardNumber = card.getCardNumber();
-			String cvv = card.getCvv();
-			String firstNameOncard = card.getFirstName();
-			String lastNameOncard = card.getLastName();
-			String type = card.getType();
+			Integer expiryMonth = creditCard.getExpiryMonth();
+			Integer expiryYear = creditCard.getExpiryYear();
+			String cardNumber = creditCard.getCardNumber();
+			String cvv = creditCard.getCvv();
+			String firstNameOncard = creditCard.getFirstName();
+			String lastNameOncard = creditCard.getLastName();
+			String type = creditCard.getType();
 
 			request.setAttribute("kreditkartennr", cardNumber);
 			request.setAttribute("vornamekreditkarte", firstNameOncard);
@@ -59,8 +57,7 @@ public class LoadCustomerInfoServlet extends HttpServlet {
 			request.setAttribute("gueltigbisjahr", Integer.toString(expiryYear));
 		}
 
-		if (billingAddressId != null) {
-			Address billingAddress = (Address) dao.getobject(Address.class, billingAddressId);
+		if (billingAddress != null) {
 			String city = billingAddress.getCity();
 			String country = billingAddress.getCountry();
 			String postCode = billingAddress.getPostCode();
@@ -76,8 +73,7 @@ public class LoadCustomerInfoServlet extends HttpServlet {
 			request.setAttribute("infor", additionalInfo);
 		}
 
-		if (shippingAddressId != null) {
-			Address shippingAddress = (Address) dao.getobject(Address.class, shippingAddressId);
+		if (shippingAddress != null) {
 			String city = shippingAddress.getCity();
 			String country = shippingAddress.getCountry();
 			String postCode = shippingAddress.getPostCode();

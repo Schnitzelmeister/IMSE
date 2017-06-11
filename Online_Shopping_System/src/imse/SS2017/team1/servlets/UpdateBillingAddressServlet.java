@@ -28,7 +28,8 @@ public class UpdateBillingAddressServlet extends HttpServlet {
 			String email = (String) request.getSession().getAttribute("email");
 			DaoInterface dao = new Dao();
 			Customer user = dao.getobject(Customer.class, email);
-			Integer billingAddressId = user.getBillingAddress();
+			Address billingAddress = user.getBillingAddress();
+			
 			
 			String stadt = request.getParameter("stadtr");
 			String strassenname = request.getParameter("strassennamer");
@@ -37,14 +38,15 @@ public class UpdateBillingAddressServlet extends HttpServlet {
 			String plz = request.getParameter("plzr");
 			String infos = request.getParameter("infor");
 			
-			if(billingAddressId == null){
-				Address newAdresse = new Address(null, strassenname, hausnummer, infos, stadt, plz, land);
-				Integer addressId=dao.saveAddress(newAdresse);
-				user.setBillingAddress(addressId);
+			System.out.println("Daten sind da");
+			
+			if(billingAddress == null){
+				Address newAdresse = new Address("", strassenname, hausnummer, infos, stadt, plz, land);
+				user.setBillingAddress(newAdresse);
 				dao.updateEntity(user);
 				response.sendRedirect("/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kontodaten wurden aktualisiert");
 			}else{
-				Address currentAddress = dao.getobject(Address.class, billingAddressId);
+				Address currentAddress = user.getBillingAddress();
 				currentAddress.setAdditionaolInfo(infos);
 				currentAddress.setCity(stadt);
 				currentAddress.setCountry(land);

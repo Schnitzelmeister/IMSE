@@ -47,13 +47,13 @@ public class CheckAddress extends HttpServlet {
 		String stadt=request.getParameter("stadt");
 		String plz=request.getParameter("plz");
 		String land=request.getParameter("land");
-		Address adr=new Address(strassenname,strassennummer,zusatzadresse,stadt,plz,land);
+	/*	Address adr=new Address(strassenname,strassennummer,zusatzadresse,stadt,plz,land);
 		
 		
 		Customer customer=(Customer)request.getSession().getAttribute("customer");
 		usercontroller.saveAddress(adr, customer);
 		
-		response.sendRedirect("NewBillingAdress.jsp");
+		response.sendRedirect("NewBillingAdress.jsp");*/
 		
 	}
 

@@ -8,7 +8,7 @@ public interface DaoInterface {
 	
 	public <T> void save(T entity);
 
-	public <T> Integer saveAddress(Address entity);
+	//public <T> Integer saveAddress(Address entity);
 	
 	public <T> void delete(T entity);
 

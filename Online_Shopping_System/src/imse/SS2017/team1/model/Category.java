@@ -20,39 +20,40 @@ import org.eclipse.persistence.nosql.annotations.Field;
 
 @Entity
 @Table(name = "category")
-@NoSql(dataFormat=DataFormatType.MAPPED)
+@NoSql(dataFormat = DataFormatType.MAPPED)
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
-	@Field(name="_id")
+	@Field(name = "_id")
 	private String id;
+
 	public String getId() {
 		return id;
 	}
 
-	/*@Id*/
-	//we save categoryId for compatibility with RDBMS
+	/* @Id */
+	// we save categoryId for compatibility with RDBMS
 	private Integer categoryId;
 	private String categoryName;
-	
+
 	public Integer getCategoryId() {
 		return categoryId;
 	}
-	
+
 	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
-	
+
 	public String getCategoryName() {
 		return categoryName;
 	}
-	
+
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	
-	//@OneToMany(mappedBy="category")
-	//private List<ProductBelongsCategory> products;
+
+	// @OneToMany(mappedBy="category")
+	// private List<ProductBelongsCategory> products;
 }

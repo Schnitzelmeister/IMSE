@@ -1,17 +1,25 @@
 package imse.SS2017.team1.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
+
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.Field;
+import org.eclipse.persistence.nosql.annotations.NoSql;
 
 
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User {
+@NoSql(dataFormat=DataFormatType.MAPPED)
+public abstract class User implements Serializable{
 
 	@Id
+	@GeneratedValue
+	@Field(name="_id")
 	private String emailAddress;
 	
 	private String password;
-	//private boolean loginStatus;
 	
 	private String firstName;
 	private String lastName;
@@ -20,12 +28,11 @@ public abstract class User {
 		
 	}
 	
-	public User(String emailAddress, String password, String firstName, String lastName, boolean loginStatus) {
+	public User(String emailAddress, String password, String firstName, String lastName) {
 		this.emailAddress = emailAddress;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		//this.loginStatus = loginStatus;
 	}
 
 	

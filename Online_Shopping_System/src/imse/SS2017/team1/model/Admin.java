@@ -2,8 +2,12 @@ package imse.SS2017.team1.model;
 
 import javax.persistence.*;
 
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.NoSql;
+
 @Entity
 @Table(name = "Admin")
+@NoSql(dataFormat=DataFormatType.MAPPED)
 public class Admin extends User {
 	
 	//muss noch im Create Table auf Boolean geändert werden
@@ -14,8 +18,8 @@ public class Admin extends User {
 		
 	}
 	
-	public Admin(String emailAddress, String password, String firstName, String lastName, boolean loginStatus, String adminName, Boolean isVerified) {
-		super(emailAddress, password, firstName, lastName, loginStatus);
+	public Admin(String emailAddress, String password, String firstName, String lastName, String adminName, Boolean isVerified) {
+		super(emailAddress, password, firstName, lastName);
 		this.verified = isVerified;
 	}
 

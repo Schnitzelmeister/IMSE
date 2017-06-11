@@ -131,6 +131,7 @@
                                     </form>
                                 </div>
                                 <div class="tab-pane fade" id="tab2primary">
+                                <form method="POST" action="../../updatecreditcard">
                                     <div class="form-group">
                                         <label for="name" class="cols-sm-2 control-label">Kreditkartennummer:</label>
                                         <div class="cols-sm-10">
