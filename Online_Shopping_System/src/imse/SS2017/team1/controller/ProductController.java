@@ -56,7 +56,7 @@ public class ProductController {
 		Product product = new Product();
 		Image image = new Image();
 		for(int i=0;i<5;++i){
-			if(!images.get(i).isEmpty()){
+			if(!images.get(i).isEmpty() && images.get(i).contains("data:image/jpeg;base64,")){
 				image = new Image();
 				image.setImageString(images.get(i).replaceAll("data:image/jpeg;base64,", ""));
 				image.setImageId(i+1);
@@ -81,7 +81,7 @@ public class ProductController {
 		Product product = dao.getobject(Product.class, productId);
 		Image image = new Image();
 		for(int i=0;i<5;++i){
-			if(!images.get(i).isEmpty()){
+			if(!images.get(i).isEmpty() && images.get(i).contains("data:image/jpeg;base64,")) {
 				image = new Image();
 				image.setImageString(images.get(i).replaceAll("data:image/jpeg;base64,", ""));
 				image.setImageId(i+1);

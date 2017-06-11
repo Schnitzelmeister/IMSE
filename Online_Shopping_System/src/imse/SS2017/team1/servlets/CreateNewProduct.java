@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import imse.SS2017.team1.controller.CategoryController;
 import imse.SS2017.team1.controller.ProductController;
+import imse.SS2017.team1.filter.Validator;
 import imse.SS2017.team1.model.Category;
 
 @WebServlet("/CreateNewProduct")
@@ -43,6 +44,7 @@ public class CreateNewProduct extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		ProductController productController = new ProductController();
+		Validator validator = new Validator();
 		
 		String adminTyp = null;
 		if(request.getSession().getAttribute("adminType")!=null){
@@ -52,9 +54,9 @@ public class CreateNewProduct extends HttpServlet {
 		request.setAttribute("IsAdminChief", adminTyp.equals("chiefadmin"));
 		
 		String productName = request.getParameter("productName");
-		Float price = Float.valueOf(request.getParameter("productPrice"));
+		String price = request.getParameter("productPrice");
 		String description = request.getParameter("productDescription");
-		Integer quantity = Integer.valueOf(request.getParameter("productQuantity"));
+		String quantity = request.getParameter("productQuantity");
 		List<String> images = new ArrayList<String>();
 		
 		images.add(request.getParameter("image"));
@@ -63,7 +65,23 @@ public class CreateNewProduct extends HttpServlet {
 		images.add(request.getParameter("image4"));
 		images.add(request.getParameter("image5"));
 		
-		productController.createProduct(productName, price, description, quantity, images);
+		if(validator.isProductNameOk(productName)){
+			if(validator.isQuantityOk(quantity)){
+				if(validator.isPriceOk(price)){
+					if(validator.isDescriptionOk(description)){
+						productController.createProduct(productName, Float.valueOf(price.replaceAll(",", ".")), description, Integer.valueOf(quantity), images);					
+					} else {
+						System.out.println("Fehler in der Beschreibung!");
+					}
+				} else {
+					System.out.println("Fehler beim Preis!");
+				}
+			} else {
+				System.out.println("Fehler bei Anzahl!");
+			}
+		} else {
+			System.out.println("Bitte geben Sie einen aussagekräftigen Produktnamen ein!");
+		}
 		
 		doGet(request,response);
 		

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import imse.SS2017.team1.controller.CategoryController;
+import imse.SS2017.team1.filter.Validator;
 import imse.SS2017.team1.model.Category;
 
 @WebServlet("/CreateNewProductCategory")
@@ -38,6 +39,7 @@ public class CreateNewProductCategory extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		CategoryController categoryController = new CategoryController();
+		Validator validator = new Validator();
 		
 		String adminTyp = null;
 		if(request.getSession().getAttribute("adminType")!=null){
@@ -48,7 +50,11 @@ public class CreateNewProductCategory extends HttpServlet {
 		
 		String categoryName = request.getParameter("productCategoryName");
 		
-		categoryController.createCategory(categoryName);
+		if(validator.isCategoryNameOk(categoryName)){
+			categoryController.createCategory(categoryName);			
+		} else {
+			System.out.println("Bitte geben Sie einen aussagekräftigen Kategorienamen ein!");
+		}
 		
 		doGet(request,response);
 		

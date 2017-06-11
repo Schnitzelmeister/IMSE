@@ -98,5 +98,5 @@ public class NoSqlJunit {
 		
 		dao.updateEntity(product);
 	}
-
+	
 }

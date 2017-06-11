@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import imse.SS2017.team1.controller.CategoryController;
 import imse.SS2017.team1.controller.ProductController;
+import imse.SS2017.team1.filter.Validator;
 import imse.SS2017.team1.model.Category;
 import imse.SS2017.team1.model.Product;
 
@@ -57,23 +58,12 @@ public class EditProduct extends HttpServlet {
 		request.setAttribute("IsAdminChief", adminTyp.equals("chiefadmin"));
 		
 		ProductController productController = new ProductController();
-		Integer quantity = null;
-		Float price = null;
-		String description = null;
-		String productName = null;
+		Validator validator = new Validator();
 		
-		if(!request.getParameter("productName").equals("Produktname")){
-			productName = request.getParameter("productName");
-		}
-		if(!request.getParameter("productPrice").equals("Preis")){
-			price = Float.valueOf(request.getParameter("productPrice"));
-		}
-		if(!request.getParameter("productDescription").equals("Beschreibung....")){
-			description = request.getParameter("description");
-		}
-		if(!request.getParameter("productQuantity").equals("Anzahl")){
-			quantity = Integer.valueOf(request.getParameter("productQuantity"));
-		}
+		String productName = request.getParameter("productName");
+		String quantity = request.getParameter("productQuantity");
+		String price = request.getParameter("productPrice");
+		String description = request.getParameter("description");		
 		Integer productId = Integer.valueOf(request.getParameter("productId").replaceAll("\\D+", ""));
 	
 		List<String> images = new ArrayList<String>();
@@ -84,7 +74,23 @@ public class EditProduct extends HttpServlet {
 		images.add(request.getParameter("image4"));
 		images.add(request.getParameter("image5"));
 		
-		productController.updateProduct(productId, productName, price, description, quantity, images);
+		if(validator.isProductNameOk(productName)){
+			if(validator.isQuantityOk(quantity)){
+				if(validator.isPriceOk(price)){
+					if(validator.isDescriptionOk(description)){
+						productController.updateProduct(productId, productName, Float.valueOf(price), description, Integer.valueOf(quantity), images);					
+					} else {
+						System.out.println("Fehler in der Beschreibung!");
+					}
+				} else {
+					System.out.println("Fehler beim Preis!");
+				}
+			} else {
+				System.out.println("Fehler bei Anzahl!");
+			}
+		} else {
+			System.out.println("Bitte geben Sie einen aussagekräftigen Produktnamen ein!");
+		}
 		
 		doGet(request,response);
 		
