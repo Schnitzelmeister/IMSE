@@ -109,24 +109,35 @@ tr:nth-child(even) {
 		<p class="w3-left">Online_Shopping_System</p>
 		</header>
 
-		<form name="deletekun" action="DeleteUser" method="POST">
-			<!-- list header -->
-			<div class="w3-display-container w3-container">
-				<ul class="w3-ul w3-card-4">
-					<c:forEach var="i" begin="0" end="${anzahl1}" step="1">
-						<li>
-							<div>
-								<input type="submit" value="Lösche Kunden: ${emails1.get(i)}"
-									name="deletedCustomerEmail"
-									class="w3-button w3-red w3-small w3-right" />
-							</div> <span class="w3-large">Nachname: ${names1.get(i)}</span><br>
-							<span>Vorname: ${surNames1.get(i)}</span>
-						</li>
-					</c:forEach>
-				</ul>
-				<div class="w3-black w3-center w3-padding-24"></div>
-			</div>
-		</form>
+		<c:choose>
+			<c:when test="${isUserAvailable==true}">
+
+				<form name="deletekun" action="DeleteUser" method="POST">
+					<!-- list header -->
+					<div class="w3-display-container w3-container">
+						<ul class="w3-ul w3-card-4">
+							<c:forEach var="i" begin="0" end="${anzahl1}" step="1">
+								<li>
+									<div>
+										<input type="submit" value="Lösche Kunden: ${emails1.get(i)}"
+											name="deletedCustomerEmail"
+											class="w3-button w3-red w3-small w3-right" />
+									</div> <span class="w3-large">Nachname: ${names1.get(i)}</span><br>
+									<span>Vorname: ${surNames1.get(i)}</span>
+								</li>
+							</c:forEach>
+						</ul>
+						<div class="w3-black w3-center w3-padding-24"></div>
+					</div>
+				</form>
+
+			</c:when>
+			<c:otherwise>
+				<div>
+					<p>Es sind keine User vorhanden!</p>
+				</div>
+			</c:otherwise>
+		</c:choose>
 
 		<!-- End page content -->
 	</div>

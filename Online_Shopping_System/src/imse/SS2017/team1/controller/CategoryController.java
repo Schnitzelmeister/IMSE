@@ -44,6 +44,9 @@ public class CategoryController {
 	
 	public Integer generateId(){
 		List<Category> categories = getAllCategories();
+		if(categories.isEmpty()){
+			return 1;
+		}
 		return categories.get(categories.size()-1).getCategoryId()+1;
 	}
 	

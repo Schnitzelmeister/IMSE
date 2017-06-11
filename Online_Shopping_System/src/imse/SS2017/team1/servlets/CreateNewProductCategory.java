@@ -20,6 +20,8 @@ public class CreateNewProductCategory extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String adminTyp = null;
+		Boolean isProductCategoryAvailable = false;
+		
 		if(request.getSession().getAttribute("adminType")!=null){
 			adminTyp = request.getSession().getAttribute("adminType").toString();
 		}
@@ -29,10 +31,15 @@ public class CreateNewProductCategory extends HttpServlet {
 		CategoryController categoryController = new CategoryController();
 		List<Category> categories = categoryController.getAllCategories();
 		Integer productCatCount = categories.size();
+		
+		if(productCatCount>0){
+			isProductCategoryAvailable=true;
+		}
 		productCatCount--;
 		
 		request.setAttribute("productCatCount1", productCatCount);
 		request.setAttribute("categories1", categories);
+		request.setAttribute("isProductCategoryAvailable", isProductCategoryAvailable);
 		request.getRequestDispatcher("/createNewProductCategory.jsp").forward(request,response);
 	}
 	

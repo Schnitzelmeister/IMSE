@@ -110,65 +110,76 @@ tr:nth-child(even) {
 		<p class="w3-left">Online_Shopping_System</p>
 		</header>
 
-		<form name="createProd" action="CreateNewProduct" method="POST">
-			<!-- list header -->
-			<div class="w3-display-container w3-container">
-				<table>
-					<tr>
-						<th><input type="text" name="productName" value="Produktname"
-							style="width: 100%"></th>
-					</tr>
-					<tr>
-						<th><select style="width: 100%">
-								<c:forEach var="i" begin="0" end="${anzahl3}" step="1">
-									<option value="${categories2.get(i).getCategoryId()}">${categories2.get(i).getCategoryName()}</option>
-								</c:forEach>
-						</select></th>
-					</tr>
-					<tr>
-						<th><input type="text" name="productQuantity" value="Anzahl"
-							style="width: 45%"></th>
-					</tr>
-					<tr>
-						<th><input type="text" name="productPrice" value="Preis"
-							style="width: 45%"></th>
-					</tr>
-					<tr>
-						<th><label for="picture">1.Bild</label> <input type="file"
-							id="picture"> <input type="text" hidden name="image"
-							id="pictureValue"></th>
-					</tr>
-					<tr>
-						<th><label for="picture">2.Bild</label> <input type="file"
-							id="picture2"> <input type="text" hidden name="image2"
-							id="pictureValue2"></th>
-					</tr>
-					<tr>
-						<th><label for="picture">3.Bild</label> <input type="file"
-							id="picture3"> <input type="text" hidden name="image3"
-							id="pictureValue3"></th>
-					</tr>
-					<tr>
-						<th><label for="picture">4.Bild</label> <input type="file"
-							id="picture4"> <input type="text" hidden name="image4"
-							id="pictureValue4"></th>
-					</tr>
-					<tr>
-						<th><label for="picture">5.Bild</label> <input type="file"
-							id="picture5"> <input type="text" hidden name="image5"
-							id="pictureValue5"></th>
-					</tr>
-					<tr>
-						<th><TEXTAREA ROWS=10 COLS=110% name="productDescription">Beschreibung....</TEXTAREA></th>
-					</tr>
-					<tr>
-						<th><input type="submit" value="Hinzufügen"
-							style="width: 45%; height: 50px; background-color: green; color: white"></th>
-					</tr>
-				</table>
+		<c:choose>
+			<c:when test="${isCategoryAvailable==true}">
 
-			</div>
-		</form>
+				<form name="createProd" action="CreateNewProduct" method="POST">
+					<!-- list header -->
+					<div class="w3-display-container w3-container">
+						<table>
+							<tr>
+								<th><input type="text" name="productName"
+									value="Produktname" style="width: 100%"></th>
+							</tr>
+							<tr>
+								<th><select style="width: 100%">
+										<c:forEach var="i" begin="0" end="${anzahl3}" step="1">
+											<option value="${categories2.get(i).getCategoryId()}">${categories2.get(i).getCategoryName()}</option>
+										</c:forEach>
+								</select></th>
+							</tr>
+							<tr>
+								<th><input type="text" name="productQuantity"
+									value="Anzahl" style="width: 45%"></th>
+							</tr>
+							<tr>
+								<th><input type="text" name="productPrice" value="Preis"
+									style="width: 45%"></th>
+							</tr>
+							<tr>
+								<th><label for="picture">1.Bild</label> <input type="file"
+									id="picture"> <input type="text" hidden name="image"
+									id="pictureValue"></th>
+							</tr>
+							<tr>
+								<th><label for="picture">2.Bild</label> <input type="file"
+									id="picture2"> <input type="text" hidden name="image2"
+									id="pictureValue2"></th>
+							</tr>
+							<tr>
+								<th><label for="picture">3.Bild</label> <input type="file"
+									id="picture3"> <input type="text" hidden name="image3"
+									id="pictureValue3"></th>
+							</tr>
+							<tr>
+								<th><label for="picture">4.Bild</label> <input type="file"
+									id="picture4"> <input type="text" hidden name="image4"
+									id="pictureValue4"></th>
+							</tr>
+							<tr>
+								<th><label for="picture">5.Bild</label> <input type="file"
+									id="picture5"> <input type="text" hidden name="image5"
+									id="pictureValue5"></th>
+							</tr>
+							<tr>
+								<th><TEXTAREA ROWS=10 COLS=110% name="productDescription">Beschreibung....</TEXTAREA></th>
+							</tr>
+							<tr>
+								<th><input type="submit" value="Hinzufügen"
+									style="width: 45%; height: 50px; background-color: green; color: white"></th>
+							</tr>
+						</table>
+
+					</div>
+				</form>
+
+			</c:when>
+			<c:otherwise>
+				<div>
+					<p>Es sind keine Kategorien vorhanden. -> Fügen Sie zuerst eine Kategorie ein!</p>
+				</div>
+			</c:otherwise>
+		</c:choose>
 
 		<!-- End page content -->
 	</div>

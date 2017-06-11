@@ -109,28 +109,39 @@ tr:nth-child(even) {
 		<p class="w3-left">Online_Shopping_System</p>
 		</header>
 
-		<form name="verifyAdm" action="VerifyAdmins" method="POST">
-			<!-- list header -->
-			<div class="w3-display-container w3-container">
-				<ul class="w3-ul w3-card-4">
-					<c:forEach var="i" begin="0" end="${anzahl2}" step="1">
-						<li>
-							<div>
-								<input type="submit"
-									value="Verifiziere Admin: ${emails2.get(i)}"
-									name="verifiedAdminEmail"
-									class="w3-button w3-green w3-small w3-right" />
-							</div> <span class="w3-large">Nachname: ${names2.get(i)}</span><br>
-							<span>Vorname: ${surNames2.get(i)}</span>
-						</li>
-					</c:forEach>
-				</ul>
-				<div class="w3-black w3-center w3-padding-24"></div>
-			</div>
-		</form>
+		<c:choose>
+			<c:when test="${isAdminAvailable==true}">
 
-		<!-- End page content -->
+				<form name="verifyAdm" action="VerifyAdmins" method="POST">
+					<!-- list header -->
+					<div class="w3-display-container w3-container">
+						<ul class="w3-ul w3-card-4">
+							<c:forEach var="i" begin="0" end="${anzahl2}" step="1">
+								<li>
+									<div>
+										<input type="submit"
+											value="Verifiziere Admin: ${emails2.get(i)}"
+											name="verifiedAdminEmail"
+											class="w3-button w3-green w3-small w3-right" />
+									</div> <span class="w3-large">Nachname: ${names2.get(i)}</span><br>
+									<span>Vorname: ${surNames2.get(i)}</span>
+								</li>
+							</c:forEach>
+						</ul>
+						<div class="w3-black w3-center w3-padding-24"></div>
+					</div>
+				</form>
+
+				<!-- End page content -->
 	</div>
+
+			</c:when>
+			<c:otherwise>
+				<div>
+					<p>Es koennen keine weiteren Hilfs-admins verifiziert werden!</p>
+				</div>
+			</c:otherwise>
+		</c:choose>
 
 	</c:when>
 	<c:otherwise>

@@ -23,6 +23,8 @@ public class EditProduct extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String adminTyp = null;
+		Boolean isProductAvailable = false;
+		
 		if(request.getSession().getAttribute("adminType")!=null){
 			adminTyp = request.getSession().getAttribute("adminType").toString();
 		}
@@ -38,12 +40,17 @@ public class EditProduct extends HttpServlet {
 		Integer anzahl4 = categories.size();
 		anzahl4--;
 		Integer anzahl5 = products.size();
+		
+		if(anzahl5>0){
+			isProductAvailable=true;
+		}
 		anzahl5--;
 		
 		request.setAttribute("anzahl5", anzahl5);
 		request.setAttribute("anzahl4", anzahl4);
 		request.setAttribute("categories3", categories);
 		request.setAttribute("products3", products);
+		request.setAttribute("isProductAvailable", isProductAvailable);
 		request.getRequestDispatcher("/editProduct.jsp").forward(request,response);
 		
 	}

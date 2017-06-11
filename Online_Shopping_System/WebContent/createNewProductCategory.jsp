@@ -109,27 +109,40 @@ tr:nth-child(even) {
 		<p class="w3-left">Online_Shopping_System</p>
 		</header>
 
-		<form name="addProductCat" action="CreateNewProductCategory"
-			method="POST">
-			<!-- list header -->
-			<div class="w3-display-container w3-container">
-				<table>
-					<tr>
-						<th><input type="text" name="productCategoryName"
-							value="Kategoriename" style="width: 100%"></th>
-						<th><input type="submit" value="Hinzufuegen"
-							style="width: 100%; background-color: green; color: white"></th>
-					</tr>
-				</table>
-				<ul class="w3-ul w3-card-4">
-					<c:forEach var="i" begin="0" end="${productCatCount1}" step="1">
-						<li><span class="w3-large">Produkkategoriename:
-								${categories1.get(i).getCategoryName()}</span><br> <span>-</span></li>
-					</c:forEach>
-				</ul>
+				<form name="addProductCat" action="CreateNewProductCategory"
+					method="POST">
+					<!-- list header -->
+					<div class="w3-display-container w3-container">
+						<table>
+							<tr>
+								<th><input type="text" name="productCategoryName"
+									value="Kategoriename" style="width: 100%"></th>
+								<th><input type="submit" value="Hinzufuegen"
+									style="width: 100%; background-color: green; color: white"></th>
+							</tr>
+						</table>
+
+				<c:choose>
+					<c:when test="${isProductCategoryAvailable==true}">
+
+						<ul class="w3-ul w3-card-4">
+							<c:forEach var="i" begin="0" end="${productCatCount1}" step="1">
+								<li><span class="w3-large">Produkkategoriename:
+										${categories1.get(i).getCategoryName()}</span><br> <span>-</span></li>
+							</c:forEach>
+						</ul>
+
+					</c:when>
+					<c:otherwise>
+						<div>
+							<p>Es sind noch Kategorien vorhanden!</p>
+						</div>
+					</c:otherwise>
+				</c:choose>
+
 				<div class="w3-black w3-center w3-padding-24"></div>
 			</div>
-		</form>
+				</form>
 
 		<!-- End page content -->
 	</div>

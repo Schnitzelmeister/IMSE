@@ -109,24 +109,35 @@ tr:nth-child(even) {
 		<p class="w3-left">Online_Shopping_System</p>
 		</header>
 
-		<form name="deleteadm" action="DeleteAdmin" method="POST">
-			<!-- list header -->
-			<div class="w3-display-container w3-container">
-				<ul class="w3-ul w3-card-4">
-					<c:forEach var="i" begin="0" end="${anzahl1}" step="1">
-						<li>
-							<div>
-								<input type="submit" value="Lösche Admin: ${emails.get(i)}"
-									name="deletedAdminEmail"
-									class="w3-button w3-red w3-small w3-right" />
-							</div> <span class="w3-large">Nachname: ${names.get(i)}</span><br>
-							<span>Vorname: ${surNames.get(i)}</span>
-						</li>
-					</c:forEach>
-				</ul>
-				<div class="w3-black w3-center w3-padding-24"></div>
-			</div>
-		</form>
+		<c:choose>
+			<c:when test="${isAdminAvailable==true}">
+
+				<form name="deleteadm" action="DeleteAdmin" method="POST">
+					<!-- list header -->
+					<div class="w3-display-container w3-container">
+						<ul class="w3-ul w3-card-4">
+							<c:forEach var="i" begin="0" end="${anzahl1}" step="1">
+								<li>
+									<div>
+										<input type="submit" value="Lösche Admin: ${emails.get(i)}"
+											name="deletedAdminEmail"
+											class="w3-button w3-red w3-small w3-right" />
+									</div> <span class="w3-large">Nachname: ${names.get(i)}</span><br>
+									<span>Vorname: ${surNames.get(i)}</span>
+								</li>
+							</c:forEach>
+						</ul>
+						<div class="w3-black w3-center w3-padding-24"></div>
+					</div>
+				</form>
+
+			</c:when>
+			<c:otherwise>
+				<div>
+					<p>Es sind keine Hilfs-Admins vorhanden!</p>
+				</div>
+			</c:otherwise>
+		</c:choose>
 
 		<!-- End page content -->
 	</div>

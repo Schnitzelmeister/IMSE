@@ -109,26 +109,37 @@ tr:nth-child(even) {
 		<p class="w3-left">Online_Shopping_System</p>
 		</header>
 
-		<form name="deleteCat" action="DeleteProductCategory" method="POST">
-			<!-- list header -->
-			<div class="w3-display-container w3-container">
-				<ul class="w3-ul w3-card-4">
-					<c:forEach var="i" begin="0" end="${productCatCount}" step="1">
-						<li>
-							<div>
-								<input type="submit"
-									value="Lösche Produktkategorie: ${categories.get(i).getCategoryId()}"
-									name="deletedCategoryId"
-									class="w3-button w3-red w3-small w3-right" />
-							</div> <span class="w3-large">Produkkategoriename:
-								${categories.get(i).getCategoryName()}</span><br> <span>-</span>
-						</li>
-					</c:forEach>
-				</ul>
-				<div class="w3-black w3-center w3-padding-24"></div>
-			</div>
+		<c:choose>
+			<c:when test="${isProductCategoryAvailable==true}">
 
-		</form>
+				<form name="deleteCat" action="DeleteProductCategory" method="POST">
+					<!-- list header -->
+					<div class="w3-display-container w3-container">
+						<ul class="w3-ul w3-card-4">
+							<c:forEach var="i" begin="0" end="${productCatCount}" step="1">
+								<li>
+									<div>
+										<input type="submit"
+											value="Lösche Produktkategorie: ${categories.get(i).getCategoryId()}"
+											name="deletedCategoryId"
+											class="w3-button w3-red w3-small w3-right" />
+									</div> <span class="w3-large">Produkkategoriename:
+										${categories.get(i).getCategoryName()}</span><br> <span>-</span>
+								</li>
+							</c:forEach>
+						</ul>
+						<div class="w3-black w3-center w3-padding-24"></div>
+					</div>
+
+				</form>
+
+			</c:when>
+			<c:otherwise>
+				<div>
+					<p>Es sind keine Kategorien vorhanden!</p>
+				</div>
+			</c:otherwise>
+		</c:choose>
 
 		<!-- End page content -->
 	</div>

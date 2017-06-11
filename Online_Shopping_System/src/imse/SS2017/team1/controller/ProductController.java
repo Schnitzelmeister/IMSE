@@ -141,6 +141,9 @@ public class ProductController {
 	
 	public Integer generateId(){
 		List<Product> products = getAllProducts();
+		if(products.isEmpty()){
+			return 1;
+		}
 		return products.get(products.size()-1).getProductId()+1;
 	}
 	

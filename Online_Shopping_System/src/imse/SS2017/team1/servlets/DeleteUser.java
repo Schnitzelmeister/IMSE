@@ -21,6 +21,8 @@ public class DeleteUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String adminTyp = null;
+		Boolean isUserAvailable = false;
+		
 		if(request.getSession().getAttribute("adminType")!=null){
 			adminTyp = request.getSession().getAttribute("adminType").toString();
 		}
@@ -37,14 +39,18 @@ public class DeleteUser extends HttpServlet {
 			emails.add(c.getEmailAddress());
 			names.add(c.getLastName());
 			surNames.add(c.getFirstName());
-		}
+		}	
 		
+		if(anzahl>0){
+			isUserAvailable=true;
+		}
 		anzahl--;
 		
 		request.setAttribute("emails1", emails);
 		request.setAttribute("names1", names);
 		request.setAttribute("surNames1", surNames);
 		request.setAttribute("anzahl1", anzahl);
+		request.setAttribute("isUserAvailable", isUserAvailable);
 		request.getRequestDispatcher("/deleteUser.jsp").forward(request,response);
 		
 	}

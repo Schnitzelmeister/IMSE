@@ -109,27 +109,39 @@ tr:nth-child(even) {
 		<p class="w3-left">Online_Shopping_System</p>
 		</header>
 
-		<form name="deleteprod" action="DeleteProduct" method="POST">
-			<!-- list header -->
-			<div class="w3-display-container w3-container">
-				<ul class="w3-ul w3-card-4">
-					<c:forEach var="i" begin="0" end="${anzahl}" step="1">
-						<li>
-							<div>
-								<input type="submit"
-									value="Lösche Produkt: ${products.get(i).getProductId()}"
-									name="deletedProductId"
-									class="w3-button w3-red w3-small w3-right" />
-							</div> <span class="w3-large">ProduktName:
-								${products.get(i).getProductName()}</span><br> <span>Preis:
-								${products.get(i).getPrice()}</span>
-						</li>
-					</c:forEach>
-				</ul>
-				<div class="w3-black w3-center w3-padding-24"></div>
-			</div>
-		</form>
+		<c:choose> 
+		<c:when test="${isProductAvailable==true}">
 
+			<form name="deleteprod" action="DeleteProduct" method="POST">
+				<!-- list header -->
+				<div class="w3-display-container w3-container">
+					<ul class="w3-ul w3-card-4">
+						<c:forEach var="i" begin="0" end="${anzahl}" step="1">
+							<li>
+								<div>
+									<input type="submit"
+										value="Lösche Produkt: ${products.get(i).getProductId()}"
+										name="deletedProductId"
+										class="w3-button w3-red w3-small w3-right" />
+								</div> <span class="w3-large">ProduktName:
+									${products.get(i).getProductName()}</span><br> <span>Preis:
+									${products.get(i).getPrice()}</span>
+							</li>
+						</c:forEach>
+					</ul>
+					<div class="w3-black w3-center w3-padding-24"></div>
+				</div>
+			</form>
+
+		</c:when> 
+		<c:otherwise>
+			<div>
+				<p>Es sind keine Produkte vorhanden!</p>
+			</div>
+		</c:otherwise> 
+		</c:choose>
+		
+		
 		<!-- End page content -->
 	</div>
 
