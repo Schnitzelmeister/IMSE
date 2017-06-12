@@ -38,7 +38,6 @@ public class UpdateBillingAddressServlet extends HttpServlet {
 			String plz = request.getParameter("plzr");
 			String infos = request.getParameter("infor");
 			
-			System.out.println("Daten sind da");
 			
 			if(billingAddress == null){
 				Address newAdresse = new Address(0, strassenname, hausnummer, infos, stadt, plz, land);
@@ -53,7 +52,8 @@ public class UpdateBillingAddressServlet extends HttpServlet {
 				currentAddress.setPostCode(plz);
 				currentAddress.setStreetName(strassenname);
 				currentAddress.setStreetNumber(hausnummer);
-				dao.updateEntity(currentAddress);
+				user.setBillingAdr(currentAddress);
+				dao.updateEntity(user);
 				response.sendRedirect(
 						"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kontodaten wurden aktualisiert");
 			} 
