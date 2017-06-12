@@ -53,11 +53,10 @@ public class DataMigration {
 	public static void main(String args[]) throws Exception {
 		DataMigration dm=	new DataMigration();
 		
-		//dm.migrateAdress();
-		//dm.migrateCustomer();
+		dm.migrateCustomer();
 		dm.migrateAdmin();
-		//dm.migrateCategory();
-		//dm.migrateProduct();
+		dm.migrateCategory();
+		dm.migrateProduct();
 		//dm.migrateCustomerOrder();
 		//dm.migrateOrderDetail();
 		
@@ -65,47 +64,16 @@ public class DataMigration {
 	
 	}
 
-	private void migrateAdress() {
-		Address address = new Address();
-		try {
-
-			ResultSet resultset = statement.executeQuery("SELECT * FROM address");
-
-			try {
-				while (resultset.next()) {
-					int numColumns = resultset.getMetaData().getColumnCount();
-					for (int i = 1; i <= numColumns; i += 7) {
-						address = new Address();
-						address.setAdressId((Integer) resultset.getObject(i));
-						address.setStreetName((String) resultset.getObject(i+1));
-						address.setStreetNumber((String) resultset.getObject(i+2));
-						address.setAdditionaolInfo((String) resultset.getObject(i+3));
-						address.setCity((String) resultset.getObject(i+4));
-						address.setPostCode((String) resultset.getObject(i+5));
-						address.setCountry((String) resultset.getObject(i+6));
-						dao.save(address);
-					}
-				}
-			} catch (Exception e) {
-				throw e;
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-			
-
-
-	}
-
 	private void migrateCustomer() {
 		Customer customer = new Customer();
 		CreditCard creditcard = new CreditCard();
+		Address address = new Address();
 		
 		try {
 
 			ResultSet resultset = statement.executeQuery("SELECT * FROM customer");
 			ResultSet resultsetCreditCards = null;
+			ResultSet resultsetDelAddress = null;
 
 			try {
 				
@@ -117,6 +85,10 @@ public class DataMigration {
 						resultsetCreditCards = statement2.executeQuery("SELECT * FROM creditcard WHERE cardnumber='" +
 								((String) resultset.getObject(i+5))+"'");
 						int numColumnsCreditCard = resultsetCreditCards.getMetaData().getColumnCount();
+						
+						resultsetDelAddress = statement3.executeQuery("SELECT * FROM address WHERE addressID="+
+								((Integer) resultset.getObject(i+6)));
+						int numColumnsDelAddress = resultsetDelAddress.getMetaData().getColumnCount();
 						
 						customer = new Customer();
 						customer.setEmailAddress((String) resultset.getObject(i));
@@ -141,6 +113,21 @@ public class DataMigration {
 							}
 						}
 						customer.setCreditCard(creditcard);
+						
+						while (resultsetDelAddress.next()){
+							for(int k = 1; k <= numColumnsDelAddress; k += 7){
+								address = new Address();
+								address.setAdressId(Integer.valueOf(String.valueOf(resultsetDelAddress.getObject(k))));
+								address.setStreetName((String) resultsetDelAddress.getObject(k+1));
+								address.setStreetNumber((String) resultsetDelAddress.getObject(k+2));
+								address.setAdditionaolInfo((String) resultsetDelAddress.getObject(k+3));
+								address.setCity((String) resultsetDelAddress.getObject(k+4));
+								address.setPostCode((String) resultsetDelAddress.getObject(k+5));
+								address.setCountry((String) resultsetDelAddress.getObject(k+6));
+							}
+						}
+						customer.setShippingAdr(address);
+						customer.setBillingAdr(address);
 						
 						dao.save(customer);
 					}
