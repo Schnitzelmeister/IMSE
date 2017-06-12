@@ -61,7 +61,7 @@ public class MySQLDataFilling {
 		ArrayList<Integer> productQuantity = DataGenerator.generateRandomInteger(200, 1, 10);
 		ArrayList<Float> productPrice = DataGenerator.generateRandomFloats(200, 10, 150);
 		
-		
+		//Dieser Ordner
 		String pictureFolder = "E:/Photos/airat/pictures";
 		File folder = new File(pictureFolder);
 		File[] listOfFiles = folder.listFiles();
