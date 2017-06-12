@@ -74,7 +74,7 @@ public class SearchEngineMongoDB implements SearchEngine {
 			// To connect to mongodb server
 			MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
 			// Get DB
-			DB db = mongoClient.getDB( "online_shop" );
+			DB db = mongoClient.getDB( "imse" );
 			// Get Collection			
 			DBCollection coll = db.getCollection("PRODUCT");
 			
@@ -85,7 +85,7 @@ public class SearchEngineMongoDB implements SearchEngine {
 			//params.add(new BasicDBObject("$project",  new BasicDBObject("_id", 1).append("CATEGORIES__id", 1) ));
 			params.add(new BasicDBObject("$lookup",  new BasicDBObject("from", "CATEGORY").append("localField", "CATEGORIES__id").append("foreignField", "_id").append("as", "CATEGORIES") ));
 			params.add(new BasicDBObject("$unwind", "$CATEGORIES"));
-			params.add(new BasicDBObject("$group",  new BasicDBObject("_id", "$CATEGORIES.CATEGORYID").append("count", new BasicDBObject("$sum", 1) ) ));
+			params.add(new BasicDBObject("$group",  new BasicDBObject("_id", "$CATEGORIES._id").append("count", new BasicDBObject("$sum", 1) ) ));
 			
 			//stats results
 			AggregationOutput output = coll.aggregate(params);
@@ -111,13 +111,13 @@ public class SearchEngineMongoDB implements SearchEngine {
 			params.add(new BasicDBObject("$lookup",  new BasicDBObject("from", "CATEGORY").append("localField", "CATEGORIES__id").append("foreignField", "_id").append("as", "CATEGORIES") ));
 
 			if (categoryId == 0) {
-				params.add(new BasicDBObject("$project",  new BasicDBObject("_id", 0).append("PRODUCTID", 1).append("PRODUCTNAME", 1).append("PRICE", 1).append("DESCRIPTION", 1).append("QUANTITY", 1).append("CATEGORIES", "$CATEGORIES.CATEGORYID").append("IMAGES", "$IMAGES.IMAGE") ));
+				params.add(new BasicDBObject("$project",  new BasicDBObject("_id", 1).append("PRODUCTNAME", 1).append("PRICE", 1).append("DESCRIPTION", 1).append("QUANTITY", 1).append("CATEGORIES", "$CATEGORIES._id").append("IMAGES", "$IMAGES.IMAGE") ));
 			}
 			else {
-				params.add(new BasicDBObject("$project",  new BasicDBObject("_id", 0).append("PRODUCTID", 1).append("PRODUCTNAME", 1).append("PRICE", 1).append("DESCRIPTION", 1).append("QUANTITY", 1).append("CATEGORIES", "$CATEGORIES.CATEGORYID").append("IMAGES", "$IMAGES.IMAGE").append("isCat", 
+				params.add(new BasicDBObject("$project",  new BasicDBObject("_id", 1).append("PRODUCTNAME", 1).append("PRICE", 1).append("DESCRIPTION", 1).append("QUANTITY", 1).append("CATEGORIES", "$CATEGORIES._id").append("IMAGES", "$IMAGES.IMAGE").append("isCat", 
 						new BasicDBObject("$setIsSubset", 
 								Arrays.<Object> asList(
-						                Arrays.<Object> asList(categoryId), "$CATEGORIES.CATEGORYID")
+						                Arrays.<Object> asList(categoryId), "$CATEGORIES._id")
 								) ) ));
 				params.add(new BasicDBObject("$match", new BasicDBObject("isCat", true)));
 			}
@@ -156,15 +156,20 @@ public class SearchEngineMongoDB implements SearchEngine {
 				
 				@SuppressWarnings("unchecked")
 				List<DBObject> docPics = (List<DBObject>) dbObject.get("IMAGES");
-				String[] pics = new String[docPics.size()];
-				System.out.println("docPics.size()=" +docPics.size());
-				for (int i=0; i < docPics.size(); ++i) {
-					pics[i] = String.valueOf( docPics.get(i) );
+				String[] pics;
+				if (docPics != null) {
+					pics = new String[docPics.size()];
+					System.out.println("docPics.size()=" +docPics.size());
+					for (int i=0; i < docPics.size(); ++i) {
+						pics[i] = String.valueOf( docPics.get(i) );
+					}
 				}
-				
+				else {
+					 pics = new String[0];
+				}
 				System.out.println("ready");
 				
-				foundProducts.add(new FoundProduct( (int)dbObject.get("PRODUCTID"), (String)dbObject.get("PRODUCTNAME"), 
+				foundProducts.add(new FoundProduct( (int)dbObject.get("_id"), (String)dbObject.get("PRODUCTNAME"), 
 						(double)dbObject.get("PRICE"), (String)dbObject.get("DESCRIPTION"), (int)dbObject.get("QUANTITY"), 
 						cats.toString(), pics) );
 		    }
@@ -175,7 +180,8 @@ public class SearchEngineMongoDB implements SearchEngine {
 			return new FoundResult(categories, foundProducts, foundCategoriesStat, searchText, categoryId, sortMode, pageNumber, pageSize);
 		}
 		catch(Exception e) {
-			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			e.printStackTrace();
+			//System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 		}
 		return null;
 	}
