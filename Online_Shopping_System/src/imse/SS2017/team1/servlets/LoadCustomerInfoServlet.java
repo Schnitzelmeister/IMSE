@@ -31,8 +31,8 @@ public class LoadCustomerInfoServlet extends HttpServlet {
 		String lastName = user.getLastName();
 		String phoneNumber = user.getPhoneNumber();
 		CreditCard creditCard = user.getCreditCard();
-		Address shippingAddress = user.getShippingAddress();
-		Address billingAddress = user.getBillingAddress();
+		Address shippingAddress = user.getShippingAdr();
+		Address billingAddress = user.getBillingAdr();
 
 		request.setAttribute("email", emailAdress);
 		request.setAttribute("vorname", firstName);

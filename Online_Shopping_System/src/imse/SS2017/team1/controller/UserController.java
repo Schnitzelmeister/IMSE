@@ -26,9 +26,9 @@ public class UserController {
 	public void registerCustomer(Customer customer) {
 		try {
 			dao.save(customer);
-			System.out.println("Benutzer wurde mit save gespeichert");
 		} catch (Exception e) {
-			throw new IllegalArgumentException("Die Datenspeicherung war nicht erfolgreich");
+			System.out.println("Exception: "+e.getMessage());
+			throw new IllegalArgumentException("Die Datenspeicherung war nicht erfolgreich: "+e.getMessage());
 		}
 	}
 
