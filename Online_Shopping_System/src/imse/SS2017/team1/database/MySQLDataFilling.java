@@ -63,17 +63,7 @@ public class MySQLDataFilling {
 		ArrayList<Integer> productQuantity = DataGenerator.generateRandomInteger(200, 1, 10);
 		ArrayList<Float> productPrice = DataGenerator.generateRandomFloats(200, 10, 150);
 		
-		
-		String pictureFolder = "E:/Photos/airat/pictures";
-		File folder = new File(pictureFolder);
-		File[] listOfFiles = folder.listFiles();
-		ArrayList<String> files = new ArrayList<String>();
-		    for (int i = 0; i < listOfFiles.length; i++) {
-		      if (listOfFiles[i].isFile()) {
-		    	  files.add(listOfFiles[i].getName());
-		      }
-		    }
-		    
+
 		for(int i=1;i<200;++i){
 			try{
 				product.setDescription(description.get(i));
@@ -94,13 +84,7 @@ public class MySQLDataFilling {
 					dao.save(productBelongsCategory);
 				}
 				
-				for (int q = 0; q < num; ++q) {
-					String filename = pictureFolder + "/" + files.get(ThreadLocalRandom.current().nextInt(0, files.size()));
-					System.out.println(Paths.get(filename).toUri().toURL().toString());
-					image.setImageString(PictureUtility.convertPicToString(Paths.get(filename).toUri().toURL().toString()));
-					image.setProductId(i);
-					dao.save(image);
-				}
+
 
 			} catch(Exception e) {
 				System.out.println(e.getMessage());
