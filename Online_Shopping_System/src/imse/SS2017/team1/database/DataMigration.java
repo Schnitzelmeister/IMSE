@@ -53,49 +53,15 @@ public class DataMigration {
 	public static void main(String args[]) throws Exception {
 		DataMigration dm=	new DataMigration();
 		
-		//dm.migrateAdress();
 		dm.migrateCustomer();
-		//dm.migrateAdmin();
-		//dm.migrateCategory();
-		//dm.migrateProduct();
+		dm.migrateAdmin();
+		dm.migrateCategory();
+		dm.migrateProduct();
 		//dm.migrateCustomerOrder();
 		//dm.migrateOrderDetail();
 		
 		dm.closeConnection();
 	
-	}
-
-	private void migrateAdress() {
-		Address address = new Address();
-		try {
-
-			ResultSet resultset = statement.executeQuery("SELECT * FROM address");
-
-			try {
-				while (resultset.next()) {
-					int numColumns = resultset.getMetaData().getColumnCount();
-					for (int i = 1; i <= numColumns; i += 7) {
-						address = new Address();
-						address.setAdressId((Integer) resultset.getObject(i));
-						address.setStreetName((String) resultset.getObject(i+1));
-						address.setStreetNumber((String) resultset.getObject(i+2));
-						address.setAdditionaolInfo((String) resultset.getObject(i+3));
-						address.setCity((String) resultset.getObject(i+4));
-						address.setPostCode((String) resultset.getObject(i+5));
-						address.setCountry((String) resultset.getObject(i+6));
-						dao.save(address);
-					}
-				}
-			} catch (Exception e) {
-				throw e;
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-			
-
-
 	}
 
 	private void migrateCustomer() {
