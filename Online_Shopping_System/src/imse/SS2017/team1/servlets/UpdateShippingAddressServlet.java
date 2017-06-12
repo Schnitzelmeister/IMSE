@@ -38,14 +38,7 @@ public class UpdateShippingAddressServlet extends HttpServlet {
 			String infos = request.getParameter("infos");
 			
 			if(shippingAddress == null){
-				Address newAdresse = new Address();
-				newAdresse.setCity(stadt);
-				newAdresse.setCountry(land);
-				newAdresse.setAdditionaolInfo(infos);
-				newAdresse.setStreetName(strassenname);
-				newAdresse.setStreetNumber(hausnummer);
-				newAdresse.setPostCode(plz);
-				
+				Address newAdresse = new Address(null, strassenname, hausnummer, infos, stadt, plz, land);
 				user.setShippingAdr(newAdresse);
 				dao.updateEntity(user);
 				response.sendRedirect("/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kontodaten wurden aktualisiert");

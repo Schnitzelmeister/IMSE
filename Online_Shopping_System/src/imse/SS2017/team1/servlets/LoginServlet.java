@@ -2,8 +2,6 @@
 package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -16,12 +14,9 @@ import javax.servlet.http.HttpSession;
 
 import imse.SS2017.team1.controller.ProductController;
 import imse.SS2017.team1.controller.UserController;
-import imse.SS2017.team1.dao.Dao;
-import imse.SS2017.team1.dao.DaoInterface;
 import imse.SS2017.team1.model.Admin;
 import imse.SS2017.team1.model.Customer;
 import imse.SS2017.team1.model.Product;
-import imse.SS2017.team1.model.User;
 
 /**
  * Servlet implementation class LoginServlet

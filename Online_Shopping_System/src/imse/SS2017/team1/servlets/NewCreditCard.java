@@ -40,7 +40,7 @@ public class NewCreditCard extends HttpServlet {
 		
 		
 		Customer customer=(Customer)request.getSession().getAttribute("customer");
-		usercontroller.saveCreditCard(cc, customer);
+		//usercontroller.saveCreditCard(cc, customer);
 	
 		
 		Enumeration<String> attributes=request.getSession().getAttributeNames();

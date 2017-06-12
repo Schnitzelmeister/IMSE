@@ -57,7 +57,6 @@ public class Dao implements DaoInterface {
 		try {
 			return (T) entitymanager.find(cls, Id);
 		} finally {
-			entitymanager.close();
 		}
 	}
 
