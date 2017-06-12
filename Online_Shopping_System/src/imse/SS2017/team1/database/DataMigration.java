@@ -59,7 +59,6 @@ public class DataMigration {
 		dm.migrateProduct();
 		//dm.migrateCustomerOrder();
 		//dm.migrateOrderDetail();
-		
 		dm.closeConnection();
 	
 	}

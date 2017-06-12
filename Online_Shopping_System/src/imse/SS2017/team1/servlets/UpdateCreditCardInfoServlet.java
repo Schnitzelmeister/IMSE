@@ -39,9 +39,18 @@ public class UpdateCreditCardInfoServlet extends HttpServlet {
 			String type = request.getParameter("typ");
 
 			if (creditCard == null) {
-				CreditCard newCard = new CreditCard(null, cardNumber, firstNameOncard, lastNameOncard, type, cvv, expiryMonth,expiryYear);
+				CreditCard newCard = new CreditCard();
+				newCard.setCardNumber(cardNumber);
+				newCard.setFirstName(firstNameOncard);
+				newCard.setLastName(lastNameOncard);
+				newCard.setType(type);
+				newCard.setCvv(cvv);
+				newCard.setExpiryMonth(expiryMonth);
+				newCard.setExpiryYear(expiryYear);
+				
 				customer.setCreditCard(newCard);
 				dao.updateEntity(customer);
+				
 				response.sendRedirect(
 						"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kontodaten wurden aktualisiert");
 			} else {
@@ -56,6 +65,7 @@ public class UpdateCreditCardInfoServlet extends HttpServlet {
 				currentCard.setType(type);
 				customer.setCreditCard(currentCard);
 				dao.updateEntity(customer);
+				
 				response.sendRedirect(
 						"/Online_Shopping_System/customer/private/editcustomerinfo.jsp?infoMessage=Die Kontodaten wurden aktualisiert");
 			}
