@@ -76,7 +76,7 @@
 
 		<!-- Top header -->
 		<header class="w3-container w3-xlarge">
-		<p class="w3-left">Online_Shopping_System</p>
+		<p class="w3-left w3-text-white">Online_Shopping_System</p>
 		</header>
 
 		<c:choose>

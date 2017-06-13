@@ -26,6 +26,7 @@ table {
 }
 
 td, th {
+	background-color: #A9D0F5;
 	border: 1px solid #dddddd;
 	text-align: align;
 	padding: 8px;
