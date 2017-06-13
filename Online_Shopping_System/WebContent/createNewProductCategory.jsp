@@ -8,43 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>  -->
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
-<link rel="stylesheet" href="/Online_Shopping_System/customer/style.css">
-<style>
-.w3-sidebar a {
-	font-family: "Roboto", sans-serif
-}
-
-body, h1, h2, h3, h4, h5, h6, .w3-wide {
-	font-family: "Montserrat", sans-serif;
-}
-
-table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	width: 100%;
-}
-
-td, th {
-	border: 1px solid #dddddd;
-	text-align: align;
-	padding: 8px;
-}
-
-tr:nth-child(even) {
-	background-color: #dddddd;
-}
-</style>
+<jsp:include page="adminDefaultIncludes.jsp" />
 </head>
 <body class="w3-content" style="max-width: 1200px">
 
@@ -70,8 +34,10 @@ tr:nth-child(even) {
 				</a>
 				<div id="demoAcc"
 					class="w3-bar-block w3-hide w3-padding-large w3-medium">
-					<a href="createNewProductCategory" class="w3-bar-item w3-button w3-text-blue">Add</a>
-					<a href="deleteProductCategory" class="w3-bar-item w3-button w3-text-blue">Delete</a>
+					<a href="createNewProductCategory"
+						class="w3-bar-item w3-button w3-text-blue">Add</a> <a
+						href="deleteProductCategory"
+						class="w3-bar-item w3-button w3-text-blue">Delete</a>
 				</div>
 
 				<a onclick="myAccFunc1()" href="javascript:void(0)"
@@ -80,9 +46,9 @@ tr:nth-child(even) {
 				</a>
 				<div id="demoAcc1"
 					class="w3-bar-block w3-hide w3-padding-large w3-medium">
-					<a href="createProduct" class="w3-bar-item w3-button w3-text-blue">Add</a> <a
-						href="deleteProduct" class="w3-bar-item w3-button w3-text-blue">Delete</a> <a
-						href="updateProduct" class="w3-bar-item w3-button w3-text-blue">Update</a>
+					<a href="createProduct" class="w3-bar-item w3-button w3-text-blue">Add</a>
+					<a href="deleteProduct" class="w3-bar-item w3-button w3-text-blue">Delete</a>
+					<a href="updateProduct" class="w3-bar-item w3-button w3-text-blue">Update</a>
 				</div>
 
 				<a onclick="myAccFunc2()" href="javascript:void(0)"
@@ -95,14 +61,15 @@ tr:nth-child(even) {
 
 						<div id="demoAcc2"
 							class="w3-bar-block w3-hide w3-padding-large w3-medium">
-							<a href="deleteAdmin" class="w3-bar-item w3-button w3-text-blue">Delete</a> <a
-								href="verifyAdmin" class="w3-bar-item w3-button w3-text-blue">Verify</a>
+							<a href="deleteAdmin" class="w3-bar-item w3-button w3-text-blue">Delete</a>
+							<a href="verifyAdmin" class="w3-bar-item w3-button w3-text-blue">Verify</a>
 						</div>
 
 					</c:when>
 				</c:choose>
 
-				<a href="deleteUser" class="w3-bar-item w3-button w3-text-blue">Edit User</a>
+				<a href="deleteUser" class="w3-bar-item w3-button w3-text-blue">Edit
+					User</a>
 
 			</div></nav>
 
@@ -113,19 +80,18 @@ tr:nth-child(even) {
 		<header class="w3-container w3-xlarge">
 		<p class="w3-left w3-text-white">Online_Shopping_System</p>
 		</header>
-
-				<form name="addProductCat" action="CreateNewProductCategory"
-					method="POST">
-					<!-- list header -->
-					<div class="w3-display-container w3-container">
-						<table>
-							<tr>
-								<th><input type="text" name="productCategoryName"
-									value="Kategoriename" style="width: 100%"></th>
-								<th><input type="submit" value="Hinzufuegen"
-									style="width: 100%; background-color: green; color: white"></th>
-							</tr>
-						</table>
+		<form name="addProductCat" action="CreateNewProductCategory" method="POST">
+		
+			<!-- list header -->
+			<div class="w3-display-container w3-container">
+				<table>
+					<tr>
+						<th><input type="text" name="productCategoryName"
+							value="Kategoriename" style="width: 100%"></th>
+						<th><input type="submit" value="Hinzufuegen"
+							style="width: 100%; background-color: green; color: white"></th>
+					</tr>
+				</table>
 
 				<c:choose>
 					<c:when test="${isProductCategoryAvailable==true}">
@@ -133,7 +99,7 @@ tr:nth-child(even) {
 						<ul class="w3-ul w3-card-4">
 							<c:forEach var="i" begin="0" end="${productCatCount1}" step="1">
 								<li><span class="w3-large"><b>Produkkategoriename:
-										${categories1.get(i).getCategoryName()}</b></span><br> <span>-</span></li>
+											${categories1.get(i).getCategoryName()}</b></span><br> <span>-</span></li>
 							</c:forEach>
 						</ul>
 
@@ -147,9 +113,7 @@ tr:nth-child(even) {
 
 				<div class="w3-black w3-center w3-padding-24"></div>
 			</div>
-				</form>
-
-		<!-- End page content -->
+		</form>
 	</div>
 
 	</c:when>
@@ -159,6 +123,8 @@ tr:nth-child(even) {
 		</div>
 	</c:otherwise>
 	</c:choose>
+
+	<!-- End page content -->
 
 	<script>
 		// Accordion 

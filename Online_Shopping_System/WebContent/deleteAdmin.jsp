@@ -8,38 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> -->
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-.w3-sidebar a {
-	font-family: "Roboto", sans-serif
-}
-
-body, h1, h2, h3, h4, h5, h6, .w3-wide {
-	font-family: "Montserrat", sans-serif;
-}
-
-table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	width: 100%;
-}
-
-td, th {
-	border: 1px solid #dddddd;
-	text-align: align;
-	padding: 8px;
-}
-
-tr:nth-child(even) {
-	background-color: #dddddd;
-}
-</style>
+<jsp:include page="adminDefaultIncludes.jsp" />
 </head>
 <body class="w3-content" style="max-width: 1200px">
 
