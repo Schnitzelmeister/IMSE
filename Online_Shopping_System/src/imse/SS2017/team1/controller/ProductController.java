@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import imse.SS2017.team1.dao.Dao;
+import imse.SS2017.team1.model.Category;
 import imse.SS2017.team1.model.Image;
 import imse.SS2017.team1.model.Product;
 
@@ -52,9 +53,12 @@ public class ProductController {
 		return dao.getobjects(Product.class);
 	}
 	
-	public void createProduct(String productName, Float price, String description, Integer quantity, List<String> images){
+	public void createProduct(String productName, Float price, String description, Integer quantity, List<String> images, List<String> categories){
 		Product product = new Product();
 		Image image = new Image();
+		for(int i=0;i<categories.size();++i){
+			product.setCategories(dao.getobject(Category.class, Integer.valueOf(categories.get(i))));
+		}
 		for(int i=0;i<5;++i){
 			if(!images.get(i).isEmpty() && images.get(i).contains("data:image/jpeg;base64,")){
 				image = new Image();
@@ -77,8 +81,13 @@ public class ProductController {
 	}
 	
 	public void updateProduct(Integer productId, String productName, Float price, 
-			String description, Integer quantity, List<String> images) {
+			String description, Integer quantity, List<String> images, List<String> categories) {
 		Product product = dao.getobject(Product.class, productId);
+		if(categories!=null){
+			for(int i=0;i<categories.size();++i){
+				product.setCategories(dao.getobject(Category.class, Integer.valueOf(categories.get(i))));
+			}
+		}
 		Image image = new Image();
 		for(int i=0;i<5;++i){
 			if(!images.get(i).isEmpty() && images.get(i).contains("data:image/jpeg;base64,")) {

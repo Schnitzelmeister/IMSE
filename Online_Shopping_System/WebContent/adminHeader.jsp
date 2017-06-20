@@ -52,7 +52,11 @@
 
 				<a href="deleteUser" class="w3-bar-item w3-button w3-text-blue">Edit User</a>
 
-			</div></nav>
+			</div>
+			
+			<a href="./logout" class="w3-bar-item w3-button w3-text-grey"><b>LOGOUT</b></a>
+			
+			</nav>
 
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 250px">

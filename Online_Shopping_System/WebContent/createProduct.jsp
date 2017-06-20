@@ -25,11 +25,11 @@
 	<c:choose>
 		<c:when test="${IsAdminTyp==true}">
 
-			<div class="w3-padding-64 w3-large w3-text-grey"
+			<div class="w3-padding-64 w3-large w3-text-blue"
 				style="font-weight: bold">
 
 				<a onclick="myAccFunc()" href="javascript:void(0)"
-					class="w3-button w3-block w3-white w3-left-align w3-text-grey"
+					class="w3-button w3-block w3-white w3-left-align w3-text-blue"
 					id="myBtn"> Edit Categories <i class="fa fa-caret-down"></i>
 				</a>
 				<div id="demoAcc"
@@ -39,7 +39,7 @@
 				</div>
 
 				<a onclick="myAccFunc1()" href="javascript:void(0)"
-					class="w3-button w3-block w3-white w3-left-align w3-text-grey"
+					class="w3-button w3-block w3-white w3-left-align w3-text-blue"
 					id="myBtn1"> Edit Products <i class="fa fa-caret-down"></i>
 				</a>
 				<div id="demoAcc1"
@@ -50,7 +50,7 @@
 				</div>
 
 				<a onclick="myAccFunc2()" href="javascript:void(0)"
-					class="w3-button w3-block w3-white w3-left-align w3-text-grey"
+					class="w3-button w3-block w3-white w3-left-align w3-text-blue"
 					id="myBtn2"> Edit Admin <i class="fa fa-caret-down"></i>
 				</a>
 
@@ -66,9 +66,13 @@
 					</c:when>
 				</c:choose>
 
-				<a href="deleteUser" class="w3-bar-item w3-button">Edit User</a>
+				<a href="deleteUser" class="w3-bar-item w3-button w3-text-blue">Edit User</a>
 
-			</div></nav>
+			</div>
+			
+			<a href="./logout" class="w3-bar-item w3-button w3-text-grey"><b>LOGOUT</b></a>
+			
+			</nav>
 
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left: 250px">
@@ -90,7 +94,7 @@
 									value="Produktname" style="width: 100%"></th>
 							</tr>
 							<tr>
-								<th><select style="width: 100%">
+								<th><select multiple name="selectedCat" style="width: 100%">
 										<c:forEach var="i" begin="0" end="${anzahl3}" step="1">
 											<option value="${categories2.get(i).getCategoryId()}">${categories2.get(i).getCategoryName()}</option>
 										</c:forEach>
