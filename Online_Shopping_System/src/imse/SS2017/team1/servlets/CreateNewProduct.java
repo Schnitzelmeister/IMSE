@@ -2,6 +2,7 @@ package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -66,30 +67,37 @@ public class CreateNewProduct extends HttpServlet {
 		String price = request.getParameter("productPrice");
 		String description = request.getParameter("productDescription");
 		String quantity = request.getParameter("productQuantity");
+		String[] selectedCat = request.getParameterValues("selectedCat");
 		List<String> images = new ArrayList<String>();
 		
-		images.add(request.getParameter("image"));
-		images.add(request.getParameter("image2"));
-		images.add(request.getParameter("image3"));
-		images.add(request.getParameter("image4"));
-		images.add(request.getParameter("image5"));
+		if(selectedCat!=null){
+			List<String> categories = Arrays.asList(selectedCat);
 		
-		if(validator.isProductNameOk(productName)){
-			if(validator.isQuantityOk(quantity)){
-				if(validator.isPriceOk(price)){
-					if(validator.isDescriptionOk(description)){
-						productController.createProduct(productName, Float.valueOf(price.replaceAll(",", ".")), description, Integer.valueOf(quantity), images);					
+			images.add(request.getParameter("image"));
+			images.add(request.getParameter("image2"));
+			images.add(request.getParameter("image3"));
+			images.add(request.getParameter("image4"));
+			images.add(request.getParameter("image5"));
+			
+			if(validator.isProductNameOk(productName)){
+				if(validator.isQuantityOk(quantity)){
+					if(validator.isPriceOk(price)){
+						if(validator.isDescriptionOk(description)){
+								productController.createProduct(productName, Float.valueOf(price.replaceAll(",", ".")), description, Integer.valueOf(quantity), images, categories);	
+						} else {
+							System.out.println("Fehler in der Beschreibung!");
+						}
 					} else {
-						System.out.println("Fehler in der Beschreibung!");
+						System.out.println("Fehler beim Preis!");
 					}
 				} else {
-					System.out.println("Fehler beim Preis!");
+					System.out.println("Fehler bei Anzahl!");
 				}
 			} else {
-				System.out.println("Fehler bei Anzahl!");
+				System.out.println("Bitte geben Sie einen aussagekräftigen Produktnamen ein!");
 			}
 		} else {
-			System.out.println("Bitte geben Sie einen aussagekräftigen Produktnamen ein!");
+			System.out.println("Bitte zumindest eine Produktkategorie auswählen!");
 		}
 		
 		doGet(request,response);

@@ -12,6 +12,7 @@ public class CategoryController {
 	public void createCategory(String categoryName){
 		Category category = new Category();
 		category.setCategoryName(categoryName);
+		category.setCategoryId(generateId());
 		dao.save(category);
 	}
 	

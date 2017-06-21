@@ -2,6 +2,7 @@ package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -70,10 +71,17 @@ public class EditProduct extends HttpServlet {
 		String productName = request.getParameter("productName");
 		String quantity = request.getParameter("productQuantity");
 		String price = request.getParameter("productPrice");
-		String description = request.getParameter("description");		
+		String description = request.getParameter("description");
+		String[] selectedCat = request.getParameterValues("selectedCat");
 		Integer productId = Integer.valueOf(request.getParameter("productId").replaceAll("\\D+", ""));
 	
 		List<String> images = new ArrayList<String>();
+		List<String> categories = new ArrayList<String>();
+		
+		
+		if(selectedCat!=null){
+			categories = Arrays.asList(selectedCat);
+		}
 		
 		images.add(request.getParameter("image"));
 		images.add(request.getParameter("image2"));
@@ -85,7 +93,7 @@ public class EditProduct extends HttpServlet {
 			if(validator.isQuantityOk(quantity)){
 				if(validator.isPriceOk(price)){
 					if(validator.isDescriptionOk(description)){
-						productController.updateProduct(productId, productName, Float.valueOf(price), description, Integer.valueOf(quantity), images);					
+						productController.updateProduct(productId, productName, Float.valueOf(price), description, Integer.valueOf(quantity), images, categories);					
 					} else {
 						System.out.println("Fehler in der Beschreibung!");
 					}
