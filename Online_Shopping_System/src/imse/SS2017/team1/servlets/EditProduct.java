@@ -71,16 +71,29 @@ public class EditProduct extends HttpServlet {
 		String productName = request.getParameter("productName");
 		String quantity = request.getParameter("productQuantity");
 		String price = request.getParameter("productPrice");
-		String description = request.getParameter("description");
+		String description = request.getParameter("productDescription");
 		String[] selectedCat = request.getParameterValues("selectedCat");
 		Integer productId = Integer.valueOf(request.getParameter("productId").replaceAll("\\D+", ""));
 	
 		List<String> images = new ArrayList<String>();
-		List<String> categories = new ArrayList<String>();
+		List<String> categories = null;
 		
 		
 		if(selectedCat!=null){
 			categories = Arrays.asList(selectedCat);
+		} 
+		
+		if(!validator.isProductNameOk(productName)){
+			productName = null;
+		}
+		if(!validator.isPriceOk(price)){
+			price = null;
+		}
+		if(!validator.isQuantityOk(quantity)){
+			quantity = null;
+		}
+		if(!validator.isDescriptionOk(description)){
+			description=null;
 		}
 		
 		images.add(request.getParameter("image"));
@@ -89,23 +102,7 @@ public class EditProduct extends HttpServlet {
 		images.add(request.getParameter("image4"));
 		images.add(request.getParameter("image5"));
 		
-		if(validator.isProductNameOk(productName)){
-			if(validator.isQuantityOk(quantity)){
-				if(validator.isPriceOk(price)){
-					if(validator.isDescriptionOk(description)){
-						productController.updateProduct(productId, productName, Float.valueOf(price), description, Integer.valueOf(quantity), images, categories);					
-					} else {
-						System.out.println("Fehler in der Beschreibung!");
-					}
-				} else {
-					System.out.println("Fehler beim Preis!");
-				}
-			} else {
-				System.out.println("Fehler bei Anzahl!");
-			}
-		} else {
-			System.out.println("Bitte geben Sie einen aussagekräftigen Produktnamen ein!");
-		}
+		productController.updateProduct(productId, productName, price, description, quantity, images, categories);					
 		
 		doGet(request,response);
 		

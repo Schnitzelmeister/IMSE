@@ -76,21 +76,14 @@ public class ProductController {
 		dao.save(product);
 	}
 	
-	public void deleteProductById(Integer productId){
-		dao.delete(dao.getobject(Product.class, productId));
-	}
-	
-	public void updateProduct(Integer productId, String productName, Float price, 
-			String description, Integer quantity, List<String> images, List<String> categories) {
-		Product product = dao.getobject(Product.class, productId);
-		if(categories!=null){
-			for(int i=0;i<categories.size();++i){
-				product.setCategories(dao.getobject(Category.class, Integer.valueOf(categories.get(i))));
-			}
-		}
+	public void createProduct(Integer productId, String productName, Float price, String description, Integer quantity, List<String> images, List<String> categories){
+		Product product = new Product();
 		Image image = new Image();
-		for(int i=0;i<5;++i){
-			if(!images.get(i).isEmpty() && images.get(i).contains("data:image/jpeg;base64,")) {
+		for(int i=0;i<categories.size();++i){
+			product.setCategories(dao.getobject(Category.class, Integer.valueOf(categories.get(i))));
+		}
+		for(int i=0;i<images.size();++i){
+			if(!images.get(i).isEmpty() && images.get(i).contains("data:image/jpeg;base64,")){
 				image = new Image();
 				image.setImageString(images.get(i).replaceAll("data:image/jpeg;base64,", ""));
 				image.setImageId(i+1);
@@ -98,18 +91,53 @@ public class ProductController {
 				product.setImages(image);
 			}
 		}
+		product.setDescription(description);
+		product.setPrice(price);
+		product.setProductName(productName);
+		product.setQuantity(quantity);
+		product.setProductId(productId);
+		dao.save(product);
+	}
+	
+	public void deleteProductById(Integer productId){
+		dao.delete(dao.getobject(Product.class, productId));
+	}
+	
+	public void updateProduct(Integer productId, String productName, String price, 
+			String description, String quantity, List<String> images, List<String> categories) {
+		Product product = dao.getobject(Product.class, productId);
+		
+		if(categories!=null){
+			product.getCategories().clear();
+			for(int i=0;i<categories.size();++i){
+				product.setCategories(dao.getobject(Category.class, Integer.valueOf(categories.get(i))));
+			}
+		}
+		
+		if(images!=null){
+			Image image = new Image();
+			for(int i=0;i<images.size();++i){
+				if(!images.get(i).isEmpty() && images.get(i).contains("data:image/jpeg;base64,")) {
+					image = new Image();
+					image.setImageString(images.get(i).replaceAll("data:image/jpeg;base64,", ""));
+					image.setImageId(i+1);
+					image.setProductId(0);
+					product.setImages(image);
+				}
+			}
+		}
 		
 		if(description!=null && !product.getDescription().equals(description)){
 			product.setDescription(description);
 		}
-		if(!product.getPrice().equals(price) && price!=null){
-			product.setPrice(price);
+		if(price!=null && !product.getPrice().equals(Float.valueOf(price))){
+			product.setPrice(Float.valueOf(price));
 		}
 		if(productName!=null && !product.getProductName().equals(productName)){
 			product.setProductName(productName);
 		}
-		if(product.getQuantity()!=quantity && quantity!=null){
-			product.setQuantity(quantity);
+		if(quantity!=null && product.getQuantity()!=Integer.valueOf(quantity)){
+			product.setQuantity(Integer.valueOf(quantity));
 		}
 		dao.updateEntity(product);	
 	}

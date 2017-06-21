@@ -89,6 +89,7 @@ public class Product implements Serializable {
 		categories.add(category);
 	}
 
+
 	//Only for MongoDB
 	@ElementCollection
 	private List<Image> images = new ArrayList<Image>();
