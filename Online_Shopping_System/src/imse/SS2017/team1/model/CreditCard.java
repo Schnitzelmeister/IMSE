@@ -14,9 +14,7 @@ public class CreditCard implements Serializable {
 
 	private static final long serialVersionUID = -5145899657319507604L;
 	private String cardNumber;
-	@Transient
 	private String firstName;
-	@Transient
 	private String lastName;
 	private String type; // MasterCard, Visa
 	private String cvv;
