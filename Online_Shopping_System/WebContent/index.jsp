@@ -18,10 +18,10 @@
 
 	<jsp:include page="header.jsp" />
 
-	<%
+	   <%
 		HttpSession newsession2 = request.getSession(false);
 		if (newsession2.getAttribute("email") == null) {
-	%>
+	%> 
 	
 	<form class="login-form" method="post" action="login">
 		<input type="text" name="email" placeholder="e-mail adresse" /> <input
@@ -32,9 +32,9 @@
 		</p>
 	</form>
 
-	<%
+	   <%
 		}
-	%>
+	%> 
 
 	<%
 		if (request.getParameter("errorMessage") != null) {

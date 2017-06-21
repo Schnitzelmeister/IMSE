@@ -43,7 +43,7 @@ for(int i=0,size=products.size(); i<products.size();i+=3,size-=3){
           in den Warenkorb einlegen</a></div>
       <%}else if(session.getAttribute("customer")!=null && session.getAttribute("productId_"+products.get(i+2).getProductId())!=null){%>
       	<div style="text-align: center;"><a style="color: rgb(0,255,0)" href="#"  >Produkt bereits im Warenkorb</a></div>
-      <%} else{%>
+      <%} else if(session.getAttribute("customer")==null){%>
       <div style="text-align: center;"><a  href="products.jsp">Produkt ansehen</a></div>
      <%} %>
       

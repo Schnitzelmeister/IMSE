@@ -57,7 +57,7 @@ public class GetShoppingCart extends HttpServlet {
 			for (int j = 0; j < allProducts.size(); j++) {
 				System.out.println("ProductId:"+allProducts.get(j).getProductId().toString());
 				if ((allProducts.get(j).getProductId().toString()).equals((ProductIdsInCart.get(i)))) {
-					System.out.println("Ich bin in if Bedingung");
+					//System.out.println("Ich bin in if Bedingung");
 					productsInCart.add(allProducts.get(j));
 				}
 			}
