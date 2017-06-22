@@ -70,7 +70,6 @@ public class CreateNewProduct extends HttpServlet {
 		String[] selectedCat = request.getParameterValues("selectedCat");
 		List<String> images = new ArrayList<String>();
 		
-		
 		try{
 			if(selectedCat!=null){
 				List<String> categories = Arrays.asList(selectedCat);

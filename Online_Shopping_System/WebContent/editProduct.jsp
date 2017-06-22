@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <jsp:include page="adminDefaultIncludes.jsp" />
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 </head>
 <body class="w3-content" style="max-width: 1200px">
 
