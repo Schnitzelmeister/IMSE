@@ -120,4 +120,29 @@ public class UserController {
 		dao.updateEntity(customer);
 	}
 	
+	public void saveShippingAddress(Address adress,Customer customer){
+		
+		List<Address> adressen=new Dao().getobjects(Address.class);
+		int max=0;
+		for(int i=0; i<adressen.size();i++){
+			if(adressen.get(i).getAdressId()>max)max=adressen.get(i).getAdressId();
+		}
+		adress.setAdressId(max+1);
+		dao.save(adress);
+		customer.setShippingAddress(adress.getAdressId());
+		dao.updateEntity(customer);
+	}
+	
+	public void saveBillingAddress(Address adress,Customer customer){
+		
+		List<Address> adressen=new Dao().getobjects(Address.class);
+		int max=0;
+		for(int i=0; i<adressen.size();i++){
+			if(adressen.get(i).getAdressId()>max)max=adressen.get(i).getAdressId();
+		}
+		adress.setAdressId(max+1);
+		dao.save(adress);
+		customer.setBillingAddress(adress.getAdressId());
+		dao.updateEntity(customer);
+	}
 }

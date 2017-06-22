@@ -23,7 +23,7 @@ CreditCard creditCard=new Dao().getobject(CreditCard.class, sessionCustomer.getC
 //out.println("Update="+request.getParameter("update"));
 //out.println("CreditCardOK:"+request.getSession().getAttribute("isCardOK"));
  %>
-	<form action="checkAddress.jsp" method="post">
+	<form action="checkShippingAddress.jsp" >
 		<pre>
 			<br>Kreditkartennummer: <%=creditCard.getCardNumber() %>
 			<br>Vorname: <%=creditCard.getFirstName() %>
