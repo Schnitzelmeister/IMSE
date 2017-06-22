@@ -63,10 +63,20 @@ public class ProductController {
 	}
 	
 	public void addProductImage(String imageString, Integer productId){
-		Image image = new Image();
-		image.setImageString(imageString);
-		image.setProductId(productId);
-		dao.save(image);
+		List<Image> images = dao.getobjects(Image.class);
+		Integer anz=0;
+		
+		for(Image i: images){
+			if(i.getProductId().equals(productId)){
+				anz++;
+			}
+		}
+		if(anz<5){
+			Image image = new Image();
+			image.setImageString(imageString);
+			image.setProductId(productId);
+			dao.save(image);
+		}
 		
 	}
 	

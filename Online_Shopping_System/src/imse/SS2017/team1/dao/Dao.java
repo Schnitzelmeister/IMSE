@@ -126,4 +126,26 @@ public class Dao implements DaoInterface {
 			delete(p);
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Boolean checkProductBelongsCategory(Integer productId){
+		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
+		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
+		List<ProductBelongsCategory> prodbelongscat = entitymanager.createQuery("SELECT c FROM ProductBelongsCategory c WHERE c.productId="+productId).getResultList();
+		if(prodbelongscat.size()>0){
+			return true;
+		} else { 
+			return false;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void deleteCategoryBelongsProduct(Integer categoryId){
+		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
+		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
+		List<ProductBelongsCategory> prodbelongscat = entitymanager.createQuery("SELECT c FROM ProductBelongsCategory c WHERE c.categoryId="+categoryId).getResultList();
+		for(ProductBelongsCategory p:prodbelongscat){
+			delete(p);
+		}
+	}
 }

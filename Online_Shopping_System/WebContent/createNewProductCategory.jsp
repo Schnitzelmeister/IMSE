@@ -22,7 +22,7 @@
 		</h3>
 	</div>
 
-		<c:choose>
+	<c:choose>
 		<c:when test="${errorMessage!=null }">
 			<div
 				class="w3-container w3-display-container w3-padding-16 w3-text-red">
@@ -92,9 +92,6 @@
 			<p class="w3-left w3-text-white">Online_Shopping_System</p>
 		</header>
 
-		<c:choose>
-			<c:when test="${isProductCategoryAvailable==true}">
-
 				<form name="addProductCat" action="CreateNewProductCategory"
 					method="POST">
 
@@ -108,6 +105,9 @@
 									style="width: 100%; background-color: green; color: white"></th>
 							</tr>
 						</table>
+						
+								<c:choose>
+			<c:when test="${isProductCategoryAvailable==true}">
 
 						<ul class="w3-ul w3-card-4">
 							<c:forEach var="i" begin="0" end="${productCatCount1}" step="1">
