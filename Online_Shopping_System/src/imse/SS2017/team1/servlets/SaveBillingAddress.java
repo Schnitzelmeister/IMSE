@@ -101,12 +101,15 @@ public class SaveBillingAddress extends HttpServlet {
 		if (customer.getBillingAddress() == null) {
 			controller.saveBillingAddress(address, customer);
 		} else if (customer.getBillingAddress() != null && !(address.getAdressId() == customer.getBillingAddress())) {
+			/*address.setAdressId(customer.getBillingAddress());
 			Address alt = dao.getobject(Address.class, customer.getBillingAddress());
 			dao.delete(alt);
-			controller.saveBillingAddress(address, customer);
+			controller.saveBillingAddress(address, customer); */
 
-		} else
+			address.setAdressId(customer.getShippingAddress());
 			dao.updateEntity(address);
+		}// else
+			//dao.updateEntity(address);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("checkBillingAddress.jsp");
 		dispatcher.forward(request, response);

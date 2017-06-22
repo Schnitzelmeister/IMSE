@@ -106,8 +106,8 @@ public class LoginServlet extends HttpServlet {
 				// "+ currentUser.getLastName());
 				session.setAttribute("customer", currentUser);
 
-				ProductController productController = new ProductController();
-				List<Product> products = productController.GetAllProducts();
+				//ProductController productController = new ProductController();
+				//List<Product> products = productController.GetAllProducts();
 
 				//am 09-06 // session.setAttribute("products", products);
 

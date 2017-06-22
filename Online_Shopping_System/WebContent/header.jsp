@@ -24,7 +24,7 @@
     
       </ul>
       <ul class="nav navbar-nav navbar-right">
-         <%if(session.getAttribute("customer")!=null){ %>
+         <%if(session.getAttribute("email")!=null){ %>
       <li><a href="GetShoppingCart"><span class="glyphicon glyphicon-shopping-cart"></span> Warenkorb</a></li>
    
        <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Konto ansehen</a></li>

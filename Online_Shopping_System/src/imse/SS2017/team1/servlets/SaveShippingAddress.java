@@ -82,20 +82,27 @@ public class SaveShippingAddress extends HttpServlet {
 	    	dispatcher.forward(request, response);
 		}
 		Address address=new  Address(streetName,streetNumber, additionalInfo, city, postCode, country) ;
+		
+		
+		
 		UserController controller=new UserController();
 		Dao dao=new Dao();
 		Customer customer=(Customer)request.getSession().getAttribute("customer");
 		if(customer.getShippingAddress()==null){
 			controller.saveShippingAddress(address,customer );
 		}
-		else if(customer.getShippingAddress()!=null && !(address.getAdressId()==customer.getShippingAddress())){
+		
+		else if(customer.getShippingAddress()!=null){
+			/*
+			address.setAdressId(customer.getShippingAddress());
 			Address alt=dao.getobject(Address.class, customer.getShippingAddress());
 			dao.delete(alt);
-			controller.saveShippingAddress(address, customer);
-			
-		}
-		else
+			controller.saveShippingAddress(address, customer);*/
+			address.setAdressId(customer.getShippingAddress());
 			dao.updateEntity(address);
+		}
+		//else
+		//	dao.updateEntity(address);
 			
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("checkShippingAddress.jsp");
