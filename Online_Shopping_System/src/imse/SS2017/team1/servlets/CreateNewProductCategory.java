@@ -57,10 +57,16 @@ public class CreateNewProductCategory extends HttpServlet {
 		
 		String categoryName = request.getParameter("productCategoryName");
 		
-		if(validator.isCategoryNameOk(categoryName)){
-			categoryController.createCategory(categoryName);			
-		} else {
-			System.out.println("Bitte geben Sie einen aussagekräftigen Kategorienamen ein!");
+		try{
+			if(validator.isCategoryNameOk(categoryName)){
+				categoryController.createCategory(categoryName);			
+			} else {
+				throw new IllegalArgumentException("Bitte geben Sie einen aussagekräftigen Kategorienamen ein!");
+			}
+		} catch(IllegalArgumentException e) {
+			request.setAttribute("errorMessage", e.getMessage());
+			request.getRequestDispatcher("/createNewProductCategory.jsp").forward(request,response);
+			return;
 		}
 		
 		doGet(request,response);

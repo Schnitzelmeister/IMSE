@@ -70,34 +70,41 @@ public class CreateNewProduct extends HttpServlet {
 		String[] selectedCat = request.getParameterValues("selectedCat");
 		List<String> images = new ArrayList<String>();
 		
-		if(selectedCat!=null){
-			List<String> categories = Arrays.asList(selectedCat);
 		
-			images.add(request.getParameter("image"));
-			images.add(request.getParameter("image2"));
-			images.add(request.getParameter("image3"));
-			images.add(request.getParameter("image4"));
-			images.add(request.getParameter("image5"));
+		try{
+			if(selectedCat!=null){
+				List<String> categories = Arrays.asList(selectedCat);
 			
-			if(validator.isProductNameOk(productName)){
-				if(validator.isQuantityOk(quantity)){
-					if(validator.isPriceOk(price)){
-						if(validator.isDescriptionOk(description)){
-								productController.createProduct(productName, Float.valueOf(price.replaceAll(",", ".")), description, Integer.valueOf(quantity), images, categories);	
+				images.add(request.getParameter("image"));
+				images.add(request.getParameter("image2"));
+				images.add(request.getParameter("image3"));
+				images.add(request.getParameter("image4"));
+				images.add(request.getParameter("image5"));
+				
+				if(validator.isProductNameOk(productName)){
+					if(validator.isQuantityOk(quantity)){
+						if(validator.isPriceOk(price)){
+							if(validator.isDescriptionOk(description)){
+									productController.createProduct(productName, Float.valueOf(price.replaceAll(",", ".")), description, Integer.valueOf(quantity), images, categories);	
+							} else {
+								throw new IllegalArgumentException("Fehler in der Beschreibung!");
+							}
 						} else {
-							System.out.println("Fehler in der Beschreibung!");
+							throw new IllegalArgumentException("Fehler beim Preis!");
 						}
 					} else {
-						System.out.println("Fehler beim Preis!");
+						throw new IllegalArgumentException("Fehler bei der Anzahl!");
 					}
 				} else {
-					System.out.println("Fehler bei Anzahl!");
+					throw new IllegalArgumentException("Bitte geben Sie einen aussagekraeftigen Produktnamen ein!");
 				}
 			} else {
-				System.out.println("Bitte geben Sie einen aussagekräftigen Produktnamen ein!");
+				throw new IllegalArgumentException("Bitte waehlen Sie zumindest eine Produktkategorie aus!");
 			}
-		} else {
-			System.out.println("Bitte zumindest eine Produktkategorie auswählen!");
+		} catch(IllegalArgumentException e) {
+			request.setAttribute("errorMessage", e.getMessage());
+			request.getRequestDispatcher("/createProduct.jsp").forward(request,response);
+			return;
 		}
 		
 		doGet(request,response);
