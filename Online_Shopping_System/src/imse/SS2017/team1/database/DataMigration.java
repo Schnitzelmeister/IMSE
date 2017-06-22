@@ -57,7 +57,7 @@ public class DataMigration {
 		dm.migrateAdmin();
 		dm.migrateCategory();
 		dm.migrateProduct();
-		//dm.migrateCustomerOrder();
+		dm.migrateCustomerOrder();
 		//dm.migrateOrderDetail();
 		dm.closeConnection();
 	
@@ -259,22 +259,42 @@ public class DataMigration {
 	
 
 	private void migrateCustomerOrder() {
-		CustomerOrder customerOrder = new CustomerOrder();
+		OrderDetail orderDetail=new OrderDetail();
 		try {
 
-			ResultSet resultset = statement.executeQuery("SELECT * FROM customerOrder");
+			ResultSet resultSetOrder = statement.executeQuery("SELECT * FROM customerOrder");
 
 			try {
-				while (resultset.next()) {
-					int numColumns = resultset.getMetaData().getColumnCount();
+				while (resultSetOrder.next()) {
+					int numColumns = resultSetOrder.getMetaData().getColumnCount();
 					for (int i = 1; i <= numColumns; i += 5) {
-						customerOrder.setOrderId((Integer) resultset.getObject(i));
-						customerOrder.setDateCreated((String) resultset.getObject(i+1));
-						customerOrder.setDateShipped((String) resultset.getObject(i+2));
-						customerOrder.setCustomerEmail((String) resultset.getObject(i+3));
-						customerOrder.setOrdered(resultset.getBoolean(i+4));
+						CustomerOrder customerOrder = new CustomerOrder();
+						customerOrder.setOrderId((Integer) resultSetOrder.getObject(i));
+						customerOrder.setDateCreated((String) resultSetOrder.getObject(i+1));
+						customerOrder.setDateShipped((String) resultSetOrder.getObject(i+2));
+						customerOrder.setCustomerEmail((String) resultSetOrder.getObject(i+3));
+						customerOrder.setOrdered(resultSetOrder.getBoolean(i+4));
 						//customerOrder.setOrdered((Boolean) resultset.getObject(i+4));
-					
+						ResultSet resultSetOrderDetail = statement2.executeQuery("SELECT * FROM orderdetail WHERE orderId=" +
+								(Integer) resultSetOrder.getObject(i));
+						int numColumnsOrderDetail = resultSetOrderDetail.getMetaData().getColumnCount();
+						
+						while (resultSetOrderDetail.next()) {
+							for(int j = 1; j<= numColumnsOrderDetail; j+= 5){
+								
+								orderDetail=new OrderDetail();
+								orderDetail.setOrderDetailId((Integer)resultSetOrderDetail.getObject(j));
+								orderDetail.setOrderId((Integer)resultSetOrderDetail.getObject(j+1));
+								orderDetail.setQuantity((Integer)resultSetOrderDetail.getObject(j+2));
+								orderDetail.setSubTotal((Float.valueOf(String.valueOf(resultSetOrderDetail.getObject(j+3)))));
+								orderDetail.setProductId((Integer)resultSetOrderDetail.getObject(j+4));
+								customerOrder.setOrderDetail(orderDetail);
+							
+							}					
+						}
+						
+						
+						
 						dao.save(customerOrder);
 					}
 				}

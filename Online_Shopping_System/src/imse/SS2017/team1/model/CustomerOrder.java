@@ -24,7 +24,7 @@ public class CustomerOrder implements Serializable{
 	@GeneratedValue
 	@Field(name="_id")
 	private Integer orderId;
-	private String customerEmail;
+	private String CustomerEmail;
 	private String dateCreated;
 	private String dateShipped;
 	private Boolean ordered;
@@ -49,13 +49,13 @@ public class CustomerOrder implements Serializable{
 	 * @return the customerEmail
 	 */
 	public String getCustomerEmail() {
-		return customerEmail;
+		return CustomerEmail;
 	}
 	/**
 	 * @param customerEmail the customerEmail to set
 	 */
 	public void setCustomerEmail(String customerEmail) {
-		this.customerEmail = customerEmail;
+		this.CustomerEmail = customerEmail;
 	}
 
 	/**
@@ -97,10 +97,14 @@ public class CustomerOrder implements Serializable{
 	}
 	
 	@ElementCollection
-	private List<OrderDetail> orderDetail = new ArrayList<OrderDetail>();
+	private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 	
-	public OrderDetail getOrderDetails() {
-		return null;
+	public List<OrderDetail> getOrderDetails() {
+		return orderDetails;
+	}
+	
+	public void setOrderDetail(OrderDetail orderDetail){
+		orderDetails.add(orderDetail);
 	}
 	
 }
