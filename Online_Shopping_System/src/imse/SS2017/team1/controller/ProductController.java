@@ -6,6 +6,7 @@ import java.util.List;
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.model.Image;
 import imse.SS2017.team1.model.Product;
+import imse.SS2017.team1.model.ProductBelongsCategory;
 
 
 public class ProductController {
@@ -93,6 +94,13 @@ public class ProductController {
 			product.setQuantity(quantity);
 		}
 		dao.updateEntity(product);	
+	}
+	
+	public void createProductBelongsCategory(Integer productId, Integer categoryId){
+		ProductBelongsCategory prodbelongscat = new ProductBelongsCategory();
+		prodbelongscat.setCategoryId(categoryId);
+		prodbelongscat.setProductId(productId);
+		dao.save(prodbelongscat);
 	}
 	
 }
