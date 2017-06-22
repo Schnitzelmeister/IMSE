@@ -19,10 +19,6 @@ public class UserController {
 		
 	}
 
-	public void verifyLogin(String emailAdress, String password) {
-
-	}
-
 	public void registerCustomer(Customer customer) {
 		try {
 			dao.save(customer);

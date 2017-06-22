@@ -76,29 +76,6 @@ public class ProductController {
 		dao.save(product);
 	}
 	
-	public void createProduct(Integer productId, String productName, Float price, String description, Integer quantity, List<String> images, List<String> categories){
-		Product product = new Product();
-		Image image = new Image();
-		for(int i=0;i<categories.size();++i){
-			product.setCategories(dao.getobject(Category.class, Integer.valueOf(categories.get(i))));
-		}
-		for(int i=0;i<images.size();++i){
-			if(!images.get(i).isEmpty() && images.get(i).contains("data:image/jpeg;base64,")){
-				image = new Image();
-				image.setImageString(images.get(i).replaceAll("data:image/jpeg;base64,", ""));
-				image.setImageId(i+1);
-				image.setProductId(0);
-				product.setImages(image);
-			}
-		}
-		product.setDescription(description);
-		product.setPrice(price);
-		product.setProductName(productName);
-		product.setQuantity(quantity);
-		product.setProductId(productId);
-		dao.save(product);
-	}
-	
 	public void deleteProductById(Integer productId){
 		dao.delete(dao.getobject(Product.class, productId));
 	}
@@ -140,36 +117,6 @@ public class ProductController {
 			product.setQuantity(Integer.valueOf(quantity));
 		}
 		dao.updateEntity(product);	
-	}
-	
-	public String getProductpictures(Integer productId){
-		try{
-			return dao.getobject(Product.class, productId).getImages().get(0).getImageString();	
-		} catch (ArrayIndexOutOfBoundsException e){
-			return null;
-		}
-	}
-	
-	public Image addProductImage(String imageString, Integer productId){
-		Image image = new Image();
-		image.setImageString(imageString);
-		image.setProductId(productId);
-		image.setImageId(0);
-		return image;
-	}
-	
-	public void deleteImage(String imageId){
-		dao.delete(imageId);
-	}
-	
-	//TODO
-	public List<Image> getAllProductImages(){
-		return null;
-	}
-	
-	//TODO
-	public List<Image> getAllImagesOfSpecProduct(){
-		return null;
 	}
 	
 	public void close() {
