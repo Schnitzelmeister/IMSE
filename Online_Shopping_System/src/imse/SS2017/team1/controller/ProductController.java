@@ -78,21 +78,23 @@ public class ProductController {
 		dao.delete(imageId);
 	}
 	
-	public void updateProduct(Integer productId, String productName, Float price, 
-			String description, Integer quantity) {
+	public void updateProduct(Integer productId, String productName, String price, 
+			String description, String quantity) {
 		Product product = dao.getobject(Product.class, productId);
+		
 		if(description!=null && !product.getDescription().equals(description)){
 			product.setDescription(description);
 		}
-		if(!product.getPrice().equals(price) && price!=null){
-			product.setPrice(price);
+		if(price!=null && !product.getPrice().equals(Float.valueOf(price))){
+			product.setPrice(Float.valueOf(price));
 		}
 		if(productName!=null && !product.getProductName().equals(productName)){
 			product.setProductName(productName);
 		}
-		if(product.getQuantity()!=quantity && quantity!=null){
-			product.setQuantity(quantity);
+		if(quantity!=null && product.getQuantity()!=Integer.valueOf(quantity)){
+			product.setQuantity(Integer.valueOf(quantity));
 		}
+		
 		dao.updateEntity(product);	
 	}
 	
@@ -101,6 +103,10 @@ public class ProductController {
 		prodbelongscat.setCategoryId(categoryId);
 		prodbelongscat.setProductId(productId);
 		dao.save(prodbelongscat);
+	}
+	
+	public void deleteProductBelongsCategory(Integer productId){
+		dao.deleteProductBelongsCategory(productId);
 	}
 	
 }
