@@ -21,6 +21,8 @@ public class DeleteAdmin extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		String adminTyp = null;
+		Boolean isAdminAvailable = false;
+		
 		if(request.getSession().getAttribute("adminType")!=null){
 			adminTyp = request.getSession().getAttribute("adminType").toString();
 		}
@@ -44,12 +46,16 @@ public class DeleteAdmin extends HttpServlet {
 		}
 		Integer anzahl1 = admins.size()-countMainAdmins;
 		
+		if(anzahl1>0){
+			isAdminAvailable=true;
+		}
 		anzahl1--;
 		
 		request.setAttribute("surNames", surNames);
 		request.setAttribute("emails", emails);
 		request.setAttribute("names", names);
 		request.setAttribute("anzahl1", anzahl1);
+		request.setAttribute("isAdminAvailable", isAdminAvailable);
 		request.getRequestDispatcher("/deleteAdmin.jsp").forward(request,response);
 		
 	}

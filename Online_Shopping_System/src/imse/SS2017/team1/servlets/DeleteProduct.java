@@ -19,6 +19,8 @@ public class DeleteProduct extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String adminTyp = null;
+		Boolean isProductAvailable = false;
+		
 		if(request.getSession().getAttribute("adminType")!=null){
 			adminTyp = request.getSession().getAttribute("adminType").toString();
 		}
@@ -28,10 +30,15 @@ public class DeleteProduct extends HttpServlet {
 		ProductController productController = new ProductController();
 		List<Product> products = productController.GetAllProducts();
 		Integer anzahl = products.size();
+
+		if(anzahl>0){
+			isProductAvailable=true;
+		}
 		anzahl--;
 		
 		request.setAttribute("products", products);
 		request.setAttribute("anzahl", anzahl);
+		request.setAttribute("isProductAvailable", isProductAvailable);
 		request.getRequestDispatcher("/deleteProduct.jsp").forward(request,response);
 		
 	}
