@@ -37,6 +37,18 @@ public class CreditCard implements Serializable {
 		this.expiryYear = expiryYear;
 	}
 
+	
+	public CreditCard(String cardNumber, String firstName, String lastName, String type, String cvv,
+			Integer expiryMonth, Integer expiryYear) {
+		//this.id = id;
+		this.cardNumber = cardNumber;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.type = type;
+		this.cvv = cvv;
+		this.expiryMonth = expiryMonth;
+		this.expiryYear = expiryYear;
+	}
 	/**
 	 * @return the cardNumber
 	 */

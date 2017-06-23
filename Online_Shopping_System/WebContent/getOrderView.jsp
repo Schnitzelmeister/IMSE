@@ -28,7 +28,7 @@
 	
 	request.getSession().setAttribute("quantityByProduct", quantityByProduct);
 %>
-<form action="CheckCreditCard">
+<form action="checkCreditCard.jsp">
 <div class="container">
      
   <table class="table table-striped">
@@ -77,3 +77,4 @@
 
 </body>
 </html>
+

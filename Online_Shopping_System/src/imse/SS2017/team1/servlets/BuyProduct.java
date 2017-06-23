@@ -34,7 +34,7 @@ public class BuyProduct extends HttpServlet {
 			e.printStackTrace();
 		}
 		if(request.getSession().getAttribute("customer")==null){
-			response.sendRedirect("index.jsp?errorMessage='Bitte loggen Sie sich ein oder registrierene Sie sich'");
+			response.sendRedirect("index.jsp?errorMessage=Bitte einloggen oder registrieren");
 			
 		}
 		
@@ -43,14 +43,14 @@ public class BuyProduct extends HttpServlet {
 		
 		
 		try {
-			if((customer==null || customer.getCreditCard()==null)){
+			if((customer==null || customer.getCreditCardInfo()==null)){
 				
 				request.getRequestDispatcher("newCreditCard.jsp").forward(request, response);
 				
 			}
 			
 			else{
-				request.setAttribute("CreditCard", customer.getCreditCard());
+				request.setAttribute("CreditCard", customer.getCreditCardInfo());
 				request.getRequestDispatcher("updateCreditCard.jsp").forward(request, response);
 			}
 			
@@ -68,3 +68,4 @@ public class BuyProduct extends HttpServlet {
 	}
 
 }
+
