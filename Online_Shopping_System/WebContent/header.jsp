@@ -42,7 +42,7 @@ tr:nth-child(even) {
       <ul class="nav navbar-nav navbar-right">
          <%if(session.getAttribute("email")!=null){ %>
       <li><a href="GetShoppingCart"><span class="glyphicon glyphicon-shopping-cart"></span> Warenkorb</a></li>
-    <li><a href="accountInfo.jsp"><span class="glyphicon glyphicon-cog"></span> Konto ansehen</a></li>
+    <li><a href="./customer/private/editcustomerinfo.jsp"><span class="glyphicon glyphicon-cog"></span>Konto ansehen</a></li>
       
          <li><a href="logout"><span class="glyphicon glyphicon-off"></span> Ausloggen</a></li>
                  <%} else{%>
