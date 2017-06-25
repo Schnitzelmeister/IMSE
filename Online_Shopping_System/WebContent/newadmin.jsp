@@ -57,7 +57,7 @@
 		<div class="row main">
 			<div class="main-login main-center">
 				<h5>Erstellen eines Administratoraccounts</h5>
-				<form method="POST" action="register">
+				<form method="POST" action="registeradmin">
 
 
 					<div class="form-group">
