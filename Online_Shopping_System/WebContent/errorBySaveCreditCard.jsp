@@ -15,6 +15,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp" />
+<%! @SuppressWarnings("unchecked") %>
 <%	
 Map<String, Boolean> creditcard=(LinkedHashMap<String,Boolean>)request.getAttribute("creditCard");
 Iterator<Map.Entry<String, Boolean>> it = creditcard.entrySet().iterator();
@@ -36,7 +37,7 @@ for (Entry<String, Boolean> entry : creditcard.entrySet())
 		<br>Nachname:<input type="text" name="nachname" value=<%=it.next().getKey() %> /> 
 		<br>Kartentyp:<select name="type"><option
 					value="MasterCard" <% if(it.next().getKey().equals("MasterCard")){ %>selected>MasterCard  </option>
-			<option value="VisaCard" <%}else {%>selected <%}%>/>VisaCard </option></select> 
+			<option value="VisaCard" <%}else {%>selected <%}%>>VisaCard </option></select> 
 			<br>CVV:<input type="text" name="cvv" value=<%=it.next().getKey() %> /> 
 			<br>Ablaufmonat:<input type="text" name="monat" value=<%=it.next().getKey() %> />
 		<br>Ablaufjahr<input type="text" name="jahr" value=<%=it.next().getKey() %> />

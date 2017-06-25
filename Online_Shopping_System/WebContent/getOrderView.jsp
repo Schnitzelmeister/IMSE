@@ -15,6 +15,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp" />
+<%! @SuppressWarnings("unchecked") %>
 <% Map<Product, Integer> quantityByProduct=(HashMap<Product, Integer>) request.getAttribute("quantityByProduct");
 	List<Product> productsInCart=(ArrayList<Product>)request.getSession().getAttribute("productsInCart");
 	Collections.sort(productsInCart, new Comparator<Product>() {

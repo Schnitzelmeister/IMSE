@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import imse.SS2017.team1.controller.ProductController;
-import imse.SS2017.team1.controller.UserController;
 import imse.SS2017.team1.model.Customer;
 import imse.SS2017.team1.model.Product;
 

@@ -2,17 +2,11 @@ package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
-import java.util.Vector;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -42,6 +36,7 @@ public class GetOrderView extends HttpServlet {
 		
 		
 		System.out.println("Eintritt in getOrderView");
+		@SuppressWarnings("unchecked")
 		List<Product> productsInCart=(ArrayList<Product>)request.getSession().getAttribute("productsInCart");
 		Map<Product, Integer> quantityByProduct=new HashMap<Product, Integer>(); 
 		

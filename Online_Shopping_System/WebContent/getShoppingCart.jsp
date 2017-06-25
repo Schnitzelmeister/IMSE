@@ -12,7 +12,9 @@
 <body>
 	<form action="GetOrderView">
 		<jsp:include page="header.jsp" />
-		<% List<Product> products = (List<Product>) request.getSession().getAttribute("productsInCart");
+		<%! @SuppressWarnings("unchecked") %>
+		<% 
+		List<Product> products = (List<Product>) request.getSession().getAttribute("productsInCart");
 		if(products.size()==0){
 		%>
 		

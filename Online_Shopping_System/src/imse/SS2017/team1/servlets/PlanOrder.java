@@ -1,10 +1,8 @@
 package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -15,10 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import imse.SS2017.team1.controller.OrderController;
-import imse.SS2017.team1.controller.ProductController;
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.model.CustomerOrder;
-import imse.SS2017.team1.model.OrderDetail;
 import imse.SS2017.team1.model.Product;
 
 
@@ -61,6 +57,7 @@ public class PlanOrder extends HttpServlet {
 		
 		//List<OrderDetail> orderdetails=new ArrayList<OrderDetail>();
 		
+		@SuppressWarnings("unchecked")
 		Map<Product,Integer> quantityByProduct=(HashMap<Product,Integer>)request.getSession().getAttribute("quantityByProduct");
 		for (Entry<Product, Integer> entry : quantityByProduct.entrySet())
 		{

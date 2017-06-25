@@ -58,7 +58,6 @@ public class DataMigration {
 		dm.migrateCategory();
 		dm.migrateProduct();
 		dm.migrateCustomerOrder();
-		//dm.migrateOrderDetail();
 		dm.closeConnection();
 	
 	}
@@ -296,34 +295,6 @@ public class DataMigration {
 						
 						
 						dao.save(customerOrder);
-					}
-				}
-			} catch (Exception e) {
-				throw e;
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void migrateOrderDetail() {
-		OrderDetail orderDetail = new OrderDetail();
-		try {
-
-			ResultSet resultset = statement.executeQuery("SELECT * FROM orderDetail");
-
-			try {
-				while (resultset.next()) {
-					int numColumns = resultset.getMetaData().getColumnCount();
-					for (int i = 1; i <= numColumns; i += 5) {
-						orderDetail.setOrderDetailId((Integer) resultset.getObject(i));
-						orderDetail.setOrderId((Integer) resultset.getObject(i+1));
-						orderDetail.setQuantity((Integer) resultset.getObject(i+2));
-						orderDetail.setSubTotal(Float.valueOf(String.valueOf(resultset.getObject(i+3))));
-						orderDetail.setProductId((Integer) resultset.getObject(i+4));
-						
-						dao.save(orderDetail);
 					}
 				}
 			} catch (Exception e) {

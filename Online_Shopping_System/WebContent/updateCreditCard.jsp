@@ -18,9 +18,10 @@ CreditCard creditCard=sessionCustomer.getCreditCard();%>
 	<br>	Kreditkartennummer:<input type="text" name="cardNumber" value=<%=creditCard.getCardNumber() %> />
 		<br>Vorname: <input type="text" name="vorname" value=<%=creditCard.getFirstName() %> /> 
 		<br>Nachname:<input type="text" name="nachname" value=<%=creditCard.getLastName() %> /> 
-		<br>Kartentyp:<select name="type"><option
-					value="MasterCard" <%if(creditCard.getType().equals("MasterCard")){ %>selected<%} %>>MasterCard</option>
-			<option value="VisaCard" <%if(creditCard.getType().equals("VisaCard")){ %>selected<%} %>/>VisaCard</option></select> 
+		<br>Kartentyp:<select name="type">
+			<option value="MasterCard" <%if(creditCard.getType().equals("MasterCard")){ %>selected<%} %>>MasterCard</option>
+			<option value="VisaCard" <%if(creditCard.getType().equals("VisaCard")){ %>selected<%} %>>VisaCard</option>
+			</select> 
 			<br>CVV:<input type="text" name="cvv" value=<%=creditCard.getCvv()%> /> 
 			<br>Ablaufmonat:<input type="text" name="monat" value=<%=creditCard.getExpiryMonth().toString()%> />
 		<br>Ablaufjahr<input type="text" name="jahr" value=<%=creditCard.getExpiryYear().toString() %> />

@@ -15,6 +15,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp" />
+<%! @SuppressWarnings("unchecked") %>
 <%	
 Map<String, Boolean> addressMap=(LinkedHashMap<String,Boolean>)request.getAttribute("addressMap");
 Iterator<Map.Entry<String, Boolean>> it = addressMap.entrySet().iterator();

@@ -1,7 +1,6 @@
 package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import imse.SS2017.team1.controller.UserController;
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.filter.CreditCardValidator;
 import imse.SS2017.team1.model.CreditCard;

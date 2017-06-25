@@ -8,9 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import imse.SS2017.team1.controller.UserController;
-import imse.SS2017.team1.dao.Dao;
-import imse.SS2017.team1.dao.DaoInterface;
-import imse.SS2017.team1.model.Address;
 import imse.SS2017.team1.model.Customer;
 
 /**

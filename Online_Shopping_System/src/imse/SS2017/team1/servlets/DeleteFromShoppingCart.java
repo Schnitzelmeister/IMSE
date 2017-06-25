@@ -30,6 +30,7 @@ public class DeleteFromShoppingCart extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		@SuppressWarnings("unchecked")
 		List<Product> productsinCart=(List<Product>)request.getSession().getAttribute("productsInCart");
 		String deleteProductId=request.getParameter("productId");
 		request.getSession().removeAttribute("productId_"+deleteProductId);

@@ -12,11 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import imse.SS2017.team1.controller.UserController;
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.filter.AddressValidator;
 import imse.SS2017.team1.model.Address;
-import imse.SS2017.team1.model.CreditCard;
 import imse.SS2017.team1.model.Customer;
 
 /**

@@ -1,6 +1,5 @@
 package imse.SS2017.team1.searchengine;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,15 +9,12 @@ import java.util.TreeMap;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 
-import org.eclipse.persistence.jpa.JpaEntityManager;
 
 import com.mongodb.AggregationOutput;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
@@ -67,6 +63,7 @@ public class SearchEngineMongoDB implements SearchEngine {
 			Initialize();
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Online_Shopping_System");
+		@SuppressWarnings("unused")
 		EntityManager em = emf.createEntityManager();
 		
 		

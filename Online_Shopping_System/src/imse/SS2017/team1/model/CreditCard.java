@@ -3,7 +3,6 @@ package imse.SS2017.team1.model;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Transient;
 
 import org.eclipse.persistence.nosql.annotations.DataFormatType;
 import org.eclipse.persistence.nosql.annotations.NoSql;
