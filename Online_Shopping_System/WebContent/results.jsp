@@ -3,6 +3,14 @@
 <%@ page import="imse.SS2017.team1.searchengine.FoundResult" %>
 <%@ page import="imse.SS2017.team1.searchengine.FoundProduct" %>
 <%@ page import="java.util.Map" %>
+<%@page import="imse.SS2017.team1.model.Category"%>
+<%@page import="javax.persistence.Persistence"%>
+<%@page import="javax.persistence.EntityManager"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="javax.persistence.EntityManagerFactory"%>
+<%@page import="imse.SS2017.team1.controller.CategoryController"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +24,51 @@
 </head>
 <body>
 
-<jsp:include page="header.jsp" /> 
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1>The Best Online Store </h1>      
+    <p>Hier findet man alles!</p>
+  </div>
+</div>
+
+<form method="get" action="${pageContext.request.contextPath}/results">
+<table>
+<th>
+       
+            <select name="cat" id="cat"><option value="0" selected>In all Categories</option><%CategoryController cc = new CategoryController();
+            for (Category c : cc.getAllCategories() ) {%><option value=<%=c.getCategoryId()%>><%=c.getCategoryName() %></option>
+            <%}
+            cc.close();%></select>
+
+
+</th>
+<th>
+   <input name="search" class="form-control" size="50" placeholder="Produktname" autocomplete="on">
+ 
+  </th>
+  <th>
+    <input type="submit" value="Suchen">
+ 
+  </th>
+  </table>
+ </form>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+   
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a class="active" href="products.jsp">Produkte</a></li>
+        <li><a href="contacts.jsp">Kontakt</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a class="active" href="index.jsp"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
+        <li id="cart"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<h1>${infomessage} </h1>
+
 
 <%
 	FoundResult results = (FoundResult)request.getAttribute("results");
