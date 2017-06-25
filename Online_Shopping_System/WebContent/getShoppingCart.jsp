@@ -12,12 +12,19 @@
 <body>
 	<form action="GetOrderView">
 		<jsp:include page="header.jsp" />
+		<% List<Product> products = (List<Product>) request.getSession().getAttribute("productsInCart");
+		if(products.size()==0){
+		%>
+		
+		<br>Keine Produkte im Warenkorb <%}else{ %>
+		
 	 <button type="submit"  class="btn btn-primary btn-lg btn-block">Bestellung fortsetzen</button><br><br>
 		<%
-			List<Product> products = (List<Product>) request.getSession().getAttribute("productsInCart");
+			
 
 			for (int i = 0, size = products.size(); i < products.size(); i += 3, size -= 3) {
 		%>
+	
 		<div class="container">
 
 			<div class="row">
@@ -159,7 +166,7 @@
 
 		<%
 			}
-		%>
+		%><% }%>
 	</form>
 </body>
 </html>

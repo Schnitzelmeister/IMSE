@@ -22,19 +22,48 @@
 			Address address = sessionCustomer.getShippingAdr();
 	%>
 	<form action="checkBillingAddress.jsp">
-		<pre>
-			<br>Strassenname:		 <%=address.getStreetName()%>
-			<br>Strassennummer: 	 <%=address.getStreetNumber()%>
-			<br>Zusatzinfo: 		 <%=address.getAdditionalInfo()%>
-			<br>Stadt: 				 <%=address.getCity()%> 
-			<br>Postleitzahl:		 <%=address.getPostCode()%> 
-			<br>Land: 				 <%=address.getCountry()%>
+		
+				<table id="tarik" align="center" style="width: 50%">
+				<h2>Lieferadresse</h2>
+			<tr>
+				<td>Strassenname
+				<td><%=address.getStreetName()%>
+			</tr>
+		
+			<tr>
+				<td>Strassennummer
+				<td> <%=address.getStreetNumber()%>
+			</tr>
+			
+			<tr>
+				<td>ZusatzInfo
+				<td> <%=address.getAdditionalInfo()%>
+			</tr>
+			
+			<tr>
+				<td>Stadt
+				<td><%=address.getCity()%> 
+			</tr>
+			
+			<tr>
+				<td>Postleitzahl
+				<td> <%=address.getPostCode()%> 
+			</tr>
+			
+			<tr>
+				<td>Land
+				<td> <%=address.getCountry()%>
+			</tr>
+		
+		</table><br>
 			<br><a type="button" href="updateShippingAddress.jsp">Lieferadresse ändern</a>
-	  	 	<br>
+	  	 	<br><br>
 			<button type="submit" class="btn btn-primary btn-lg btn-block">Bestellung fortsetzen</button>
 			<br>
 			<br>
-		</pre>
+		
+		
+	
 
 	</form>
 

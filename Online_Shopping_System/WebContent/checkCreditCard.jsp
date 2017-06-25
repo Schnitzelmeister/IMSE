@@ -24,20 +24,53 @@ CreditCard creditCard=sessionCustomer.getCreditCard();
 //out.println("CreditCardOK:"+request.getSession().getAttribute("isCardOK"));
  %>
 	<form action="checkShippingAddress.jsp" >
-		<pre>
-			<br>Kreditkartennummer: <%=creditCard.getCardNumber() %>
-			<br>Vorname: <%=creditCard.getFirstName() %>
-			<br>Nachname: <%=creditCard.getLastName() %>
-			<br>Kartentyp: <%=creditCard.getType() %> 
-			<br>CVV: <%=creditCard.getCvv() %> 
-			<br>Ablaufmonat: <%=creditCard.getExpiryMonth() %>
-			<br>Ablaufjahr: <%=creditCard.getExpiryYear() %>
-			<br><a type="button" href="updateCreditCard.jsp">Kreditkartendaten ändern</a>
+			
+	<table id="tarik" style="width:50%" align="center">
+	<h2>Kreditkartendaten</h2>
+	
+	
+	<tr> 
+		<td>Kreditkartennummer
+		<td><%=creditCard.getCardNumber() %>
+		
+	</tr>
+
+	<tr> 
+		<td>Vorname
+		<td><%=creditCard.getFirstName() %>
+	</tr>
+	
+	<tr> 
+		<td>Nachname
+		<td><%=creditCard.getLastName() %>
+	</tr>
+	
+	<tr> 
+		<td>Kartentyp
+		<td><%=creditCard.getType() %>
+	</tr>
+	
+	<tr> 
+		<td>CVV
+		<td><%=creditCard.getCvv() %>
+	</tr>
+	
+	<tr> 
+		<td>Ablaufmonat
+		<td><%=creditCard.getExpiryMonth() %>
+	</tr>
+	
+	<tr> 
+		<td>Ablaufjahr
+		<td><%=creditCard.getExpiryYear() %>
+	</tr>
+</table>
+			<br><a type="button" href="updateCreditCard.jsp">Kreditkartendaten ändern</a><br>
 	  	 	<br><button type="submit" class="btn btn-primary btn-lg btn-block">Bestellung fortsetzen</button>
 			<br>
 			<br>
-		</pre>
-
+			
+			
 	</form>
 
 
