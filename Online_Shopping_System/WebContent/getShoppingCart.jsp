@@ -14,6 +14,7 @@
 		<jsp:include page="header.jsp" />
 	 <button type="submit"  class="btn btn-primary btn-lg btn-block">Bestellung fortsetzen</button><br><br>
 		<%
+			ProductController pc=new ProductController();
 			List<Product> products = (List<Product>) request.getSession().getAttribute("productsInCart");
 
 			for (int i = 0, size = products.size(); i < products.size(); i += 3, size -= 3) {
@@ -32,8 +33,7 @@
 								Euro</span>
 						</div>
 						<div class="panel-body">
-							<img src="https://placehold.it/150x80?text=IMAGE"
-								class="img-responsive" style="width: 100%" alt="Image">
+							<img src="<%=pc.getProductpictures(products.get(i).getProductId())%>" style="width:100%" alt="Image">
 						</div>
 						<div class="panel-footer"><%=products.get(i + 2).getDescription()%></div>
 
@@ -74,8 +74,7 @@
 								Euro</span>
 						</div>
 						<div class="panel-body">
-							<img src="https://placehold.it/150x80?text=IMAGE"
-								class="img-responsive" style="width: 100%" alt="Image">
+							<img src="<%=pc.getProductpictures(products.get(i+1).getProductId())%>" style="width:100%" alt="Image">
 						</div>
 						<div class="panel-footer"><%=products.get(i + 1).getDescription()%></div>
 
@@ -121,8 +120,7 @@
 								Euro</span>
 						</div>
 						<div class="panel-body">
-							<img src="https://placehold.it/150x80?text=IMAGE"
-								class="img-responsive" style="width: 100%" alt="Image">
+							<img src="<%=pc.getProductpictures(products.get(i).getProductId())%>" style="width:100%" alt="Image">
 						</div>
 						<div class="panel-footer"><%=products.get(i).getDescription()%></div>
 

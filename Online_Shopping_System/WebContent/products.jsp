@@ -19,14 +19,15 @@
 
 	<jsp:include page="header.jsp" />
 	<%
+		Dao dao=new Dao();
 		ProductController pc = new ProductController();
 		List<Product> products = pc.GetAllProducts();
-
+		
 		for (int i = 0, size = products.size(); i < products.size(); i += 3, size -= 3) {
+			
 	%>
-	<div class="container">
-
-		<div class="row">
+<div class="container">
+<div class="row">
 			<%
 				if (size >= 3) {
 			%>
@@ -36,10 +37,11 @@
 							style="float: right;"><%=products.get(i + 2).getPrice()%>
 							Euro</span>
 					</div>
-					<div class="panel-body">
-						<img src="https://placehold.it/150x80?text=IMAGE"
-							class="img-responsive" style="width: 100%" alt="Image">
-					</div>
+					
+					 <%--Statt "pictures" muss man das entsprechende Bild einfgen --%>
+        <div class="panel-body"><img src="<%=pc.getProductpictures(products.get(i+2).getProductId())%>" style="width:100%" alt="Image"></div>
+
+					
 					<div class="panel-footer"><%=products.get(i + 2).getDescription()%></div>
 
 					<%
@@ -95,10 +97,10 @@
 							style="float: right;"><%=products.get(i + 1).getPrice()%>
 							Euro</span>
 					</div>
-					<div class="panel-body">
-						<img src="https://placehold.it/150x80?text=IMAGE"
-							class="img-responsive" style="width: 100%" alt="Image">
-					</div>
+					
+					 <%--Statt "pictures" muss man das entsprechende Bild einfgen --%>
+        <div class="panel-body"><img src="<%=pc.getProductpictures(products.get(i+1).getProductId())%>" style="width:100%" alt="Image"></div>
+					
 					<div class="panel-footer"><%=products.get(i + 1).getDescription()%></div>
 
 					<%
@@ -153,10 +155,10 @@
 							style="float: right;"><%=products.get(i).getPrice()%>
 							Euro</span>
 					</div>
-					<div class="panel-body">
-						<img src="https://placehold.it/150x80?text=IMAGE"
-							class="img-responsive" style="width: 100%" alt="Image">
-					</div>
+					
+					 <%--Statt "pictures" muss man das entsprechende Bild einfgen --%>
+        <div class="panel-body"><img src="<%=pc.getProductpictures(products.get(i).getProductId())%>" style="width:100%" alt="Image"></div>
+					
 					<div class="panel-footer"><%=products.get(i).getDescription()%></div>
 
 					<%
@@ -203,8 +205,8 @@
 			<%
 				}
 			%>
-		</div>
-	</div>
+</div>
+</div>
 	<br>
 	<br>
 

@@ -88,6 +88,22 @@ public class ProductController {
 		dao.delete(imageId);
 	}
 	
+	public String getProductpictures(Integer productId){
+		  try{
+			  List<Image> images=dao.getobjects(Image.class);
+			  for(int i=0; i<images.size();i++){
+				  if(!images.get(i).getProductId().equals(productId)){
+					  images.remove(images.get(i));
+				  }
+			  }
+			  
+		   return images.get(0).getImageString();
+		  } catch (ArrayIndexOutOfBoundsException e){
+		   return null;
+		  }
+		 }
+
+	
 	public void updateProduct(Integer productId, String productName, String price, 
 			String description, String quantity) {
 		Product product = dao.getobject(Product.class, productId);
