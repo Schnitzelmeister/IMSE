@@ -4,6 +4,7 @@ import java.util.List;
 
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.model.Category;
+import imse.SS2017.team1.model.Product;
 
 public class CategoryController {
 	
@@ -16,7 +17,15 @@ public class CategoryController {
 	}
 	
 	public void deleteCategory(Integer categoryId){
+		dao.deleteCategoryBelongsProduct(categoryId);
 		dao.delete(dao.getobject(Category.class, categoryId));
+		
+		List<Product> products = dao.getobjects(Product.class);
+		for(Product p:products){
+			if(!dao.checkProductBelongsCategory(p.getProductId())){
+				dao.delete(p);
+			}
+		}
 	}
 	
 	public Category getCategoryByName(String categoryName){

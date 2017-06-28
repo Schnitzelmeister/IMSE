@@ -34,7 +34,7 @@ public class BuyProduct extends HttpServlet {
 			e.printStackTrace();
 		}
 		if(request.getSession().getAttribute("customer")==null){
-			response.sendRedirect("index.jsp?errorMessage='Bitte loggen Sie sich ein oder registrierene Sie sich'");
+			response.sendRedirect("index.jsp?errorMessage=Bitte einloggen oder registrieren");
 			
 		}
 		

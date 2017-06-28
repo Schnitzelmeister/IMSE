@@ -1,6 +1,8 @@
 package imse.SS2017.team1.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import imse.SS2017.team1.controller.CategoryController;
 import imse.SS2017.team1.controller.ProductController;
+import imse.SS2017.team1.filter.Validator;
 import imse.SS2017.team1.model.Category;
+import imse.SS2017.team1.model.Product;
 
 @WebServlet("/CreateNewProduct")
 public class CreateNewProduct extends HttpServlet {
@@ -21,6 +25,8 @@ public class CreateNewProduct extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String adminTyp = null;
+		Boolean isCategoryAvailable = false;
+		
 		if(request.getSession().getAttribute("adminType")!=null){
 			adminTyp = request.getSession().getAttribute("adminType").toString();
 		}
@@ -30,9 +36,15 @@ public class CreateNewProduct extends HttpServlet {
 		CategoryController categoryController = new CategoryController();
 		List<Category> categories = categoryController.getAllCategories();
 		Integer anzahl3 = categories.size();
+		
+		if(anzahl3>0){
+			isCategoryAvailable=true;
+		}
 		anzahl3--;
+		
 		request.setAttribute("categories2", categories);
 		request.setAttribute("anzahl3", anzahl3);
+		request.setAttribute("isCategoryAvailable", isCategoryAvailable);
 		request.getRequestDispatcher("/createProduct.jsp").forward(request,response);
 		
 	}
@@ -40,6 +52,8 @@ public class CreateNewProduct extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		ProductController productController = new ProductController();
+		Product product = null;
+		Validator validator = new Validator();
 		
 		String adminTyp = null;
 		if(request.getSession().getAttribute("adminType")!=null){
@@ -49,38 +63,59 @@ public class CreateNewProduct extends HttpServlet {
 		request.setAttribute("IsAdminChief", adminTyp.equals("chiefadmin"));
 		
 		String productName = request.getParameter("productName");
-		Float price = Float.valueOf(request.getParameter("productPrice"));
+		String price = request.getParameter("productPrice");
 		String description = request.getParameter("productDescription");
-		Integer quantity = Integer.valueOf(request.getParameter("productQuantity"));
+		String quantity = request.getParameter("productQuantity");
+		String[] selectedCat = request.getParameterValues("selectedCat");
+		List<String> images = new ArrayList<String>();
+
+		try{
+			if(selectedCat!=null){
+				List<String> categories = Arrays.asList(selectedCat);
 		
-		String image1 = request.getParameter("image6");
-		String image2 = request.getParameter("image7");
-		String image3 = request.getParameter("image8");
-		String image4 = request.getParameter("image9");
-		String image5 = request.getParameter("image10");
+				images.add(request.getParameter("image"));
+				images.add(request.getParameter("image2"));
+				images.add(request.getParameter("image3"));
+				images.add(request.getParameter("image4"));
+				images.add(request.getParameter("image5"));
 		
-		productController.createProduct(productName, price, description, quantity);
-		
-		Integer productId=0;
-		if(productController.getProductByParams(productName, price, description, quantity)!=null){
-			productId = productController.getProductByParams(productName, price, description, quantity).getProductId();
+				if(validator.isProductNameOk(productName)){
+					if(validator.isQuantityOk(quantity)){
+						if(validator.isPriceOk(price)){
+							if(validator.isDescriptionOk(description)){
+									productController.createProduct(productName, Float.valueOf(price.replaceAll(",", ".")), description, Integer.valueOf(quantity));
+									product = productController.getProductByParams(productName, Float.valueOf(price.replaceAll(",", ".")), description, Integer.valueOf(quantity));
+									
+									for(int i=0;i<categories.size();++i){
+										productController.createProductBelongsCategory(product.getProductId(), Integer.valueOf(categories.get(i)));
+									}
+									
+									for(int i=0;i<images.size();++i){
+										if(images.get(i)!=""){
+											productController.addProductImage(images.get(i), product.getProductId());
+										}
+									}
+									
+							} else {
+								throw new IllegalArgumentException("Fehler in der Beschreibung!");
+							}
+						} else {
+							throw new IllegalArgumentException("Fehler beim Preis!");
+						}
+					} else {
+						throw new IllegalArgumentException("Fehler bei der Anzahl!");
+					}
+				} else {
+					throw new IllegalArgumentException("Bitte geben Sie einen aussagekraeftigen Produktnamen ein!");
+				}
+			} else {
+				throw new IllegalArgumentException("Bitte waehlen Sie zumindest eine Produktkategorie aus!");
+			}
+		} catch(IllegalArgumentException e) {
+			request.setAttribute("errorMessage", e.getMessage());
+			request.getRequestDispatcher("/createProduct.jsp").forward(request,response);
+			return;
 		}
-		
-		if(image1!=null && !image1.equals("") && productId!=0){
-			productController.addProductImage(image1, productId);
-		}
-		if(image2!=null && !image2.equals("") && productId!=0){
-			productController.addProductImage(image2, productId);
-		}
-		if(image3!=null && !image3.equals("") && productId!=0){
-			productController.addProductImage(image3, productId);
-		}
-		if(image4!=null && !image4.equals("") && productId!=0){
-			productController.addProductImage(image4, productId);
-		}
-		if(image5!=null && !image5.equals("") && productId!=0){
-			productController.addProductImage(image5, productId);
-		}	
 		
 		doGet(request,response);
 		

@@ -8,6 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import imse.SS2017.team1.model.Address;
+import imse.SS2017.team1.model.ProductBelongsCategory;
 
 public class Dao implements DaoInterface {
 	EntityManagerFactory entitymanagerfactory;
@@ -113,6 +114,38 @@ public class Dao implements DaoInterface {
 			tx.commit();
 		} finally {
 			entitymanager.close();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void deleteProductBelongsCategory(Integer productId){
+		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
+		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
+		List<ProductBelongsCategory> prodbelongscat = entitymanager.createQuery("SELECT c FROM ProductBelongsCategory c WHERE c.productId="+productId).getResultList();
+		for(ProductBelongsCategory p:prodbelongscat){
+			delete(p);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Boolean checkProductBelongsCategory(Integer productId){
+		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
+		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
+		List<ProductBelongsCategory> prodbelongscat = entitymanager.createQuery("SELECT c FROM ProductBelongsCategory c WHERE c.productId="+productId).getResultList();
+		if(prodbelongscat.size()>0){
+			return true;
+		} else { 
+			return false;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void deleteCategoryBelongsProduct(Integer categoryId){
+		entitymanagerfactory = Persistence.createEntityManagerFactory("Online_Shopping_System");
+		EntityManager entitymanager = entitymanagerfactory.createEntityManager();
+		List<ProductBelongsCategory> prodbelongscat = entitymanager.createQuery("SELECT c FROM ProductBelongsCategory c WHERE c.categoryId="+categoryId).getResultList();
+		for(ProductBelongsCategory p:prodbelongscat){
+			delete(p);
 		}
 	}
 }

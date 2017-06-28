@@ -21,6 +21,8 @@ public class VerifyAdmins extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		String adminTyp = null;
+		Boolean isAdminAvailable = false;
+		
 		if(request.getSession().getAttribute("adminType")!=null){
 			adminTyp = request.getSession().getAttribute("adminType").toString();
 		}
@@ -45,11 +47,15 @@ public class VerifyAdmins extends HttpServlet {
 		Integer anzahl = admins.size()-countMainVerifiedAdmins;
 		
 		anzahl--;
+		if(anzahl>0){
+			isAdminAvailable=true;
+		}
 		
 		request.setAttribute("surNames2", surNames);
 		request.setAttribute("emails2", emails);
 		request.setAttribute("names2", names);
 		request.setAttribute("anzahl2", anzahl);
+		request.setAttribute("isAdminAvailable", isAdminAvailable);
 		request.getRequestDispatcher("/verifyAdmin.jsp").forward(request,response);
 		
 	}

@@ -63,7 +63,17 @@ public class MySQLDataFilling {
 		ArrayList<Integer> productQuantity = DataGenerator.generateRandomInteger(200, 1, 10);
 		ArrayList<Float> productPrice = DataGenerator.generateRandomFloats(200, 10, 150);
 		
-
+		
+		/*String pictureFolder = "E:/Photos/airat/pictures";
+		File folder = new File(pictureFolder);
+		File[] listOfFiles = folder.listFiles();
+		ArrayList<String> files = new ArrayList<String>();
+		    for (int i = 0; i < listOfFiles.length; i++) {
+		      if (listOfFiles[i].isFile()) {
+		    	  files.add(listOfFiles[i].getName());
+		      }
+		    }
+		    */
 		for(int i=1;i<200;++i){
 			try{
 				product.setDescription(description.get(i));
@@ -84,7 +94,13 @@ public class MySQLDataFilling {
 					dao.save(productBelongsCategory);
 				}
 				
-
+				/*for (int q = 0; q < num; ++q) {
+					String filename = pictureFolder + "/" + files.get(ThreadLocalRandom.current().nextInt(0, files.size()));
+					System.out.println(Paths.get(filename).toUri().toURL().toString());
+					image.setImageString(PictureUtility.convertPicToString(Paths.get(filename).toUri().toURL().toString()));
+					image.setProductId(i);
+					dao.save(image);
+				}*/
 
 			} catch(Exception e) {
 				System.out.println(e.getMessage());
@@ -105,6 +121,7 @@ public class MySQLDataFilling {
 				customerAddress.setPostCode(String.valueOf(postCode.get(i)));
 				customerAddress.setStreetName(streetName.get(i));
 				customerAddress.setStreetNumber(String.valueOf(streetNumber.get(i)));
+				customerAddress.setAdditionaolInfo("keine");
 			} catch (Exception e){
 				System.out.println("Fehler bei Variablensetzung!");
 			}
@@ -120,13 +137,13 @@ public class MySQLDataFilling {
 		ArrayList<String> cardNumber = DataGenerator.generateRandomCreditCards(2000);
 		ArrayList<String> surnames = DataGenerator.generateRandomData(entityTyp.surNames, 2000);
 		ArrayList<String> lastNames = DataGenerator.generateRandomData(entityTyp.Names, 2000);
-		ArrayList<String> cvvs = DataGenerator.generateRandomStrings(2000, 32);
+		ArrayList<Integer> cvvs = DataGenerator.generateRandomInteger(2000,100,999);
 		ArrayList<Integer> expiryMonths = DataGenerator.generateRandomInteger(2000, 1, 12);
 		ArrayList<Integer> expiryYears = DataGenerator.generateRandomInteger(2000, 2017, 2025);
 		for(int i=0;i<2000;++i){
 			try {
 				creditcard.setCardNumber(cardNumber.get(i));
-				creditcard.setCvv(cvvs.get(i));
+				creditcard.setCvv(cvvs.get(i).toString());
 				creditcard.setExpiryMonth(expiryMonths.get(i));
 				creditcard.setExpiryYear(expiryYears.get(i));
 				creditcard.setFirstName(surnames.get(i));
@@ -183,7 +200,7 @@ public class MySQLDataFilling {
 				customer.setLastName(lastNames.get(i));
 				customer.setPassword(passwords.get(i));
 				customer.setPhoneNumber(phoneNumbers.get(i));
-				customer.setShippingAddress(addressIds.get(i));
+				customer.setShippingAddress(addressIds.get(i));	
 			} catch (Exception e){
 				System.out.println("Fehler bei Variablensetzung!");
 			}

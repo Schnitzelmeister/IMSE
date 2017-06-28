@@ -6,6 +6,7 @@ import java.util.List;
 import imse.SS2017.team1.dao.Dao;
 import imse.SS2017.team1.model.Image;
 import imse.SS2017.team1.model.Product;
+import imse.SS2017.team1.model.ProductBelongsCategory;
 
 
 public class ProductController {
@@ -62,10 +63,22 @@ public class ProductController {
 	}
 	
 	public void addProductImage(String imageString, Integer productId){
-		Image image = new Image();
-		image.setImageString(imageString);
-		image.setProductId(productId);
-		dao.save(image);
+		List<Image> images = dao.getobjects(Image.class);
+		Integer anz=0;
+		
+		for(Image i: images){
+			if(i.getProductId().equals(productId)){
+				anz++;
+			}
+		}
+		if(anz<5){
+			if(!imageString.contains("data:image/jpeg;base64,")){
+				Image image = new Image();
+				image.setImageString(imageString);
+				image.setProductId(productId);
+				dao.save(image);
+			}
+		}
 		
 	}
 	
@@ -77,22 +90,51 @@ public class ProductController {
 		dao.delete(imageId);
 	}
 	
-	public void updateProduct(Integer productId, String productName, Float price, 
-			String description, Integer quantity) {
+	public String getProductpictures(Integer productId){
+		  try{
+			  List<Image> images=dao.getobjects(Image.class);
+			  for(int i=0; i<images.size();i++){
+				  if(!images.get(i).getProductId().equals(productId)){
+					  images.remove(images.get(i));
+				  }
+			  }
+			  
+		   return images.get(0).getImageString();
+		  } catch (ArrayIndexOutOfBoundsException e){
+		   return null;
+		  }
+		 }
+
+	
+	public void updateProduct(Integer productId, String productName, String price, 
+			String description, String quantity) {
 		Product product = dao.getobject(Product.class, productId);
+		
 		if(description!=null && !product.getDescription().equals(description)){
 			product.setDescription(description);
 		}
-		if(!product.getPrice().equals(price) && price!=null){
-			product.setPrice(price);
+		if(price!=null && !product.getPrice().equals(Float.valueOf(price))){
+			product.setPrice(Float.valueOf(price));
 		}
 		if(productName!=null && !product.getProductName().equals(productName)){
 			product.setProductName(productName);
 		}
-		if(product.getQuantity()!=quantity && quantity!=null){
-			product.setQuantity(quantity);
+		if(quantity!=null && product.getQuantity()!=Integer.valueOf(quantity)){
+			product.setQuantity(Integer.valueOf(quantity));
 		}
+		
 		dao.updateEntity(product);	
+	}
+	
+	public void createProductBelongsCategory(Integer productId, Integer categoryId){
+		ProductBelongsCategory prodbelongscat = new ProductBelongsCategory();
+		prodbelongscat.setCategoryId(categoryId);
+		prodbelongscat.setProductId(productId);
+		dao.save(prodbelongscat);
+	}
+	
+	public void deleteProductBelongsCategory(Integer productId){
+		dao.deleteProductBelongsCategory(productId);
 	}
 	
 }

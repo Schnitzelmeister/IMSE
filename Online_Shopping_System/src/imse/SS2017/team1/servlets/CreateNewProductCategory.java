@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import imse.SS2017.team1.controller.CategoryController;
+import imse.SS2017.team1.filter.Validator;
 import imse.SS2017.team1.model.Category;
 
 @WebServlet("/CreateNewProductCategory")
@@ -19,6 +20,8 @@ public class CreateNewProductCategory extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String adminTyp = null;
+		Boolean isProductCategoryAvailable = false;
+		
 		if(request.getSession().getAttribute("adminType")!=null){
 			adminTyp = request.getSession().getAttribute("adminType").toString();
 		}
@@ -28,16 +31,22 @@ public class CreateNewProductCategory extends HttpServlet {
 		CategoryController categoryController = new CategoryController();
 		List<Category> categories = categoryController.getAllCategories();
 		Integer productCatCount = categories.size();
+		
+		if(productCatCount>0){
+			isProductCategoryAvailable=true;
+		}
 		productCatCount--;
 		
 		request.setAttribute("productCatCount1", productCatCount);
 		request.setAttribute("categories1", categories);
+		request.setAttribute("isProductCategoryAvailable", isProductCategoryAvailable);
 		request.getRequestDispatcher("/createNewProductCategory.jsp").forward(request,response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		CategoryController categoryController = new CategoryController();
+		Validator validator = new Validator();
 		
 		String adminTyp = null;
 		if(request.getSession().getAttribute("adminType")!=null){
@@ -48,7 +57,17 @@ public class CreateNewProductCategory extends HttpServlet {
 		
 		String categoryName = request.getParameter("productCategoryName");
 		
-		categoryController.createCategory(categoryName);
+		try{
+			if(validator.isCategoryNameOk(categoryName)){
+				categoryController.createCategory(categoryName);			
+			} else {
+				throw new IllegalArgumentException("Bitte geben Sie einen aussagekräftigen Kategorienamen ein!");
+			}
+		} catch(IllegalArgumentException e) {
+			request.setAttribute("errorMessage", e.getMessage());
+			request.getRequestDispatcher("/createNewProductCategory.jsp").forward(request,response);
+			return;
+		}
 		
 		doGet(request,response);
 		
