@@ -12,6 +12,23 @@
 	</div>
 </div>
 
+<style>
+table#tarik {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
 
 
 <nav class="navbar navbar-inverse">
@@ -27,7 +44,7 @@
          <%if(session.getAttribute("email")!=null){ %>
       <li><a href="GetShoppingCart"><span class="glyphicon glyphicon-shopping-cart"></span> Warenkorb</a></li>
    
-       <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Konto ansehen</a></li>
+       <li><a href="accountInfo.jsp"><span class="glyphicon glyphicon-cog"></span> Konto ansehen</a></li>
          <li><a href="logout"><span class="glyphicon glyphicon-off"></span> Ausloggen</a></li>
                  <%} else{%>
          <li><a href="index.jsp" ><span class="glyphicon glyphicon-user"></span> Einloggen</a></li><%} %>

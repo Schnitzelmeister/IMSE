@@ -55,10 +55,13 @@ public class PlanOrder extends HttpServlet {
 		 }
 		
 		OrderController ordercontroller=new OrderController();
+		Map<Product,Integer> quantityByProduct=(HashMap<Product,Integer>)request.getSession().getAttribute("quantityByProduct");
+		
+		if(quantityByProduct!=null){
 		CustomerOrder customerOrder=ordercontroller.createCustomerOrder((String)request.getSession().getAttribute("email"));
 		
 		
-		Map<Product,Integer> quantityByProduct=(HashMap<Product,Integer>)request.getSession().getAttribute("quantityByProduct");
+		
 		for (Entry<Product, Integer> entry : quantityByProduct.entrySet())
 		{
 			
@@ -70,10 +73,12 @@ public class PlanOrder extends HttpServlet {
 			
 		    System.out.println(entry.getKey() + "/" + entry.getValue());
 		}
+		
+		
 		//quantityByProduct wird gelöscht
 		request.getSession().removeAttribute("quantityByProduct");
 		response.sendRedirect("congratulation.jsp");
-		
+		}
 	
 	
 	}

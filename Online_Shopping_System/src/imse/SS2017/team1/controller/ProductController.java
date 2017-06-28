@@ -72,10 +72,12 @@ public class ProductController {
 			}
 		}
 		if(anz<5){
-			Image image = new Image();
-			image.setImageString(imageString);
-			image.setProductId(productId);
-			dao.save(image);
+			if(!imageString.contains("data:image/jpeg;base64,")){
+				Image image = new Image();
+				image.setImageString(imageString);
+				image.setProductId(productId);
+				dao.save(image);
+			}
 		}
 		
 	}

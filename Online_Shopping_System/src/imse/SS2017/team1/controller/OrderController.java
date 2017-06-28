@@ -64,8 +64,9 @@ public class OrderController {
 		
 		
 	}
-	private static Integer orderDetailId=0;
+	//private static Integer orderDetailId=0;
 	public void createOrderDetail(CustomerOrder customerOrder, Product product, Integer quantity){
+		Integer orderDetailId=0;
 		OrderDetail orderDetail=new OrderDetail();
 		if(customerOrder.getOrderId()!=null)
 		orderDetail.setOrderId(customerOrder.getOrderId());
@@ -73,7 +74,8 @@ public class OrderController {
 		
 		List<OrderDetail> listOrderDetail=dao.getobjects(OrderDetail.class);
 		for (OrderDetail orderDetail2 : listOrderDetail) {
-			if(orderDetail2.getProductId().equals(product.getProductId())){
+			//
+			if(orderDetail2.getOrderId().equals(customerOrder.getOrderId())){
 				if(orderDetail2.getOrderDetailId()>orderDetailId)orderDetailId=orderDetail2.getOrderDetailId();
 			}
 		}
@@ -82,6 +84,7 @@ public class OrderController {
 		orderDetail.setSubTotal(quantity*product.getPrice());
 		orderDetail.setProductId(product.getProductId());
 		dao.save(orderDetail);
+		
 	}
 	
 	
