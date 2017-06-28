@@ -62,7 +62,7 @@ public class ProductController {
 		for(int i=0;i<5;++i){
 			if(!images.get(i).isEmpty() && images.get(i).contains("data:image/jpeg;base64,")){
 				image = new Image();
-				image.setImageString(images.get(i).replaceAll("data:image/jpeg;base64,", ""));
+				image.setImageString(images.get(i));
 				image.setImageId(i+1);
 				image.setProductId(0);
 				product.setImages(image);
@@ -104,7 +104,7 @@ public class ProductController {
 			for(int i=product.getImages().size();i<images.size();++i){
 				if(!images.get(i).isEmpty() && images.get(i).contains("data:image/jpeg;base64,")) {
 					image = new Image();
-					image.setImageString(images.get(i).replaceAll("data:image/jpeg;base64,", ""));
+					image.setImageString(images.get(i));
 					image.setImageId(i+1);
 					image.setProductId(product.getProductId());
 					product.setImages(image);

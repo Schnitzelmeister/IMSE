@@ -37,7 +37,7 @@
 							Euro</span>
 					</div>
 					 <%--Statt "pictures" muss man das entsprechende Bild einfgen --%>
-        <div class="panel-body"><img src="data:image/jpeg;base64,<%=pc.getProductpictures(products.get(i+2).getProductId())%>" style="width:100%" alt="Image"></div>
+        <div class="panel-body"><img src="<%=pc.getProductpictures(products.get(i+2).getProductId())%>" style="width:100%" alt="Image"></div>
 
 					<div class="panel-footer"><%=products.get(i + 2).getDescription()%></div>
 
@@ -95,7 +95,7 @@
 							Euro</span>
 					</div>
 					 <%--Statt "pictures" muss man das entsprechende Bild einfgen --%>
-        <div class="panel-body"><img src="data:image/jpeg;base64,<%=pc.getProductpictures(products.get(i+1).getProductId())%>" style="width:100%" alt="Image"></div>
+        <div class="panel-body"><img src="<%=pc.getProductpictures(products.get(i+1).getProductId())%>" style="width:100%" alt="Image"></div>
 
 					<div class="panel-footer"><%=products.get(i + 1).getDescription()%></div>
 
@@ -152,7 +152,7 @@
 							Euro</span>
 					</div>
 				 <%--Statt "pictures" muss man das entsprechende Bild einfgen --%>
-        <div class="panel-body"><img src="data:image/jpeg;base64,<%=pc.getProductpictures(products.get(i).getProductId())%>" style="width:100%" alt="Image"></div>
+        <div class="panel-body"><img src="<%=pc.getProductpictures(products.get(i).getProductId())%>" style="width:100%" alt="Image"></div>
 
 					<div class="panel-footer"><%=products.get(i).getDescription()%></div>
 

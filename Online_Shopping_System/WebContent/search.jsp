@@ -10,19 +10,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="header.jsp" /> 
+	<jsp:include page="header.jsp" />
 	<form method="get" action="${pageContext.request.contextPath}/results">
 
 		<table>
 
-			<th><select name="cat" id="cat"><option value="0"
-						selected>In all Categories</option>
+			<th><select name="cat" id="cat"> <option value="0" selected>In all Categories</option>
 					<%
 						CategoryController cc = new CategoryController();
 
 						for (Category c : cc.getAllCategories()) {
-					%><option
-						value=<%=c.getCategoryId()%>><%=c.getCategoryName()%></option>
+					%><option value=<%=c.getCategoryId()%>><%=c.getCategoryName()%></option>
 
 					<%
 						}
